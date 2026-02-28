@@ -785,7 +785,7 @@ const Footer = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
             <button onClick={() => onNavigate('privacy')} className="text-left hover:text-blue-400 transition-colors">Privacy Policy</button>
             <button onClick={() => onNavigate('cookies')} className="text-left hover:text-blue-400 transition-colors">Cookie Policy</button>
             <button onClick={() => onNavigate('terms')} className="text-left hover:text-blue-400 transition-colors">Termini e Condizioni</button>
-            <a href="https://nis2.bbt-consulting.it" target="_blank" rel="noopener noreferrer" className="text-left hover:text-blue-400 transition-colors opacity-40 hover:opacity-100 flex items-center gap-2">
+            <a href="http://195.231.53.232:3000/" target="_blank" rel="noopener noreferrer" className="text-left hover:text-blue-400 transition-colors opacity-40 hover:opacity-100 flex items-center gap-2">
               Accesso Partner <ExternalLink size={12} />
             </a>
           </div>
