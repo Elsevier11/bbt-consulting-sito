@@ -24,7 +24,8 @@ import {
   Linkedin,
   ExternalLink,
   CheckCircle2,
-  Plus
+  Plus,
+  Shield
 } from 'lucide-react';
 
 // --- Types ---
@@ -464,24 +465,81 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
                   <X size={20} />
                 </button>
 
-                {/* Anteprima Visuale dell'App */}
+                {/* Grafica Tematica dell'App */}
                 <div className="lg:w-1/2 bg-blue-600/5 p-8 flex items-center justify-center relative overflow-hidden group border-b lg:border-b-0 lg:border-r border-white/5">
                   <div className="absolute inset-0 atmosphere opacity-30" />
-                  <div className="relative z-10 glass-premium rounded-xl border border-white/20 shadow-2xl w-full aspect-video overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
-                    <div className="h-6 bg-white/10 flex items-center px-4 gap-2 border-b border-white/5">
-                      <div className="w-2 h-2 rounded-full bg-red-500/50" />
-                      <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-                      <div className="w-2 h-2 rounded-full bg-green-500/50" />
-                    </div>
-                    <div className="p-6 flex flex-col gap-4">
-                      <div className="w-2/3 h-4 bg-white/10 rounded-full" />
-                      <div className="flex gap-4">
-                        <div className="w-1/3 h-24 bg-blue-500/10 rounded-lg border border-blue-500/20" />
-                        <div className="w-2/3 h-24 bg-white/5 rounded-lg" />
+
+                  {/* Sales Intelligence Graphic */}
+                  {selectedCase === 0 && (
+                    <div className="relative z-10 w-full max-w-md aspect-square flex flex-col gap-4">
+                      <div className="flex items-end gap-2 h-40">
+                        {[40, 70, 45, 90, 65, 80].map((h, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ height: 0 }}
+                            animate={{ height: `${h}%` }}
+                            transition={{ delay: 0.5 + (i * 0.1), duration: 1 }}
+                            className="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg opacity-80"
+                          />
+                        ))}
                       </div>
-                      <div className="w-full h-20 bg-white/5 rounded-lg" />
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="h-20 glass-premium rounded-xl border border-white/10 flex flex-col justify-center px-4">
+                          <div className="text-[10px] text-white/30 uppercase font-bold">Pipeline</div>
+                          <div className="text-xl font-bold text-blue-400">€2.4M</div>
+                        </div>
+                        <div className="h-20 glass-premium rounded-xl border border-white/10 flex flex-col justify-center px-4">
+                          <div className="text-[10px] text-white/30 uppercase font-bold">Accuracy</div>
+                          <div className="text-xl font-bold text-emerald-400">94%</div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  )}
+
+                  {/* NIS2 Compliance Graphic */}
+                  {selectedCase === 1 && (
+                    <div className="relative z-10 w-full max-w-md aspect-square flex items-center justify-center p-8">
+                      <div className="relative w-full h-full border-2 border-dashed border-blue-500/20 rounded-full animate-[spin_20s_linear_infinite] flex items-center justify-center">
+                        {[0, 90, 180, 270].map((deg, i) => (
+                          <div
+                            key={i}
+                            style={{ transform: `rotate(${deg}deg) translateY(-140px)` }}
+                            className="absolute w-8 h-8 glass-premium border border-blue-500/50 rounded-lg flex items-center justify-center text-blue-400 origin-center"
+                          >
+                            <Shield size={14} />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="w-40 h-40 bg-blue-600/20 rounded-full blur-2xl animate-pulse"
+                        />
+                        <div className="relative z-10 text-6xl font-black text-blue-500 opacity-20 italic">NIS2</div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Digital Audit Graphic */}
+                  {selectedCase === 2 && (
+                    <div className="relative z-10 w-full max-w-md aspect-square flex flex-col items-center justify-center gap-6">
+                      <div className="relative w-48 h-48">
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+                          className="absolute inset-0 border-4 border-t-blue-500 border-r-blue-500/0 border-b-blue-500/20 border-l-blue-500/0 rounded-full"
+                        />
+                        <div className="absolute inset-4 glass-premium rounded-full border border-white/10 flex items-center justify-center overflow-hidden">
+                          <BarChart3 size={48} className="text-blue-500 opacity-50" />
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full border border-emerald-500/20">SEO +24%</div>
+                        <div className="px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold rounded-full border border-blue-500/20">UX OPTIMIZED</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Dettagli e Azioni */}
@@ -507,20 +565,27 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <a
-                      href={cases[selectedCase].appUrl}
-                      className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
-                    >
-                      Accedi alla Piattaforma <ChevronRight size={18} />
-                    </a>
+                    {/* Mostra link piattaforma solo per NIS2 al momento, o se definito */}
+                    {cases[selectedCase].title.includes('NIS2') && (
+                      <a
+                        href="https://nis2.bbt-consulting.it"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                      >
+                        Accedi alla Piattaforma <ChevronRight size={18} />
+                      </a>
+                    )}
+
                     <button
                       onClick={() => {
                         setSelectedCase(null);
-                        onNavigate('contatti');
+                        window.open('https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true', '_blank');
                       }}
-                      className="flex-1 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-full text-center border border-white/10 transition-all"
+                      className={`${cases[selectedCase].title.includes('NIS2') ? 'flex-1 bg-white/5' : 'w-full bg-blue-600 shadow-blue-500/20 shadow-lg'} hover:bg-blue-500/20 text-white font-bold py-4 px-8 rounded-full text-center border border-white/10 transition-all flex items-center justify-center gap-2`}
                     >
-                      Richiedi Account Demo
+                      {cases[selectedCase].title.includes('NIS2') ? 'Richiedi Account Demo' : 'Prenota Demo Personalizzata'}
+                      <ChevronRight size={18} />
                     </button>
                   </div>
                 </div>
