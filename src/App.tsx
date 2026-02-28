@@ -602,26 +602,14 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    {/* Mostra link piattaforma solo per NIS2 al momento, o se definito */}
-                    {cases[selectedCase].title.includes('NIS2') && (
-                      <a
-                        href="https://nis2.bbt-consulting.it"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
-                      >
-                        Accedi alla Piattaforma <ChevronRight size={18} />
-                      </a>
-                    )}
-
                     <button
                       onClick={() => {
                         setSelectedCase(null);
                         window.open('https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true', '_blank');
                       }}
-                      className={`${cases[selectedCase].title.includes('NIS2') ? 'flex-1 bg-white/5' : 'w-full bg-blue-600 shadow-blue-500/20 shadow-lg'} hover:bg-blue-500/20 text-white font-bold py-4 px-8 rounded-full text-center border border-white/10 transition-all flex items-center justify-center gap-2`}
+                      className="w-full bg-blue-600 shadow-blue-500/20 shadow-lg hover:bg-blue-500/20 text-white font-bold py-4 px-8 rounded-full text-center border border-white/10 transition-all flex items-center justify-center gap-2"
                     >
-                      {cases[selectedCase].title.includes('NIS2') ? 'Richiedi Account Demo' : 'Prenota Demo Personalizzata'}
+                      Prenota Demo Personalizzata
                       <ChevronRight size={18} />
                     </button>
                   </div>
