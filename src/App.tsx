@@ -23,7 +23,8 @@ import {
   MapPin,
   Linkedin,
   ExternalLink,
-  CheckCircle2
+  CheckCircle2,
+  Plus
 } from 'lucide-react';
 
 // --- Types ---
@@ -362,31 +363,39 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
       features: ["Audit SEO Semantico", "Analisi User Experience (UX)", "Benchmark Competitivo AI", "Roadmap di Ottimizzazione Conversioni"],
       appUrl: "#",
       icon: <BarChart3 size={32} />
+    },
+    {
+      sector: "Co-Creation",
+      title: "La tua prossima soluzione",
+      impact: "Inizia Ora",
+      desc: "Hai una sfida specifica o un processo da ottimizzare? Progettiamo insieme lo strumento AI su misura per la tua impresa.",
+      isCTA: true,
+      icon: <Plus size={32} />
     }
   ];
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen pt-24 pb-12 px-6 flex items-center">
+      <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-12"
         >
-          <div className="flex items-center gap-2 text-blue-500 mb-6">
+          <div className="flex items-center gap-2 text-blue-500 mb-4">
             <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
               <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
             </div>
             <span className="text-[10px] font-bold tracking-[0.2em]">Case Studies</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-balance">Risultati misurabili, impatti reali</h2>
-          <p className="text-white/60 max-w-2xl text-lg">
-            Dalla teoria alla pratica: esplora le nostre piattaforme dedicate alla crescita e alla sicurezza digitale. Clicca sui box per vedere le anteprime.
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Risultati reali, soluzioni su misura</h2>
+          <p className="text-white/60 max-w-2xl text-base">
+            Esplora le nostre piattaforme o richiedi una consulenza per la tua nuova idea.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {cases.map((c, i) => (
             <motion.div
               key={i}
@@ -394,7 +403,13 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              onClick={() => setSelectedCase(i)}
+              onClick={() => {
+                if ('isCTA' in c && c.isCTA) {
+                  window.open('https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true', '_blank');
+                } else {
+                  setSelectedCase(i);
+                }
+              }}
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -402,17 +417,20 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
                 e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
                 e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
               }}
-              className="glass-premium spotlight-card p-10 rounded-3xl group flex flex-col h-full cursor-pointer hover:border-blue-500/30 transition-colors"
+              className={`spotlight-card p-8 rounded-3xl group flex flex-col h-full cursor-pointer transition-all duration-300 ${'isCTA' in c && c.isCTA
+                ? 'bg-blue-600/10 border-2 border-blue-500/30 hover:bg-blue-600/20'
+                : 'glass-premium hover:border-blue-500/30'
+                }`}
             >
-              <div className="text-blue-500 mb-8 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
+              <div className="text-blue-500 mb-6 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
                 {c.icon}
-                <ExternalLink size={20} className="text-white/20 group-hover:text-blue-400" />
+                {!('isCTA' in c && c.isCTA) && <ExternalLink size={18} className="text-white/20 group-hover:text-blue-400" />}
               </div>
               <div className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">{c.sector}</div>
-              <h3 className="text-2xl font-bold mb-4">{c.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed mb-8">{c.desc}</p>
-              <div className="pt-8 border-t border-white/5 mt-auto">
-                <div className="text-3xl font-bold text-blue-400">{c.impact}</div>
+              <h3 className="text-xl font-bold mb-3">{c.title}</h3>
+              <p className="text-white/50 text-xs leading-relaxed mb-6">{c.desc}</p>
+              <div className="pt-6 border-t border-white/5 mt-auto">
+                <div className="text-2xl font-bold text-blue-400">{c.impact}</div>
               </div>
             </motion.div>
           ))}
@@ -677,6 +695,9 @@ const Footer = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
             <button onClick={() => onNavigate('privacy')} className="text-left hover:text-blue-400 transition-colors">Privacy Policy</button>
             <button onClick={() => onNavigate('cookies')} className="text-left hover:text-blue-400 transition-colors">Cookie Policy</button>
             <button onClick={() => onNavigate('terms')} className="text-left hover:text-blue-400 transition-colors">Termini e Condizioni</button>
+            <a href="https://nis2.bbt-consulting.it" target="_blank" rel="noopener noreferrer" className="text-left hover:text-blue-400 transition-colors opacity-40 hover:opacity-100 flex items-center gap-2">
+              Accesso Partner <ExternalLink size={12} />
+            </a>
           </div>
         </div>
       </div>
