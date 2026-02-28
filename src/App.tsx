@@ -331,9 +331,9 @@ const CaseStudies = () => {
   const cases = [
     {
       sector: "Sales Intelligence",
-      title: "Pipeline Analytics Hub",
-      impact: "Zero Blind Spots",
-      desc: "Analisi avanzata della pipeline di vendita: integrazione dati CRM per il raffronto tra monte trattative (totale/pesato), ordini e budget. Identificazione istantanea delle criticità per area e singolo commerciale.",
+      title: "Smart Pipeline Control",
+      impact: "Controllo Totale",
+      desc: "L'AI al fianco della direzione commerciale: monitoraggio costante delle trattative per anticipare i rischi, ottimizzare il lavoro dei team e garantire il raggiungimento degli obiettivi di budget.",
       icon: <TrendingUp size={32} />
     },
     {
@@ -347,7 +347,7 @@ const CaseStudies = () => {
       sector: "Digital Strategy",
       title: "Performance Audit Tool",
       impact: "Max Visibility",
-      desc: "Analisi multidisciplinare della qualità web: valutazione estetica, funzionale e SEO per ottimizzare il posizionamento e massimizzare la conversione dei visitatori in opportunità reali.",
+      desc: "Analisi completa della qualità web: valutazione estetica, funzionale e SEO per ottimizzare il posizionamento e massimizzare la conversione dei visitatori in opportunità reali.",
       icon: <BarChart3 size={32} />
     }
   ];
@@ -388,7 +388,7 @@ const CaseStudies = () => {
                 e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
                 e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
               }}
-              className="glass-premium spotlight-card p-10 rounded-3xl group"
+              className="glass-premium spotlight-card p-10 rounded-3xl group flex flex-col h-full"
             >
               <div className="text-blue-500 mb-8 opacity-50 group-hover:opacity-100 transition-opacity">
                 {c.icon}
@@ -396,7 +396,7 @@ const CaseStudies = () => {
               <div className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">{c.sector}</div>
               <h3 className="text-2xl font-bold mb-4">{c.title}</h3>
               <p className="text-white/50 text-sm leading-relaxed mb-8">{c.desc}</p>
-              <div className="pt-8 border-t border-white/5">
+              <div className="pt-8 border-t border-white/5 mt-auto">
                 <div className="text-3xl font-bold text-blue-400">{c.impact}</div>
                 <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mt-1">Impact KPI</div>
               </div>
