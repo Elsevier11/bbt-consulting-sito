@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 // --- Types ---
-type Page = 'home' | 'servizi' | 'chi-siamo' | 'contatti' | 'privacy' | 'cookies' | 'terms';
+type Page = 'home' | 'servizi' | 'chi-siamo' | 'contatti' | 'privacy' | 'cookies' | 'terms' | 'case-studies';
 
 // --- Components ---
 
@@ -35,6 +35,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
   const navItems: { label: string, id: Page }[] = [
     { label: 'Home', id: 'home' },
     { label: 'Servizi', id: 'servizi' },
+    { label: 'Case Studies', id: 'case-studies' },
     { label: 'Chi siamo', id: 'chi-siamo' },
     { label: 'Contatti', id: 'contatti' },
   ];
@@ -326,6 +327,87 @@ const ChiSiamo = () => (
   </div>
 );
 
+const CaseStudies = () => {
+  const cases = [
+    {
+      sector: "Manifattura",
+      title: "Ottimizzazione Qualità AI",
+      impact: "-30% Scarti",
+      desc: "Implementazione di un sistema di Computer Vision per l'ispezione automatica dei difetti in tempo reale.",
+      icon: <Target size={32} />
+    },
+    {
+      sector: "Logistica",
+      title: "Predictive Routing",
+      impact: "+22% Efficienza",
+      desc: "Algoritmi predittivi per l'ottimizzazione dei carichi e delle rotte basati su dati storici e traffico.",
+      icon: <Database size={32} />
+    },
+    {
+      sector: "Retail",
+      title: "Smart Inventory",
+      impact: "-15% Overstock",
+      desc: "Previsione della domanda tramite AI generativa per una gestione intelligente dei livelli di magazzino.",
+      icon: <BarChart3 size={32} />
+    }
+  ];
+
+  return (
+    <div className="min-h-screen pt-32 pb-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-2 text-blue-500 mb-6">
+            <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+            </div>
+            <span className="text-[10px] font-bold tracking-[0.2em]">Case Studies</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-balance">Risultati misurabili, impatti reali</h2>
+          <p className="text-white/60 max-w-2xl text-lg">
+            Dalla teoria alla pratica: come trasformiamo la tecnologia in vantaggio competitivo concreto per le imprese.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {cases.map((c, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+                e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+              }}
+              className="glass-premium spotlight-card p-10 rounded-3xl group"
+            >
+              <div className="text-blue-500 mb-8 opacity-50 group-hover:opacity-100 transition-opacity">
+                {c.icon}
+              </div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">{c.sector}</div>
+              <h3 className="text-2xl font-bold mb-4">{c.title}</h3>
+              <p className="text-white/50 text-sm leading-relaxed mb-8">{c.desc}</p>
+              <div className="pt-8 border-t border-white/5">
+                <div className="text-3xl font-bold text-blue-400">{c.impact}</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mt-1">Impact KPI</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Contatti = () => (
   <div className="min-h-screen pt-32 pb-20 px-6">
     <div className="max-w-7xl mx-auto text-center">
@@ -532,6 +614,7 @@ export default function App() {
           >
             {currentPage === 'home' && <Home onNavigate={setCurrentPage} />}
             {currentPage === 'servizi' && <Servizi />}
+            {currentPage === 'case-studies' && <CaseStudies />}
             {currentPage === 'chi-siamo' && <ChiSiamo />}
             {currentPage === 'contatti' && <Contatti />}
             {currentPage === 'privacy' && <PrivacyPolicy />}
