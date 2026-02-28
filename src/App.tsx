@@ -398,7 +398,6 @@ const CaseStudies = () => {
               <p className="text-white/50 text-sm leading-relaxed mb-8">{c.desc}</p>
               <div className="pt-8 border-t border-white/5 mt-auto">
                 <div className="text-3xl font-bold text-blue-400">{c.impact}</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mt-1">Impact KPI</div>
               </div>
             </motion.div>
           ))}
