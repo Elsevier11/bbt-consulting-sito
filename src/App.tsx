@@ -330,24 +330,24 @@ const ChiSiamo = () => (
 const CaseStudies = () => {
   const cases = [
     {
-      sector: "Manifattura",
-      title: "Ottimizzazione Qualità AI",
-      impact: "-30% Scarti",
-      desc: "Implementazione di un sistema di Computer Vision per l'ispezione automatica dei difetti in tempo reale.",
-      icon: <Target size={32} />
+      sector: "Sales Intelligence",
+      title: "Pipeline Analytics Hub",
+      impact: "Zero Blind Spots",
+      desc: "Analisi avanzata della pipeline di vendita: integrazione dati CRM per il raffronto tra monte trattative (totale/pesato), ordini e budget. Identificazione istantanea delle criticità per area e singolo commerciale.",
+      icon: <TrendingUp size={32} />
     },
     {
-      sector: "Logistica",
-      title: "Predictive Routing",
-      impact: "+22% Efficienza",
-      desc: "Algoritmi predittivi per l'ottimizzazione dei carichi e delle rotte basati su dati storici e traffico.",
-      icon: <Database size={32} />
+      sector: "Cybersecurity",
+      title: "NIS2 Compliance Navigator",
+      impact: "100% Regulatory Fit",
+      desc: "Piattaforma guidata per l'adeguamento alla direttiva NIS2: supporto alla documentazione, checklist interattive e snapshot di avanzamento per garantire l'aderenza ai requisiti ACN.",
+      icon: <BrainCircuit size={32} />
     },
     {
-      sector: "Retail",
-      title: "Smart Inventory",
-      impact: "-15% Overstock",
-      desc: "Previsione della domanda tramite AI generativa per una gestione intelligente dei livelli di magazzino.",
+      sector: "Digital Strategy",
+      title: "Performance Audit Tool",
+      impact: "Max Visibility",
+      desc: "Analisi multidisciplinare della qualità web: valutazione estetica, funzionale e SEO per ottimizzare il posizionamento e massimizzare la conversione dei visitatori in opportunità reali.",
       icon: <BarChart3 size={32} />
     }
   ];
