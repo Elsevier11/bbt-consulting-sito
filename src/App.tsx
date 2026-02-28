@@ -496,28 +496,65 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
                     </div>
                   )}
 
-                  {/* NIS2 Compliance Graphic */}
+                  {/* NIS2 Compliance Graphic - Enhanced Security Visual */}
                   {selectedCase === 1 && (
                     <div className="relative z-10 w-full max-w-md aspect-square flex items-center justify-center p-8">
-                      <div className="relative w-full h-full border-2 border-dashed border-blue-500/20 rounded-full animate-[spin_20s_linear_infinite] flex items-center justify-center">
-                        {[0, 90, 180, 270].map((deg, i) => (
-                          <div
-                            key={i}
-                            style={{ transform: `rotate(${deg}deg) translateY(-140px)` }}
-                            className="absolute w-8 h-8 glass-premium border border-blue-500/50 rounded-lg flex items-center justify-center text-blue-400 origin-center"
-                          >
-                            <Shield size={14} />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="absolute inset-0 flex items-center justify-center">
+                      {/* Outer Rings - Rotating Scanning Effect */}
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-4 border border-blue-500/10 rounded-full"
+                      />
+                      <motion.div
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-12 border border-dashed border-blue-500/20 rounded-full"
+                      />
+
+                      {/* Scanning Beam */}
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-500/10 to-transparent flex items-start justify-center"
+                      >
+                        <div className="w-1 h-1/2 bg-blue-500/30 blur-md" />
+                      </motion.div>
+
+                      {/* Central Shield Core */}
+                      <div className="relative flex flex-col items-center gap-4">
                         <motion.div
                           initial={{ scale: 0.8, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          className="w-40 h-40 bg-blue-600/20 rounded-full blur-2xl animate-pulse"
-                        />
-                        <div className="relative z-10 text-6xl font-black text-blue-500 opacity-20 italic">NIS2</div>
+                          animate={{ scale: [1, 1.1, 1], opacity: 1 }}
+                          transition={{ duration: 3, repeat: Infinity }}
+                          className="w-32 h-32 glass-premium border-2 border-blue-500/30 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(59,130,246,0.2)]"
+                        >
+                          <Shield size={64} className="text-blue-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+                        </motion.div>
+
+                        {/* Status Label */}
+                        <div className="flex flex-col items-center">
+                          <div className="flex items-center gap-2 text-blue-400 font-bold tracking-widest text-[10px]">
+                            <motion.div
+                              animate={{ opacity: [0, 1, 0] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                              className="w-1.5 h-1.5 bg-blue-500 rounded-full"
+                            />
+                            SYSTEM PROTECTED
+                          </div>
+                          <div className="text-[8px] text-white/30 uppercase mt-1">NIS2 Compliance Verified</div>
+                        </div>
                       </div>
+
+                      {/* Moving Data Nodes */}
+                      {[0, 45, 135, 225, 315].map((angle, i) => (
+                        <motion.div
+                          key={i}
+                          style={{ transform: `rotate(${angle}deg) translateY(-140px)` }}
+                          animate={{ opacity: [0.2, 0.8, 0.2] }}
+                          transition={{ duration: 2, delay: i * 0.4, repeat: Infinity }}
+                          className="absolute w-2 h-2 bg-blue-400 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]"
+                        />
+                      ))}
                     </div>
                   )}
 
