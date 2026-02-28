@@ -15,13 +15,15 @@ import {
   TrendingUp,
   Users,
   Database,
+  Twitter,
+  ArrowRight,
   BrainCircuit,
   Mail,
   Phone,
   MapPin,
   Linkedin,
-  Twitter,
-  ArrowRight
+  ExternalLink,
+  CheckCircle2
 } from 'lucide-react';
 
 // --- Types ---
@@ -327,13 +329,18 @@ const ChiSiamo = () => (
   </div>
 );
 
-const CaseStudies = () => {
+const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
+  const [selectedCase, setSelectedCase] = React.useState<number | null>(null);
+
   const cases = [
     {
       sector: "Sales Intelligence",
       title: "Smart Pipeline Control",
       impact: "Controllo Totale",
       desc: "L'AI al fianco della direzione commerciale: monitoraggio costante delle trattative per anticipare i rischi, ottimizzare il lavoro dei team e garantire il raggiungimento degli obiettivi di budget.",
+      longDesc: "Una piattaforma di Sales Intelligence che trasforma i dati grezzi del CRM in insight azionabili. Il sistema analizza la pipeline storica per prevedere la chiusura delle trattative e segnala proattivamente le anomalie, permettendo al Direttore Commerciale di intervenire prima che i target vengano mancati.",
+      features: ["Integrazione CRM Real-time", "Analisi Predittiva Chiusure", "Dashboard Direzionale Comparativa", "Alerting Criticità Automatico"],
+      appUrl: "#",
       icon: <TrendingUp size={32} />
     },
     {
@@ -341,6 +348,9 @@ const CaseStudies = () => {
       title: "NIS2 Compliance Navigator",
       impact: "100% Regulatory Fit",
       desc: "Piattaforma guidata per l'adeguamento alla direttiva NIS2: supporto alla documentazione, checklist interattive e snapshot di avanzamento per garantire l'aderenza ai requisiti ACN.",
+      longDesc: "Il navigatore NIS2 semplifica il complesso percorso di compliance normativa. Attraverso un workflow strutturato, guida l'azienda nella redazione della documentazione richiesta dall'Agenzia per la Cybersicurezza Nazionale, monitorando ogni step fino alla piena aderenza ai dettati della direttiva.",
+      features: ["Workflow di Documentazione Guidato", "Checklist Requisiti NIS2/ACN", "Repository Prove di Compliance", "Report Avanzamento in Tempo Reale"],
+      appUrl: "#",
       icon: <BrainCircuit size={32} />
     },
     {
@@ -348,6 +358,9 @@ const CaseStudies = () => {
       title: "Performance Audit Tool",
       impact: "Max Visibility",
       desc: "Analisi completa della qualità web: valutazione estetica, funzionale e SEO per ottimizzare il posizionamento e massimizzare la conversione dei visitatori in opportunità reali.",
+      longDesc: "Uno strumento di analisi profonda che valuta l'efficacia del sito web sotto tre lenti: estetica (brand perception), tecnica (performance e SEO) e funzionale (conversion rate). Identifica esattamente dove l'utente si ferma e consiglia gli interventi per massimizzare il ROI del canale digitale.",
+      features: ["Audit SEO Semantico", "Analisi User Experience (UX)", "Benchmark Competitivo AI", "Roadmap di Ottimizzazione Conversioni"],
+      appUrl: "#",
       icon: <BarChart3 size={32} />
     }
   ];
@@ -369,7 +382,7 @@ const CaseStudies = () => {
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-balance">Risultati misurabili, impatti reali</h2>
           <p className="text-white/60 max-w-2xl text-lg">
-            Dalla teoria alla pratica: come trasformiamo la tecnologia in vantaggio competitivo concreto per le imprese.
+            Dalla teoria alla pratica: esplora le nostre piattaforme dedicate alla crescita e alla sicurezza digitale. Clicca sui box per vedere le anteprime.
           </p>
         </motion.div>
 
@@ -381,6 +394,7 @@ const CaseStudies = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
+              onClick={() => setSelectedCase(i)}
               onMouseMove={(e) => {
                 const rect = e.currentTarget.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -388,10 +402,11 @@ const CaseStudies = () => {
                 e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
                 e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
               }}
-              className="glass-premium spotlight-card p-10 rounded-3xl group flex flex-col h-full"
+              className="glass-premium spotlight-card p-10 rounded-3xl group flex flex-col h-full cursor-pointer hover:border-blue-500/30 transition-colors"
             >
-              <div className="text-blue-500 mb-8 opacity-50 group-hover:opacity-100 transition-opacity">
+              <div className="text-blue-500 mb-8 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
                 {c.icon}
+                <ExternalLink size={20} className="text-white/20 group-hover:text-blue-400" />
               </div>
               <div className="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">{c.sector}</div>
               <h3 className="text-2xl font-bold mb-4">{c.title}</h3>
@@ -402,6 +417,99 @@ const CaseStudies = () => {
             </motion.div>
           ))}
         </div>
+
+        <AnimatePresence>
+          {selectedCase !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+            >
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                onClick={() => setSelectedCase(null)}
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="relative w-full max-w-5xl glass-premium rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]"
+              >
+                <button
+                  onClick={() => setSelectedCase(null)}
+                  className="absolute top-6 right-6 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full transition-colors backdrop-blur-md"
+                >
+                  <X size={20} />
+                </button>
+
+                {/* Anteprima Visuale dell'App */}
+                <div className="lg:w-1/2 bg-blue-600/5 p-8 flex items-center justify-center relative overflow-hidden group border-b lg:border-b-0 lg:border-r border-white/5">
+                  <div className="absolute inset-0 atmosphere opacity-30" />
+                  <div className="relative z-10 glass-premium rounded-xl border border-white/20 shadow-2xl w-full aspect-video overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
+                    <div className="h-6 bg-white/10 flex items-center px-4 gap-2 border-b border-white/5">
+                      <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                      <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                      <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                    </div>
+                    <div className="p-6 flex flex-col gap-4">
+                      <div className="w-2/3 h-4 bg-white/10 rounded-full" />
+                      <div className="flex gap-4">
+                        <div className="w-1/3 h-24 bg-blue-500/10 rounded-lg border border-blue-500/20" />
+                        <div className="w-2/3 h-24 bg-white/5 rounded-lg" />
+                      </div>
+                      <div className="w-full h-20 bg-white/5 rounded-lg" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dettagli e Azioni */}
+                <div className="lg:w-1/2 p-8 lg:p-12 overflow-y-auto">
+                  <div className="text-xs font-bold uppercase tracking-widest text-blue-500 mb-4">
+                    {cases[selectedCase].sector}
+                  </div>
+                  <h2 className="text-3xl font-bold mb-6 italic">{cases[selectedCase].title}</h2>
+                  <p className="text-white/60 mb-8 leading-relaxed">
+                    {cases[selectedCase].longDesc}
+                  </p>
+
+                  <div className="mb-10">
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Moduli Chiave</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {cases[selectedCase].features.map((f, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-sm text-white/80">
+                          <CheckCircle2 size={16} className="text-blue-500 flex-shrink-0" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                      href={cases[selectedCase].appUrl}
+                      className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                    >
+                      Accedi alla Piattaforma <ChevronRight size={18} />
+                    </a>
+                    <button
+                      onClick={() => {
+                        setSelectedCase(null);
+                        onNavigate('contatti');
+                      }}
+                      className="flex-1 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-full text-center border border-white/10 transition-all"
+                    >
+                      Richiedi Account Demo
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -613,7 +721,7 @@ export default function App() {
           >
             {currentPage === 'home' && <Home onNavigate={setCurrentPage} />}
             {currentPage === 'servizi' && <Servizi />}
-            {currentPage === 'case-studies' && <CaseStudies />}
+            {currentPage === 'case-studies' && <CaseStudies onNavigate={setCurrentPage} />}
             {currentPage === 'chi-siamo' && <ChiSiamo />}
             {currentPage === 'contatti' && <Contatti />}
             {currentPage === 'privacy' && <PrivacyPolicy />}
