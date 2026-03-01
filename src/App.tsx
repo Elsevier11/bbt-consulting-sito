@@ -113,12 +113,7 @@ const Home = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex items-center gap-2 text-blue-500 mb-6">
-            <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            </div>
-            <span className="text-[10px] font-bold tracking-[0.2em]">Home</span>
-          </div>
+
 
           <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tighter text-balance">
             Sviluppo d'impresa con l'intelligenza artificiale
@@ -223,21 +218,16 @@ const Servizi = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6">
+    <div className="min-h-screen pt-24 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-10"
         >
-          <div className="flex items-center gap-2 text-blue-500 mb-6">
-            <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            </div>
-            <span className="text-[10px] font-bold tracking-[0.2em]">Servizi</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-balance">Quattro pilastri per lo sviluppo della tua impresa</h2>
+
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">Quattro pilastri per lo sviluppo della tua impresa</h2>
           <p className="text-white/60 max-w-2xl text-lg">
             Soluzioni mirate per costruire organizzazioni agili, intelligenti e pronte a vincere le sfide del mercato.
           </p>
@@ -276,7 +266,7 @@ const Servizi = () => {
 };
 
 const ChiSiamo = () => (
-  <div className="min-h-screen pt-32 pb-20 px-6">
+  <div className="min-h-screen pt-24 pb-20 px-6">
     <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-20 items-start">
         <motion.div
@@ -284,13 +274,8 @@ const ChiSiamo = () => (
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center gap-2 text-blue-500 mb-6">
-            <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            </div>
-            <span className="text-[10px] font-bold tracking-[0.2em]">Chi siamo</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-10 leading-tight text-balance">
+
+          <h2 className="text-3xl md:text-5xl font-bold mb-10 leading-tight text-balance">
             Il nostro metodo: regia unica, valore multidisciplinare
           </h2>
 
@@ -384,13 +369,8 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <div className="flex items-center gap-2 text-blue-500 mb-4">
-            <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
-              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            </div>
-            <span className="text-[10px] font-bold tracking-[0.2em]">Case Studies</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Risultati reali, soluzioni su misura</h2>
+
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">Risultati reali, soluzioni su misura</h2>
           <p className="text-white/60 max-w-2xl text-base">
             Esplora le nostre piattaforme o richiedi una consulenza per la tua nuova idea.
           </p>
@@ -624,24 +604,19 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
 };
 
 const Contatti = () => (
-  <div className="min-h-screen pt-32 pb-20 px-6">
+  <div className="min-h-screen pt-24 pb-20 px-6">
     <div className="max-w-7xl mx-auto text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-20 flex flex-col items-center"
+        className="mb-12 flex flex-col items-center"
       >
-        <div className="flex items-center gap-2 text-blue-500 mb-6">
-          <div className="w-4 h-4 border border-blue-500/30 rounded-full flex items-center justify-center">
-            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-          </div>
-          <span className="text-[10px] font-bold tracking-[0.2em]">Contatti</span>
-        </div>
-        <h2 className="text-4xl md:text-6xl font-bold mb-8 text-balance max-w-4xl">
+
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-balance max-w-4xl">
           Scegli un momento per parlare del tuo progetto
         </h2>
-        <p className="text-white/60 max-w-2xl text-lg mb-12">
+        <p className="text-white/60 max-w-2xl text-lg mb-8">
           Ogni grande cambiamento nasce da un confronto. Prenota una <strong>chiamata conoscitiva</strong> direttamente sul mio calendario e definiamo insieme la rotta per la tua impresa.
         </p>
 
@@ -684,7 +659,7 @@ const Contatti = () => (
 );
 
 const LegalSection = ({ title, children }: { title: string, children: React.ReactNode }) => (
-  <div className="min-h-screen pt-40 pb-20 px-6">
+  <div className="min-h-screen pt-32 pb-20 px-6">
     <div className="max-w-4xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
