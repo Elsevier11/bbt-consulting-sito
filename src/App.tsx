@@ -105,7 +105,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
 };
 
 const Home = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
-  <div className="min-h-screen pt-32 pb-20 px-6">
+  <div className="pt-32 pb-20 px-6">
     <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
@@ -218,7 +218,7 @@ const Servizi = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-6">
+    <div className="pt-24 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -266,7 +266,7 @@ const Servizi = () => {
 };
 
 const ChiSiamo = () => (
-  <div className="min-h-screen pt-24 pb-20 px-6">
+  <div className="pt-24 pb-20 px-6">
     <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-20 items-start">
         <motion.div
@@ -361,7 +361,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-6 flex items-center">
+    <div className="pt-24 pb-16 px-6">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -411,7 +411,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
               <h3 className="text-xl font-bold mb-3">{c.title}</h3>
               <p className="text-white/50 text-xs leading-relaxed mb-6">{c.desc}</p>
               <div className="pt-6 border-t border-white/5 mt-auto">
-                <div className="text-2xl font-bold text-blue-400">{c.impact}</div>
+                <div className="text-xl xl:text-2xl font-bold text-blue-400 whitespace-nowrap">{c.impact}</div>
               </div>
             </motion.div>
           ))}
@@ -604,7 +604,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
 };
 
 const Contatti = () => (
-  <div className="min-h-screen pt-24 pb-20 px-6">
+  <div className="pt-24 pb-20 px-6">
     <div className="max-w-7xl mx-auto text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -659,7 +659,7 @@ const Contatti = () => (
 );
 
 const LegalSection = ({ title, children }: { title: string, children: React.ReactNode }) => (
-  <div className="min-h-screen pt-32 pb-20 px-6">
+  <div className="pt-32 pb-20 px-6">
     <div className="max-w-4xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -731,7 +731,7 @@ const TermsOfService = () => (
 );
 
 const Footer = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
-  <footer className="bg-black/50 border-t border-white/5 pt-20 pb-10 px-6">
+  <footer className="bg-black/50 border-t border-white/5 pt-16 pb-10 px-6">
     <div className="max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
         <div className="lg:col-span-2">
@@ -786,7 +786,7 @@ export default function App() {
   }, [currentPage]);
 
   return (
-    <div className="relative min-h-screen atmosphere overflow-x-hidden">
+    <div className="relative min-h-screen atmosphere overflow-x-hidden flex flex-col">
       {/* Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full animate-pulse" />
@@ -796,7 +796,7 @@ export default function App() {
 
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
-      <main>
+      <main className="flex-grow">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
