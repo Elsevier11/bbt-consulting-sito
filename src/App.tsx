@@ -105,7 +105,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
 };
 
 const Home = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
-  <div className="pt-32 pb-20 px-6">
+  <div className="pt-32 pb-8 px-6">
     <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
@@ -218,7 +218,7 @@ const Servizi = () => {
   ];
 
   return (
-    <div className="pt-24 pb-20 px-6">
+    <div className="pt-24 pb-8 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -266,7 +266,7 @@ const Servizi = () => {
 };
 
 const ChiSiamo = () => (
-  <div className="pt-24 pb-20 px-6">
+  <div className="pt-24 pb-8 px-6">
     <div className="max-w-7xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-20 items-start">
         <motion.div
@@ -361,7 +361,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
   ];
 
   return (
-    <div className="pt-24 pb-16 px-6">
+    <div className="pt-24 pb-8 px-6">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -604,7 +604,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
 };
 
 const Contatti = () => (
-  <div className="pt-24 pb-20 px-6">
+  <div className="pt-24 pb-8 px-6">
     <div className="max-w-7xl mx-auto text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -659,7 +659,7 @@ const Contatti = () => (
 );
 
 const LegalSection = ({ title, children }: { title: string, children: React.ReactNode }) => (
-  <div className="pt-32 pb-20 px-6">
+  <div className="pt-32 pb-8 px-6">
     <div className="max-w-4xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -731,9 +731,9 @@ const TermsOfService = () => (
 );
 
 const Footer = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
-  <footer className="bg-black/50 border-t border-white/5 pt-16 pb-10 px-6">
+  <footer className="bg-black/50 border-t border-white/5 pt-8 pb-10 px-6">
     <div className="max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div className="lg:col-span-2">
           <div className="text-2xl font-bold tracking-tighter mb-6 flex items-center gap-3">
             <img src="/Favicon/apple-touch-icon.png" alt="BBT Logo" className="w-8 h-8 object-contain" />
@@ -760,7 +760,7 @@ const Footer = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
             <button onClick={() => onNavigate('privacy')} className="text-left hover:text-blue-400 transition-colors">Privacy Policy</button>
             <button onClick={() => onNavigate('cookies')} className="text-left hover:text-blue-400 transition-colors">Cookie Policy</button>
             <button onClick={() => onNavigate('terms')} className="text-left hover:text-blue-400 transition-colors">Termini e Condizioni</button>
-            <a href="http://195.231.53.232:3000/" target="_blank" rel="noopener noreferrer" className="text-left hover:text-blue-400 transition-colors opacity-40 hover:opacity-100 flex items-center gap-2">
+            <a href="https://nis2.bbtconsulting.it/" target="_blank" rel="noopener noreferrer" className="text-left hover:text-blue-400 transition-colors opacity-40 hover:opacity-100 flex items-center gap-2">
               Accesso Partner <ExternalLink size={12} />
             </a>
           </div>
