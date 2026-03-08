@@ -1,7 +1,6 @@
 
 import React from 'react';
 import Layout from './components/Layout';
-import AiAssistant from './components/AiAssistant';
 import {
   STRATEGIC_OBJECTIVES,
   APPLICATION_AREAS,
@@ -264,7 +263,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      <AiAssistant />
     </Layout>
   );
 };
