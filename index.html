@@ -1,26 +1,969 @@
-<!doctype html>
-<html lang="it">
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BBT Consulting | Strategia, Direzione e Integrazione AI per PMI</title>
-  <meta name="description"
-    content="BBT Consulting aiuta le PMI a integrare l'Intelligenza Artificiale nei processi aziendali per ottimizzare le performance e scalare il business." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBT Consulting | Strategia, Direzione e Integrazione AI per PMI</title>
+    <meta name="description"
+        content="BBT Consulting aiuta le PMI a integrare l'Intelligenza Artificiale nei processi aziendali per ottimizzare le performance e scalare il business.">
 
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/Favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/Favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/Favicon/favicon-16x16.png">
-  <link rel="manifest" href="/Favicon/site.webmanifest">
-  <link rel="shortcut icon" href="/Favicon/favicon.ico">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="theme-color" content="#0a0a0a">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./Favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./Favicon/favicon-16x16.png">
+    <link rel="manifest" href="./Favicon/site.webmanifest">
+    <link rel="shortcut icon" href="./Favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --brand-dark: #0a0a0a;
+            --brand-blue: #2563eb;
+            --brand-cyan: #06b6d4;
+            --brand-indigo: #6366f1;
+            --brand-emerald: #10b981;
+            --brand-violet: #8b5cf6;
+        }
+
+        html,
+        body {
+            background: #0a0a0a;
+            min-height: 100%;
+        }
+
+        body {
+            background-color: var(--brand-dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-premium {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.10);
+        }
+
+        .glass-premium::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s;
+        }
+
+        .glass-premium:hover::after {
+            left: 150%;
+        }
+
+        /* Background Atmosphere */
+        .atmosphere {
+            background-color: var(--brand-dark);
+            background:
+                radial-gradient(circle at 50% -20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.10) 0%, transparent 40%),
+                radial-gradient(circle at 100% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 30%),
+                linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 100%);
+        }
+
+        .bg-blur-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.45;
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes grow {
+            0% {
+                height: 0%;
+            }
+            100% {
+                height: var(--target-height);
+            }
+        }
+
+        @keyframes rotate-slow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse-opacity {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .drop-shadow-glow {
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+        }
+
+        /* Spotlight Effect */
+        .spotlight-card {
+            position: relative;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.12), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Entrance Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--brand-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
+        /* Legal Content Syles */
+        .legal-content p {
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 1rem;
+        }
+
+        .legal-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        #content-home section {
+            scroll-margin-top: 96px;
+        }
+    </style>
 </head>
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
+<body class="atmosphere min-h-screen flex flex-col">
+    <!-- background blobs -->
+    <div class="bg-blur-element top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10"></div>
+    <div class="bg-blur-element bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/5" style="filter: blur(100px); animation-delay: -2s">
+    </div>
+    <div class="bg-blur-element top-[20%] left-[15%] w-[30%] h-[30%] bg-cyan-500/5" style="filter: blur(140px); animation-delay: -4s"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b-0 transition-all duration-300" id="main-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="text-xl font-bold tracking-tighter flex items-center gap-3">
+                <img src="./Favicon/apple-touch-icon.png" alt="BBT Logo" class="w-10 h-10 object-contain">
+                <span>BBT <span class="text-blue-500">Consulting</span></span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home"
+                    class="nav-link text-xs font-semibold tracking-widest transition-colors hover:text-blue-400 text-blue-500"
+                    data-section="home">HOME</a>
+                <a href="#servizi"
+                    class="nav-link text-xs font-semibold tracking-widest transition-colors hover:text-blue-400 text-white/70"
+                    data-section="servizi">SERVIZI</a>
+                <a href="#case-studies"
+                    class="nav-link text-xs font-semibold tracking-widest transition-colors hover:text-blue-400 text-white/70"
+                    data-section="case-studies">CASE STUDIES</a>
+                <a href="#chi-siamo"
+                    class="nav-link text-xs font-semibold tracking-widest transition-colors hover:text-blue-400 text-white/70"
+                    data-section="chi-siamo">CHI SIAMO</a>
+                <a href="#contatti"
+                    class="nav-link text-xs font-semibold tracking-widest transition-colors hover:text-blue-400 text-white/70"
+                    data-section="contatti">CONTATTI</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden" id="mobile-menu-toggle">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden absolute top-20 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-2xl p-6 md:hidden flex flex-col gap-4 border-b border-white/10 shadow-2xl">
+            <a href="#home"
+                class="mobile-nav-link text-left text-sm font-semibold tracking-widest py-2 text-blue-500">HOME</a>
+            <a href="#servizi"
+                class="mobile-nav-link text-left text-sm font-semibold tracking-widest py-2 text-white/70">SERVIZI</a>
+            <a href="#case-studies"
+                class="mobile-nav-link text-left text-sm font-semibold tracking-widest py-2 text-white/70">CASE
+                STUDIES</a>
+            <a href="#chi-siamo"
+                class="mobile-nav-link text-left text-sm font-semibold tracking-widest py-2 text-white/70">CHI SIAMO</a>
+            <a href="#contatti"
+                class="mobile-nav-link text-left text-sm font-semibold tracking-widest py-2 text-white/70">CONTATTI</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 flex-grow pt-20">
+        <!-- Main Content Area -->
+        <div id="content-home">
+            <!-- Home Section -->
+            <section id="home" class="min-h-[80vh] flex items-center px-6 pt-12 pb-24">
+                <div class="max-w-7xl mx-auto w-full">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="reveal">
+                            <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tighter text-balance">
+                                Sviluppo d'impresa con l'intelligenza artificiale
+                            </h1>
+                            <div
+                                class="inline-flex items-center gap-2 border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-blue-300 mb-6">
+                                Consulenza strategica e AI per PMI
+                            </div>
+                            <div class="space-y-6 text-white/78 text-lg leading-relaxed max-w-xl mb-10">
+                                <p>Aiutiamo le PMI a usare l'intelligenza artificiale per migliorare processi,
+                                    supportare le decisioni e accelerare risultati commerciali e organizzativi.</p>
+                                <p>Dalla direzione strategica all'operatività quotidiana, trasformiamo obiettivi di
+                                    business in strumenti, flussi e priorità concrete.</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                                <a href="#servizi"
+                                    class="group flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-sm font-bold transition-all shadow-lg shadow-blue-600/20">
+                                    Vedi servizi e approccio
+                                    <i data-lucide="arrow-right"
+                                        class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                </a>
+                                <a href="https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-sm font-bold transition-all">
+                                    Prenota una call conoscitiva
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 reveal" style="transition-delay: 200ms">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="glass-premium spotlight-card p-8 rounded-xl space-y-4">
+                                    <div
+                                        class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
+                                        <i data-lucide="target" class="w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="font-bold text-xl">Consulenza direzionale</h3>
+                                    <p class="text-sm text-white/68 leading-relaxed">Definiamo priorità, obiettivi e
+                                        piano operativo per far crescere l'impresa con metodo.</p>
+                                </div>
+                                <div class="glass-premium spotlight-card p-8 rounded-xl space-y-4">
+                                    <div
+                                        class="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center text-cyan-400">
+                                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="font-bold text-xl">Integrazione AI</h3>
+                                    <p class="text-sm text-white/68 leading-relaxed">Inseriamo strumenti AI nei
+                                        processi aziendali per ridurre attività ripetitive e aumentare velocità
+                                        decisionale.</p>
+                                </div>
+                            </div>
+                            <div class="glass-premium spotlight-card p-8 rounded-xl space-y-4">
+                                <div
+                                    class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400">
+                                    <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                                </div>
+                                <h3 class="font-bold text-xl">Data intelligence</h3>
+                                <p class="text-sm text-white/68 leading-relaxed">Trasformiamo i dati in indicatori utili
+                                    per vendite, controllo e decisioni più rapide.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Servizi Section -->
+            <section id="servizi" class="py-24 px-6 border-t border-white/5">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-10 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-balance">Quattro pilastri per lo sviluppo
+                            della tua impresa</h2>
+                        <p class="text-white/72 max-w-2xl text-lg">Interveniamo sulle aree che contano di più per una
+                            PMI: priorità, vendite, dati e strumenti operativi.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glass-premium spotlight-card p-8 rounded-2xl hover:bg-white/10 transition-colors group reveal"
+                            style="transition-delay: 0ms">
+                            <div class="mb-8 text-blue-500 group-hover:scale-110 transition-transform duration-500">
+                                <i data-lucide="trending-up" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Strategia e direzione</h3>
+                            <p class="text-sm text-white/68 leading-relaxed">Mettiamo a fuoco obiettivi, priorità e
+                                piano d'azione per guidare crescita, investimenti e scelte operative.</p>
+                        </div>
+
+                        <div class="glass-premium spotlight-card p-8 rounded-2xl hover:bg-white/10 transition-colors group reveal"
+                            style="transition-delay: 100ms">
+                            <div class="mb-8 text-indigo-400 group-hover:scale-110 transition-transform duration-500">
+                                <i data-lucide="users" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Organizzazione commerciale</h3>
+                            <p class="text-sm text-white/68 leading-relaxed">Rendiamo più chiari pipeline, ruoli e
+                                processi di vendita per aumentare controllo e performance commerciali.</p>
+                        </div>
+
+                        <div class="glass-premium spotlight-card p-8 rounded-2xl hover:bg-white/10 transition-colors group reveal"
+                            style="transition-delay: 200ms">
+                            <div class="mb-8 text-emerald-400 group-hover:scale-110 transition-transform duration-500">
+                                <i data-lucide="database" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Data intelligence</h3>
+                            <p class="text-sm text-white/68 leading-relaxed">Costruiamo indicatori, dashboard e letture
+                                dei dati che aiutano il management a decidere meglio e più in fretta.</p>
+                        </div>
+
+                        <div class="glass-premium spotlight-card p-8 rounded-2xl hover:bg-white/10 transition-colors group reveal"
+                            style="transition-delay: 300ms">
+                            <div class="mb-8 text-violet-400 group-hover:scale-110 transition-transform duration-500">
+                                <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Integrazione AI</h3>
+                            <p class="text-sm text-white/68 leading-relaxed">Introduciamo soluzioni AI utili davvero:
+                                meno attività manuali, più velocità e più supporto alle decisioni.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Case Studies Section -->
+            <section id="case-studies" class="py-24 px-6 bg-black/20">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-12 reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4 text-balance">Risultati reali, soluzioni su
+                            misura</h2>
+                        <p class="text-white/72 max-w-2xl text-base">Soluzioni pensate per problemi concreti:
+                            performance commerciali, compliance, qualità digitale e nuovi strumenti operativi.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glass-premium spotlight-card p-8 rounded-3xl group flex flex-col h-full cursor-pointer transition-all duration-300 hover:border-blue-500/30 reveal"
+                            data-modal="0">
+                            <div
+                                class="text-blue-500 mb-6 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
+                                <i data-lucide="trending-up" class="w-8 h-8"></i>
+                                <i data-lucide="external-link"
+                                    class="w-4 h-4 text-white/20 group-hover:text-blue-400"></i>
+                            </div>
+                            <div class="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">Sales
+                                Intelligence</div>
+                            <h3 class="text-xl font-bold mb-3">Smart Pipeline Control</h3>
+                            <p class="text-white/68 text-xs leading-relaxed mb-6">Più controllo sulla pipeline
+                                commerciale, più visibilità sulle trattative, meno sorprese sui target.</p>
+                            <div class="pt-6 border-t border-white/5 mt-auto">
+                                <div class="text-xl xl:text-2xl font-bold text-blue-400 whitespace-nowrap">Più
+                                    Controllo</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-premium spotlight-card p-8 rounded-3xl group flex flex-col h-full cursor-pointer transition-all duration-300 hover:border-blue-500/30 reveal"
+                            data-modal="1">
+                            <div
+                                class="text-blue-500 mb-6 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
+                                <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                                <i data-lucide="external-link"
+                                    class="w-4 h-4 text-white/20 group-hover:text-blue-400"></i>
+                            </div>
+                            <div class="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">
+                                Cybersecurity</div>
+                            <h3 class="text-xl font-bold mb-3">NIS2 Compliance Navigator</h3>
+                            <p class="text-white/68 text-xs leading-relaxed mb-6">Un percorso guidato per gestire
+                                compliance, documentazione e avanzamento in modo ordinato e verificabile.</p>
+                            <div class="pt-6 border-t border-white/5 mt-auto">
+                                <div class="text-xl xl:text-2xl font-bold text-blue-400 whitespace-nowrap">Compliance
+                                    Sotto Controllo</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-premium spotlight-card p-8 rounded-3xl group flex flex-col h-full cursor-pointer transition-all duration-300 hover:border-blue-500/30 reveal"
+                            data-modal="2">
+                            <div
+                                class="text-blue-500 mb-6 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
+                                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                                <i data-lucide="external-link"
+                                    class="w-4 h-4 text-white/20 group-hover:text-blue-400"></i>
+                            </div>
+                            <div class="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">Digital
+                                Strategy</div>
+                            <h3 class="text-xl font-bold mb-3">Audit Performance Sito</h3>
+                            <p class="text-white/68 text-xs leading-relaxed mb-6">Un'analisi chiara di performance,
+                                SEO, UX e conversione per capire dove intervenire davvero.</p>
+                            <div class="pt-6 border-t border-white/5 mt-auto">
+                                <div class="text-xl xl:text-2xl font-bold text-blue-400 whitespace-nowrap">Più
+                                    Visibilità</div>
+                            </div>
+                        </div>
+
+                        <a href="https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true"
+                            target="_blank"
+                            class="bg-blue-600/10 border-2 border-blue-500/30 hover:bg-blue-600/20 spotlight-card p-8 rounded-3xl group flex flex-col h-full cursor-pointer transition-all duration-300 reveal text-left">
+                            <div
+                                class="text-blue-500 mb-6 opacity-50 group-hover:opacity-100 transition-opacity flex justify-between items-start">
+                                <i data-lucide="plus" class="w-8 h-8"></i>
+                            </div>
+                            <div class="text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-2">Co-Creation
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">La tua prossima soluzione</h3>
+                            <p class="text-white/68 text-xs leading-relaxed mb-6">Hai un processo da migliorare o una
+                                criticità da risolvere? Progettiamo insieme la soluzione giusta.</p>
+                            <div class="pt-6 border-t border-white/5 mt-auto">
+                                <div class="text-xl xl:text-2xl font-bold text-blue-400 whitespace-nowrap">Prenota una
+                                    call</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chi Siamo Section -->
+            <section id="chi-siamo" class="py-24 px-6 border-t border-white/5">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-20 items-start">
+                        <div class="reveal">
+                            <h2 class="text-3xl md:text-5xl font-bold mb-10 leading-tight text-balance">Un solo punto
+                                di regia per trasformare obiettivi in risultati</h2>
+                            <div class="space-y-8 text-white/78 text-lg leading-relaxed">
+                                <p>Affianchiamo imprenditori e management nella definizione delle priorità e nella
+                                    realizzazione di soluzioni concrete, dove strategia, organizzazione e tecnologia
+                                    devono lavorare insieme.</p>
+                                <p>Non vendiamo complessità: coordiniamo competenze, strumenti e partner per portare
+                                    chiarezza decisionale, velocità esecutiva e risultati misurabili.</p>
+                            </div>
+                        </div>
+                        <div class="glass p-10 rounded-3xl space-y-10 reveal" style="transition-delay: 200ms">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                                    <div class="w-8 h-1 bg-blue-500"></div>
+                                    L'ecosistema BBT: la forza del network
+                                </h3>
+                                <p class="text-white/72 leading-relaxed">La nostra capacità di esecuzione si basa su un
+                                    network selezionato di partner specializzati. Questo ci permette di offrire
+                                    soluzioni coordinate in ambiti chiave come IT, AI, cybersecurity e processi
+                                    digitali.</p>
+                            </div>
+                            <div class="pt-10 border-t border-white/10">
+                                <p class="text-white/72 leading-relaxed italic">"Collaborare con noi significa avere un
+                                    interlocutore unico, capace di tenere insieme visione strategica, coordinamento
+                                    operativo e qualità dell'esecuzione."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contatti Section -->
+            <section id="contatti" class="py-24 px-6 border-t border-white/5 bg-blue-600/[0.02]">
+                <div class="max-w-7xl mx-auto text-center">
+                    <div class="mb-12 flex flex-col items-center reveal">
+                        <h2 class="text-3xl md:text-5xl font-bold mb-8 text-balance max-w-4xl">Parliamo del
+                            prossimo passo per la tua impresa</h2>
+                        <p class="text-white/78 max-w-2xl text-lg mb-8">Ogni miglioramento concreto parte da una
+                            valutazione iniziale chiara. Prenota una <strong>call conoscitiva</strong> per capire priorità,
+                            opportunità e prossimi passi per la tua impresa.</p>
+                        <p class="text-white/60 max-w-xl text-base mb-4">Call conoscitiva di 30 minuti, senza
+                            impegno, per valutare dove l'AI può generare valore reale.</p>
+                        <p
+                            class="inline-flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 mb-10">
+                            Nessun impegno - 30 minuti - focus operativo
+                        </p>
+                        <a href="https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true"
+                            target="_blank" rel="noopener noreferrer"
+                            class="group relative flex items-center gap-4 bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 rounded-sm font-bold text-xl transition-all shadow-2xl shadow-blue-600/40 hover:scale-105">
+                            Prenota una call conoscitiva
+                            <i data-lucide="arrow-right"
+                                class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Legal Content Area (Managed via JS) -->
+        <div id="content-legal" class="hidden min-h-screen">
+            <section id="legal-privacy" class="hidden py-32 px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-premium p-10 md:p-16 rounded-3xl legal-content">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-12">Privacy Policy</h1>
+                        <section class="space-y-4">
+                            <h2 class="text-2xl font-bold">1. Titolare del Trattamento</h2>
+                            <p>Il Titolare del trattamento e <strong>BBT S.r.l.</strong>, con sede legale in Via
+                                Vicenza, 32 - 31050 Vedelago (TV). Per qualsiasi chiarimento in merito alla protezione
+                                dei dati, e possibile contattarci tramite i canali ufficiali indicati sul sito.</p>
+                            <h2 class="text-2xl font-bold">2. Tipologia di Dati Raccolti</h2>
+                            <p>Trattiamo esclusivamente i dati necessari alla gestione degli appuntamenti e delle
+                                sessioni di consulenza prenotate tramite la piattaforma di terze parti Cal.com. Non
+                                salviamo dati personali direttamente su questo sito.</p>
+                            <h2 class="text-2xl font-bold">3. Finalità del Trattamento</h2>
+                            <p>I dati sono trattati esclusivamente per l'erogazione dei servizi di consulenza richiesti
+                                e per la gestione del calendario appuntamenti.</p>
+                        </section>
+                        <div class="mt-12 flex justify-between items-center">
+                            <a href="#home"
+                                class="text-blue-500 font-bold flex items-center gap-2 hover:text-blue-400 transition-colors">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i> Torna alla Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="legal-cookies" class="hidden py-32 px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-premium p-10 md:p-16 rounded-3xl legal-content">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-12">Cookie Policy</h1>
+                        <section class="space-y-4">
+                            <h2 class="text-2xl font-bold">Informativa Estesa sui Cookie</h2>
+                            <p>Questo sito utilizza esclusivamente cookie tecnici necessari al corretto funzionamento
+                                della piattaforma. Non utilizziamo cookie di profilazione o tracciamento pubblicitario.
+                            </p>
+                            <h2 class="text-2xl font-bold">Servizi di Terze Parti</h2>
+                            <p>L'integrazione con Cal.com per la prenotazione degli appuntamenti potrebbe comportare
+                                l'uso di cookie tecnici da parte del fornitore esterno per gestire la sessione di
+                                prenotazione.</p>
+                        </section>
+                        <div class="mt-12">
+                            <a href="#home"
+                                class="text-blue-500 font-bold flex items-center gap-2 hover:text-blue-400 transition-colors">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i> Torna alla Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="legal-terms" class="hidden py-32 px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-premium p-10 md:p-16 rounded-3xl legal-content">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-12">Termini e Condizioni</h1>
+                        <section class="space-y-4">
+                            <h2 class="text-2xl font-bold">Oggetto</h2>
+                            <p>I presenti Termini disciplinano l'utilizzo del sito web bbtconsulting.com e del servizio
+                                di prenotazione integrato. L'accesso al sito implica l'accettazione integrale degli
+                                stessi.</p>
+                            <h2 class="text-2xl font-bold">Proprietà Intellettuale</h2>
+                            <p>Tutti i contenuti (testi, grafiche, loghi) presenti sul sito sono di proprietà di BBT
+                                S.r.l. o dei rispettivi aventi diritto e sono protetti dalle leggi sul diritto d'autore.
+                            </p>
+                            <h2 class="text-2xl font-bold">Limitazione di Responsabilità</h2>
+                            <p>BBT S.r.l. declina ogni responsabilità per eventuali disservizi tecnici legati a
+                                piattaforme esterne di prenotazione o per inesattezze temporanee nei contenuti
+                                informativi.</p>
+                        </section>
+                        <div class="mt-12">
+                            <a href="#home"
+                                class="text-blue-500 font-bold flex items-center gap-2 hover:text-blue-400 transition-colors">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i> Torna alla Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 border-t border-white/5 pt-12 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="lg:col-span-2">
+                    <div class="text-2xl font-bold tracking-tighter mb-6 flex items-center gap-3">
+                        <img src="./Favicon/apple-touch-icon.png" alt="BBT Logo" class="w-10 h-10 object-contain">
+                        <span class="font-bold">BBT <span class="text-blue-500">Consulting</span></span>
+                    </div>
+                    <p class="text-white/50 max-w-sm leading-relaxed mb-8">Strategia, organizzazione e intelligenza
+                        artificiale per aiutare le PMI a decidere meglio e crescere con più controllo.</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold mb-6 uppercase tracking-widest text-white/80">Navigazione</h4>
+                    <div class="flex flex-col gap-4 text-sm text-white/60">
+                        <a href="#home" class="nav-link-footer hover:text-blue-400 transition-colors">Home</a>
+                        <a href="#servizi" class="nav-link-footer hover:text-blue-400 transition-colors">Servizi</a>
+                        <a href="#chi-siamo" class="nav-link-footer hover:text-blue-400 transition-colors">Chi Siamo</a>
+                        <a href="#contatti" class="nav-link-footer hover:text-blue-400 transition-colors">Contatti</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest mb-6 text-white/80">Legale</h4>
+                    <div class="flex flex-col gap-4 text-sm text-white/60">
+                        <a href="#privacy" class="legal-trigger hover:text-blue-400 transition-colors">Privacy
+                            Policy</a>
+                        <a href="#cookies" class="legal-trigger hover:text-blue-400 transition-colors">Cookie Policy</a>
+                        <a href="#terms" class="legal-trigger hover:text-blue-400 transition-colors">Termini e
+                            Condizioni</a>
+                        <a href="https://nis2.bbtconsulting.it/" target="_blank"
+                            class="opacity-40 hover:opacity-100 hover:text-blue-400 transition-colors flex items-center gap-2">Accesso Partner <i
+                                data-lucide="external-link" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-white/30">
+                <p>(c) 2025 BBT S.r.l. Tutti i diritti riservati.</p>
+                <div class="flex gap-8">
+                    <span>P.IVA 05371510263</span>
+                    <span>Vedelago (TV), Italia</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="modal-overlay"></div>
+        <div
+            class="relative w-full max-w-5xl glass-premium rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]">
+            <button id="modal-close"
+                class="absolute top-6 right-6 z-10 p-2 bg-black/20 hover:bg-black/40 rounded-full transition-colors backdrop-blur-md text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="lg:w-1/2 bg-blue-600/5 p-8 flex items-center justify-center relative overflow-hidden group border-b lg:border-b-0 lg:border-r border-white/5"
+                id="modal-graphic">
+                <!-- Injected via JS -->
+            </div>
+            <div class="lg:w-1/2 p-8 lg:p-12 overflow-y-auto" id="modal-body">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // --- Core Initialization ---
+        lucide.createIcons();
+
+        // --- View Logic (Legal vs Home) ---
+        const handleNavigation = () => {
+            const hash = window.location.hash;
+            const contentHome = document.getElementById('content-home');
+            const contentLegal = document.getElementById('content-legal');
+            const legalSections = {
+                '#privacy': document.getElementById('legal-privacy'),
+                '#cookies': document.getElementById('legal-cookies'),
+                '#terms': document.getElementById('legal-terms')
+            };
+
+            // Hide everything first
+            contentHome.classList.add('hidden');
+            contentLegal.classList.add('hidden');
+            Object.values(legalSections).forEach(s => s.classList.add('hidden'));
+
+            if (hash in legalSections) {
+                contentLegal.classList.remove('hidden');
+                legalSections[hash].classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                contentHome.classList.remove('hidden');
+                if (!hash || hash === '#home') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // If it's a section anchor within home, scroll to it
+                    const el = document.querySelector(hash);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        };
+
+        window.addEventListener('hashchange', handleNavigation);
+        window.addEventListener('load', handleNavigation);
+
+        document.querySelectorAll('a[href="#home"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.location.hash !== '#home') {
+                    window.location.hash = 'home';
+                    return;
+                }
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // --- Spotlight Effect ---
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // --- Mobile Menu ---
+        const mobileToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            menuIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+            lucide.createIcons();
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // --- Scroll Spy & Sticky Nav ---
+        const nav = document.getElementById('main-nav');
+        const homeSections = document.querySelectorAll('#content-home section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            // Navbar Shrink
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'bg-black/90', 'border-white/10');
+                nav.querySelector('div').classList.replace('h-20', 'h-16');
+            } else {
+                nav.classList.remove('py-2', 'bg-black/90', 'border-white/10');
+                nav.querySelector('div').classList.replace('h-16', 'h-20');
+            }
+
+            // Scroll Spy
+            let current = '';
+            homeSections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-500');
+                link.classList.add('text-white/70');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('text-blue-500');
+                    link.classList.remove('text-white/70');
+                }
+            });
+        });
+
+        // --- Intersection Observer for Animations ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Once animated, stop observing
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- Case Studies Modals ---
+        const caseStudiesData = [
+            {
+                sector: "Sales Intelligence",
+                title: "Smart Pipeline Control",
+                longDesc: "Una piattaforma di Sales Intelligence che trasforma i dati del CRM in informazioni utili per la direzione commerciale. Il sistema analizza andamento, storico e qualità della pipeline per prevedere le chiusure, evidenziare criticità e aiutare il management a intervenire prima che i target vengano compromessi.",
+                features: ["Integrazione CRM in tempo reale", "Previsione chiusura trattative", "Dashboard direzionale comparativa", "Alert automatici sulle criticità"],
+                impact: "Più Controllo",
+                graphic: `
+                    <div class="relative z-10 w-full max-w-md aspect-square flex flex-col gap-4">
+                        <div class="flex items-end gap-2 h-40">
+                            ${[40, 70, 45, 90, 65, 80].map((h, i) => `
+                                <div class="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg opacity-80" style="height: 0%; --target-height: ${h}%; animation: grow 1s ease-out ${i * 0.1}s forwards;"></div>
+                            `).join('')}
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="h-20 glass-premium rounded-xl border border-white/10 flex flex-col justify-center px-4">
+                                <div class="text-[10px] text-white/30 uppercase font-bold">Pipeline</div>
+                                <div class="text-xl font-bold text-blue-400">EUR 2.4M</div>
+                            </div>
+                            <div class="h-20 glass-premium rounded-xl border border-white/10 flex flex-col justify-center px-4">
+                                <div class="text-[10px] text-white/30 uppercase font-bold">Accuracy</div>
+                                <div class="text-xl font-bold text-emerald-400">94%</div>
+                            </div>
+                        </div>
+                    </div>`
+            },
+            {
+                sector: "Cybersecurity",
+                title: "NIS2 Compliance Navigator",
+                longDesc: "Il Navigatore NIS2 semplifica un percorso normativo complesso con un workflow strutturato e leggibile. Guida l'azienda nella raccolta delle evidenze, nella produzione della documentazione e nel monitoraggio dello stato di avanzamento fino a una compliance più ordinata e verificabile.",
+                features: ["Workflow di Documentazione Guidato", "Checklist Requisiti NIS2/ACN", "Repository Prove di Compliance", "Report Avanzamento in Tempo Reale"],
+                impact: "Compliance Sotto Controllo",
+                graphic: `
+                    <div class="relative z-10 flex flex-col items-center gap-6">
+                        <div class="relative w-40 h-40 flex items-center justify-center">
+                            <div class="absolute inset-0 border-2 border-blue-500/20 rounded-full animate-ping" style="animation-duration: 3s"></div>
+                            <div class="absolute inset-4 border border-blue-500/10 rounded-full" style="animation: rotate-slow 15s linear infinite;"></div>
+                            <div class="absolute inset-8 border border-dashed border-blue-500/20 rounded-full" style="animation: rotate-slow 25s linear infinite reverse;"></div>
+                            <div class="w-32 h-32 glass-premium border-2 border-blue-500/30 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(59,130,246,0.3)]">
+                                <i data-lucide="shield" class="w-16 h-16 text-blue-500 drop-shadow-glow"></i>
+                            </div>
+                            ${[0, 45, 135, 225, 315].map((angle, i) => `
+                                <div class="absolute w-2 h-2 bg-blue-400 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" style="transform: rotate(${angle}deg) translateY(-140px); animation: pulse-opacity 2s infinite ${i * 0.4}s;"></div>
+                            `).join('')}
+                        </div>
+                        <div class="text-center">
+                            <div class="text-blue-400 font-bold tracking-widest text-[10px]">VERIFICA ATTIVA</div>
+                            <div class="text-[8px] text-white/30 mt-1 uppercase">Infrastruttura NIS2 compliant</div>
+                        </div>
+                    </div>`
+            },
+            {
+                sector: "Digital Strategy",
+                title: "Audit Performance Sito",
+                longDesc: "Uno strumento di analisi che valuta il sito web sotto tre aspetti decisivi: performance tecnica, efficacia SEO e qualità dell'esperienza utente. Evidenzia i punti di attrito, aiuta a capire dove si perdono opportunità e definisce una roadmap concreta di miglioramento.",
+                features: ["Audit SEO semantico", "Analisi user experience", "Benchmark competitivo", "Roadmap di ottimizzazione"],
+                impact: "Più Visibilità",
+                graphic: `
+                    <div class="relative w-48 h-48 flex items-center justify-center">
+                        <div class="absolute inset-0 border-4 border-t-blue-500 border-r-transparent border-b-blue-500/20 border-l-transparent rounded-full animate-spin" style="animation-duration: 5s"></div>
+                        <div class="absolute inset-4 glass-premium rounded-full flex items-center justify-center">
+                             <i data-lucide="bar-chart-3" class="w-12 h-12 text-blue-500 opacity-60"></i>
+                        </div>
+                        <div class="absolute bottom-[-10px] left-1/2 -translate-x-1/2 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-3 py-1 rounded-full border border-emerald-500/20">SEO: +24%</div>
+                    </div>`
+            }
+        ];
+
+        const modalContainer = document.getElementById('modal-container');
+        const modalBody = document.getElementById('modal-body');
+        const modalGraphic = document.getElementById('modal-graphic');
+        const modalClose = document.getElementById('modal-close');
+
+        document.querySelectorAll('[data-modal]').forEach(card => {
+            card.addEventListener('click', () => {
+                const idx = card.getAttribute('data-modal');
+                const data = caseStudiesData[idx];
+
+                modalGraphic.innerHTML = data.graphic;
+                modalBody.innerHTML = `
+                    <div class="text-xs font-bold uppercase tracking-widest text-blue-500 mb-4">${data.sector}</div>
+                    <h2 class="text-3xl font-bold mb-6 italic text-white">${data.title}</h2>
+                    <p class="text-white/72 mb-8 leading-relaxed">${data.longDesc}</p>
+                    <div class="mb-10">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Elementi Chiave</h4>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${data.features.map(f => `
+                                <li class="flex items-center gap-2 text-sm text-white/80">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-500"></i>
+                                    ${f}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true" target="_blank" class="w-full bg-blue-600 shadow-blue-500/20 shadow-lg hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-full text-center transition-all flex items-center justify-center gap-2">
+                            Prenota una call conoscitiva
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>`;
+
+                modalContainer.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                lucide.createIcons();
+            });
+        });
+
+        const closeModal = () => {
+            modalContainer.classList.add('hidden');
+            document.body.style.overflow = '';
+        };
+
+        modalClose.addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', closeModal);
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+        // Dynamic copyright
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyrightEl = document.querySelector('footer p');
+            if (copyrightEl) {
+                copyrightEl.textContent = `© ${new Date().getFullYear()} BBT S.r.l. Tutti i diritti riservati.`;
+            }
+        });
+    </script>
 </body>
 
 </html>

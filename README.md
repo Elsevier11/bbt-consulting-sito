@@ -1,20 +1,17 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# BBT Sito
 
-# Run and deploy your AI Studio app
+La versione live del sito e il file [index.html](/c:/Users/Paolo%20Pedron/OneDrive%20-%20ZEROBYTE%20SRL/Dev/BBT_Sito/index.html).
 
-This contains everything you need to run your app locally.
+## Struttura
 
-View your app in AI Studio: https://ai.studio/apps/5293b785-ded5-4f74-9217-a463efa0c203
+- `index.html`: pagina statica attualmente pubblicata.
+- `Favicon/`: asset favicon usati dalla pagina live.
+- `legacy-spa/`: archivio della precedente SPA React/Vite. Non e piu il target di deploy.
 
-## Run Locally
+## Deploy
 
-**Prerequisites:**  Node.js
+Il repository e configurato per pubblicare su Netlify la root del progetto come sito statico, senza build della SPA legacy.
 
+## Nota operativa
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Per modifiche future al sito live, lavora su `index.html`.
