@@ -1,0 +1,762 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copilot in Microsoft 365 per la PA | Comune di Livorno</title>
+  <style>
+    :root {
+      --bg: #f3efe5;
+      --paper: rgba(255, 252, 246, 0.88);
+      --ink: #13293d;
+      --muted: #52606d;
+      --accent: #cf1700;
+      --accent-soft: #f5d2cd;
+      --line: rgba(19, 41, 61, 0.12);
+      --shadow: 0 24px 60px rgba(19, 41, 61, 0.14);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(154, 52, 18, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(19, 41, 61, 0.18), transparent 26%),
+        linear-gradient(180deg, #f8f4eb 0%, #f0e8da 100%);
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, .eyebrow {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0.01em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(248, 244, 235, 0.78);
+      border-bottom: 1px solid rgba(19, 41, 61, 0.08);
+      box-shadow: inset 0 -3px 0 rgba(207, 23, 0, 0.16);
+    }
+
+    .topbar-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 16px 28px rgba(154, 52, 18, 0.2);
+    }
+
+    .brand-logo img {
+      display: block;
+      width: auto;
+      height: 58px;
+      max-width: min(100%, 290px);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav a {
+      position: relative;
+      padding: 6px 0;
+      transition: color 180ms ease;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 180ms ease;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .partner-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 8px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #13293d, #1d425f);
+      box-shadow: 0 16px 28px rgba(19, 41, 61, 0.2);
+    }
+
+    .partner-logo img {
+      display: block;
+      width: auto;
+      height: 34px;
+      max-width: min(100%, 180px);
+    }
+
+    .hero {
+      padding: 72px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -70px;
+      bottom: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(154, 52, 18, 0.16), transparent 70%);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 4.6vw, 4.45rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    .lead {
+      max-width: 58ch;
+      margin: 22px 0 28px;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      border: 1px solid transparent;
+    }
+
+    .button.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), #e5513d);
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(19, 41, 61, 0.12);
+    }
+
+    .hero-panel {
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .stat {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(207, 23, 0, 0.05);
+      border: 1px solid rgba(207, 23, 0, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .grid-3,
+    .grid-2 {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    section {
+      padding: 18px 0 34px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+    }
+
+    .section-head p {
+      max-width: 56ch;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .feature,
+    .timeline-item,
+    .office,
+    .governance,
+    .cta {
+      padding: 26px;
+      position: relative;
+    }
+
+    .feature::before,
+    .timeline-item::before,
+    .office::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      bottom: 20px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent), rgba(207, 23, 0, 0.18));
+    }
+
+    .feature h3,
+    .timeline-item h3,
+    .office h3,
+    .governance h3,
+    .cta h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .feature p,
+    .timeline-item p,
+    .office p,
+    .governance p,
+    li {
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .time {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .governance {
+      background:
+        linear-gradient(145deg, rgba(19, 41, 61, 0.96), rgba(24, 57, 86, 0.9)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+      color: #f8f4eb;
+    }
+
+    .governance p,
+    .governance li {
+      color: rgba(248, 244, 235, 0.82);
+    }
+
+    .cta {
+      display: grid;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(154, 52, 18, 0.12), rgba(19, 41, 61, 0.08));
+      margin-bottom: 56px;
+    }
+
+    .footer {
+      padding: 0 0 36px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .feature,
+      .timeline-item,
+      .office,
+      .governance,
+      .cta {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: start;
+        flex-direction: column;
+        display: flex;
+      }
+
+      .topbar-right {
+        width: 100%;
+        align-items: flex-start;
+        justify-content: flex-end;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .brand-logo img {
+        height: 52px;
+      }
+
+      .partner-logo {
+        min-height: 52px;
+      }
+
+      .partner-logo img {
+        height: 30px;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 9vw, 3.4rem);
+        line-height: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-label="Citt&#224; di Livorno">
+          <img src="Immagine1.png" alt="Logo Citt&#224; di Livorno">
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#valore">Valore</a>
+        <a href="#programma">Programma</a>
+        <a href="#verticali">Percorsi verticali</a>
+        <a href="#governance">Sicurezza</a>
+      </nav>
+      <div class="topbar-right">
+        <div class="partner-logo" aria-label="Logo aziendale">
+          <img src="LOGO_white-800x377.png" alt="Logo aziendale">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="card hero-copy">
+          <p class="eyebrow">Percorso formativo articolato in due fasi</p>
+          <h1>Copilot in Microsoft 365 per la Pubblica Amministrazione</h1>
+          <p class="lead">
+            Un percorso progettato per il personale del Comune di Livorno: una giornata formativa generale,
+            replicata 4 volte, seguita da 4 ulteriori mezze giornate verticali dedicate ai principali casi d'uso
+            specialistici dell'ente.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#programma">Esplora il programma</a>
+            <a class="button secondary" href="#verticali">Vedi i percorsi verticali</a>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Online sincrono</span>
+            <span class="tag">1 giornata generale x4</span>
+            <span class="tag">4 mezze giornate verticali</span>
+            <span class="tag">Dimostrazioni guidate</span>
+          </div>
+        </article>
+
+        <aside class="card hero-panel">
+          <div class="stat">
+            <strong>Una base comune per tutti i gruppi</strong>
+            La prima giornata costruisce linguaggio condiviso, metodo e consapevolezza d'uso su Copilot Chat nella versione inclusa in Microsoft 365.
+          </div>
+          <div class="stat">
+            <strong>Approfondimenti per sottogruppo</strong>
+            Le mezze giornate successive sviluppano casi d'uso verticali con un taglio pi&#249; operativo e aderente ai processi.
+          </div>
+          <div class="stat">
+            <strong>Focus su risultati misurabili</strong>
+            Riduzione dei tempi di redazione, maggiore qualit&#224; documentale e pi&#249; controllo nei flussi amministrativi.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="valore">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Perch&#233; questa proposta</p>
+          <h2>Un uso di Copilot che parla il linguaggio della PA</h2>
+        </div>
+          <p>
+          La proposta combina una formazione generale, utile a creare una base comune, con approfondimenti specialistici
+          dedicati a specifici sottogruppi. In questo modo il Comune pu&#242; avviare un percorso coerente, progressivo e gi&#224; orientato all'applicazione pratica.
+        </p>
+      </div>
+      <div class="grid-3">
+        <article class="card feature">
+          <h3>Base comune e linguaggio condiviso</h3>
+          <p>La prima giornata consente a tutti i partecipanti di comprendere funzioni, limiti, metodo d'uso e opportunit&#224; di Copilot nel contesto comunale.</p>
+          <ul>
+            <li>Comprensione uniforme dello strumento</li>
+            <li>Allineamento tra uffici e ruoli</li>
+            <li>Maggiore consapevolezza operativa</li>
+          </ul>
+        </article>
+        <article class="card feature">
+          <h3>Approfondimenti verticali per sottogruppo</h3>
+          <p>Le mezze giornate specialistiche permettono di lavorare su scenari ad alta rilevanza, con esempi pi&#249; vicini alle attivit&#224; reali.</p>
+          <ul>
+            <li>Maggiore aderenza ai processi</li>
+            <li>Applicazione su casi d'uso concreti</li>
+            <li>Valore percepito pi&#249; immediato</li>
+          </ul>
+        </article>
+        <article class="card feature">
+          <h3>Innovazione governata</h3>
+          <p>Il percorso mantiene un equilibrio tra efficienza, qualit&#224; del risultato, controllo umano e corretta gestione dei dati.</p>
+          <ul>
+            <li>Uso corretto di Copilot nei flussi documentali</li>
+            <li>Attenzione a privacy, GDPR e governance</li>
+            <li>Verifica sempre in capo all'operatore</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="programma">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Fase 1</p>
+          <h2>Una giornata generale, replicata 4 volte</h2>
+        </div>
+        <p>
+          La prima fase mantiene un taglio trasversale: introduce Copilot Chat nella versione inclusa in Microsoft 365, ne chiarisce il perimetro reale di utilizzo
+          e prepara i partecipanti alla seconda fase, pi&#249; specialistica e orientata ai singoli sottogruppi.
+        </p>
+      </div>
+      <div class="timeline">
+        <article class="card timeline-item">
+          <div class="time">09:00 - 09:30</div>
+          <div>
+            <h3>Introduzione all'AI generativa e a Copilot Chat</h3>
+            <p>Cos'&#232; Copilot Chat, come funziona e quali sono le caratteristiche e i limiti della versione inclusa nel piano Microsoft 365 dell'ente.</p>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="time">09:30 - 10:30</div>
+          <div>
+            <h3>Il flusso operativo di base: portare il lavoro alla chat</h3>
+            <p>Interagire via testo libero, caricare documenti in chat, analizzare delibere, determine, bandi e regolamenti; confronto tra testi, creazione di riassunti, bozze e semplificazione di testi per i cittadini.</p>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="time">10:45 - 12:00</div>
+          <div>
+            <h3>Copilot Chat con i documenti del Comune</h3>
+            <p>Come lavorare tramite upload-e-chat con documenti Word, tabelle Excel e contenuti per presentazioni: riscrittura, sintesi, bozze e interpretazione di dati senza integrazioni native nelle singole applicazioni.</p>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="time">12:00 - 13:00</div>
+          <div>
+            <h3>Prompt engineering per la Pubblica Amministrazione</h3>
+            <p>Metodo CLEAR, richieste efficaci, prompt pronti all'uso per atti amministrativi, relazioni dirigenziali, risposte formali, comunicazioni ai cittadini e analisi Excel.</p>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="time">14:00 - 15:00</div>
+          <div>
+            <h3>Panoramica ragionata dei principali scenari applicativi</h3>
+            <p>Una sintesi dei filoni di utilizzo pi&#249; rilevanti, utile per preparare il passaggio agli approfondimenti verticali della seconda fase.</p>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="time">15:00 - 15:45</div>
+          <div>
+            <h3>Sicurezza, privacy e governance</h3>
+            <p>Un modulo chiave per chiarire perimetro di accesso ai dati, non addestramento sui contenuti, limiti sui dati sensibili e ruolo del controllo umano.</p>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="time">16:00 - 17:30</div>
+          <div>
+            <h3>Dimostrazioni avanzate, Q&amp;A e chiusura</h3>
+            <p>Documenti istituzionali completi, sintesi di regolamenti, estrazione di criticit&#224; da un bando, lettura di tabelle e check-list finale con materiali di supporto.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="verticali">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Fase 2</p>
+          <h2>Quattro mezze giornate verticali per i sottogruppi</h2>
+        </div>
+        <p>
+          Dopo la formazione generale, il percorso prosegue con 4 sessioni specialistiche. Ogni mezza giornata approfondisce
+          un ambito operativo specifico, con l'obiettivo di tradurre le possibilit&#224; di Copilot Chat in vantaggi concreti nei flussi documentali reali del Comune.
+        </p>
+      </div>
+      <div class="grid-2">
+        <article class="card office">
+          <h3>1. Redazione di delibere, determine e rapporti</h3>
+          <p>Una sessione dedicata alla costruzione e revisione di testi amministrativi complessi, con attenzione a struttura, chiarezza espositiva e coerenza formale.</p>
+          <ul>
+            <li>Supporto alla stesura di bozze e schemi iniziali</li>
+            <li>Uniformazione del linguaggio amministrativo</li>
+            <li>Maggiore rapidit&#224; nella preparazione dei documenti</li>
+          </ul>
+        </article>
+        <article class="card office">
+          <h3>2. Redazione di bandi di gara</h3>
+          <p>Un approfondimento focalizzato sulla predisposizione di testi articolati e documentazione di supporto, utile per organizzare contenuti, requisiti e clausole in modo pi&#249; efficiente.</p>
+          <ul>
+            <li>Aiuto nella strutturazione delle sezioni del bando</li>
+            <li>Controllo di coerenza tra parti del testo</li>
+            <li>Supporto alla revisione e alla leggibilit&#224; complessiva</li>
+          </ul>
+        </article>
+        <article class="card office">
+          <h3>3. Sintesi documentale e normativa</h3>
+          <p>Una sessione pensata per ridurre i tempi di lettura e interpretazione di documenti lunghi, regolamenti e testi normativi, migliorando la capacit&#224; di estrarre elementi chiave e criticit&#224;.</p>
+          <ul>
+            <li>Riassunti strutturati di documenti complessi</li>
+            <li>Individuazione rapida di punti chiave e passaggi critici</li>
+            <li>Supporto alla preparazione di briefing e note sintetiche</li>
+          </ul>
+        </article>
+        <article class="card office">
+          <h3>4. Anonimizzazione documentale (GDPR)</h3>
+          <p>Un modulo verticale dedicato alla protezione dei dati personali, con focus sulle modalit&#224; con cui Copilot pu&#242; supportare l'analisi preliminare e la revisione dei documenti da anonimizzare.</p>
+          <ul>
+            <li>Individuazione di dati e riferimenti sensibili</li>
+            <li>Supporto alla preparazione di versioni condivisibili</li>
+            <li>Maggiore attenzione a conformit&#224; e controllo finale umano</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="governance">
+      <article class="card governance">
+        <p class="eyebrow" style="color:#f3d7c9;">Sicurezza e affidabilit&#224;</p>
+        <h2>Una proposta credibile anche sotto il profilo della governance</h2>
+        <div class="grid-2">
+          <div>
+            <p>
+              Il modulo dedicato a sicurezza e privacy &#232; uno dei passaggi pi&#249; importanti della giornata:
+              serve a rassicurare, ma soprattutto a impostare un utilizzo corretto e coerente con il contesto pubblico.
+            </p>
+            <ul>
+              <li>Copilot opera nel perimetro di accesso gi&#224; consentito all'utente</li>
+              <li>I contenuti non vengono usati per addestrare i modelli</li>
+              <li>Le informazioni non vengono condivise indiscriminatamente tra utenti</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Attenzione specifica a dati sensibili e documenti critici</li>
+              <li>Uso consapevole di Copilot Chat: cosa caricare e cosa non caricare in chat</li>
+              <li>Verifica umana obbligatoria prima di qualunque pubblicazione o invio</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="materiali">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Materiali consegnati</p>
+          <h2>Contenuti di supporto pronti all&#39;uso</h2>
+        </div>
+        <p>
+          Al termine del percorso verranno condivisi materiali essenziali, pensati per aiutare i partecipanti a
+          consolidare quanto visto in aula e a riutilizzarlo con immediatezza nelle attivit&#224; quotidiane.
+        </p>
+      </div>
+      <div class="grid-2">
+        <article class="card office">
+          <h3>Slide della giornata in formato PDF</h3>
+          <p>Un supporto ordinato e consultabile per riprendere i contenuti principali, le logiche d&#39;uso di Copilot e i punti metodologici emersi durante la formazione.</p>
+        </article>
+        <article class="card office">
+          <h3>Scheda &ldquo;I prompt essenziali per la PA&rdquo;</h3>
+          <p>Una sintesi operativa di una pagina, pronta all&#39;uso, con esempi pratici e formulazioni utili per impostare richieste pi&#249; efficaci nel contesto della Pubblica Amministrazione.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <article class="card cta">
+        <p class="eyebrow">Visione finale</p>
+        <h2>Un percorso completo: visione comune e applicazione specialistica</h2>
+        <p>
+          La proposta mette insieme una base metodologica condivisa e un secondo livello di approfondimento verticale.
+          In questo modo il Comune pu&#242; accompagnare gruppi diversi verso un uso pi&#249; consapevole, concreto e pertinente di Copilot Chat nei rispettivi ambiti di lavoro.
+        </p>
+        <div class="tag-row">
+          <span class="tag">1 giornata generale x4</span>
+          <span class="tag">4 mezze giornate verticali</span>
+          <span class="tag">Approccio operativo</span>
+          <span class="tag">Governance e controllo</span>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="shell footer">
+    Copilot in Microsoft 365 per la Pubblica Amministrazione.
+    <br>
+    Documento riservato. Riproduzione, distribuzione o condivisione non autorizzata vietata.
+  </footer>
+</body>
+</html>
