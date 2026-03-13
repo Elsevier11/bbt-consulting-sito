@@ -219,6 +219,32 @@
         #content-home section {
             scroll-margin-top: 96px;
         }
+
+        .mobile-menu-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .mobile-menu-toggle svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .mobile-menu-panel {
+            display: none;
+        }
+
+        .mobile-menu-panel.is-open {
+            display: flex;
+        }
     </style>
 </head>
 
@@ -257,14 +283,14 @@
             </div>
 
             <!-- Mobile Toggle -->
-            <button class="md:hidden" id="mobile-menu-toggle" type="button" aria-label="Apri menu" aria-expanded="false">
+            <button class="mobile-menu-toggle md:hidden" id="mobile-menu-toggle" type="button" aria-label="Apri menu" aria-expanded="false">
                 <i data-lucide="menu" id="menu-icon"></i>
             </button>
         </div>
 
         <!-- Mobile Menu -->
         <div id="mobile-menu"
-            class="hidden absolute top-20 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-2xl p-6 md:hidden flex flex-col gap-4 border-b border-white/10 shadow-2xl">
+            class="mobile-menu-panel absolute top-20 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-2xl p-6 md:hidden flex-col gap-4 border-b border-white/10 shadow-2xl">
             <a href="#home"
                 class="mobile-nav-link text-left text-sm font-semibold tracking-widest py-2 text-blue-500">HOME</a>
             <a href="#servizi"
@@ -773,7 +799,7 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         const setMobileMenuState = (isOpen) => {
-            mobileMenu.classList.toggle('hidden', !isOpen);
+            mobileMenu.classList.toggle('is-open', isOpen);
             mobileToggle.setAttribute('aria-expanded', String(isOpen));
             mobileToggle.setAttribute('aria-label', isOpen ? 'Chiudi menu' : 'Apri menu');
             mobileToggle.innerHTML = `<i data-lucide="${isOpen ? 'x' : 'menu'}" id="menu-icon"></i>`;
@@ -781,7 +807,7 @@
         };
 
         mobileToggle.addEventListener('click', () => {
-            const isOpen = mobileMenu.classList.contains('hidden');
+            const isOpen = !mobileMenu.classList.contains('is-open');
             setMobileMenuState(isOpen);
         });
 
