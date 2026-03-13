@@ -10,7 +10,9 @@ La versione live del sito e il file [index.html](/c:/Users/Paolo%20Pedron/OneDri
 
 ## Deploy
 
-Il repository e configurato per pubblicare su Netlify la root del progetto come sito statico, senza build della SPA legacy.
+Il repository viene pubblicato su Cloudflare Pages usando la root del progetto come sito statico, senza build della SPA legacy.
+
+Per i percorsi custom e i rewrite lato hosting, usa [`_redirects`](/c:/Users/Paolo%20Pedron/OneDrive%20-%20ZEROBYTE%20SRL/Dev/BBT_Sito/_redirects).
 
 ## Nota operativa
 
