@@ -1,46 +1,1129 @@
-
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atalanta AI Strategy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Atalanta BC | AI Strategy - Proposta Operativa</title>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        :root {
+            --bg-dark: #020617;
+            --bg-card: rgba(15, 23, 42, 0.6);
+            --blue-primary: #2563eb;
+            --blue-accent: #60a5fa;
+            --blue-glow: rgba(37, 99, 235, 0.4);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --nerazzurro-gradient: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Outfit', sans-serif;
+        }
+
+        /* Basic Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             scroll-behavior: smooth;
+            cursor: none;
+            /* Hide default for custom cursor */
         }
-        .bg-nerazzurro {
-            background: linear-gradient(135deg, #000000 0%, #1e3a8a 100%);
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-title);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Custom Cursor */
+        #cursor-dot,
+        #cursor-outline {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, background-color 0.3s ease, border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+        }
+
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--blue-accent);
+        }
+
+        #cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--blue-glow);
+        }
+
+        /* Scroll Progress */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(to right, var(--blue-primary), var(--blue-accent));
+            z-index: 1001;
+            box-shadow: 0 0 10px var(--blue-glow);
+        }
+
+        /* Utilities */
         .text-gradient {
-            background: linear-gradient(to right, #60a5fa, #ffffff);
+            background: linear-gradient(to right, #60a5fa, #2563eb, #3b82f6);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textFlow 3s linear infinite;
         }
+
+        @keyframes textFlow {
+            to {
+                background-position: 200% center;
+            }
+        }
+
         .card-glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .card-glass:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Staggered Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.5s ease-out;
+        }
+
+        .stagger-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 2rem 0;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .atalanta-logo {
+            height: 3.5rem;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .atalanta-logo:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .ribo-branding {
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blue-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--bg-dark);
+            overflow: hidden;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1522778119026-d647f0565c6d?q=80&w=2970&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            transform: scale(1.1);
+            transition: transform 0.1s ease-out;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+        }
+
+        .badge-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 999px;
+            color: var(--blue-accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.1);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-weight: 300;
+        }
+
+        .btn-premium {
+            padding: 1.2rem 2.5rem;
+            border-radius: 999px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-solid {
+            background: var(--blue-primary);
+            color: white;
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-solid:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content Sections */
+        section {
+            padding: 8rem 0;
+        }
+
+        .back-to-top {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .back-to-top a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.8rem;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 4px;
+            color: var(--blue-accent);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .img-rounded {
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: auto;
+            transition: all 0.6s ease;
+        }
+
+        .img-rounded:hover {
+            filter: grayscale(0) !important;
+            transform: scale(1.02) !important;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.04em;
+        }
+
+        /* Cards & Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .obiettivi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .icon-box {
+            width: 4.5rem;
+            height: 4.5rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.05));
+            border-radius: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card-glass:hover .icon-box {
+            background: var(--blue-primary);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .num-indicator {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            font-weight: 950;
+            color: rgba(37, 99, 235, 0.1);
+            line-height: 0.8;
+            font-family: var(--font-title);
+        }
+
+        /* Showcase / Camp */
+        .showcase-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 4rem;
+            padding: 4rem;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-bg-circles {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 40rem;
+            height: 40rem;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .camp-item-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .pill {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .pill:hover {
+            border-color: var(--blue-accent);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Phases */
+        .metodo-line {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            position: relative;
+        }
+
+        .phase-circle {
+            width: 5rem;
+            height: 5rem;
+            background: var(--bg-dark);
+            border: 4px solid var(--blue-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px var(--blue-glow);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Kick off */
+        .kick-off {
+            background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+            text-align: center;
+            padding: 10rem 0;
+        }
+
+        .glitch-title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 950;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -0.05em;
+            margin-bottom: 4rem;
+            line-height: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            background: #010409;
         }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
-<link rel="stylesheet" href="index.css">
 </head>
-<body class="bg-black text-white">
-    <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+
+<body>
+
+    <!-- Executive Features -->
+    <div id="scroll-progress"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <nav id="navbar">
+        <div class="container nav-content">
+            <div class="logos" style="display: flex; align-items: center; gap: 2rem;">
+                <img src="atalanta-logo.avif" alt="Atalanta BC" class="atalanta-logo">
+                <div class="ribo-branding">
+                    <span
+                        style="font-size: 10px; color: var(--text-dim); text-transform: uppercase; font-weight: 900; letter-spacing: 0.2rem; margin-bottom: 4px;">Powered
+                        by</span>
+                    <img src="logo-ribo-2023.png" alt="Ribo"
+                        style="height: 1.3rem; width: auto; object-fit: contain; filter: brightness(0.9);">
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#premessa" class="nav-link">Premessa</a>
+                <a href="#obiettivi" class="nav-link">Obiettivi</a>
+                <a href="#ambiti" class="nav-link">Ambiti</a>
+                <a href="#camp" class="nav-link">Case Study</a>
+                <a href="#metodo" class="nav-link">Metodo</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-bg" id="hero-parallax"></div>
+        <div class="hero-content container">
+            <div class="badge-premium reveal">
+                <i data-lucide="play" style="width: 14px; fill: currentColor;"></i>
+                Evoluzione Digitale 2026
+            </div>
+            <h1 class="reveal">AI GENERATIVA COME LEVA DI <br> <span class="text-gradient">VANTAGGIO COMPETITIVO</span>
+            </h1>
+            <p class="reveal">Proposta Operativa per <strong>Atalanta BC</strong>: trasformare le potenzialità
+                tecnologiche in efficienza concreta.</p>
+            <div class="hero-btns reveal" style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#premessa" class="btn-premium btn-solid">Inizia l'Esplorazione <i
+                        data-lucide="chevron-right"></i></a>
+                <a href="#metodo" class="btn-premium btn-outline">Guarda il Metodo</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="premessa" style="position: relative;">
+        <div class="container">
+            <div class="grid-2">
+                <div class="reveal">
+                    <span class="section-tag">01. Premessa</span>
+                    <h2 class="section-title">Dalla Fase Esplorativa alla <br> <span
+                            class="text-gradient">Trasformazione Operativa</span>.</h2>
+                    <p class="section-desc" style="margin-bottom: 2.5rem;">A seguito dell'incontro introduttivo,
+                        definiamo una proposta finalizzata a integrare gli strumenti di AI nei processi aziendali in
+                        modo <strong>strutturato e misurabile</strong>.</p>
+                    <div class="card-glass"
+                        style="padding: 2.5rem; font-style: italic; font-size: 1.25rem; font-weight: 300; border-left: 6px solid var(--blue-primary);">
+                        "L’obiettivo non è l’utilizzo occasionale dell’AI, ma la sua adozione come leva organizzativa
+                        per generare efficienza, qualità e vantaggio competitivo."
+                    </div>
+                </div>
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
+                        alt="Innovazione" class="img-rounded" style="border: 2px solid var(--glass-border);">
+                </div>
+            </div>
+            <div class="back-to-top reveal">
+                <a href="#home"><i data-lucide="arrow-up" style="width: 14px;"></i> Torna su</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="obiettivi" style="background: #010409;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 6rem;">
+                <span class="section-tag">02. Obiettivi</span>
+                <h2 class="section-title">Pilastri della Strategia</h2>
+            </div>
+            <div class="obiettivi-grid">
+                <div class="card-glass tipo-card reveal stagger-item" style="padding: 3rem;">
+                    <span class="num-indicator">01</span>
+                    <div class="icon-box"><i data-lucide="puzzle"></i></div>
+                    <p style="font-weight: 600; font-size: 1.1rem;">Integrare l'AI nei flussi di lavoro esistenti.</p>
+                </div>
+                <div class="card-glass tipo-card reveal stagger-item" style="padding: 3rem;">
+                    <span class="num-indicator">02</span>
+                    <div class="icon-box"><i data-lucide="clock"></i></div>
+                    <p style="font-weight: 600; font-size: 1.1rem;">Ridurre tempi e complessità operative.</p>
+                </div>
+                <div class="card-glass tipo-card reveal stagger-item" style="padding: 3rem;">
+                    <span class="num-indicator">03</span>
+                    <div class="icon-box"><i data-lucide="sparkles"></i></div>
+                    <p style="font-weight: 600; font-size: 1.1rem;">Migliorare qualità e coerenza degli output.</p>
+                </div>
+                <div class="card-glass tipo-card reveal stagger-item" style="padding: 3rem;">
+                    <span class="num-indicator">04</span>
+                    <div class="icon-box"><i data-lucide="scale"></i></div>
+                    <p style="font-weight: 600; font-size: 1.1rem;">Standardizzare processi ripetitivi.</p>
+                </div>
+                <div class="card-glass tipo-card reveal stagger-item" style="padding: 3rem;">
+                    <span class="num-indicator">05</span>
+                    <div class="icon-box"><i data-lucide="graduation-cap"></i></div>
+                    <p style="font-weight: 600; font-size: 1.1rem;">Rafforzare la capacità progettuale interna.</p>
+                </div>
+                <div class="card-glass tipo-card reveal stagger-item" style="padding: 3rem;">
+                    <span class="num-indicator">06</span>
+                    <div class="icon-box"><i data-lucide="rocket"></i></div>
+                    <p style="font-weight: 600; font-size: 1.1rem;">Consolidare il posizionamento come Club innovativo.
+                    </p>
+                </div>
+            </div>
+            <div class="back-to-top reveal">
+                <a href="#home"><i data-lucide="arrow-up" style="width: 14px;"></i> Torna su</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="ambiti">
+        <div class="container">
+            <div
+                style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; margin-bottom: 6rem;">
+                <div>
+                    <span class="section-tag">03. Ambiti di Applicazione</span>
+                    <h2 class="section-title">Un Ecosistema AI per ogni <span class="text-gradient">Reparto</span>.</h2>
+                </div>
+                <p style="color: var(--text-dim); font-style: italic; font-size: 0.9rem;">Aree prioritarie di intervento
+                    non vincolanti ed estensibili.</p>
+            </div>
+
+            <div class="obiettivi-grid">
+                <div class="card-glass reveal stagger-item" style="padding: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <i data-lucide="megaphone" style="color: var(--blue-accent); width: 32px; height: 32px;"></i>
+                        <h4 style="font-size: 1.25rem;">Comunicazione e Marketing</h4>
+                    </div>
+                    <ul style="list-style: none; display: grid; gap: 1rem;">
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i> Piano
+                            editoriale multiformato</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Produzione rapida contenuti social</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Storyboard e concept campagne</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Presentazioni istituzionali</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Infografiche e sintesi dati</li>
+                    </ul>
+                </div>
+
+                <div class="card-glass reveal stagger-item" style="padding: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <i data-lucide="handshake" style="color: var(--blue-accent); width: 32px; height: 32px;"></i>
+                        <h4 style="font-size: 1.25rem;">Commerciale & Sponsorship</h4>
+                    </div>
+                    <ul style="list-style: none; display: grid; gap: 1rem;">
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Proposte personalizzate</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Presentazioni corporate modulari</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i> Report
+                            attivazioni post-evento</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Analisi comparativa competitor</li>
+                    </ul>
+                </div>
+
+                <div class="card-glass reveal stagger-item" style="padding: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <i data-lucide="calendar" style="color: var(--blue-accent); width: 32px; height: 32px;"></i>
+                        <h4 style="font-size: 1.25rem;">Eventi e Hospitality</h4>
+                    </div>
+                    <ul style="list-style: none; display: grid; gap: 1rem;">
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Concept eventi corporate</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Materiali promozionali standard</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Moodboard e supporto creativo</li>
+                    </ul>
+                </div>
+
+                <div class="card-glass reveal stagger-item" style="padding: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <i data-lucide="users" style="color: var(--blue-accent); width: 32px; height: 32px;"></i>
+                        <h4 style="font-size: 1.25rem;">HR e Processi Interni</h4>
+                    </div>
+                    <ul style="list-style: none; display: grid; gap: 1rem;">
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Manuali onboarding</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Sintesi policy interne</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Template comunicazioni standard</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Questionari e feedback</li>
+                    </ul>
+                </div>
+
+                <div class="card-glass reveal stagger-item" style="padding: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <i data-lucide="shopping-bag" style="color: var(--blue-accent); width: 32px; height: 32px;"></i>
+                        <h4 style="font-size: 1.25rem;">Merchandising</h4>
+                    </div>
+                    <ul style="list-style: none; display: grid; gap: 1rem;">
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i> Naming
+                            nuove linee</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Descrizioni prodotto e storytelling</li>
+                        <li style="display: flex; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem;"><i
+                                data-lucide="chevron-right" style="width: 14px; color: var(--blue-primary);"></i>
+                            Supporto contenuti e-commerce</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="back-to-top reveal">
+                <a href="#home"><i data-lucide="arrow-up" style="width: 14px;"></i> Torna su</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="camp">
+        <div class="container reveal">
+            <div class="showcase-card">
+                <div class="showcase-bg-circles"></div>
+                <div class="grid-2" style="position: relative; z-index: 5;">
+                    <div>
+                        <span class="badge-premium" style="background: white; color: black; border: none;">Case Study
+                            Focus</span>
+                        <h3
+                            style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 950; margin-bottom: 2rem; line-height: 1;">
+                            Atalanta Football <br> <span class="text-gradient" style="font-style: italic;">Camp</span>
+                        </h3>
+                        <p
+                            style="font-size: 1.25rem; font-weight: 300; margin-bottom: 3rem; color: #cbd5e1; line-height: 1.5;">
+                            Non un rilancio, ma un potenziamento operativo. L'obiettivo è aumentare l'efficienza interna
+                            e la qualità percepita dai genitori e dai piccoli atleti.
+                        </p>
+                        <div class="camp-item-pills">
+                            <div class="pill">
+                                <div
+                                    style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent);">
+                                </div> Standardizzazione comunicazioni genitori
+                            </div>
+                            <div class="pill">
+                                <div
+                                    style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent);">
+                                </div> Produzione modulare multi-località
+                            </div>
+                            <div class="pill">
+                                <div
+                                    style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent);">
+                                </div> Kit informativi sintetici
+                            </div>
+                            <div class="pill">
+                                <div
+                                    style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent);">
+                                </div> Diario giornaliero riutilizzabile
+                            </div>
+                            <div class="pill">
+                                <div
+                                    style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent);">
+                                </div> Valorizzazione format Elite
+                            </div>
+                            <div class="pill">
+                                <div
+                                    style="width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent);">
+                                </div> Materiali educational complementari
+                            </div>
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                        <div
+                            style="position: absolute; inset: -20px; border: 1px solid var(--blue-glow); border-radius: 3.5rem; transform: rotate(3deg); pointer-events: none;">
+                        </div>
+                        <div
+                            style="background: black; padding: 0.5rem; border-radius: 3rem; overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,0.8);">
+                            <img src="camp.jpg" alt="Atalanta Camp"
+                                style="width: 100%; display: block; filter: saturate(1.1) contrast(1.05);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top reveal">
+                <a href="#home"><i data-lucide="arrow-up" style="width: 14px;"></i> Torna su</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="metodo">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 8rem;">
+                <span class="section-tag">04. Metodo di Lavoro</span>
+                <h2 class="section-title">Un Percorso in 3 Fasi</h2>
+            </div>
+
+            <div class="metodo-line">
+                <div class="reveal stagger-item">
+                    <div class="phase-circle">01</div>
+                    <h4 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Fase 1: Allineamento</h4>
+                    <p style="color: var(--text-dim); margin-bottom: 2.5rem; font-size: 0.9rem;">Consolidamento
+                        competenze e definizione basi.</p>
+                    <div style="display: grid; gap: 0.75rem;">
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Training avanzato di prompting</div>
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Definizione linee guida utilizzo</div>
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Setup controllo qualità output</div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-item">
+                    <div class="phase-circle">02</div>
+                    <h4 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Fase 2: Laboratori</h4>
+                    <p style="color: var(--text-dim); margin-bottom: 2.5rem; font-size: 0.9rem;">Focus specifico per
+                        ogni reparto operativo.</p>
+                    <div style="display: grid; gap: 0.75rem;">
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Analisi processi per reparto</div>
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Identificazione attività high-impact</div>
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Sviluppo template concreti</div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-item">
+                    <div class="phase-circle">03</div>
+                    <h4 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Fase 3: Standardizzazione</h4>
+                    <p style="color: var(--text-dim); margin-bottom: 2.5rem; font-size: 0.9rem;">Integrazione
+                        strutturale nei flussi.</p>
+                    <div style="display: grid; gap: 0.75rem;">
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Libreria prompt condivisa</div>
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Definizione modelli riutilizzabili</div>
+                        <div
+                            style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 1rem; font-size: 0.85rem; border: 1px solid var(--glass-border);">
+                            Automazione flussi di lavoro</div>
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top reveal">
+                <a href="#home"><i data-lucide="arrow-up" style="width: 14px;"></i> Torna su</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefici" style="background: #010409;">
+        <div class="container">
+            <div class="grid-2">
+                <div class="reveal">
+                    <span class="section-tag">05. Benefici Attesi</span>
+                    <h2 class="section-title">L'impatto sul Business <br><span class="text-gradient">Nerazzurro</span>
+                    </h2>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
+                        <div class="card-glass"
+                            style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+                            <i data-lucide="zap" style="color: var(--blue-accent);"></i>
+                            <span style="font-weight: 600; font-size: 0.9rem;">Tempi produzione</span>
+                        </div>
+                        <div class="card-glass"
+                            style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+                            <i data-lucide="target" style="color: var(--blue-accent);"></i>
+                            <span style="font-weight: 600; font-size: 0.9rem;">Qualità progettuale</span>
+                        </div>
+                        <div class="card-glass"
+                            style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+                            <i data-lucide="shield-check" style="color: var(--blue-accent);"></i>
+                            <span style="font-weight: 600; font-size: 0.9rem;">Coerenza</span>
+                        </div>
+                        <div class="card-glass"
+                            style="padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
+                            <i data-lucide="trending-up" style="color: var(--blue-accent);"></i>
+                            <span style="font-weight: 600; font-size: 0.9rem;">Autonomia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-glass reveal" style="padding: 3rem; border-color: rgba(37, 99, 235, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <i data-lucide="info" style="color: var(--blue-primary); width: 32px; height: 32px;"></i>
+                        <h4 style="font-size: 1.5rem; font-weight: 700;">Coinvolgimento del Personale</h4>
+                    </div>
+                    <p style="color: #d1d5db; margin-bottom: 2rem; font-size: 1rem;">
+                        Ogni intervento verrà definito congiuntamente con il personale delle singole funzioni.
+                        L’obiettivo è lavorare esclusivamente su elementi che abbiano <strong>valore effettivo</strong>
+                        per i team coinvolti.
+                    </p>
+                    <div
+                        style="padding: 1.5rem; background: rgba(0,0,0,0.3); border-left: 4px solid var(--blue-primary); border-radius: 0.5rem; font-style: italic; color: #9ca3af; font-size: 0.95rem;">
+                        "Il progetto si fonda su un principio chiave: utilità concreta prima della sperimentazione."
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-top reveal">
+                <a href="#home"><i data-lucide="arrow-up" style="width: 14px;"></i> Torna su</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="kick-off">
+        <div class="container reveal">
+            <h2 class="glitch-title">READY FOR THE <span class="text-gradient">KICK-OFF?</span></h2>
+            <p
+                style="font-size: 1.4rem; color: var(--text-dim); margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                I prossimi passi da discutere insieme:</p>
+
+            <div style="max-width: 500px; margin: 0 auto 5rem; display: grid; gap: 1rem;">
+                <div class="card-glass"
+                    style="padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i data-lucide="check-circle-2" style="color: var(--blue-accent);"></i>
+                        <span
+                            style="font-weight: 800; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">Definizione
+                            perimetro iniziale</span>
+                    </div>
+                    <i data-lucide="arrow-right" style="width: 14px; color: var(--blue-primary);"></i>
+                </div>
+                <div class="card-glass"
+                    style="padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i data-lucide="check-circle-2" style="color: var(--blue-accent);"></i>
+                        <span
+                            style="font-weight: 800; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">Identificazione
+                            aree pilota</span>
+                    </div>
+                    <i data-lucide="arrow-right" style="width: 14px; color: var(--blue-primary);"></i>
+                </div>
+                <div class="card-glass"
+                    style="padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i data-lucide="check-circle-2" style="color: var(--blue-accent);"></i>
+                        <span
+                            style="font-weight: 800; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">Pianificazione
+                            calendario</span>
+                    </div>
+                    <i data-lucide="arrow-right" style="width: 14px; color: var(--blue-primary);"></i>
+                </div>
+            </div>
+
+            <button class="btn-premium btn-solid"
+                style="padding: 1.8rem 4rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em;">Avvia
+                Collaborazione</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Atalanta BC AI Strategy | Proposta Operativa Riservata | Powered by Ribo</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide
+        lucide.createIcons();
+
+        // Custom Cursor Logic
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+
+            outline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Cursor interactions
+        const interactables = document.querySelectorAll('a, button, .card-glass, .pill');
+        interactables.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                outline.style.width = '60px';
+                outline.style.height = '60px';
+                outline.style.backgroundColor = 'rgba(37, 99, 235, 0.1)';
+            });
+            link.addEventListener('mouseleave', () => {
+                outline.style.width = '40px';
+                outline.style.height = '40px';
+                outline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const b = document.body;
+            const st = 'scrollTop';
+            const sh = 'scrollHeight';
+            const percent = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+            document.getElementById('scroll-progress').style.width = percent + '%';
+
+            // Navbar effect
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+
+            // Parallax effect
+            const heroBg = document.getElementById('hero-parallax');
+            const speed = 0.4;
+            heroBg.style.transform = `translateY(${window.scrollY * speed}px) scale(1.1)`;
+        });
+
+        // Intersection Observer for Reveal Animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+
+                    // Stagger child items if present
+                    const staggers = entry.target.querySelectorAll('.stagger-item');
+                    staggers.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('active');
+                        }, index * 100);
+                    });
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
 </body>
+
 </html>
