@@ -1,0 +1,1294 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viambiente | Proposta AI per servizi ambientali e relazione con il territorio</title>
+    <meta name="description"
+        content="Proposta AI per Viambiente: efficienza operativa, servizio al cittadino e supporto ai processi ambientali del territorio.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1513;
+            --bg-soft: #14201d;
+            --surface: rgba(20, 32, 29, 0.78);
+            --surface-strong: rgba(10, 18, 16, 0.92);
+            --surface-alt: #1a2824;
+            --line: rgba(212, 228, 221, 0.12);
+            --line-strong: rgba(212, 228, 221, 0.22);
+            --text: #edf5f1;
+            --text-dim: #b4c5bc;
+            --text-soft: #8ea198;
+            --sage: #7ac79b;
+            --teal: #5cc0b3;
+            --sand: #d7c2a3;
+            --sky: #91c8d8;
+            --glow: rgba(92, 192, 179, 0.25);
+            --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+            --radius: 28px;
+            --font-main: "Manrope", sans-serif;
+            --font-display: "Fraunces", serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(122, 199, 155, 0.16), transparent 28%),
+                radial-gradient(circle at 85% 15%, rgba(145, 200, 216, 0.15), transparent 24%),
+                linear-gradient(180deg, #09100f 0%, #0d1513 32%, #121d1a 100%);
+            color: var(--text);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(circle at center, black 55%, transparent 90%);
+            pointer-events: none;
+            opacity: 0.35;
+            z-index: -2;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 2rem));
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-dim);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--teal));
+            box-shadow: 0 0 18px rgba(122, 199, 155, 0.45);
+        }
+
+        .section {
+            padding: 7rem 0;
+            position: relative;
+        }
+
+        .section-intro {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: end;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.35rem, 5vw, 4.4rem);
+            line-height: 0.98;
+            letter-spacing: -0.03em;
+            max-width: 11ch;
+        }
+
+        .section-copy {
+            color: var(--text-dim);
+            font-size: 1.02rem;
+            max-width: 56ch;
+        }
+
+        .accent {
+            color: var(--sage);
+        }
+
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, var(--sage), var(--teal), var(--sky));
+            box-shadow: 0 0 18px var(--glow);
+            z-index: 1001;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(16px);
+            background: rgba(9, 16, 15, 0.72);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.25s ease, background 0.25s ease;
+        }
+
+        nav.scrolled {
+            border-color: var(--line);
+            background: rgba(9, 16, 15, 0.88);
+        }
+
+        .nav-inner {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand-mark {
+            width: 2.9rem;
+            height: 2.9rem;
+            border-radius: 1rem;
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(122, 199, 155, 0.18), rgba(145, 200, 216, 0.14)),
+                rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(145, 200, 216, 0.28);
+            overflow: hidden;
+        }
+
+        .brand-mark::before,
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            border-radius: 999px;
+        }
+
+        .brand-mark::before {
+            width: 1.4rem;
+            height: 1.4rem;
+            border: 2px solid rgba(122, 199, 155, 0.85);
+            border-top-color: transparent;
+            transform: rotate(28deg);
+        }
+
+        .brand-mark::after {
+            width: 0.5rem;
+            height: 1.5rem;
+            background: linear-gradient(180deg, var(--sage), var(--teal));
+            transform: rotate(-25deg) translateX(0.18rem);
+            box-shadow: 0 0 18px rgba(92, 192, 179, 0.25);
+        }
+
+        .brand-copy strong {
+            display: block;
+            font-size: 0.96rem;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-copy span {
+            display: block;
+            color: var(--text-soft);
+            font-size: 0.8rem;
+        }
+
+
+        .brand-logos {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding-left: 1rem;
+            margin-left: 0.25rem;
+            border-left: 1px solid var(--line);
+        }
+
+        .brand-logo {
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.18));
+        }
+
+        .ava-logo {
+            height: 2.35rem;
+            width: auto;
+        }
+
+        .bbt-logo {
+            height: 2rem;
+            width: auto;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.35rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 800;
+            transition: color 0.25s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 5rem 0 6rem;
+            min-height: calc(100vh - 82px);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            margin-top: 1.2rem;
+            font-family: var(--font-display);
+            font-size: clamp(3.2rem, 8vw, 6.8rem);
+            line-height: 0.92;
+            letter-spacing: -0.055em;
+            max-width: 11ch;
+        }
+
+        .hero-title .gradient {
+            background: linear-gradient(135deg, var(--text) 0%, var(--sage) 42%, var(--sky) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-copy {
+            margin-top: 1.35rem;
+            color: var(--text-dim);
+            font-size: 1.08rem;
+            max-width: 60ch;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 1.35rem;
+            border-radius: 999px;
+            font-weight: 800;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, rgba(122, 199, 155, 0.28), rgba(92, 192, 179, 0.28));
+            border: 1px solid rgba(122, 199, 155, 0.32);
+            box-shadow: 0 16px 40px rgba(92, 192, 179, 0.16);
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--line);
+            color: var(--text-dim);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-panel,
+        .card,
+        .metric,
+        .timeline-card,
+        .benefit-card,
+        .source-card {
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+            backdrop-filter: blur(14px);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel {
+            border-radius: 2rem;
+            padding: 1.6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            inset: auto -10% -30% auto;
+            width: 18rem;
+            height: 18rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(122, 199, 155, 0.18), transparent 62%);
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .panel-card {
+            padding: 1.2rem;
+            border-radius: 1.4rem;
+            background: rgba(7, 12, 11, 0.46);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .panel-kicker {
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .panel-card strong {
+            display: block;
+            margin-top: 0.55rem;
+            font-size: 1.3rem;
+        }
+
+        .panel-card p {
+            margin-top: 0.35rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+        .hero-notes {
+            margin-top: 1rem;
+            padding: 1rem 1.1rem;
+            border-radius: 1.2rem;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            font-size: 0.92rem;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .metric {
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: clamp(1.9rem, 3vw, 2.5rem);
+            line-height: 1;
+            font-weight: 800;
+            margin-bottom: 0.45rem;
+        }
+
+        .metric span {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .story-grid,
+        .challenge-grid,
+        .use-case-grid,
+        .benefit-grid,
+        .source-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .story-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 1.6rem;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card h3,
+        .timeline-card h3,
+        .benefit-card h3,
+        .source-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .card p,
+        .card li,
+        .timeline-card p,
+        .benefit-card p,
+        .source-card p {
+            color: var(--text-dim);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .service-item {
+            padding: 1.1rem;
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .service-item strong {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-size: 1rem;
+        }
+
+        .service-item span {
+            color: var(--text-soft);
+            font-size: 0.92rem;
+        }
+
+        .challenge-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .challenge-card {
+            min-height: 240px;
+        }
+
+        .challenge-index,
+        .timeline-step {
+            display: inline-flex;
+            width: 2.3rem;
+            height: 2.3rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: rgba(122, 199, 155, 0.14);
+            border: 1px solid rgba(122, 199, 155, 0.24);
+            color: var(--sage);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .use-case-card {
+            min-height: 280px;
+        }
+
+        .use-case-tag,
+        .benefit-tag {
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            padding: 0.32rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(145, 200, 216, 0.12);
+            border: 1px solid rgba(145, 200, 216, 0.18);
+            color: var(--sky);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .timeline-card,
+        .benefit-card,
+        .source-card {
+            padding: 1.6rem;
+            border-radius: var(--radius);
+        }
+
+        .timeline-card p + p,
+        .benefit-card p + p {
+            margin-top: 0.85rem;
+        }
+
+        .benefit-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .cta-wrap {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 2rem;
+            border: 1px solid var(--line-strong);
+            background:
+                radial-gradient(circle at top right, rgba(145, 200, 216, 0.12), transparent 34%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+            box-shadow: var(--shadow);
+        }
+
+        .cta-wrap h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.85rem;
+        }
+
+        .cta-list {
+            display: grid;
+            gap: 0.7rem;
+            margin-top: 1.2rem;
+        }
+
+        .cta-list div {
+            color: var(--text-dim);
+            padding-left: 1rem;
+            border-left: 2px solid rgba(122, 199, 155, 0.28);
+        }
+
+        .source-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 1.25rem;
+        }
+
+        .source-card a {
+            color: var(--sage);
+            font-weight: 700;
+        }
+
+        footer {
+            padding: 2rem 0 3.5rem;
+            color: var(--text-soft);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--line);
+            padding-top: 1.3rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1100px) {
+            .hero-layout,
+            .section-intro,
+            .story-grid,
+            .cta-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics,
+            .challenge-grid,
+            .use-case-grid,
+            .timeline,
+            .benefit-grid,
+            .source-grid,
+            .service-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .section {
+                padding: 5.25rem 0;
+            }
+
+            .nav-inner {
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem 0;
+            }
+
+            .brand {
+                width: 100%;
+            }
+
+            .nav-meta {
+                width: 100%;
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .brand-logo-shell {
+                padding: 0.5rem 0.7rem;
+            }
+
+            .nav-links {
+                gap: 0.85rem 1rem;
+                justify-content: flex-start;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 3rem;
+            }
+
+            .metrics,
+            .challenge-grid,
+            .use-case-grid,
+            .timeline,
+            .benefit-grid,
+            .source-grid,
+            .service-grid,
+            .panel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .cta-wrap {
+                padding: 1.5rem;
+            }
+        }
+    
+        @media (max-width: 760px) {
+            .brand-logos {
+                padding-left: 0;
+                margin-left: 0;
+                border-left: 0;
+            }
+        }
+    </style>
+    <style>
+        .nav-inner {
+            min-height: 92px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 0;
+            flex-wrap: nowrap;
+        }
+
+        .brand-mark,
+        .brand-logos {
+            display: none !important;
+        }
+
+        .brand-logo-shell {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.8rem;
+            border-radius: 1rem;
+            background: linear-gradient(180deg, rgba(247, 245, 239, 0.98), rgba(233, 229, 220, 0.94));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+        }
+
+        .brand-copy strong {
+            font-size: 1.02rem;
+        }
+
+        .brand-copy span {
+            font-size: 0.84rem;
+        }
+
+        .brand-logo {
+            display: block;
+            object-fit: contain;
+        }
+
+        .ava-logo {
+            height: 3rem;
+            width: auto;
+        }
+
+        .bbt-logo {
+            height: 2.5rem;
+            width: auto;
+        }
+
+        .nav-meta {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        @media (max-width: 760px) {
+            .nav-inner {
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem 0;
+            }
+
+            .brand {
+                width: 100%;
+            }
+
+            .nav-meta {
+                width: 100%;
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .brand-logo-shell {
+                padding: 0.5rem 0.7rem;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scroll-progress"></div>
+
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#top" class="brand" aria-label="Vai all'inizio">
+                <span class="brand-logo-shell">
+                    <img src="AVA.png" alt="Logo Alto Vicentino Ambiente" class="brand-logo ava-logo">
+                </span>
+                <div class="brand-copy">
+                    <strong>Viambiente</strong>
+                    <span>Proposta AI per il servizio ambientale</span>
+                </div>
+            </a>
+            <div></div>
+            <div class="nav-meta">
+                <div class="nav-links">
+                    <a href="#contesto">Contesto</a>
+                    <a href="#sfide">Sfide</a>
+                    <a href="#ambiti-ai">Ambiti AI</a>
+                    <a href="#metodo">Metodo</a>
+                    <a href="#benefici">Benefici</a>
+                    <a href="#next-step">Next step</a>
+                </div>
+                <span class="brand-logo-shell">
+                    <img src="BBT_consulting_colori_aggiornati.png" alt="Logo BBT Consulting" class="brand-logo bbt-logo">
+                </span>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+    <main id="top">
+        <section class="hero section">
+            <div class="container hero-layout">
+                <div class="reveal active">
+                    <span class="eyebrow">AI generativa per servizi ambientali</span>
+                    <h1 class="hero-title">Più <span class="gradient">servizio</span>, più coordinamento, più valore
+                        per il territorio.</h1>
+                    <p class="hero-copy">
+                        Una proposta operativa per <strong>Viambiente</strong>, costruita sul contesto di
+                        <strong>Alto Vicentino Ambiente</strong>: usare l'AI per migliorare l'accesso alle
+                        informazioni, il supporto agli operatori, la relazione con gli utenti e la qualità dei processi
+                        documentali e di servizio.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="#ambiti-ai">Esplora gli ambiti AI</a>
+                        <a class="button secondary" href="#next-step">Impostiamo un pilota</a>
+                    </div>
+                </div>
+
+                <div class="hero-panel reveal">
+                    <div class="panel-grid">
+                        <div class="panel-card">
+                            <span class="panel-kicker">Mandato</span>
+                            <strong>Efficacia, efficienza e trasparenza</strong>
+                            <p>Il progetto AI viene impostato come abilitatore di servizio e non come esercizio
+                                tecnologico.</p>
+                        </div>
+                        <div class="panel-card">
+                            <span class="panel-kicker">Focus</span>
+                            <strong>Cittadini, Comuni, operatori</strong>
+                            <p>Priorità ai punti di contatto dove il valore informativo e organizzativo è più alto.</p>
+                        </div>
+                        <div class="panel-card">
+                            <span class="panel-kicker">Campo d'azione</span>
+                            <strong>Raccolta, TARI, ecocentri, segnalazioni</strong>
+                            <p>Ambiti già visibili sul sito e coerenti con il servizio gestito sul territorio.</p>
+                        </div>
+                        <div class="panel-card">
+                            <span class="panel-kicker">Approccio</span>
+                            <strong>Assessment, pilota, adozione</strong>
+                            <p>Percorso progressivo, misurabile e compatibile con processi già in essere.</p>
+                        </div>
+                    </div>
+                    <div class="hero-notes">
+                        Contesto e dati istituzionali ricavati dal sito di Alto Vicentino Ambiente: 31 Comuni soci, un
+                        bacino di circa 180 mila cittadini, oltre 84 mila utenze domestiche, 28 impianti e circa 200
+                        dipendenti.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contesto" class="section">
+            <div class="container">
+                <div class="section-intro reveal">
+                    <div>
+                        <span class="eyebrow">01. Contesto</span>
+                        <h2 class="section-title">Un servizio ambientale <span class="accent">esteso, regolato,
+                                multi-canale</span>.</h2>
+                    </div>
+                    <p class="section-copy">
+                        Alto Vicentino Ambiente si presenta come un sistema articolato: servizi per cittadini e Comuni,
+                        gestione dei rifiuti, ecocentri, tariffa, contact center, sportello online, app dedicata,
+                        trasparenza ARERA e comunicazione territoriale. L'AI ha senso dove questa complessità richiede
+                        accesso rapido, coerenza informativa e supporto operativo.
+                    </p>
+                </div>
+
+                <div class="metrics reveal">
+                    <div class="metric">
+                        <strong>31</strong>
+                        <span>Comuni soci e Unione Montana coinvolti nel bacino servito.</span>
+                    </div>
+                    <div class="metric">
+                        <strong>180k</strong>
+                        <span>Cittadini serviti nel territorio dell'Alto Vicentino.</span>
+                    </div>
+                    <div class="metric">
+                        <strong>84k+</strong>
+                        <span>Utenze domestiche da supportare su raccolta e tariffa.</span>
+                    </div>
+                    <div class="metric">
+                        <strong>28</strong>
+                        <span>Impianti tra centri di raccolta, trattamento, termovalorizzazione e discariche.</span>
+                    </div>
+                    <div class="metric">
+                        <strong>200</strong>
+                        <span>Dipendenti circa per processi tecnico-amministrativi e operativi.</span>
+                    </div>
+                </div>
+
+                <div class="story-grid reveal">
+                    <article class="card">
+                        <h3>Chi è AVA oggi</h3>
+                        <p>
+                            Il sito descrive un'organizzazione con focus su raccolta, recupero e trattamento dei
+                            rifiuti, con certificazioni ISO 9001, ISO 14001 e ISO 45001 e registrazione EMAS per siti
+                            specifici. La proposta AI deve quindi rispettare un contesto dove qualità, ambiente,
+                            sicurezza e trasparenza non sono accessori ma struttura del servizio.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3>Ecosistema servizi da cui partire</h3>
+                        <div class="service-grid">
+                            <div class="service-item">
+                                <strong>Raccolta rifiuti</strong>
+                                <span>Porta a porta, stradale, spazzamento e servizi dedicati.</span>
+                            </div>
+                            <div class="service-item">
+                                <strong>Ecocentri</strong>
+                                <span>Ricerca orari, conferimenti e gestione dei centri comunali di raccolta.</span>
+                            </div>
+                            <div class="service-item">
+                                <strong>Gestione TARI</strong>
+                                <span>Informazioni, pratiche, fatturazione e sportelli territoriali.</span>
+                            </div>
+                            <div class="service-item">
+                                <strong>Contact center</strong>
+                                <span>Numero verde, email utenti, disservizi e prenotazioni.</span>
+                            </div>
+                            <div class="service-item">
+                                <strong>DifferenziAVA</strong>
+                                <span>App per calendario rifiuti, ecocentri, vocabolario e notifiche.</span>
+                            </div>
+                            <div class="service-item">
+                                <strong>Trasparenza ARERA</strong>
+                                <span>Informazioni di servizio e obblighi regolatori accessibili online.</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="sfide" class="section">
+            <div class="container">
+                <div class="section-intro reveal">
+                    <div>
+                        <span class="eyebrow">02. Sfide</span>
+                        <h2 class="section-title">Dove la complessità <span class="accent">genera attrito
+                                operativo</span>.</h2>
+                    </div>
+                    <p class="section-copy">
+                        Le criticità non dipendono da un solo reparto: nascono dall'incrocio tra regole, territori,
+                        casistiche utente, eccezioni locali, segnalazioni e comunicazioni ricorrenti. Qui l'AI può
+                        agire come motore di chiarezza, triage e produttività assistita.
+                    </p>
+                </div>
+
+                <div class="challenge-grid reveal">
+                    <article class="card challenge-card">
+                        <div class="challenge-index">01</div>
+                        <h3>Variabilita territoriale</h3>
+                        <p>Calendari, modalità di raccolta, servizi a chiamata, orari ecocentri e regole operative
+                            cambiano per Comune e per utenza.</p>
+                    </article>
+                    <article class="card challenge-card">
+                        <div class="challenge-index">02</div>
+                        <h3>Domande ricorrenti e frammentate</h3>
+                        <p>FAQ su TARI, sportelli, conferimenti, reclami, dotazioni e disservizi impattano contact
+                            center e uffici.</p>
+                    </article>
+                    <article class="card challenge-card">
+                        <div class="challenge-index">03</div>
+                        <h3>Conoscenza distribuita</h3>
+                        <p>Procedure, regolamenti, modulistica, informazioni ARERA e contenuti web vivono in punti
+                            diversi e richiedono navigazione manuale.</p>
+                    </article>
+                    <article class="card challenge-card">
+                        <div class="challenge-index">04</div>
+                        <h3>Comunicazione continua</h3>
+                        <p>Campagne, aggiornamenti di servizio, app, mail, news e contenuti ai cittadini richiedono
+                            coerenza editoriale e rapidità di aggiornamento.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="ambiti-ai" class="section">
+            <div class="container">
+                <div class="section-intro reveal">
+                    <div>
+                        <span class="eyebrow">03. Ambiti AI</span>
+                        <h2 class="section-title">Use case concreti per <span class="accent">servizio, supporto e
+                                conoscenza</span>.</h2>
+                    </div>
+                    <p class="section-copy">
+                        Gli ambiti proposti sono deliberatamente vicini ai servizi già esposti sul sito e possono essere
+                        attivati in modo progressivo, con dati verificati e perimetri controllati.
+                    </p>
+                </div>
+
+                <div class="use-case-grid reveal">
+                    <article class="card use-case-card">
+                        <span class="use-case-tag">Assistente utenti</span>
+                        <h3>Copilota per contact center e front office</h3>
+                        <p>Un assistente AI che aiuta operatori e sportelli a rispondere più velocemente a richieste su
+                            TARI, calendari, ecocentri, segnalazioni, bidoni, prenotazioni e servizi a chiamata.</p>
+                    </article>
+                    <article class="card use-case-card">
+                        <span class="use-case-tag">Ricerca semantica</span>
+                        <h3>Accesso rapido a regolamenti e procedure</h3>
+                        <p>Motore di ricerca conversazionale su contenuti istituzionali, modulistica, trasparenza ARERA,
+                            pagine servizio e documentazione interna autorizzata.</p>
+                    </article>
+                    <article class="card use-case-card">
+                        <span class="use-case-tag">Comunicazione</span>
+                        <h3>Supporto redazionale multicanale</h3>
+                        <p>Bozze per news, avvisi, campagne territoriali, email informative, FAQ e notifiche app,
+                            mantenendo tono istituzionale e coerenza terminologica.</p>
+                    </article>
+                    <article class="card use-case-card">
+                        <span class="use-case-tag">Segnalazioni</span>
+                        <h3>Triage e classificazione disservizi</h3>
+                        <p>Classificazione iniziale di segnalazioni su mancate raccolte, rifiuti abbandonati,
+                            attrezzature rotte o richieste di sostituzione, per velocizzare smistamento e presa in
+                            carico.</p>
+                    </article>
+                    <article class="card use-case-card">
+                        <span class="use-case-tag">Consultazione servizi</span>
+                        <h3>Guida intelligente per Comune e tipologia di rifiuto</h3>
+                        <p>Interfaccia che orienta utenti e operatori sulle regole corrette in base a Comune, profilo
+                            utenza, canale di raccolta e materiale da conferire.</p>
+                    </article>
+                    <article class="card use-case-card">
+                        <span class="use-case-tag">Uffici interni</span>
+                        <h3>Copilota documentale per aree tecnico-amministrative</h3>
+                        <p>Supporto alla sintesi, confronto versioni, recupero clausole, redazione iniziale e
+                            consultazione di atti, standard e documenti operativi, con validazione umana finale.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="metodo" class="section">
+            <div class="container">
+                <div class="section-intro reveal">
+                    <div>
+                        <span class="eyebrow">04. Metodo</span>
+                        <h2 class="section-title">Un percorso in tre fasi, con <span class="accent">perimetro chiaro e
+                                adozione progressiva</span>.</h2>
+                    </div>
+                    <p class="section-copy">
+                        L'obiettivo non è introdurre un nuovo livello di complessità, ma attivare un percorso realistico
+                        che parta da casi ad alta frequenza e basso rischio, con controllo dei contenuti e del ruolo
+                        umano.
+                    </p>
+                </div>
+
+                <div class="timeline reveal">
+                    <article class="timeline-card">
+                        <div class="timeline-step">1</div>
+                        <h3>Assessment e priorità</h3>
+                        <p>Mappatura dei servizi e dei canali piu adatti al pilota: contact center, FAQ, contenuti web,
+                            modulistica, procedure e segnalazioni.</p>
+                        <p>Definizione del perimetro informativo autorizzato, dei rischi da evitare e dei casi d'uso da
+                            validare con i referenti di funzione.</p>
+                    </article>
+                    <article class="timeline-card">
+                        <div class="timeline-step">2</div>
+                        <h3>Pilota controllato</h3>
+                        <p>Attivazione di un prototipo su un insieme limitato di contenuti e richieste, con supervisione
+                            umana e verifica della qualità delle risposte.</p>
+                        <p>Misura qualitativa di chiarezza, copertura delle richieste, riduzione del tempo di ricerca e
+                            utilità percepita dagli operatori.</p>
+                    </article>
+                    <article class="timeline-card">
+                        <div class="timeline-step">3</div>
+                        <h3>Adozione e governance</h3>
+                        <p>Estensione graduale ai canali e ai reparti che dimostrano valore: front office, back office,
+                            comunicazione e supporto documentale.</p>
+                        <p>Definizione di processi di aggiornamento delle fonti, ruoli di approvazione e linee guida per
+                            l'uso responsabile dell'AI.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefici" class="section">
+            <div class="container">
+                <div class="section-intro reveal">
+                    <div>
+                        <span class="eyebrow">05. Benefici attesi</span>
+                        <h2 class="section-title">Impatto atteso su <span class="accent">qualità del servizio e
+                                operativita interna</span>.</h2>
+                    </div>
+                    <p class="section-copy">
+                        I benefici sono espressi come obiettivi di progetto, non come promesse quantitative. La logica è
+                        migliorare chiarezza, coerenza e supporto decisionale nei punti in cui AVA dialoga con utenti,
+                        Comuni e operatori.
+                    </p>
+                </div>
+
+                <div class="benefit-grid reveal">
+                    <article class="benefit-card">
+                        <span class="benefit-tag">Servizio al cittadino</span>
+                        <h3>Risposte più accessibili e uniformi</h3>
+                        <p>Maggiore coerenza informativa tra sito, contact center, sportelli e contenuti di servizio.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-tag">Operatori</span>
+                        <h3>Meno tempo perso nella ricerca manuale</h3>
+                        <p>Accesso più rapido a regole, eccezioni, pagine informative e documenti autorizzati.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-tag">Processi</span>
+                        <h3>Migliore smistamento delle richieste</h3>
+                        <p>Classificazione iniziale di domande e disservizi con un impatto diretto sulla presa in carico.
+                        </p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-tag">Territorio</span>
+                        <h3>Comunicazione più tempestiva</h3>
+                        <p>Supporto alla produzione di avvisi, campagne e aggiornamenti locali senza sacrificare il tono
+                            istituzionale.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-tag">Compliance</span>
+                        <h3>Maggiore presidio delle fonti ufficiali</h3>
+                        <p>Uso dell'AI come livello di consultazione e supporto, sempre ancorato a contenuti verificati e
+                            tracciabili.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <span class="benefit-tag">Adozione</span>
+                        <h3>Innovazione leggibile e misurabile</h3>
+                        <p>Un progetto introdotto per casi concreti, con estensioni successive solo dove emerge valore
+                            reale per il servizio.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="next-step" class="section">
+            <div class="container">
+                <div class="cta-wrap reveal">
+                    <div>
+                        <span class="eyebrow">06. Next step</span>
+                        <h2>Impostare un primo workshop operativo su priorità, fonti e perimetro del pilota.</h2>
+                        <p class="section-copy">
+                            Il passo corretto non è partire da una piattaforma, ma da un tavolo di lavoro ristretto che
+                            selezioni i casi d'uso con maggiore utilità pratica e minore complessità iniziale.
+                        </p>
+                        <div class="cta-list">
+                            <div>Allineamento su obiettivi, vincoli e livelli di rischio accettabili.</div>
+                            <div>Scelta di 1-2 casi pilota ad alta frequenza e forte impatto informativo.</div>
+                            <div>Definizione delle fonti ufficiali da usare e del presidio umano sulle risposte.</div>
+                            <div>Prototipo rapido con validazione da parte dei referenti di funzione.</div>
+                        </div>
+                    </div>
+                    <a class="button primary" href="#top">Torna alla visione d'insieme</a>
+                </div>
+
+                <div class="source-grid reveal">
+                    <article class="source-card">
+                        <h3>Fonti usate</h3>
+                        <p>Contenuti istituzionali ricavati dal sito di Alto Vicentino Ambiente, inclusi AVA oggi,
+                            Mission, Servizi gestiti e pagine utenti.</p>
+                    </article>
+                    <article class="source-card">
+                        <h3>Branding e contesto</h3>
+                        <p>La pagina distingue <strong>Viambiente S.p.A.</strong> come intestazione della proposta e
+                            <strong>Alto Vicentino Ambiente</strong> come fonte del contesto pubblico e dei servizi
+                            descritti.</p>
+                    </article>
+                    <article class="source-card">
+                        <h3>Riferimenti online</h3>
+                        <p><a href="https://altovicentinoambiente.it/" target="_blank"
+                                rel="noreferrer">altovicentinoambiente.it</a></p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <p>Proposta HTML standalone per Viambiente S.p.A., costruita su contenuti pubblici di Alto Vicentino
+                Ambiente.</p>
+            <p>Contesto verificato su missione, scala operativa, servizi gestiti, canali utenti, app DifferenziAVA e
+                trasparenza ARERA.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById("navbar");
+        const progress = document.getElementById("scroll-progress");
+        const reveals = document.querySelectorAll(".reveal");
+        const sections = document.querySelectorAll("section[id]");
+        const links = document.querySelectorAll(".nav-links a");
+
+        const onScroll = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progressValue = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progress.style.width = progressValue + "%";
+            navbar.classList.toggle("scrolled", scrollTop > 20);
+
+            let activeId = "";
+            sections.forEach((section) => {
+                const top = section.offsetTop - 140;
+                const bottom = top + section.offsetHeight;
+                if (scrollTop >= top && scrollTop < bottom) {
+                    activeId = section.id;
+                }
+            });
+
+            links.forEach((link) => {
+                const isActive = link.getAttribute("href") === "#" + activeId;
+                link.classList.toggle("active", isActive);
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, { threshold: 0.18 });
+
+        reveals.forEach((item, index) => {
+            if (index === 0) {
+                return;
+            }
+            observer.observe(item);
+        });
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("load", onScroll);
+        onScroll();
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

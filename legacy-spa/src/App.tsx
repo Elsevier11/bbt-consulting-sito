@@ -138,7 +138,7 @@ const Home = ({ onNavigate }: { onNavigate: (p: Page) => void }) => (
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a
-              href="https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true"
+              href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&ismsaljsauthenabled&ep=mlink"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-sm font-bold transition-all"
@@ -386,7 +386,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
               transition={{ delay: i * 0.1 }}
               onClick={() => {
                 if ('isCTA' in c && c.isCTA) {
-                  window.open('https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true', '_blank');
+                  window.open('https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&ismsaljsauthenabled&ep=mlink', '_blank');
                 } else {
                   setSelectedCase(i);
                 }
@@ -411,7 +411,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
               <h3 className="text-xl font-bold mb-3">{c.title}</h3>
               <p className="text-white/50 text-xs leading-relaxed mb-6">{c.desc}</p>
               <div className="pt-6 border-t border-white/5 mt-auto">
-                <div className="text-xl xl:text-2xl font-bold text-blue-400 whitespace-nowrap">{c.impact}</div>
+                <div className="text-xl xl:text-2xl font-bold leading-tight text-blue-400">{c.impact}</div>
               </div>
             </motion.div>
           ))}
@@ -585,7 +585,7 @@ const CaseStudies = ({ onNavigate }: { onNavigate: (p: Page) => void }) => {
                     <button
                       onClick={() => {
                         setSelectedCase(null);
-                        window.open('https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true', '_blank');
+                        window.open('https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&ismsaljsauthenabled&ep=mlink', '_blank');
                       }}
                       className="w-full bg-blue-600 shadow-blue-500/20 shadow-lg hover:bg-blue-500/20 text-white font-bold py-4 px-8 rounded-full text-center border border-white/10 transition-all flex items-center justify-center gap-2"
                     >
@@ -621,7 +621,7 @@ const Contatti = () => (
         </p>
 
         <a
-          href="https://www.cal.eu/paolopedron/30min?user=paolopedron&overlayCalendar=true"
+          href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&ismsaljsauthenabled&ep=mlink"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative flex items-center gap-4 bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 rounded-sm font-bold text-xl transition-all shadow-2xl shadow-blue-600/40 hover:scale-105"
@@ -683,7 +683,7 @@ const PrivacyPolicy = () => (
     </section>
     <section className="space-y-4">
       <h2 className="text-2xl font-bold text-white">2. Tipologia di Dati Raccolti</h2>
-      <p>Trattiamo esclusivamente i dati necessari alla gestione degli appuntamenti e delle sessioni di consulenza prenotate tramite la piattaforma di terze parti Cal.com. Non salviamo dati personali direttamente su questo sito.</p>
+      <p>Trattiamo esclusivamente i dati necessari alla gestione degli appuntamenti e delle sessioni di consulenza prenotate tramite la piattaforma di terze parti Microsoft Bookings su Outlook. Non salviamo dati personali direttamente su questo sito.</p>
     </section>
     <section className="space-y-4">
       <h2 className="text-2xl font-bold text-white">3. Finalità del Trattamento</h2>
@@ -708,7 +708,7 @@ const CookiePolicy = () => (
     </section>
     <section className="space-y-4">
       <h2 className="text-2xl font-bold text-white">Servizi di Terze Parti</h2>
-      <p>L'integrazione con Cal.com per la prenotazione degli appuntamenti potrebbe comportare l'uso di cookie tecnici da parte del fornitore esterno per gestire la sessione di prenotazione.</p>
+      <p>L'integrazione con Microsoft Bookings su Outlook per la prenotazione degli appuntamenti potrebbe comportare l'uso di cookie tecnici da parte del fornitore esterno per gestire la sessione di prenotazione.</p>
     </section>
   </LegalSection>
 );
