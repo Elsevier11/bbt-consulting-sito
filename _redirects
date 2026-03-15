@@ -1,2 +1,11 @@
 /offerte/atalanta /Offerte/Atalanta/ 301
 /offerte/atalanta/* /Offerte/Atalanta/:splat 200
+
+/comune_livorno /Offerte/Comune_Livorno/ 301
+/comune_livorno/* /Offerte/Comune_Livorno/:splat 200
+
+/viambiente /Offerte/Viambiente/ 301
+/viambiente/* /Offerte/Viambiente/:splat 200
+
+/atalanta /Offerte/Atalanta/ 301
+/atalanta/* /Offerte/Atalanta/:splat 200
