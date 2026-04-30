@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<!-- saved from url=(0135)file:///C:/Users/l.denegri/OneDrive%20-%20ZEROBYTE%20SRL/Desktop/Flusso%20Documentale%20TECNOSTAMPI/Flusso_Documentale_TECNOSTAMPI.html -->
+<html lang="it"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flusso Documentale — TECNOSTAMPI SRL</title>
+  <script src="./Flusso Documentale — TECNOSTAMPI_files/mermaid.min.js.download"></script>
+  <style>
+    :root {
+      --primary: #0f2044;
+      --accent:  #1d4ed8;
+      --bg:      #f1f5f9;
+      --card:    #ffffff;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --border:  #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0a1628 0%, #1d4ed8 100%);
+      color: white; padding: 44px 56px;
+      display: flex; align-items: center; gap: 28px;
+    }
+    .hicon {
+      width: 76px; height: 76px; flex-shrink: 0;
+      background: rgba(255,255,255,.15); border-radius: 18px;
+      display: flex; align-items: center; justify-content: center; font-size: 38px;
+    }
+    header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -.5px; }
+    header p  { opacity: .75; margin-top: 6px; }
+    .hbadge {
+      margin-top: 10px; display: inline-block;
+      background: rgba(255,255,255,.15); border-radius: 99px;
+      padding: 3px 14px; font-size: .8rem; font-weight: 600;
+    }
+
+    /* ── CONTAINER ── */
+      .wrap { max-width: 1680px; margin: 0 auto; padding: 44px 40px; }
+
+    /* ── SECTION TITLE ── */
+    .sec {
+      font-size: 1.25rem; font-weight: 700; color: var(--primary);
+      margin: 48px 0 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .sec::after {
+      content: ''; flex: 1; height: 2px; margin-left: 12px;
+      background: linear-gradient(to right, var(--accent), transparent);
+    }
+
+    /* ── LEGEND ── */
+    .legend {
+      background: var(--card); border-radius: 14px; padding: 22px 28px;
+      display: flex; flex-wrap: wrap; gap: 10px 22px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08); margin-bottom: 4px;
+    }
+    .li { display: flex; align-items: center; gap: 8px; font-size: .9rem; font-weight: 500; }
+    .ls { width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid rgba(0,0,0,.15); flex-shrink: 0; }
+
+    /* ── GRIDS ── */
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .full { grid-column: 1/-1; }
+    @media(max-width:960px) { .g2,.g3 { grid-template-columns: 1fr; } }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card); border-radius: 16px; padding: 26px 28px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      border-top: 4px solid var(--ca, var(--accent));
+    }
+    .card h3 {
+      font-size: 1rem; font-weight: 700; color: var(--primary);
+      margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
+    }
+    .mermaid {
+      text-align: center; overflow-x: auto; overflow-y: hidden;
+      background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px; scrollbar-gutter: stable;
+    }
+    .mermaid svg { max-width: none; height: auto; }
+    .flow-grid { grid-template-columns: 1fr; }
+    .flow-card { padding: 28px 30px; }
+    .flow-card h3 { font-size: 1.08rem; margin-bottom: 0; }
+    .flow-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 18px; margin-bottom: 16px;
+    }
+    .flow-meta {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;
+      color: var(--muted); font-size: .78rem; font-weight: 700;
+    }
+    .flow-meta span {
+      background: #f8fafc; border: 1px solid var(--border);
+      border-radius: 999px; padding: 4px 9px; white-space: nowrap;
+    }
+    .flow-tool {
+      border: 1px solid var(--border); background: #fff; color: var(--primary);
+      border-radius: 999px; padding: 4px 10px; font: inherit; font-size: .78rem;
+      font-weight: 800; cursor: pointer; white-space: nowrap;
+    }
+    .flow-tool:hover { border-color: #94a3b8; background: #f8fafc; }
+    .flow-collapse { display: none; }
+    .flow-body {
+      display: grid; grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px; align-items: start;
+    }
+    .flow-aside {
+      border: 1px solid var(--border); border-radius: 10px;
+      background: #ffffff; padding: 14px; font-size: .82rem;
+    }
+    .flow-aside h4 {
+      font-size: .72rem; letter-spacing: .05em; text-transform: uppercase;
+      color: var(--muted); margin: 0 0 8px;
+    }
+    .flow-aside h4:not(:first-child) { margin-top: 14px; }
+    .flow-chipline { display: flex; flex-wrap: wrap; gap: 6px; }
+    .flow-code {
+      display: inline-flex; align-items: center; min-height: 22px;
+      border-radius: 6px; padding: 2px 7px; font-size: .75rem;
+      font-weight: 800; border: 1px solid rgba(15,32,68,.12);
+      background: #f8fafc; color: var(--primary);
+    }
+    .flow-code-prev { background:#e0f2fe; color:#075985; }
+    .flow-code-ord { background:#dbeafe; color:#1e40af; }
+    .flow-code-ddt { background:#ffedd5; color:#9a3412; }
+    .flow-code-tras { background:#fef9c3; color:#854d0e; }
+    .flow-code-prod, .flow-code-sch { background:#ede9fe; color:#5b21b6; }
+    .flow-code-fat, .flow-code-fatacc { background:#dcfce7; color:#166534; }
+    .flow-code-nc { background:#fce7f3; color:#9d174d; }
+    .flow-code-mix { background:#fee2e2; color:#991b1b; }
+    .flow-code-gen { background:#fef3c7; color:#92400e; }
+    .flow-code-rett { background:#f1f5f9; color:#475569; }
+    .flow-code[data-flow-code] { cursor: pointer; transition: transform .12s, box-shadow .12s, opacity .12s; }
+    .flow-code[data-flow-code]:hover {
+      transform: translateY(-1px); box-shadow: 0 2px 7px rgba(15,32,68,.14);
+    }
+    .flow-code.flow-code-selected {
+      outline: 2px solid #0f2044; outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+    }
+    .flow-code.flow-code-origin {
+      outline: 2px solid #dc2626; outline-offset: 2px;
+    }
+    .flow-code.flow-code-destination {
+      outline: 2px solid #16a34a; outline-offset: 2px;
+    }
+    .flow-routes {
+      list-style: none; display: grid; gap: 6px; max-height: 230px;
+      overflow: auto; padding-right: 4px;
+    }
+    .flow-routes li {
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      gap: 7px; color: var(--muted);
+      border-radius: 7px; padding: 2px 3px; cursor: pointer;
+      transition: background .12s, opacity .12s;
+    }
+    .flow-routes li:hover { background: #f8fafc; }
+    .flow-routes li.flow-route-active { background: #eff6ff; }
+    .flow-arrow { color: #94a3b8; font-weight: 800; }
+    .flow-note { color: var(--muted); font-size: .78rem; margin-top: 8px; }
+    .flow-help {
+      color: var(--muted); font-size: .78rem; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .flow-clear {
+      border: 1px solid var(--border); background: #fff; color: var(--muted);
+      border-radius: 999px; padding: 2px 8px; font: inherit; font-size: .74rem;
+      font-weight: 700; cursor: pointer; margin-left: auto;
+    }
+    .flow-clear:hover { color: var(--primary); border-color: #94a3b8; }
+    .flow-card.flow-selected .mermaid .node,
+    .flow-card.flow-selected .mermaid .edgePath,
+    .flow-card.flow-selected .mermaid .flowchart-link,
+    .flow-card.flow-selected .flow-code,
+    .flow-card.flow-selected .flow-routes li {
+      opacity: .18;
+    }
+    .flow-card.flow-selected .mermaid .node.flow-node-related,
+    .flow-card.flow-selected .mermaid .edgePath.flow-edge-active,
+    .flow-card.flow-selected .mermaid .flowchart-link.flow-edge-active,
+    .flow-card.flow-selected .flow-code.flow-code-related,
+    .flow-card.flow-selected .flow-routes li.flow-route-active {
+      opacity: 1;
+    }
+    .mermaid .node[data-flow-code] { cursor: pointer; }
+    .mermaid .node[data-flow-code] .label-container,
+    .mermaid .node[data-flow-code] rect,
+    .mermaid .node[data-flow-code] polygon,
+    .mermaid .node[data-flow-code] ellipse,
+    .mermaid .node[data-flow-code] circle,
+    .mermaid .node[data-flow-code] path {
+      transition: stroke-width .12s, filter .12s;
+    }
+    .mermaid .node.flow-node-selected .label-container,
+    .mermaid .node.flow-node-selected rect,
+    .mermaid .node.flow-node-selected polygon,
+    .mermaid .node.flow-node-selected ellipse,
+    .mermaid .node.flow-node-selected circle,
+    .mermaid .node.flow-node-selected path {
+      stroke: #0f2044 !important; stroke-width: 3px !important;
+      filter: drop-shadow(0 4px 8px rgba(15,32,68,.22));
+    }
+    .mermaid .node.flow-node-origin .label-container,
+    .mermaid .node.flow-node-origin rect,
+    .mermaid .node.flow-node-origin polygon,
+    .mermaid .node.flow-node-origin ellipse,
+    .mermaid .node.flow-node-origin circle,
+    .mermaid .node.flow-node-origin path {
+      stroke: #dc2626 !important; stroke-width: 2.5px !important;
+    }
+    .mermaid .node.flow-node-destination .label-container,
+    .mermaid .node.flow-node-destination rect,
+    .mermaid .node.flow-node-destination polygon,
+    .mermaid .node.flow-node-destination ellipse,
+    .mermaid .node.flow-node-destination circle,
+    .mermaid .node.flow-node-destination path {
+      stroke: #16a34a !important; stroke-width: 2.5px !important;
+    }
+    .mermaid .edgePath.flow-edge-incoming .path,
+    .mermaid .flowchart-link.flow-edge-incoming {
+      stroke: #dc2626 !important; stroke-width: 3.5px !important;
+    }
+    .mermaid .edgePath.flow-edge-outgoing .path,
+    .mermaid .flowchart-link.flow-edge-outgoing {
+      stroke: #16a34a !important; stroke-width: 3.5px !important;
+    }
+    .flow-loading {
+      border: 1px dashed var(--border); border-radius: 10px;
+      color: var(--muted); padding: 24px; text-align: center; background: #f8fafc;
+    }
+    .flow-guide {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      margin: -2px 0 20px;
+    }
+    .flow-guide div {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .flow-guide strong { display: block; color: var(--primary); font-size: .9rem; margin-bottom: 4px; }
+    .flow-guide span { color: var(--muted); font-size: .82rem; }
+    body.flow-modal-open { overflow: hidden; }
+    .flow-card.is-expanded {
+      position: fixed; inset: 14px; z-index: 50; overflow: hidden;
+      display: flex; flex-direction: column; padding: 22px 24px;
+      border: 1px solid #cbd5e1; border-top: 5px solid var(--ca, var(--accent));
+      box-shadow: 0 24px 80px rgba(15, 32, 68, .35);
+    }
+    .flow-card.is-expanded .flow-head { flex-shrink: 0; margin-bottom: 12px; }
+    .flow-card.is-expanded .flow-body {
+      min-height: 0; flex: 1; grid-template-columns: minmax(0, 1fr) 360px;
+    }
+    .flow-card.is-expanded .mermaid {
+      height: 100%; min-height: 0; overflow: auto;
+    }
+    .flow-card.is-expanded .flow-aside {
+      min-height: 0; max-height: 100%; overflow: auto;
+    }
+    .flow-card.is-expanded .flow-routes { max-height: none; }
+    .flow-card.is-expanded .flow-expand { display: none; }
+    .flow-card.is-expanded .flow-collapse { display: inline-flex; }
+    @media(max-width:1100px) {
+      .flow-body { grid-template-columns: 1fr; }
+      .flow-meta { justify-content: flex-start; }
+      .flow-head { flex-direction: column; }
+      .flow-guide { grid-template-columns: 1fr; }
+      .flow-card.is-expanded .flow-body { grid-template-columns: 1fr; overflow: auto; }
+      .flow-card.is-expanded .mermaid { min-height: 62vh; }
+    }
+
+    /* ── TABLES ── */
+    .tw { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+    table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    thead th { background: var(--primary); color: white; padding: 11px 15px; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody td { padding: 9px 15px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) td { background: #f8fafc; }
+    tbody tr:hover td { background: #eff6ff; transition: background .15s; }
+
+    /* ── BADGES ── */
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: .75rem; font-weight: 700; letter-spacing: .3px; white-space: nowrap; }
+    .tO { background:#dbeafe; color:#1e40af; }
+    .tB { background:#ffedd5; color:#9a3412; }
+    .tF { background:#dcfce7; color:#166534; }
+    .tN { background:#fce7f3; color:#9d174d; }
+    .tV { background:#ede9fe; color:#5b21b6; }
+    .tT { background:#fef9c3; color:#854d0e; }
+    .tL { background:#f3e8ff; color:#6b21a8; }
+    .tA { background:#d1fae5; color:#065f46; }
+    .tM { background:#fee2e2; color:#991b1b; }
+    .tP { background:#e0f2fe; color:#075985; }
+    .tR { background:#f1f5f9; color:#475569; }
+    .tG { background:#fef3c7; color:#92400e; }
+
+    .ok  { color:#16a34a; font-weight:700; }
+    .no  { color:#dc2626; font-weight:700; }
+    .obs { font-size:.75rem; color:#dc2626; font-style:italic; margin-left:4px; }
+
+    /* ── SEARCH ── */
+    .srch {
+      width:100%; max-width:420px; padding:10px 16px; margin-bottom:14px;
+      border:1.5px solid var(--border); border-radius:9px; font-size:.9rem; outline:none;
+    }
+    .srch:focus { border-color: var(--accent); }
+
+    /* ── STAT PILLS ── */
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+    .pill {
+      background: var(--card); border-radius: 12px; padding: 14px 22px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07); display: flex; flex-direction: column;
+      align-items: center; min-width: 110px;
+    }
+    .pill strong { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .pill span   { font-size: .78rem; color: var(--muted); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer { text-align:center; padding:30px; color:var(--muted); font-size:.82rem; border-top:1px solid var(--border); margin-top:48px; }
+
+    @page {
+      size: A3 landscape;
+      margin: 10mm;
+    }
+
+    @media print {
+      html, body { background: white !important; }
+      body {
+        color: #111827;
+        font-size: 11px;
+      }
+      header {
+        background: linear-gradient(135deg, #0a1628 0%, #1d4ed8 100%) !important;
+        color: white !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .hicon, .hbadge, .legend, .pill, .card, .tw, thead th, .badge, .ls {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .wrap {
+        max-width: none;
+        padding: 18px 12px;
+      }
+      .sec,
+      .legend,
+      .pills,
+      .card,
+      .tw,
+      table,
+      .mermaid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .g2,
+      .g3,
+      .flow-grid {
+        gap: 14px;
+      }
+      .card,
+      .tw,
+      .pill {
+        box-shadow: none;
+        border: 1px solid #cbd5e1;
+      }
+      .card {
+        border-top: 4px solid var(--ca, var(--accent));
+      }
+      .sec {
+        margin: 26px 0 12px;
+      }
+      thead th {
+        background: var(--primary) !important;
+        color: white !important;
+      }
+      tbody tr:nth-child(even) td {
+        background: #f8fafc !important;
+      }
+      tbody tr:hover td {
+        background: inherit !important;
+      }
+      .badge {
+        border: 1px solid rgba(15, 32, 68, .15);
+      }
+      footer {
+        margin-top: 24px;
+        border-top: 1px solid #cbd5e1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hicon">🏭</div>
+  <div>
+    <h1>Flusso Documentale — TECNOSTAMPI SRL</h1>
+    <p>Gestionale Arca Evolution</p>
+    <div class="hbadge">Analisi al 30 aprile 2026</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- STATS -->
+  <div class="sec">📊 Riepilogo</div>
+  <div class="pills">
+    <div class="pill"><strong>70</strong><span>Tipi Documento</span></div>
+    <div class="pill"><strong>96</strong><span>Regole Prelevabilità</span></div>
+    <div class="pill"><strong>45</strong><span>Causali Magazzino</span></div>
+    <div class="pill"><strong>13</strong><span>Magazzini</span></div>
+    <div class="pill"><strong id="flow-count">7</strong><span>Diagrammi Completi</span></div>
+  </div>
+
+  <!-- LEGENDA -->
+  <div class="sec">📋 Legenda Tipologie Documento</div>
+  <div class="legend">
+    <div class="li"><div class="ls" style="background:#d1fae5;border-color:#059669"></div>Fattura Accompagnatoria</div>
+    <div class="li"><div class="ls" style="background:#ffedd5;border-color:#f97316"></div>Bolla</div>
+    <div class="li"><div class="ls" style="background:#dcfce7;border-color:#16a34a"></div>Fattura</div>
+    <div class="li"><div class="ls" style="background:#fef3c7;border-color:#d97706"></div>Generico</div>
+    <div class="li"><div class="ls" style="background:#f3e8ff;border-color:#7c3aed"></div>Ordine Lavorazione</div>
+    <div class="li"><div class="ls" style="background:#fee2e2;border-color:#dc2626"></div>Reso Merce</div>
+    <div class="li"><div class="ls" style="background:#fce7f3;border-color:#ec4899"></div>Nota di Accredito</div>
+    <div class="li"><div class="ls" style="background:#dbeafe;border-color:#2563eb"></div>Ordine</div>
+    <div class="li"><div class="ls" style="background:#e0f2fe;border-color:#0284c7"></div>Preventivo</div>
+    <div class="li"><div class="ls" style="background:#f1f5f9;border-color:#94a3b8"></div>Rettifica Inventario</div>
+    <div class="li"><div class="ls" style="background:#fef9c3;border-color:#ca8a04"></div>Trasferimento Merce</div>
+    <div class="li"><div class="ls" style="background:#ede9fe;border-color:#7c3aed"></div>Carico Produzione</div>
+  </div>
+
+  <!-- ===== FLUSSI ===== -->
+  <div class="sec">🔄 Flussi Documentali</div>
+  <div class="flow-guide">
+    <div><strong>Origine</strong><span>Preventivi, ordini e schede che avviano il processo.</span></div>
+    <div><strong>Movimento</strong><span>DDT, carichi, resi, trasferimenti e produzione.</span></div>
+    <div><strong>Chiusura</strong><span>Fatture, note di accredito e documenti amministrativi finali.</span></div>
+  </div>
+  <div class="g2 flow-grid">
+    <div class="flow-loading">Preparazione diagrammi documentali...</div>
+  </div><!-- /g2 -->
+
+  <!-- ===== MAGAZZINI ===== -->
+  <div class="sec">🏪 Magazzini</div>
+  <div class="g2">
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Cod.</th><th>Magazzino</th><th>Fiscale</th></tr></thead>
+        <tbody>
+          <tr><td><b>1</b></td><td>Magazzino Centrale</td><td class="ok">✓</td></tr>
+          <tr><td><b>5</b></td><td>Prest. uso a Fornitore</td><td class="ok">✓</td></tr>
+          <tr><td><b>9</b></td><td>Produzione</td><td class="no">✗</td></tr>
+          <tr><td><b>10</b></td><td>Conto Visione</td><td class="ok">✓</td></tr>
+          <tr><td><b>21</b></td><td>Merce Cli. in Riparazione</td><td class="no">✗</td></tr>
+          <tr><td><b>30</b></td><td>Fornitori Terzisti</td><td class="ok">✓</td></tr>
+          <tr><td><b>31</b></td><td>Reso da cli. x accredito</td><td class="ok">✓</td></tr>
+          <tr><td><b>32</b></td><td>Prest. d'uso da cliente</td><td class="ok">✓</td></tr>
+          <tr><td><b>100</b></td><td>Cooperativa Il Cerchio</td><td class="ok">✓</td></tr>
+          <tr><td><b>101</b></td><td>Conto Deposito</td><td class="ok">✓</td></tr>
+          <tr><td><b>CL</b></td><td>Conto Lavoro</td><td class="ok">✓</td></tr>
+          <tr><td><b>VF</b></td><td>Merce Forn. in Visione</td><td class="no">✗</td></tr>
+          <tr><td><b>11111</b></td><td>INDISPONIBILI</td><td class="no">✗</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Documento</th><th>Descrizione</th><th>Da magazzino</th><th>A magazzino</th></tr></thead>
+        <tbody>
+          <tr><td><b>DDV / FV2</b></td><td>DDT / Fattura Vendita</td><td>Mag. 1 — Centrale</td><td>—</td></tr>
+          <tr><td><b>CAF / CF5</b></td><td>Carico da Fornitore</td><td>—</td><td>Mag. 1 — Centrale</td></tr>
+          <tr><td><b>DCL</b></td><td>DDT Invio Conto Lavoro</td><td>Mag. 1 — Centrale</td><td>Mag. 30 — Terzisti</td></tr>
+          <tr><td><b>CRL / CNL</b></td><td>Carico Reso da Terzista</td><td>Mag. 30 — Terzisti</td><td>Mag. 1 — Centrale</td></tr>
+          <tr><td><b>DTA</b></td><td>DDT Invio per Assemblaggio</td><td>Mag. 1 — Centrale</td><td>Mag. 100 — Cerchio</td></tr>
+          <tr><td><b>CRA / CCN</b></td><td>Carico Reso da Cerchio</td><td>Mag. 100 — Cerchio</td><td>Mag. 1 — Centrale</td></tr>
+          <tr><td><b>DVI / DVC</b></td><td>DDT Conto Visione</td><td>Mag. 1 — Centrale</td><td>Mag. 10 — C. Visione</td></tr>
+          <tr><td><b>CVI / CRV</b></td><td>Reso Visione Cliente</td><td>Mag. 10 — C. Visione</td><td>Mag. 1 — Centrale</td></tr>
+          <tr><td><b>CVF</b></td><td>Carico Visione Fornitore</td><td>—</td><td>Mag. VF — Visione Forn.</td></tr>
+          <tr><td><b>DRV</b></td><td>DDT Reso Visione Fornitore</td><td>Mag. VF — Visione Forn.</td><td>—</td></tr>
+          <tr><td><b>SPR / SDP</b></td><td>Scarico per Produzione</td><td>Mag. 1 — Centrale</td><td>Mag. 9 — Produzione</td></tr>
+          <tr><td><b>CPR</b></td><td>Carico Produzione Interna</td><td>Mag. 9 — Produzione</td><td>Mag. 1 — Centrale</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ===== REGISTRO COMPLETO ===== -->
+  <div class="sec">📑 Registro Documenti</div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Codice</th>
+          <th>Descrizione</th>
+          <th>Tipo</th>
+          <th>Ultimo utilizzo</th>
+          <th title="Esecutivo">Esec.</th>
+          <th title="Prelevabile">Prel.</th>
+          <th title="Modificabile">Mod.</th>
+        </tr>
+      </thead>
+      <tbody id="dbody"><tr>
+      <td style="color:var(--muted);font-size:.8rem">42</td>
+      <td><strong>ACV</strong></td>
+      <td>Accettazione Visione</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">77</td>
+      <td><strong>BOF</strong></td>
+      <td>Bolla Lavoro Officina</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">34</td>
+      <td><strong>C04</strong></td>
+      <td>Carico da Cliente (diversi)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">4</td>
+      <td><strong>CAF</strong></td>
+      <td>Carico Fornitore</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">38</td>
+      <td><strong>CCN</strong></td>
+      <td>Carico Reso da "Il Cerchio" (non lavorato)</td>
+      <td><span class="badge tT">T — Trasferimento</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">50</td>
+      <td><strong>CDP</strong></td>
+      <td>CDP</td>
+      <td><span class="badge tV">V — Variaz./Prod.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">36</td>
+      <td><strong>CF5</strong></td>
+      <td>Carico Reso da Fornitore (diverse)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">10</td>
+      <td><strong>CMR</strong></td>
+      <td>Carico da Cliente x Reso</td>
+      <td><span class="badge tM">M — Misto</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">31</td>
+      <td><strong>CNL</strong></td>
+      <td>Carico Reso da Fornitore (non lavorato)</td>
+      <td><span class="badge tT">T — Trasferimento</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">15</td>
+      <td><strong>CPR</strong></td>
+      <td>Carico Produzione Interna</td>
+      <td><span class="badge tV">V — Variaz./Prod.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">28</td>
+      <td><strong>CRA</strong></td>
+      <td>Carico Reso da "Il Cerchio" (lavorato/assemblato)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">32</td>
+      <td><strong>CRL</strong></td>
+      <td>Carico Reso Lavorato da Fornitore (da fatturare)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">44</td>
+      <td><strong>CRM</strong></td>
+      <td>Carico Reso Lavorato da Fornitore no P/C</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">17</td>
+      <td><strong>CRR</strong></td>
+      <td>Carico x Reso Rip.Sost. Garanzia Fornitore</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">41</td>
+      <td><strong>CRV</strong></td>
+      <td>Carico da Cliente x Reso Visione</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">53</td>
+      <td><strong>CRZ</strong></td>
+      <td>Carico Reso Lavorato da Fornitore (da fatturare)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">22</td>
+      <td><strong>CVF</strong></td>
+      <td>Carico Visione da Fornitore</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">82</td>
+      <td><strong>CVI</strong></td>
+      <td>Carico da Cliente per Reso Visione</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">52</td>
+      <td><strong>CZZ</strong></td>
+      <td>Carico Reso Lavorato da Fornitore (da fatturare)</td>
+      <td><span class="badge tV">V — Variaz./Prod.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">30</td>
+      <td><strong>DCL</strong></td>
+      <td>DDT Invio a Fornitore (merce in C/Lavoro)</td>
+      <td><span class="badge tT">T — Trasferimento</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">5</td>
+      <td><strong>DDV</strong></td>
+      <td>DDT Cliente (vendita)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">35</td>
+      <td><strong>DF5</strong></td>
+      <td>DDT Invio a Fornitori (diverse)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">33</td>
+      <td><strong>DIM</strong></td>
+      <td>DDT Cliente Reso Imballi (no magazzino)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">39</td>
+      <td><strong>DMM</strong></td>
+      <td>DDT Cliente Reso Imballi (sì magazzino)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">20</td>
+      <td><strong>DRF</strong></td>
+      <td>DDT Reso a Fornitore x Accredito</td>
+      <td><span class="badge tM">M — Misto</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">25</td>
+      <td><strong>DRL</strong></td>
+      <td>DDT Cliente Reso Lavorato (da fatturare)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">16</td>
+      <td><strong>DRR</strong></td>
+      <td>DDT Cliente Reso Lavorato (da non fatturare)</td>
+      <td><span class="badge tG">G — Gestionale</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">21</td>
+      <td><strong>DRS</strong></td>
+      <td>DDT Reso a Fornitore x Sostituzione</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">23</td>
+      <td><strong>DRV</strong></td>
+      <td>DDT Reso da Visione Fornitore</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">27</td>
+      <td><strong>DTA</strong></td>
+      <td>DDT Invio Merce per Assembl. "Il Cerchio"</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">40</td>
+      <td><strong>DVC</strong></td>
+      <td>DDT Cliente (conto visione)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">81</td>
+      <td><strong>DVI</strong></td>
+      <td>DDT Cliente (conto visione)</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">65</td>
+      <td><strong>E02</strong></td>
+      <td>Fattura Elettronica di Acconto</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">75</td>
+      <td><strong>FA2</strong></td>
+      <td>Fattura Acquisto 2° Registro</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">12</td>
+      <td><strong>FF1</strong></td>
+      <td>Fattura Acquisto</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">62</td>
+      <td><strong>FF2</strong></td>
+      <td>Fattura Acquisto</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">74</td>
+      <td><strong>FPF</strong></td>
+      <td>Proforma Invoice</td>
+      <td><span class="badge tG">G — Gestionale</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">6</td>
+      <td><strong>FV1</strong></td>
+      <td>Fattura Vendita Italia</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">7</td>
+      <td><strong>FV2</strong></td>
+      <td>Fattura Vendita Immediata</td>
+      <td><span class="badge tA">A — Fattura Imm.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">60</td>
+      <td><strong>FV3</strong></td>
+      <td>Fattura Elettronica 3° Registro</td>
+      <td><span class="badge tA">A — Fattura Imm.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">58</td>
+      <td><strong>FVE</strong></td>
+      <td>Fattura Elettronica di Vendita</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">47</td>
+      <td><strong>INV</strong></td>
+      <td>Inventario</td>
+      <td><span class="badge tR">R — Rettifica</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">67</td>
+      <td><strong>LAF</strong></td>
+      <td>Lavorazioni Officina</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">63</td>
+      <td><strong>NC3</strong></td>
+      <td>Nota di Credito 3° Registro</td>
+      <td><span class="badge tN">N — Nota Credito</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">59</td>
+      <td><strong>NCE</strong></td>
+      <td>Nota Accredito Elettronica</td>
+      <td><span class="badge tN">N — Nota Credito</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">13</td>
+      <td><strong>NF1</strong></td>
+      <td>Nota Accredito da Fornitore</td>
+      <td><span class="badge tN">N — Nota Credito</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">78</td>
+      <td><strong>NF2</strong></td>
+      <td>Nota Accredito da Fornitore Estero</td>
+      <td><span class="badge tN">N — Nota Credito</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">8</td>
+      <td><strong>NV1</strong></td>
+      <td>Nota di Accredito Italia</td>
+      <td><span class="badge tN">N — Nota Credito</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">43</td>
+      <td><strong>NV2</strong></td>
+      <td>Nota Accredito Reg.2</td>
+      <td><span class="badge tN">N — Nota Credito</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">3</td>
+      <td><strong>OAF</strong></td>
+      <td>Ordine Fornitore</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">26</td>
+      <td><strong>OAS</strong></td>
+      <td>Ordine Assemblaggio Esterno</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">24</td>
+      <td><strong>OCL</strong></td>
+      <td>Ordine Cliente (conto lavoro)</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">29</td>
+      <td><strong>OLE</strong></td>
+      <td>Ordine Lavorazione Esterna</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">76</td>
+      <td><strong>OOF</strong></td>
+      <td>Ordine Officina</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="no">✗</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">1</td>
+      <td><strong>OVC</strong></td>
+      <td>Ordine Cliente (vendita)</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">80</td>
+      <td><strong>OVP</strong></td>
+      <td>Ordine Cliente (vendita a programma)</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">37</td>
+      <td><strong>PRE</strong></td>
+      <td>Preventivo</td>
+      <td><span class="badge tP">P — Preventivo</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">56</td>
+      <td><strong>RE-</strong></td>
+      <td>Rettifica Negativa</td>
+      <td><span class="badge tR">R — Rettifica</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">57</td>
+      <td><strong>RE+</strong></td>
+      <td>Rettifica Positiva</td>
+      <td><span class="badge tR">R — Rettifica</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">66</td>
+      <td><strong>ROF</strong></td>
+      <td>Richiesta Officina</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">55</td>
+      <td><strong>SAS</strong></td>
+      <td>Ordine Assemblaggio Esterno</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">49</td>
+      <td><strong>SDP</strong></td>
+      <td>Scheda di Produzione 2016</td>
+      <td><span class="badge tL">L — Scheda Prod.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">54</td>
+      <td><strong>SLE</strong></td>
+      <td>Ordine Lavorazione Esterna</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">14</td>
+      <td><strong>SPR</strong></td>
+      <td>Scheda di Produzione</td>
+      <td><span class="badge tL">L — Scheda Prod.</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">68</td>
+      <td><strong>ST0</strong></td>
+      <td>Ordine Officina</td>
+      <td><span class="badge tO">O — Ordine</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">69</td>
+      <td><strong>ST1</strong></td>
+      <td>Consuntivo Officina</td>
+      <td><span class="badge tB">B — Bolla/DDT</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">70</td>
+      <td><strong>T16</strong></td>
+      <td>Integrazione</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">71</td>
+      <td><strong>T17</strong></td>
+      <td>Integrazione Estero</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">72</td>
+      <td><strong>T18</strong></td>
+      <td>Integrazione UE</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr><tr>
+      <td style="color:var(--muted);font-size:.8rem">73</td>
+      <td><strong>T19</strong></td>
+      <td>Integrazione Art.17</td>
+      <td><span class="badge tF">F — Fattura</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+      <td style="text-align:center"><span class="ok">✓</span></td>
+    </tr></tbody>
+    </table>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  Documento riservato — ZEROBYTE SRL per TECNOSTAMPI &nbsp;·&nbsp; 30 aprile 2026
+</footer>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'base',
+  themeVariables: {
+    primaryColor: '#dbeafe',
+    primaryTextColor: '#1e3a5f',
+    primaryBorderColor: '#2563eb',
+    lineColor: '#94a3b8',
+    fontSize: '14px'
+  },
+  flowchart: { curve: 'linear', padding: 18, htmlLabels: false, nodeSpacing: 42, rankSpacing: 76 }
+});
+
+/* ---- Document registry ---- */
+const TYPES = {
+  A:'Fattura Accompagnatoria', B:'Bolla', F:'Fattura', G:'Generico',
+  L:'Ordine Lavorazione', M:'Reso Merce', N:'Nota di Accredito', O:'Ordine',
+  P:'Preventivo', R:'Rettifica Inventario', T:'Trasferimento Merce', V:'Carico Produzione'
+};
+
+const LAST_USE = {
+  BOF:'10/03/2023 12:00',
+  C04:'27/04/2026 15:49',
+  CAF:'28/04/2026 12:26',
+  CCN:'03/03/2020 10:58',
+  CDP:'30/04/2026 10:30',
+  CF5:'27/04/2026 15:45',
+  CMR:'24/03/2026 12:15',
+  CNL:'06/03/2026 10:14',
+  CPR:'30/12/2015 12:16',
+  CRA:'21/04/2026 14:54',
+  CRL:'21/04/2026 14:09',
+  CRM:'26/10/2011 14:31',
+  CRR:'18/07/2018 10:57',
+  CRV:'07/12/2023 11:20',
+  CRZ:'01/04/2026 12:26',
+  CVF:'09/04/2025 15:26',
+  DCL:'28/04/2026 15:34',
+  DDV:'29/04/2026 15:16',
+  DF5:'12/03/2026 16:41',
+  DIM:'28/02/2013 09:42',
+  DMM:'01/04/2026 08:17',
+  DRF:'29/09/2025 11:43',
+  DRL:'30/01/2026 10:10',
+  DRR:'06/03/2026 08:55',
+  DRS:'31/03/2022 16:17',
+  DRV:'15/04/2025 14:51',
+  DTA:'29/04/2026 14:53',
+  DVC:'06/06/2024 09:42',
+  DVI:'28/02/2025 10:07',
+  E02:'18/12/2025 16:49',
+  FA2:'15/04/2026 11:07',
+  FF1:'14/04/2026 16:37',
+  FF2:'11/10/2022 10:54',
+  FPF:'08/04/2026 11:49',
+  FV1:'09/01/2019 16:34',
+  FV2:'09/01/2019 17:33',
+  FV3:'14/04/2026 14:00',
+  FVE:'29/04/2026 16:45',
+  INV:'03/02/2026 11:01',
+  LAF:'22/02/2022 11:04',
+  NC3:'07/03/2022 15:24',
+  NCE:'08/04/2026 16:22',
+  NF1:'14/10/2025 15:20',
+  NF2:'19/03/2026 09:35',
+  NV1:'18/12/2018 09:32',
+  NV2:'20/04/2016 08:51',
+  OAF:'29/04/2026 15:48',
+  OAS:'14/02/2025 13:54',
+  OCL:'08/06/2022 10:57',
+  OLE:'03/09/2024 15:02',
+  OOF:'10/03/2023 11:59',
+  OVC:'29/04/2026 15:51',
+  OVP:'19/07/2024 09:35',
+  PRE:'24/07/2024 09:49',
+  'RE-':'02/01/2018 15:11',
+  'RE+':'11/01/2021 16:45',
+  ROF:'23/02/2022 09:32',
+  SAS:'04/09/2017 13:57',
+  SDP:'30/04/2026 10:31',
+  SLE:'28/04/2026 09:25',
+  SPR:'04/01/2016 15:25',
+  ST0:'24/02/2022 09:23',
+  T17:'13/03/2026 15:40',
+  T18:'15/04/2026 11:07',
+  T19:'16/01/2026 11:51'
+};
+
+// [Id, Cd, Descrizione, Tipo, Esecutivo, Prelevabile, Modificabile]
+const DOCS = [
+  [42,'ACV','Accettazione Visione','B',1,1,1],
+  [77,'BOF','Bolla Lavoro Officina','B',1,1,1],
+  [34,'C04','Carico da Cliente (diversi)','B',1,1,1],
+  [4, 'CAF','Carico Fornitore','B',1,1,1],
+  [38,'CCN','Carico Reso da "Il Cerchio" (non lavorato)','T',1,0,1],
+  [50,'CDP','CDP','V',1,1,1],
+  [36,'CF5','Carico Reso da Fornitore (diverse)','B',1,1,1],
+  [10,'CMR','Carico da Cliente x Reso','M',1,1,1],
+  [31,'CNL','Carico Reso da Fornitore (non lavorato)','T',1,0,1],
+  [15,'CPR','Carico Produzione Interna','V',1,1,1],
+  [28,'CRA','Carico Reso da "Il Cerchio" (lavorato/assemblato)','B',1,1,1],
+  [32,'CRL','Carico Reso Lavorato da Fornitore (da fatturare)','B',1,1,1],
+  [44,'CRM','Carico Reso Lavorato da Fornitore no P/C','B',1,1,1],
+  [17,'CRR','Carico x Reso Rip.Sost. Garanzia Fornitore','B',1,1,1],
+  [41,'CRV','Carico da Cliente x Reso Visione','B',1,0,1,'obs'],
+  [53,'CRZ','Carico Reso Lavorato da Fornitore (da fatturare)','B',1,1,1],
+  [22,'CVF','Carico Visione da Fornitore','B',1,1,1],
+  [82,'CVI','Carico da Cliente per Reso Visione','B',1,0,1],
+  [52,'CZZ','Carico Reso Lavorato da Fornitore (da fatturare)','V',1,1,1],
+  [30,'DCL','DDT Invio a Fornitore (merce in C/Lavoro)','T',1,1,1],
+  [5, 'DDV','DDT Cliente (vendita)','B',1,1,1],
+  [35,'DF5','DDT Invio a Fornitori (diverse)','B',1,1,1],
+  [33,'DIM','DDT Cliente Reso Imballi (no magazzino)','B',1,1,1],
+  [39,'DMM','DDT Cliente Reso Imballi (sì magazzino)','B',1,1,1],
+  [20,'DRF','DDT Reso a Fornitore x Accredito','M',1,1,1],
+  [25,'DRL','DDT Cliente Reso Lavorato (da fatturare)','B',1,1,1],
+  [16,'DRR','DDT Cliente Reso Lavorato (da non fatturare)','G',1,0,1],
+  [21,'DRS','DDT Reso a Fornitore x Sostituzione','B',1,1,1],
+  [23,'DRV','DDT Reso da Visione Fornitore','B',1,1,1],
+  [27,'DTA','DDT Invio Merce per Assembl. "Il Cerchio"','B',1,1,1],
+  [40,'DVC','DDT Cliente (conto visione)','B',0,1,1,'obs'],
+  [81,'DVI','DDT Cliente (conto visione)','B',1,1,1],
+  [65,'E02','Fattura Elettronica di Acconto','F',1,1,1],
+  [75,'FA2','Fattura Acquisto 2° Registro','F',1,1,1],
+  [12,'FF1','Fattura Acquisto','F',1,1,1],
+  [62,'FF2','Fattura Acquisto','F',1,1,1],
+  [74,'FPF','Proforma Invoice','G',1,1,1],
+  [6, 'FV1','Fattura Vendita Italia','F',1,1,1],
+  [7, 'FV2','Fattura Vendita Immediata','A',1,1,1],
+  [60,'FV3','Fattura Elettronica 3° Registro','A',1,1,1],
+  [58,'FVE','Fattura Elettronica di Vendita','F',1,1,1],
+  [47,'INV','Inventario','R',1,1,1],
+  [67,'LAF','Lavorazioni Officina','B',1,1,1],
+  [63,'NC3','Nota di Credito 3° Registro','N',1,1,1],
+  [59,'NCE','Nota Accredito Elettronica','N',1,1,1],
+  [13,'NF1','Nota Accredito da Fornitore','N',1,1,1],
+  [78,'NF2','Nota Accredito da Fornitore Estero','N',1,1,1],
+  [8, 'NV1','Nota di Accredito Italia','N',1,1,1],
+  [43,'NV2','Nota Accredito Reg.2','N',1,1,1],
+  [3, 'OAF','Ordine Fornitore','O',1,1,1],
+  [26,'OAS','Ordine Assemblaggio Esterno','O',1,1,1],
+  [24,'OCL','Ordine Cliente (conto lavoro)','O',1,1,1],
+  [29,'OLE','Ordine Lavorazione Esterna','O',1,1,1],
+  [76,'OOF','Ordine Officina','O',0,1,1],
+  [1, 'OVC','Ordine Cliente (vendita)','O',1,1,1],
+  [80,'OVP','Ordine Cliente (vendita a programma)','O',1,1,1],
+  [37,'PRE','Preventivo','P',1,1,1],
+  [56,'RE-','Rettifica Negativa','R',1,1,1],
+  [57,'RE+','Rettifica Positiva','R',1,1,1],
+  [66,'ROF','Richiesta Officina','O',1,1,1],
+  [55,'SAS','Ordine Assemblaggio Esterno','O',1,1,1],
+  [49,'SDP','Scheda di Produzione 2016','L',1,1,1],
+  [54,'SLE','Ordine Lavorazione Esterna','O',1,1,1],
+  [14,'SPR','Scheda di Produzione','L',1,1,1],
+  [68,'ST0','Ordine Officina','O',1,1,1],
+  [69,'ST1','Consuntivo Officina','B',1,1,1],
+  [70,'T16','Integrazione','F',1,1,1],
+  [71,'T17','Integrazione Estero','F',1,1,1],
+  [72,'T18','Integrazione UE','F',1,1,1],
+  [73,'T19','Integrazione Art.17','F',1,1,1],
+];
+
+const ck = v => v ? '<span class="ok">✓</span>' : '<span class="no">✗</span>';
+
+const DOCS_BY_CODE = Object.fromEntries(DOCS.map(doc => [doc[1], {
+  description: doc[2],
+  type: doc[3],
+  obsolete: doc[doc.length - 1] === 'obs',
+}]));
+
+const FLOW_RULES = [
+  ["DVC", "ACV"], ["OOF", "BOF"], ["OCL", "C04"], ["OAF", "CAF"], ["OLE", "CAF"], ["SDP", "CDP"],
+  ["DCL", "CF5"], ["DF5", "CF5"], ["OLE", "CF5"], ["DMM", "CMR"], ["DVI", "CMR"], ["OCL", "CMR"],
+  ["OVC", "CMR"], ["CF5", "CNL"], ["DCL", "CNL"], ["DF5", "CNL"], ["SPR", "CPR"], ["OAS", "CRA"],
+  ["DCL", "CRL"], ["DF5", "CRL"], ["DTA", "CRL"], ["OAS", "CRL"], ["OLE", "CRL"], ["OAF", "CRM"],
+  ["OLE", "CRM"], ["DF5", "CRR"], ["DRS", "CRR"], ["DDV", "CRV"], ["DVC", "CRV"], ["OAF", "CRZ"],
+  ["OAS", "CRZ"], ["SAS", "CRZ"], ["SLE", "CRZ"], ["DVI", "CVI"], ["SDP", "CZZ"], ["OAF", "DCL"],
+  ["CRV", "DDV"], ["OVC", "DDV"], ["OVP", "DDV"], ["CF5", "DF5"], ["C04", "DMM"], ["C04", "DRL"],
+  ["OCL", "DRL"], ["OVC", "DRL"], ["C04", "DRR"], ["CMR", "DRR"], ["CF5", "DRV"], ["CVF", "DRV"],
+  ["CRA", "DTA"], ["ACV", "E02"], ["DDV", "E02"], ["DRL", "E02"], ["OCL", "E02"], ["OVC", "E02"],
+  ["CAF", "FA2"], ["CAF", "FF1"], ["CF5", "FF1"], ["CRA", "FF1"], ["CRL", "FF1"], ["CRM", "FF1"],
+  ["CRZ", "FF1"], ["CVF", "FF1"], ["OAF", "FF1"], ["CAF", "FF2"], ["CF5", "FF2"], ["CRA", "FF2"],
+  ["CRL", "FF2"], ["CRM", "FF2"], ["CRZ", "FF2"], ["CVF", "FF2"], ["OAF", "FF2"], ["ACV", "FV1"],
+  ["DDV", "FV1"], ["DRL", "FV1"], ["OCL", "FV1"], ["OVC", "FV1"], ["DDV", "FV2"], ["OVC", "FV2"],
+  ["DDV", "FV3"], ["OVC", "FV3"], ["ACV", "FVE"], ["DDV", "FVE"], ["DRL", "FVE"], ["OCL", "FVE"],
+  ["OVC", "FVE"], ["ROF", "LAF"], ["CMR", "NC3"], ["CMR", "NCE"], ["DRF", "NF1"], ["DRF", "NF2"],
+  ["CMR", "NV1"], ["CMR", "NV2"], ["DRR", "NV2"], ["DRR", "OVC"], ["PRE", "OVC"], ["DRR", "OVP"]
+];
+
+const FLOW_WAREHOUSES = {
+  ACV: 'Mag.10', C04: 'Mag.1', CAF: 'Mag.1', CCN: 'Mag.100 → Mag.1', CDP: 'Mag.1 → Mag.1', CF5: 'Mag.1',
+  CMR: 'Mag.1', CNL: 'Mag.30 → Mag.1', CPR: 'Mag.1', CRA: 'Mag.100 → Mag.1', CRL: 'Mag.30 → Mag.1',
+  CRM: 'Mag.30 → Mag.1', CRR: 'Mag.1', CRV: 'Mag.10 → Mag.1', CRZ: 'Mag.30', CVF: 'Mag.VF',
+  CVI: 'Mag.10 → Mag.1', CZZ: 'Mag.30', DCL: 'Mag.1 → Mag.30', DDV: 'Mag.1', DF5: 'Mag.1', DMM: 'Mag.1',
+  DRF: 'Mag.1', DRL: 'Mag.1', DRR: 'Mag.1', DRS: 'Mag.1', DRV: 'Mag.VF', DTA: 'Mag.1 → Mag.100',
+  DVC: 'Mag.10', DVI: 'Mag.1 → Mag.10', INV: 'Mag.1', OAF: 'Mag.1', OAS: 'Mag.100 → Mag.1', OCL: 'Mag.1',
+  OVC: 'Mag.1', OVP: 'Mag.1', 'RE+': 'Mag.1', 'RE-': 'Mag.1', SAS: 'Mag.100 → Mag.1', SDP: 'Mag.1',
+  SPR: 'Mag.1', ST0: 'Mag.1',
+};
+
+const FLOW_CLASS_BY_TYPE = {
+  A: 'fatacc', B: 'ddt', F: 'fat', G: 'gen', L: 'sch', M: 'mix', N: 'nc', O: 'ord', P: 'prev', R: 'rett', T: 'tras', V: 'prod'
+};
+
+const FLOW_STAGE_BY_CLASS = {
+  prev: 'origin', ord: 'origin', sch: 'origin',
+  ddt: 'movement', tras: 'movement', mix: 'movement', gen: 'movement', prod: 'movement',
+  fat: 'closing', fatacc: 'closing', nc: 'closing',
+  rett: 'control'
+};
+
+const FLOW_STAGE_META = {
+  origin: { title: 'Origine', order: 1 },
+  movement: { title: 'Movimento magazzino', order: 2 },
+  closing: { title: 'Chiusura amministrativa', order: 3 },
+  control: { title: 'Controllo / inventario', order: 4 },
+};
+
+const FLOW_CLASS_DEFS = String.raw`
+  classDef prev fill:#e0f2fe,stroke:#0284c7,color:#075985,font-weight:bold;
+  classDef ord fill:#dbeafe,stroke:#2563eb,color:#1e3a5f,font-weight:bold;
+  classDef ddt fill:#ffedd5,stroke:#f97316,color:#7c2d12,font-weight:bold;
+  classDef fat fill:#dcfce7,stroke:#16a34a,color:#14532d,font-weight:bold;
+  classDef fatacc fill:#d1fae5,stroke:#059669,color:#065f46,font-weight:bold;
+  classDef nc fill:#fce7f3,stroke:#ec4899,color:#831843,font-weight:bold;
+  classDef mix fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,font-weight:bold;
+  classDef tras fill:#fef9c3,stroke:#ca8a04,color:#78350f,font-weight:bold;
+  classDef prod fill:#ede9fe,stroke:#7c3aed,color:#5b21b6,font-weight:bold;
+  classDef sch fill:#f3e8ff,stroke:#7c3aed,color:#3b0764,font-weight:bold;
+  classDef gen fill:#fef3c7,stroke:#d97706,color:#78350f,font-weight:bold;
+  classDef rett fill:#f1f5f9,stroke:#94a3b8,color:#475569,font-weight:bold;`;
+
+function getDocInfo(code) {
+  return DOCS_BY_CODE[code] || { description: code, type: 'G', obsolete: false };
+}
+
+function getNodeClass(code) {
+  const info = getDocInfo(code);
+  return FLOW_CLASS_BY_TYPE[info.type] || 'gen';
+}
+
+function sanitizeFlowLabel(text) {
+  return String(text).replace(/"/g, "'");
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function compactDescription(description) {
+  return String(description || '')
+    .replace(/Fattura Elettronica/g, 'Fattura Elettr.')
+    .replace(/Nota Accredito/g, 'Nota Accred.')
+    .replace(/Nota di Accredito/g, 'Nota Accred.')
+    .replace(/Ordine Cliente/g, 'Ord. Cliente')
+    .replace(/Ordine Fornitore/g, 'Ord. Fornitore')
+    .replace(/Ordine Lavorazione/g, 'Ord. Lavoraz.')
+    .replace(/Carico Reso/g, 'Carico Reso')
+    .replace(/Fornitore/g, 'Forn.')
+    .replace(/Fornitori/g, 'Forn.')
+    .replace(/Cliente/g, 'Cliente')
+    .replace(/Produzione/g, 'Prod.')
+    .replace(/Assemblaggio/g, 'Assembl.')
+    .replace(/Lavorato/g, 'Lav.')
+    .replace(/lavorato/g, 'lav.')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getNodeLabel(code) {
+  const info = getDocInfo(code);
+  let description = compactDescription(info.description || code);
+  if (description.length > 34) {
+    description = `${description.slice(0, 31).trim()}...`;
+  }
+  const lines = [`${code} — ${sanitizeFlowLabel(description)}`];
+  if (info.obsolete) {
+    lines.push('obs.');
+  }
+  if (FLOW_WAREHOUSES[code]) {
+    lines.push(FLOW_WAREHOUSES[code]);
+  }
+  return lines.join('<br/>');
+}
+
+function getComponentMeta(nodes) {
+  const codes = new Set(nodes);
+  if (codes.has('OVC') || codes.has('DDV') || codes.has('PRE')) {
+    return { title: '🛒 Cliente: vendita, visione e resi', accent: '#2563eb', priority: 1, category: 'Ciclo cliente' };
+  }
+  if (codes.has('OAF') || codes.has('OLE') || codes.has('OAS')) {
+    return { title: '📦 Fornitori, terzisti e assemblaggio', accent: '#059669', priority: 2, category: 'Ciclo fornitore' };
+  }
+  if (codes.has('DRF')) {
+    return { title: '↩️ Resi fornitore per accredito', accent: '#0f766e', priority: 3, category: 'Resi fornitore' };
+  }
+  if (codes.has('SDP')) {
+    return { title: '🧩 Produzione 2016', accent: '#7c3aed', priority: 4, category: 'Produzione' };
+  }
+  if (codes.has('SPR')) {
+    return { title: '⚙️ Produzione interna', accent: '#6d28d9', priority: 5, category: 'Produzione' };
+  }
+  if (codes.has('OOF') || codes.has('BOF')) {
+    return { title: '🏭 Officina: ordine e bolla', accent: '#b45309', priority: 6, category: 'Officina' };
+  }
+  if (codes.has('ROF')) {
+    return { title: '🛠️ Richiesta officina', accent: '#475569', priority: 7, category: 'Officina' };
+  }
+  return { title: '🔀 Flusso documentale', accent: '#2563eb', priority: 99, category: 'Altro' };
+}
+
+function getGraphDepths(nodes, edges) {
+  const nodeSet = new Set(nodes);
+  const incoming = new Map(nodes.map(code => [code, 0]));
+  const outgoing = new Map(nodes.map(code => [code, []]));
+
+  for (const [source, target] of edges) {
+    if (!nodeSet.has(source) || !nodeSet.has(target)) {
+      continue;
+    }
+    incoming.set(target, (incoming.get(target) || 0) + 1);
+    outgoing.get(source).push(target);
+  }
+
+  const roots = nodes.filter(code => (incoming.get(code) || 0) === 0).sort((left, right) => left.localeCompare(right, 'it'));
+  const queue = roots.length ? [...roots] : [...nodes].sort((left, right) => left.localeCompare(right, 'it'));
+  const depth = new Map(queue.map(code => [code, 0]));
+
+  while (queue.length > 0) {
+    const current = queue.shift();
+    const nextDepth = (depth.get(current) || 0) + 1;
+    for (const next of outgoing.get(current) || []) {
+      if (!depth.has(next)) {
+        depth.set(next, nextDepth);
+        queue.push(next);
+      }
+    }
+  }
+
+  return depth;
+}
+
+function buildMermaidDiagram(nodes, edges) {
+  const aliases = Object.fromEntries(nodes.map((code, index) => [code, `n${index + 1}`]));
+  const groupedNodes = new Map();
+  const graphDepths = getGraphDepths(nodes, edges);
+  for (const code of nodes) {
+    const groupKey = FLOW_STAGE_BY_CLASS[getNodeClass(code)] || 'movement';
+    if (!groupedNodes.has(groupKey)) {
+      groupedNodes.set(groupKey, []);
+    }
+    groupedNodes.get(groupKey).push(code);
+  }
+
+  const useSubgraphs = nodes.length > 4;
+  const lines = [useSubgraphs ? 'flowchart TD' : 'flowchart LR'];
+
+  if (useSubgraphs) {
+    const orderedGroups = Array.from(groupedNodes.entries()).sort((left, right) => {
+      const leftOrder = (FLOW_STAGE_META[left[0]] || { order: 99 }).order;
+      const rightOrder = (FLOW_STAGE_META[right[0]] || { order: 99 }).order;
+      return leftOrder - rightOrder || left[0].localeCompare(right[0], 'it');
+    });
+    for (const [groupKey, groupCodes] of orderedGroups) {
+      const meta = FLOW_STAGE_META[groupKey] || { title: 'Altri documenti' };
+      lines.push(`  subgraph ${groupKey}["${meta.title}"]`);
+      lines.push('    direction TB');
+      const orderedCodes = groupCodes.sort((left, right) => {
+        return (graphDepths.get(left) || 0) - (graphDepths.get(right) || 0) || left.localeCompare(right, 'it');
+      });
+      for (const code of orderedCodes) {
+        lines.push(`    ${aliases[code]}["${getNodeLabel(code)}"]:::${getNodeClass(code)}`);
+      }
+      lines.push('  end');
+    }
+  } else {
+    for (const code of nodes.sort((left, right) => left.localeCompare(right, 'it'))) {
+      lines.push(`  ${aliases[code]}["${getNodeLabel(code)}"]:::${getNodeClass(code)}`);
+    }
+  }
+
+  for (const [source, target] of edges) {
+    lines.push(`  ${aliases[source]} --> ${aliases[target]}`);
+  }
+
+  lines.push(FLOW_CLASS_DEFS.trim());
+  return lines.join('\n');
+}
+
+function getFlowStats(nodes, edges) {
+  const incoming = Object.fromEntries(nodes.map(code => [code, 0]));
+  const outgoing = Object.fromEntries(nodes.map(code => [code, 0]));
+  for (const [source, target] of edges) {
+    outgoing[source] = (outgoing[source] || 0) + 1;
+    incoming[target] = (incoming[target] || 0) + 1;
+  }
+
+  const sortCodes = codes => codes.sort((left, right) => left.localeCompare(right, 'it'));
+  return {
+    origins: sortCodes(nodes.filter(code => !incoming[code])),
+    finals: sortCodes(nodes.filter(code => !outgoing[code])),
+    hubs: sortCodes(nodes.filter(code => incoming[code] > 1 || outgoing[code] > 1)),
+  };
+}
+
+function renderCodeBadge(code) {
+  const info = getDocInfo(code);
+  return `<span class="flow-code flow-code-${getNodeClass(code)}" data-flow-code="${escapeHtml(code)}" title="${escapeHtml(info.description || code)}">${escapeHtml(code)}</span>`;
+}
+
+function renderCodeLine(codes, emptyLabel = '—') {
+  if (!codes.length) {
+    return `<span class="flow-note">${emptyLabel}</span>`;
+  }
+  return codes.map(renderCodeBadge).join('');
+}
+
+function renderRouteRows(edges) {
+  return edges
+    .slice()
+    .sort((left, right) => left[1].localeCompare(right[1], 'it') || left[0].localeCompare(right[0], 'it'))
+    .map(([source, target]) => `
+      <li data-flow-source="${escapeHtml(source)}" data-flow-target="${escapeHtml(target)}" title="${escapeHtml(source)} → ${escapeHtml(target)}">
+        <span>${renderCodeBadge(source)}</span>
+        <span class="flow-arrow">→</span>
+        <span>${renderCodeBadge(target)}</span>
+      </li>`)
+    .join('');
+}
+
+function renderFlowAside(component) {
+  const stats = getFlowStats(component.nodes, component.edges);
+  return `
+    <aside class="flow-aside">
+      <div class="flow-help">
+        <span>Click su nodo, codice o passaggio per isolare le relazioni.</span>
+        <button class="flow-clear" type="button">Reset</button>
+      </div>
+      <h4>Origini</h4>
+      <div class="flow-chipline">${renderCodeLine(stats.origins)}</div>
+      <h4>Uscite</h4>
+      <div class="flow-chipline">${renderCodeLine(stats.finals)}</div>
+      <h4>Nodi snodo</h4>
+      <div class="flow-chipline">${renderCodeLine(stats.hubs.slice(0, 10))}</div>
+      ${stats.hubs.length > 10 ? `<div class="flow-note">+${stats.hubs.length - 10} altri snodi</div>` : ''}
+      <h4>Passaggi</h4>
+      <ul class="flow-routes">${renderRouteRows(component.edges)}</ul>
+    </aside>`;
+}
+
+function buildFlowComponents() {
+  const adjacency = new Map();
+  for (const [source, target] of FLOW_RULES) {
+    if (!adjacency.has(source)) {
+      adjacency.set(source, new Set());
+    }
+    if (!adjacency.has(target)) {
+      adjacency.set(target, new Set());
+    }
+    adjacency.get(source).add(target);
+    adjacency.get(target).add(source);
+  }
+
+  const visited = new Set();
+  const components = [];
+  const nodes = Array.from(adjacency.keys()).sort((left, right) => left.localeCompare(right, 'it'));
+
+  for (const start of nodes) {
+    if (visited.has(start)) {
+      continue;
+    }
+    const queue = [start];
+    const componentNodes = [];
+    visited.add(start);
+
+    while (queue.length > 0) {
+      const current = queue.shift();
+      componentNodes.push(current);
+      for (const next of Array.from(adjacency.get(current) || []).sort((left, right) => left.localeCompare(right, 'it'))) {
+        if (!visited.has(next)) {
+          visited.add(next);
+          queue.push(next);
+        }
+      }
+    }
+
+    const componentNodeSet = new Set(componentNodes);
+    const componentEdges = FLOW_RULES.filter(([source, target]) => componentNodeSet.has(source) && componentNodeSet.has(target));
+    const meta = getComponentMeta(componentNodes);
+    components.push({
+      ...meta,
+      nodes: componentNodes.sort((left, right) => left.localeCompare(right, 'it')),
+      edges: componentEdges,
+    });
+  }
+
+  return components
+    .sort((left, right) => left.priority - right.priority || right.nodes.length - left.nodes.length || left.title.localeCompare(right.title, 'it'))
+    .map(component => ({
+      ...component,
+      aliases: Object.fromEntries(component.nodes.map((code, index) => [code, `n${index + 1}`])),
+      diagram: buildMermaidDiagram(component.nodes, component.edges),
+    }));
+}
+
+function resizeFlowDiagrams(diagrams, components) {
+  diagrams.forEach((diagram, index) => {
+    const svg = diagram.querySelector('svg');
+    if (!svg) {
+      return;
+    }
+    const nodeCount = components[index]?.nodes.length || 0;
+    const width = Math.max(820, Math.min(2800, 760 + nodeCount * 84));
+    svg.dataset.baseWidth = String(width);
+    svg.style.width = `${width}px`;
+    svg.style.maxWidth = 'none';
+  });
+}
+
+function enableFlowFullscreenShortcuts() {
+  if (window.__flowFullscreenShortcutsEnabled) {
+    return;
+  }
+  window.__flowFullscreenShortcutsEnabled = true;
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && document.querySelector('.flow-card.is-expanded')) {
+      closeExpandedFlow();
+      event.preventDefault();
+    }
+  });
+}
+
+function getFlowRelations(component, code) {
+  const incoming = component.edges.filter(([, target]) => target === code);
+  const outgoing = component.edges.filter(([source]) => source === code);
+  return {
+    incoming,
+    outgoing,
+    origins: incoming.map(([source]) => source),
+    destinations: outgoing.map(([, target]) => target),
+  };
+}
+
+function clearFlowSelection(card) {
+  card.classList.remove('flow-selected');
+  card.dataset.selectedCode = '';
+  card.dataset.selectedRoute = '';
+  card.querySelectorAll('.flow-node-related, .flow-node-selected, .flow-node-origin, .flow-node-destination')
+    .forEach(node => node.classList.remove('flow-node-related', 'flow-node-selected', 'flow-node-origin', 'flow-node-destination'));
+  card.querySelectorAll('.flow-edge-active, .flow-edge-incoming, .flow-edge-outgoing')
+    .forEach(edge => edge.classList.remove('flow-edge-active', 'flow-edge-incoming', 'flow-edge-outgoing'));
+  card.querySelectorAll('.flow-code-related, .flow-code-selected, .flow-code-origin, .flow-code-destination')
+    .forEach(code => code.classList.remove('flow-code-related', 'flow-code-selected', 'flow-code-origin', 'flow-code-destination'));
+  card.querySelectorAll('.flow-route-active').forEach(route => route.classList.remove('flow-route-active'));
+}
+
+function closeExpandedFlow(card) {
+  const target = card || document.querySelector('.flow-card.is-expanded');
+  if (!target) {
+    return;
+  }
+  const svg = target.querySelector('.mermaid svg');
+  if (svg?.dataset.baseWidth) {
+    svg.style.width = `${svg.dataset.baseWidth}px`;
+  }
+  target.classList.remove('is-expanded');
+  document.body.classList.remove('flow-modal-open');
+}
+
+function fitExpandedFlowGraph(card) {
+  const scroller = card.querySelector('.mermaid');
+  const svg = card.querySelector('.mermaid svg');
+  if (!scroller || !svg) {
+    return;
+  }
+  const baseWidth = Number(svg.dataset.baseWidth || parseFloat(svg.style.width) || 0);
+  if (!baseWidth) {
+    return;
+  }
+  const zoomedWidth = Math.max(scroller.clientWidth, Math.round(baseWidth * 0.72));
+  svg.style.width = `${zoomedWidth}px`;
+  scroller.scrollLeft = 0;
+}
+
+function openExpandedFlow(card) {
+  document.querySelectorAll('.flow-card.is-expanded').forEach(openCard => {
+    if (openCard !== card) {
+      openCard.classList.remove('is-expanded');
+    }
+  });
+  card.classList.add('is-expanded');
+  document.body.classList.add('flow-modal-open');
+  fitExpandedFlowGraph(card);
+  const scroller = card.querySelector('.mermaid');
+  if (scroller) {
+    scroller.focus({ preventScroll: true });
+  }
+}
+
+function markFlowCode(card, code, className) {
+  card.querySelectorAll(`.flow-code[data-flow-code="${CSS.escape(code)}"]`).forEach(item => {
+    item.classList.add('flow-code-related', className);
+  });
+}
+
+function markFlowNode(card, code, className) {
+  card.querySelectorAll(`.mermaid .node[data-flow-code="${CSS.escape(code)}"]`).forEach(node => {
+    node.classList.add('flow-node-related', className);
+  });
+}
+
+function scrollFlowNodeIntoView(card, code) {
+  const scroller = card.querySelector('.mermaid');
+  const node = card.querySelector(`.mermaid .node[data-flow-code="${CSS.escape(code)}"]`);
+  if (!scroller || !node) {
+    return;
+  }
+  const scrollerRect = scroller.getBoundingClientRect();
+  const nodeRect = node.getBoundingClientRect();
+  const nextLeft = scroller.scrollLeft + nodeRect.left - scrollerRect.left - (scrollerRect.width / 2) + (nodeRect.width / 2);
+  scroller.scrollTo({ left: Math.max(0, nextLeft), behavior: 'smooth' });
+}
+
+function markFlowEdge(card, source, target, className) {
+  card.querySelectorAll(`.edgePath[data-flow-source="${CSS.escape(source)}"][data-flow-target="${CSS.escape(target)}"],
+    .flowchart-link[data-flow-source="${CSS.escape(source)}"][data-flow-target="${CSS.escape(target)}"]`)
+    .forEach(edge => edge.classList.add('flow-edge-active', className));
+  card.querySelectorAll(`.flow-routes li[data-flow-source="${CSS.escape(source)}"][data-flow-target="${CSS.escape(target)}"]`)
+    .forEach(route => route.classList.add('flow-route-active'));
+}
+
+function activateFlowDocument(card, component, code) {
+  if (card.dataset.selectedCode === code && !card.dataset.selectedRoute) {
+    clearFlowSelection(card);
+    return;
+  }
+
+  clearFlowSelection(card);
+  card.classList.add('flow-selected');
+  card.dataset.selectedCode = code;
+
+  const relations = getFlowRelations(component, code);
+  markFlowNode(card, code, 'flow-node-selected');
+  markFlowCode(card, code, 'flow-code-selected');
+
+  for (const source of relations.origins) {
+    markFlowNode(card, source, 'flow-node-origin');
+    markFlowCode(card, source, 'flow-code-origin');
+  }
+  for (const target of relations.destinations) {
+    markFlowNode(card, target, 'flow-node-destination');
+    markFlowCode(card, target, 'flow-code-destination');
+  }
+  for (const [source, target] of relations.incoming) {
+    markFlowEdge(card, source, target, 'flow-edge-incoming');
+  }
+  for (const [source, target] of relations.outgoing) {
+    markFlowEdge(card, source, target, 'flow-edge-outgoing');
+  }
+  scrollFlowNodeIntoView(card, code);
+}
+
+function activateFlowRoute(card, source, target) {
+  const routeKey = `${source}->${target}`;
+  if (card.dataset.selectedRoute === routeKey) {
+    clearFlowSelection(card);
+    return;
+  }
+
+  clearFlowSelection(card);
+  card.classList.add('flow-selected');
+  card.dataset.selectedRoute = routeKey;
+  markFlowNode(card, source, 'flow-node-origin');
+  markFlowNode(card, target, 'flow-node-destination');
+  markFlowCode(card, source, 'flow-code-origin');
+  markFlowCode(card, target, 'flow-code-destination');
+  markFlowEdge(card, source, target, 'flow-edge-active');
+  scrollFlowNodeIntoView(card, source);
+}
+
+function prepareFlowSvg(card, component) {
+  const svg = card.querySelector('.mermaid svg');
+  if (!svg) {
+    return;
+  }
+
+  const aliasToCode = Object.fromEntries(Object.entries(component.aliases).map(([code, alias]) => [alias, code]));
+
+  svg.querySelectorAll('.node').forEach(node => {
+    const alias = node.getAttribute('data-id') || (node.id || '').replace(/^flowchart-/, '').replace(/-\d+$/, '');
+    const code = aliasToCode[alias];
+    if (!code) {
+      return;
+    }
+    node.dataset.flowCode = code;
+    node.setAttribute('role', 'button');
+    node.setAttribute('tabindex', '0');
+    node.setAttribute('aria-label', `${code} - ${getDocInfo(code).description || code}`);
+  });
+
+  const edgePaths = Array.from(svg.querySelectorAll('.edgePath, .flowchart-link'));
+  for (const [source, target] of component.edges) {
+    const sourceAlias = component.aliases[source];
+    const targetAlias = component.aliases[target];
+    const edge = edgePaths.find(item => {
+      const id = item.id || '';
+      return id.startsWith(`L-${sourceAlias}-${targetAlias}-`) ||
+        (item.classList.contains(`LS-${sourceAlias}`) && item.classList.contains(`LE-${targetAlias}`));
+    });
+    if (edge) {
+      edge.dataset.flowSource = source;
+      edge.dataset.flowTarget = target;
+    }
+  }
+}
+
+function enableFlowInteractions(diagrams, components) {
+  diagrams.forEach((diagram, index) => {
+    const component = components[index];
+    const card = diagram.closest('.flow-card');
+    if (!component || !card) {
+      return;
+    }
+
+    prepareFlowSvg(card, component);
+
+    card.addEventListener('click', event => {
+      const expandButton = event.target.closest('.flow-expand');
+      if (expandButton && card.contains(expandButton)) {
+        openExpandedFlow(card);
+        return;
+      }
+
+      const collapseButton = event.target.closest('.flow-collapse');
+      if (collapseButton && card.contains(collapseButton)) {
+        closeExpandedFlow(card);
+        return;
+      }
+
+      const clearButton = event.target.closest('.flow-clear');
+      if (clearButton && card.contains(clearButton)) {
+        clearFlowSelection(card);
+        return;
+      }
+
+      const svgNode = event.target.closest('.mermaid .node[data-flow-code]');
+      if (svgNode && card.contains(svgNode)) {
+        activateFlowDocument(card, component, svgNode.dataset.flowCode);
+        return;
+      }
+
+      const codeBadge = event.target.closest('[data-flow-code]');
+      if (codeBadge && card.contains(codeBadge)) {
+        activateFlowDocument(card, component, codeBadge.dataset.flowCode);
+        return;
+      }
+
+      const route = event.target.closest('.flow-routes li[data-flow-source][data-flow-target]');
+      if (route && card.contains(route)) {
+        activateFlowRoute(card, route.dataset.flowSource, route.dataset.flowTarget);
+      }
+    });
+
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        if (card.classList.contains('is-expanded')) {
+          closeExpandedFlow(card);
+        } else {
+          clearFlowSelection(card);
+        }
+        return;
+      }
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+      const svgNode = event.target.closest('.mermaid .node[data-flow-code]');
+      if (svgNode && card.contains(svgNode)) {
+        event.preventDefault();
+        activateFlowDocument(card, component, svgNode.dataset.flowCode);
+      }
+    });
+  });
+}
+
+function pluralize(count, singular, plural) {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
+async function renderFlowDiagrams() {
+  const flowGrid = document.querySelector('.flow-grid');
+  if (!flowGrid) {
+    return;
+  }
+
+  const components = buildFlowComponents();
+  window.__flowComponents = components.map(component => ({
+    title: component.title,
+    nodes: component.nodes,
+    edges: component.edges,
+  }));
+
+  const flowCount = document.getElementById('flow-count');
+  if (flowCount) {
+    flowCount.textContent = String(components.length);
+  }
+
+  flowGrid.innerHTML = components.map(component => `
+    <div class="card flow-card" style="--ca:${component.accent}">
+      <div class="flow-head">
+        <h3>${component.title}</h3>
+        <div class="flow-meta">
+          <span>${component.category}</span>
+          <span>${pluralize(component.nodes.length, 'documento', 'documenti')}</span>
+          <span>${pluralize(component.edges.length, 'passaggio', 'passaggi')}</span>
+          <button class="flow-tool flow-expand" type="button">Schermo intero</button>
+          <button class="flow-tool flow-collapse" type="button">Chiudi</button>
+        </div>
+      </div>
+      <div class="flow-body">
+        <div class="mermaid"></div>
+        ${renderFlowAside(component)}
+      </div>
+    </div>`).join('');
+
+  const diagrams = Array.from(flowGrid.querySelectorAll('.mermaid'));
+  enableFlowFullscreenShortcuts();
+  diagrams.forEach((diagram, index) => {
+    diagram.textContent = components[index].diagram;
+    diagram.removeAttribute('data-processed');
+  });
+
+  if (typeof mermaid.run === 'function') {
+    await mermaid.run({ nodes: diagrams });
+    resizeFlowDiagrams(diagrams, components);
+    enableFlowInteractions(diagrams, components);
+    return;
+  }
+
+  mermaid.init(undefined, diagrams);
+  resizeFlowDiagrams(diagrams, components);
+  enableFlowInteractions(diagrams, components);
+}
+
+function render(q) {
+  const lo = (q||'').toLowerCase();
+  const rows = DOCS.filter(d =>
+    !lo ||
+    d[1].toLowerCase().includes(lo) ||
+    d[2].toLowerCase().includes(lo) ||
+    (LAST_USE[d[1]]||'').toLowerCase().includes(lo) ||
+    (TYPES[d[3]]||'').toLowerCase().includes(lo) ||
+    d[3].toLowerCase().includes(lo)
+  );
+  document.getElementById('dbody').innerHTML = rows.map(d => {
+    const obs = d[8] === 'obs' ? '<span class="obs">obsoleto</span>' : '';
+    const lastUse = LAST_USE[d[1]] || '—';
+    return `<tr>
+      <td style="color:var(--muted);font-size:.8rem">${d[0]}</td>
+      <td><strong>${d[1]}</strong></td>
+      <td>${d[2]}${obs}</td>
+      <td><span class="badge t${d[3]}">${TYPES[d[3]]||d[3]}</span></td>
+      <td>${lastUse}</td>
+      <td style="text-align:center">${ck(d[4])}</td>
+      <td style="text-align:center">${ck(d[5])}</td>
+      <td style="text-align:center">${ck(d[6])}</td>
+    </tr>`;
+  }).join('');
+}
+
+render('');
+renderFlowDiagrams().catch(console.error);
+</script>
+
+
+<div class="mermaidTooltip" style="opacity: 0;"></div></body></html>

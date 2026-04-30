@@ -18,3 +18,10 @@
 
 /espiu /Offerte/Espiu/ 301
 /espiu/* /Offerte/Espiu/:splat 200
+
+/tecnostampi /Offerte/Tecnostampi/ 301
+/tecnostampi/* /Offerte/Tecnostampi/:splat 200
+
+/offerte/tecnostampi /Offerte/Tecnostampi/ 301
+/offerte/tecnostampi/* /Offerte/Tecnostampi/:splat 200
+
