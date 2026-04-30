@@ -15,3 +15,6 @@
 
 /atalanta /Offerte/Atalanta/ 301
 /atalanta/* /Offerte/Atalanta/:splat 200
+
+/espiu /Offerte/Espiu/ 301
+/espiu/* /Offerte/Espiu/:splat 200

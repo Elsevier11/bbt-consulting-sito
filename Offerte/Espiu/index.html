@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta Formativa IA | Espiù S.r.l.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #88BF9A;
+      --primary-dark: #6e9e7d;
+      --primary-soft: #e7f2ec;
+      --dark: #242226;
+      --text-muted: #5c5a5e;
+      --bg: #f8faf9;
+      --card-bg: #ffffff;
+      --glass: rgba(255, 255, 255, 0.8);
+      --shadow: 0 20px 40px rgba(36, 34, 38, 0.08);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(136, 191, 154, 0.2);
+      padding: 16px 0;
+    }
+
+    .navbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    .partner-logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .zerobyte-svg {
+      height: 50px;
+      width: auto;
+      filter: drop-shadow(0 4px 8px rgba(0, 51, 153, 0.2));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--primary-soft) 0%, transparent 70%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(136, 191, 154, 0.3);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .hero-lead {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 65ch;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: 2rem;
+      color: var(--primary-dark);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .stat-item span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 70ch;
+    }
+
+    /* Phases Cards */
+    .phases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(136, 191, 154, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(36, 34, 38, 0.12);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-soft);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid #f0f0f0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    /* Labs Section */
+    .labs {
+      background-color: var(--dark);
+      color: white;
+      border-radius: 40px;
+      padding: 80px 60px;
+      margin: 40px 0;
+    }
+
+    .labs h2 {
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+    .labs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .lab-item h4 {
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lab-item h4::before {
+      content: '→';
+      color: var(--primary);
+    }
+
+    .lab-item p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+    }
+
+    /* Deliverables */
+    .deliverables {
+      background: white;
+      border-radius: var(--radius);
+      padding: 60px;
+      box-shadow: var(--shadow);
+    }
+
+    .deliv-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      list-style: none;
+    }
+
+    .deliv-list li {
+      padding: 16px;
+      background: var(--primary-soft);
+      border-radius: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .deliv-list li::before {
+      content: '✓';
+      color: var(--primary-dark);
+      font-weight: 900;
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0;
+      border-top: 1px solid #e0e0e0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 0; }
+      .hero-stats { flex-direction: column; gap: 24px; }
+      .labs { padding: 40px 24px; }
+      .deliverables { padding: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <div class="logo">
+        <img src="logo-2.svg" alt="Espiù Logo">
+      </div>
+      <div class="nav-links">
+        <a href="#visione">Il Percorso</a>
+        <a href="#fasi">Fasi</a>
+        <a href="#laboratori">Laboratori</a>
+        <a href="#risultati">Risultati</a>
+      </div>
+      <div class="partner-logo">
+        <!-- Zerobyte Logo SVG -->
+        <svg class="zerobyte-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0072bc;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#003a70;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <!-- Diamond Background -->
+          <rect x="25" y="25" width="70" height="70" rx="4" transform="rotate(45 60 60)" fill="url(#grad1)" />
+          <!-- White Border Glow -->
+          <rect x="27" y="27" width="66" height="66" rx="2" transform="rotate(45 60 60)" fill="none" stroke="white" stroke-width="0.5" opacity="0.8" />
+          
+          <!-- Barcode Graphic -->
+          <g transform="translate(42, 52) scale(0.5)">
+            <rect x="0" y="0" width="2" height="8" fill="white" />
+            <rect x="4" y="0" width="1" height="8" fill="white" />
+            <rect x="7" y="0" width="3" height="8" fill="white" />
+            <rect x="12" y="0" width="1" height="8" fill="white" />
+            <rect x="15" y="0" width="2" height="8" fill="white" />
+            <rect x="19" y="0" width="4" height="8" fill="white" />
+            <rect x="25" y="0" width="1" height="8" fill="white" />
+            <rect x="28" y="0" width="2" height="8" fill="white" />
+            <rect x="32" y="0" width="3" height="8" fill="white" />
+            <rect x="37" y="0" width="1" height="8" fill="white" />
+          </g>
+          
+          <!-- Zerobyte Text -->
+          <text x="60" y="72" font-family="Arial, sans-serif" font-weight="900" font-size="9" fill="white" text-anchor="middle" letter-spacing="-0.2">zerobyte</text>
+        </svg>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    
+    <section class="hero">
+      <div class="hero-content">
+        <span class="badge">Proposta Formativa — Aprile 2026</span>
+        <h1>L'Intelligenza Artificiale Generativa per <span>Espiù</span></h1>
+        <p class="hero-lead">
+          Un percorso di 18 ore progettato per trasformare il potenziale dell'IA in strumenti concreti per la consulenza energetica, partendo dalle basi fino ai laboratori verticali su documenti e processi reali.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <strong>18</strong>
+            <span>Ore di formazione</span>
+          </div>
+          <div class="stat-item">
+            <strong>3</strong>
+            <span>Aree coinvolte</span>
+          </div>
+          <div class="stat-item">
+            <strong>20-40%</strong>
+            <span>Efficienza stimata</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="visione">
+      <div class="section-title">
+        <h2>Un percorso su misura</h2>
+        <p>Non si tratta di una formazione generica. Abbiamo calibrato ogni modulo sulla dimensione e sulla cultura operativa di Espiù, lavorando con un team multidisciplinare che spazia dal commerciale al tecnico-specialistico.</p>
+      </div>
+      
+      <div class="card">
+        <h3>Visione d'insieme</h3>
+        <p>Il percorso si articola in due momenti distinti e complementari: una base comune per costruire linguaggio e consapevolezza, e laboratori applicativi per tradurre quella consapevolezza in strumenti personalizzati per ciascuna funzione aziendale.</p>
+      </div>
+    </section>
+
+    <section id="fasi">
+      <div class="section-title">
+        <h2>Le tre tappe dell'innovazione</h2>
+      </div>
+      
+      <div class="phases-grid">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Fase 1: Corso Base</h3>
+          <p>Offrire a tutti i collaboratori una base comune su cosa sia davvero l'IA generativa, come si usa in modo efficace e dove può fare la differenza.</p>
+          <div class="card-footer">
+            <span>4 ore</span>
+            <span>Tutto il team</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>Fase 1B: Analisi Esigenze</h3>
+          <p>Il punto di snodo: workshop con i referenti d'area per mappare i processi e definire un piano d'intervento sulle priorità reali di Espiù.</p>
+          <div class="card-footer">
+            <span>Workshop</span>
+            <span>Referenti d'area</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🛠️</div>
+          <h3>Fase 2: Laboratori</h3>
+          <p>Il cuore operativo. Sessioni di lavoro sui documenti reali per creare prompt validati e workflow immediatamente utilizzabili.</p>
+          <div class="card-footer">
+            <span>12+ ore</span>
+            <span>Funzioni specifiche</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="laboratori" class="labs">
+      <h2>Laboratori per funzione specifica</h2>
+      <div class="labs-grid">
+        <div class="lab-item">
+          <h4>Commerciale</h4>
+          <p>Redazione offerte personalizzate, sintesi bandi e capitolati, gestione rapida della corrispondenza e preparazione brief per incontri.</p>
+        </div>
+        <div class="lab-item">
+          <h4>Tecnico-Specialistico</h4>
+          <p>Sintesi normative energetiche (AI Act, Transizione 5.0), audit energetici, relazioni di progetto e documentazione ISO.</p>
+        </div>
+        <div class="lab-item">
+          <h4>Amministrativo</h4>
+          <p>Solleciti di pagamento calibrati, gestione contrattuale, verifica clausole e reportistica interna verso la direzione.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="risultati">
+      <div class="section-title">
+        <h2>Risultati attesi e Deliverable</h2>
+        <p>L'obiettivo finale è l'autonomia del team: i collaboratori non dipenderanno dal formatore, ma sapranno adattare l'IA alle nuove sfide.</p>
+      </div>
+      
+      <div class="deliverables">
+        <h3>Cosa riceverete</h3>
+        <br>
+        <ul class="deliv-list">
+          <li>Slide del corso in PDF</li>
+          <li>Scheda "I prompt per Espiù"</li>
+          <li>Libreria di prompt validati</li>
+          <li>Workflow operativi definiti</li>
+          <li>Guida all'aggiornamento autonomo</li>
+          <li>Report misurazione risultati</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="text-align: center; background: var(--primary-soft); border-radius: var(--radius); padding: 60px;">
+      <h2 style="font-size: 2rem; margin-bottom: 20px;">«La formazione non finisce in aula. Finisce quando il cambiamento è diventato abitudine.»</h2>
+      <p style="color: var(--primary-dark); font-weight: 700;">Pronti a iniziare il viaggio nell'Intelligenza Artificiale?</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Zerobyte S.r.l. - Proposta riservata</p>
+      <p>www.zerobytesrl.it</p>
+    </div>
+  </footer>
+
+</body>
+</html>
