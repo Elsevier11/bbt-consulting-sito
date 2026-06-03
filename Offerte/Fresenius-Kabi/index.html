@@ -6,63 +6,63 @@
   <title>Copilot in Microsoft 365 | Fresenius Kabi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #e8eff8;
-      --paper: rgba(255, 255, 255, 0.92);
+      --paper: rgba(255, 255, 255, 0.94);
       --ink: #0c2863;
       --muted: #52606d;
       --accent: #0073dd;
       --accent-dark: #0063be;
       --accent-soft: #c8ddf5;
       --line: rgba(12, 40, 99, 0.12);
-      --shadow: 0 24px 60px rgba(12, 40, 99, 0.14);
+      --shadow-sm: 0 1px 3px rgba(12,40,99,.05), 0 4px 12px rgba(12,40,99,.07);
+      --shadow-md: 0 2px 8px rgba(12,40,99,.04), 0 12px 32px rgba(12,40,99,.09), inset 0 1px 0 rgba(255,255,255,.9);
+      --shadow-lg: 0 4px 16px rgba(12,40,99,.06), 0 32px 64px rgba(12,40,99,.11), inset 0 1px 0 rgba(255,255,255,.9);
       --radius: 28px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: "Albert Sans", "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(0, 115, 221, 0.10), transparent 32%),
-        radial-gradient(circle at top right, rgba(12, 40, 99, 0.10), transparent 26%),
+        radial-gradient(ellipse 65% 45% at top left, rgba(0,115,221,.11), transparent),
+        radial-gradient(ellipse 55% 38% at top right, rgba(12,40,99,.09), transparent),
         linear-gradient(180deg, #f0f5fb 0%, #e8eff8 100%);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    h1, h2, h3, .eyebrow {
-      font-family: Georgia, "Times New Roman", serif;
-      letter-spacing: 0.01em;
-    }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .shell {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
     }
 
+    /* ── TOPBAR ── */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 10;
-      backdrop-filter: blur(18px);
-      background: rgba(240, 245, 251, 0.82);
-      border-bottom: 1px solid rgba(12, 40, 99, 0.08);
-      box-shadow: inset 0 -3px 0 rgba(0, 115, 221, 0.20);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      background: rgba(240, 245, 251, 0.86);
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 25%, var(--accent-dark) 75%, transparent 100%);
+      opacity: 0.45;
     }
 
     .topbar-inner {
@@ -73,11 +73,7 @@
       padding: 14px 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .brand { display: flex; align-items: center; }
 
     .brand-logo {
       display: flex;
@@ -86,7 +82,7 @@
       overflow: hidden;
       background: #fff;
       padding: 8px 14px;
-      box-shadow: 0 4px 16px rgba(12, 40, 99, 0.10);
+      box-shadow: var(--shadow-sm);
     }
 
     .brand-logo img {
@@ -114,40 +110,29 @@
     .nav a::after {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -2px;
+      left: 0; right: 0; bottom: -2px;
       height: 2px;
       border-radius: 999px;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
       transform: scaleX(0);
       transform-origin: center;
-      transition: transform 180ms ease;
+      transition: transform 200ms ease;
     }
 
-    .nav a:hover {
-      color: var(--ink);
-    }
+    .nav a:hover { color: var(--ink); }
+    .nav a:hover::after { transform: scaleX(1); }
 
-    .nav a:hover::after {
-      transform: scaleX(1);
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
+    .topbar-right { display: flex; align-items: center; justify-content: flex-end; }
 
     .partner-logo {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 58px;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 18px;
-      background: linear-gradient(135deg, #0c2863, #1a3d7a);
-      box-shadow: 0 16px 28px rgba(12, 40, 99, 0.22);
+      background: linear-gradient(145deg, #0c2863, #163566);
+      box-shadow: 0 8px 24px rgba(12,40,99,.26), 0 2px 8px rgba(12,40,99,.14), inset 0 1px 0 rgba(255,255,255,.1);
     }
 
     .partner-logo img {
@@ -157,9 +142,18 @@
       max-width: min(100%, 180px);
     }
 
-    .hero {
-      padding: 72px 0 40px;
+    /* ── CARD — gradient border ── */
+    .card {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      background:
+        linear-gradient(var(--paper), var(--paper)) padding-box,
+        linear-gradient(145deg, rgba(255,255,255,.95) 0%, rgba(0,115,221,.16) 50%, rgba(255,255,255,.55) 100%) border-box;
+      border: 1px solid transparent;
     }
+
+    /* ── HERO ── */
+    .hero { padding: 72px 0 44px; }
 
     .hero-grid {
       display: grid;
@@ -168,107 +162,110 @@
       align-items: stretch;
     }
 
-    .card {
-      background: var(--paper);
-      border: 1px solid rgba(255, 255, 255, 0.72);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
     .hero-copy {
-      padding: 42px;
+      padding: 48px;
       position: relative;
       overflow: hidden;
     }
 
-    /* Motivo righe verticali ispirato al logo FK */
-    .hero-copy::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 115, 221, 0.08), transparent 70%);
-      pointer-events: none;
-    }
-
+    /* FK vertical stripe motif — full-height */
     .hero-copy::before {
       content: "";
       position: absolute;
-      right: 28px;
-      top: 28px;
-      width: 80px;
-      height: 80px;
+      right: 0; top: 0; bottom: 0;
+      width: 200px;
       background: repeating-linear-gradient(
         90deg,
-        rgba(0, 115, 221, 0.12) 0px,
-        rgba(0, 115, 221, 0.12) 4px,
-        transparent 4px,
-        transparent 12px
+        rgba(0,115,221,.055) 0px,
+        rgba(0,115,221,.055) 5px,
+        transparent 5px,
+        transparent 18px
       );
-      border-radius: 8px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.75) 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.75) 100%);
+      pointer-events: none;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      right: 0; bottom: 0;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,115,221,.07), transparent 65%);
       pointer-events: none;
     }
 
     .eyebrow {
-      margin: 0 0 14px;
-      font-size: 0.9rem;
+      margin: 0 0 16px;
+      font-size: 0.78rem;
       text-transform: uppercase;
+      letter-spacing: 0.14em;
       color: var(--accent);
+      font-family: "Albert Sans", sans-serif;
+      font-weight: 600;
     }
 
     h1 {
       margin: 0;
       font-size: clamp(2.3rem, 4.6vw, 4.45rem);
-      line-height: 0.98;
-      letter-spacing: -0.02em;
+      line-height: 0.97;
+      letter-spacing: -0.025em;
       text-wrap: balance;
     }
 
     .lead {
-      max-width: 58ch;
-      margin: 22px 0 28px;
-      font-size: 1.08rem;
+      max-width: 56ch;
+      margin: 20px 0 30px;
+      font-size: 1.06rem;
+      font-weight: 300;
       color: var(--muted);
+      line-height: 1.72;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 48px;
-      padding: 0 20px;
+      padding: 0 24px;
       border-radius: 999px;
       font-weight: 600;
       font-family: "Albert Sans", "Segoe UI", sans-serif;
-      font-size: 0.96rem;
+      font-size: 0.94rem;
       border: 1px solid transparent;
-      transition: opacity 160ms ease;
-    }
-
-    .button:hover {
-      opacity: 0.88;
     }
 
     .button.primary {
       color: #fff;
       background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      box-shadow: 0 4px 14px rgba(0,115,221,.32), 0 1px 4px rgba(0,115,221,.16);
+      transition: box-shadow 200ms ease, transform 150ms ease;
+    }
+
+    .button.primary:hover {
+      box-shadow: 0 8px 24px rgba(0,115,221,.42), 0 2px 8px rgba(0,115,221,.22);
+      transform: translateY(-1px);
     }
 
     .button.secondary {
       color: var(--ink);
-      background: rgba(255, 255, 255, 0.6);
-      border-color: rgba(12, 40, 99, 0.14);
+      background: rgba(255,255,255,.65);
+      border-color: rgba(12,40,99,.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 180ms ease, transform 150ms ease, box-shadow 150ms ease;
     }
 
+    .button.secondary:hover {
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 4px 12px rgba(12,40,99,.10);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO PANEL ── */
     .hero-panel {
       padding: 28px;
       display: grid;
@@ -277,36 +274,51 @@
     }
 
     .stat {
-      padding: 18px 20px;
-      border-radius: 22px;
-      background: rgba(0, 115, 221, 0.06);
-      border: 1px solid rgba(0, 115, 221, 0.10);
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: rgba(0,115,221,.05);
+      border: 1px solid rgba(0,115,221,.12);
     }
 
-    .stat strong {
+    .stat-num {
       display: block;
-      font-size: 1.8rem;
+      font-size: 2.4rem;
       line-height: 1;
+      margin-bottom: 4px;
+      font-family: Georgia, serif;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-title {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
       margin-bottom: 6px;
-      font-family: Georgia, "Times New Roman", serif;
     }
 
-    .grid-3,
-    .grid-2 {
-      display: grid;
-      gap: 22px;
+    .stat-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.5;
     }
 
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    /* ── GRIDS ── */
+    .grid-3, .grid-2 { display: grid; gap: 22px; }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    /* ── SECTIONS ── */
+    section { padding: 24px 0 42px; }
 
-    section {
-      padding: 18px 0 34px;
+    section.tinted {
+      background: rgba(0,115,221,.028);
+      border-radius: 24px;
+      padding-top: 36px;
+      padding-bottom: 50px;
     }
 
     .section-head {
@@ -314,27 +326,32 @@
       justify-content: space-between;
       gap: 24px;
       align-items: end;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
     }
 
     .section-head h2 {
       margin: 0;
       font-size: clamp(1.8rem, 3vw, 3rem);
+      letter-spacing: -0.018em;
     }
 
     .section-head p {
-      max-width: 56ch;
+      max-width: 52ch;
       margin: 0;
       color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
     }
 
+    /* ── FEATURE / OFFICE / SHARED ── */
     .feature,
     .timeline-item,
     .office,
     .conformita-card,
     .cta {
-      padding: 26px;
+      padding: 28px 28px 28px 34px;
       position: relative;
+      overflow: hidden;
     }
 
     .feature::before,
@@ -342,107 +359,157 @@
     .office::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 20px;
-      bottom: 20px;
+      left: 0; top: 18px; bottom: 18px;
       width: 4px;
       border-radius: 999px;
-      background: linear-gradient(180deg, var(--accent), rgba(0, 115, 221, 0.14));
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(0,115,221,.10) 100%);
+    }
+
+    /* Watermark number */
+    .feature[data-n]::after,
+    .office[data-n]::after {
+      content: attr(data-n);
+      position: absolute;
+      right: 14px;
+      bottom: -10px;
+      font-size: 6.5rem;
+      font-weight: 700;
+      font-family: Georgia, serif;
+      color: rgba(0,115,221,.052);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
     }
 
     .feature h3,
     .timeline-item h3,
     .office h3,
-    .conformita h3,
     .cta h2 {
       margin-top: 0;
       margin-bottom: 10px;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
     }
 
     .feature p,
     .timeline-item p,
     .office p,
-    .conformita p,
+    .conformita-card p,
     li {
       color: var(--muted);
+      font-weight: 400;
     }
 
-    ul {
-      margin: 14px 0 0;
-      padding-left: 18px;
-    }
+    ul { margin: 14px 0 0; padding-left: 18px; }
+    li { margin-bottom: 5px; }
 
-    .timeline {
-      display: grid;
-      gap: 18px;
-    }
+    /* ── TIMELINE ── */
+    .timeline { display: grid; gap: 16px; }
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 160px 1fr;
+      grid-template-columns: 176px 1fr;
       gap: 20px;
       align-items: start;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding-top: 2px;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: "Albert Sans", sans-serif;
+      flex-shrink: 0;
+    }
+
+    .step-badge.break-badge {
+      background: rgba(0,115,221,.15);
+      color: var(--accent);
     }
 
     .time {
       font-weight: 600;
       color: var(--accent);
-      font-size: 0.92rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      font-size: 0.86rem;
+      letter-spacing: 0.03em;
+      font-family: "Albert Sans", sans-serif;
+      line-height: 1.3;
     }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
+    /* ── TAGS ── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 
     .tag {
-      padding: 8px 12px;
+      padding: 7px 14px;
       border-radius: 999px;
       background: var(--accent-soft);
       color: var(--accent-dark);
-      font-size: 0.84rem;
+      font-size: 0.81rem;
       font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
+    /* ── CONFORMITÀ ── */
     .conformita-card {
-      background:
-        linear-gradient(145deg, rgba(12, 40, 99, 0.96), rgba(18, 55, 130, 0.92)),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+      background: linear-gradient(150deg, #0d2f6e 0%, #0c2863 55%, #111e4a 100%);
       color: #f0f5fb;
+      box-shadow: 0 8px 32px rgba(12,40,99,.32), 0 32px 64px rgba(12,40,99,.18);
+      border: 1px solid rgba(255,255,255,.08);
     }
 
     .conformita-card p,
-    .conformita-card li {
-      color: rgba(240, 245, 251, 0.82);
+    .conformita-card li { color: rgba(240,245,251,.82); }
+
+    /* ── NOTE BOX ── */
+    .note-box {
+      margin-top: 24px;
+      padding: 18px 22px 18px 28px;
+      border-radius: 16px;
+      background: rgba(0,115,221,.05);
+      border: 1px solid rgba(0,115,221,.14);
+      font-size: 0.93rem;
+      color: var(--muted);
+      position: relative;
+      font-weight: 400;
     }
 
-    .note-box {
-      margin-top: 22px;
-      padding: 18px 22px;
-      border-radius: 16px;
-      background: rgba(0, 115, 221, 0.06);
-      border: 1px solid rgba(0, 115, 221, 0.14);
-      font-size: 0.94rem;
-      color: var(--muted);
+    .note-box::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 14px; bottom: 14px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(0,115,221,.16) 100%);
     }
 
     .note-box strong {
       color: var(--ink);
       display: block;
       margin-bottom: 6px;
+      font-weight: 600;
     }
 
+    /* ── CTA ── */
     .cta {
+      background: linear-gradient(145deg, rgba(0,115,221,.08) 0%, rgba(12,40,99,.05) 100%);
+      margin-bottom: 56px;
       display: grid;
       gap: 16px;
-      background: linear-gradient(135deg, rgba(0, 115, 221, 0.10), rgba(12, 40, 99, 0.07));
-      margin-bottom: 56px;
     }
 
+    /* ── SEDI ── */
     .sedi-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -451,114 +518,109 @@
     }
 
     .sede-card {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(0, 115, 221, 0.05);
-      border: 1px solid rgba(0, 115, 221, 0.12);
+      padding: 18px 14px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,115,221,.12);
       text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .sede-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .sede-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .sede-badge.presenza {
+      background: rgba(0,115,221,.10);
+      color: var(--accent-dark);
+    }
+
+    .sede-badge.remoto-lbl {
+      background: rgba(12,40,99,.10);
+      color: var(--ink);
     }
 
     .sede-card .sede-nome {
       font-weight: 600;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: var(--ink);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .sede-card .sede-num {
-      font-size: 1.4rem;
+      font-size: 1.9rem;
       font-family: Georgia, serif;
       color: var(--accent);
       font-weight: 700;
       line-height: 1;
+      letter-spacing: -0.03em;
     }
 
     .sede-card .sede-label {
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: var(--muted);
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .sede-card.remoto {
-      background: rgba(12, 40, 99, 0.05);
-      border-color: rgba(12, 40, 99, 0.14);
+      background: rgba(12,40,99,.04);
+      border-color: rgba(12,40,99,.14);
     }
 
+    /* ── FOOTER ── */
     .footer {
-      padding: 0 0 36px;
+      padding: 0 0 40px;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
+      opacity: 0.75;
     }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 980px) {
-      .hero-grid,
-      .grid-3,
-      .grid-2,
-      .timeline-item {
+      .hero-grid, .grid-3, .grid-2, .timeline-item {
         grid-template-columns: 1fr;
       }
 
-      .sedi-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
-      }
+      .sedi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .section-head { align-items: start; flex-direction: column; }
 
       .hero-copy,
       .hero-panel,
       .feature,
       .timeline-item,
       .office,
-      .conformita,
+      .conformita-card,
       .cta {
-        padding: 22px;
+        padding: 24px 24px 24px 30px;
       }
+
+      section.tinted { margin: 0; padding-left: 0; padding-right: 0; }
     }
 
     @media (max-width: 640px) {
-      .topbar-inner {
-        align-items: start;
-        flex-direction: column;
-        display: flex;
-      }
-
-      .topbar-right {
-        width: 100%;
-        align-items: flex-start;
-        justify-content: flex-end;
-      }
-
-      .nav {
-        justify-content: flex-start;
-      }
-
-      .brand-logo img {
-        height: 30px;
-      }
-
-      .partner-logo {
-        min-height: 52px;
-      }
-
-      .partner-logo img {
-        height: 30px;
-      }
-
-      .hero {
-        padding-top: 36px;
-      }
-
-      h1 {
-        font-size: clamp(2.1rem, 9vw, 3.4rem);
-        line-height: 1;
-      }
-
-      .sedi-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .topbar-inner { align-items: start; flex-direction: column; display: flex; }
+      .topbar-right { width: 100%; justify-content: flex-end; }
+      .nav { justify-content: flex-start; }
+      .brand-logo img { height: 30px; }
+      .partner-logo { min-height: 52px; }
+      .partner-logo img { height: 30px; }
+      .hero { padding-top: 36px; }
+      h1 { font-size: clamp(2.1rem, 9vw, 3.4rem); line-height: 1; }
+      .sedi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature[data-n]::after, .office[data-n]::after { font-size: 4.5rem; }
     }
   </style>
 </head>
@@ -609,22 +671,24 @@
 
         <aside class="card hero-panel">
           <div class="stat">
-            <strong>~580 persone coinvolte</strong>
-            Verona, Isola della Scala, Mirandola, Villadose e la forza vendita/assistenza tecnica da remoto.
+            <span class="stat-num">~580</span>
+            <span class="stat-title">persone coinvolte</span>
+            <span class="stat-desc">Verona, Isola della Scala, Mirandola, Villadose e la forza vendita/assistenza tecnica da remoto.</span>
           </div>
           <div class="stat">
-            <strong>10 sessioni in totale</strong>
-            Due turni per ciascuna sede &mdash; mattina e pomeriggio &mdash; per consentire a tutti di partecipare.
+            <span class="stat-num">10</span>
+            <span class="stat-title">sessioni in totale</span>
+            <span class="stat-desc">Due turni per ciascuna sede &mdash; mattina e pomeriggio &mdash; per consentire a tutti di partecipare.</span>
           </div>
           <div class="stat">
-            <strong>Applicazione immediata</strong>
-            Ogni sessione lavora su scenari concreti, adattati alla tipologia di funzione aziendale.
+            <span class="stat-title">Applicazione immediata</span>
+            <span class="stat-desc">Ogni sessione lavora su scenari concreti, adattati alla tipologia di funzione aziendale.</span>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="sedi">
+    <section id="sedi" class="tinted">
       <div class="section-head">
         <div>
           <p class="eyebrow">Copertura territoriale</p>
@@ -637,29 +701,34 @@
       </div>
       <div class="sedi-grid">
         <div class="sede-card">
+          <div class="sede-badge presenza">In presenza</div>
           <div class="sede-nome">Verona</div>
           <div class="sede-num">~120</div>
           <div class="sede-label">persone</div>
         </div>
         <div class="sede-card">
+          <div class="sede-badge presenza">In presenza</div>
           <div class="sede-nome">Isola della Scala</div>
           <div class="sede-num">~100</div>
           <div class="sede-label">persone &mdash; VR</div>
         </div>
         <div class="sede-card">
+          <div class="sede-badge presenza">In presenza</div>
           <div class="sede-nome">Mirandola</div>
           <div class="sede-num">~100</div>
           <div class="sede-label">persone</div>
         </div>
         <div class="sede-card">
+          <div class="sede-badge presenza">In presenza</div>
           <div class="sede-nome">Villadose</div>
           <div class="sede-num">~200</div>
           <div class="sede-label">persone &mdash; RO</div>
         </div>
         <div class="sede-card remoto">
+          <div class="sede-badge remoto-lbl">Remoto</div>
           <div class="sede-nome">Forza vendita</div>
           <div class="sede-num">~60</div>
-          <div class="sede-label">remoto</div>
+          <div class="sede-label">assistenza tecnica</div>
         </div>
       </div>
     </section>
@@ -677,7 +746,7 @@
         </p>
       </div>
       <div class="grid-3">
-        <article class="card feature">
+        <article class="card feature" data-n="1">
           <h3>Linguaggio condiviso tra funzioni</h3>
           <p>La sessione comune allinea tutta l&rsquo;organizzazione su metodo, opportunit&agrave; e limiti di Copilot, indipendentemente dal ruolo o dalla sede.</p>
           <ul>
@@ -686,7 +755,7 @@
             <li>Maggiore consapevolezza operativa</li>
           </ul>
         </article>
-        <article class="card feature">
+        <article class="card feature" data-n="2">
           <h3>Applicazione ai processi aziendali</h3>
           <p>Le mezze giornate verticali portano Copilot nei flussi reali di ciascuna area, con esempi costruiti su scenari riconoscibili dal settore healthcare e farmaceutico.</p>
           <ul>
@@ -695,7 +764,7 @@
             <li>Valore percepito immediato</li>
           </ul>
         </article>
-        <article class="card feature">
+        <article class="card feature" data-n="3">
           <h3>Innovazione con controllo e conformit&agrave;</h3>
           <p>Il percorso mantiene un equilibrio tra efficienza e correttezza, con attenzione specifica alla gestione dei dati sensibili in un contesto regolamentato.</p>
           <ul>
@@ -707,7 +776,7 @@
       </div>
     </section>
 
-    <section id="programma">
+    <section id="programma" class="tinted">
       <div class="section-head">
         <div>
           <p class="eyebrow">Fase 1 &mdash; Sessione generale</p>
@@ -721,49 +790,70 @@
       </div>
       <div class="timeline">
         <article class="card timeline-item">
-          <div class="time">09:00 &ndash; 09:20</div>
+          <div class="time-block">
+            <div class="step-badge">1</div>
+            <div class="time">09:00 &ndash; 09:20</div>
+          </div>
           <div>
             <h3>Introduzione all&rsquo;AI generativa e a Copilot</h3>
             <p>Cos&rsquo;&egrave; Copilot, come funziona e quali sono le caratteristiche della versione inclusa nel piano Microsoft 365. Opportunit&agrave; e limiti nel contesto aziendale.</p>
           </div>
         </article>
         <article class="card timeline-item">
-          <div class="time">09:20 &ndash; 10:00</div>
+          <div class="time-block">
+            <div class="step-badge">2</div>
+            <div class="time">09:20 &ndash; 10:00</div>
+          </div>
           <div>
             <h3>Il flusso operativo di base</h3>
             <p>Interazione via testo, caricamento documenti in chat, sintesi di report, bozze di comunicazioni interne ed e-mail. Confronto tra testi e creazione di riepiloghi strutturati.</p>
           </div>
         </article>
         <article class="card timeline-item">
-          <div class="time">10:00 &ndash; 10:30</div>
+          <div class="time-block">
+            <div class="step-badge">3</div>
+            <div class="time">10:00 &ndash; 10:30</div>
+          </div>
           <div>
             <h3>Copilot con i documenti aziendali</h3>
             <p>Come lavorare tramite upload e chat con procedure Word, tabelle Excel e presentazioni: riscrittura, analisi dati, estrazione di punti chiave e preparazione di sintesi operative.</p>
           </div>
         </article>
         <article class="card timeline-item">
-          <div class="time">10:30 &ndash; 10:45</div>
+          <div class="time-block">
+            <div class="step-badge break-badge">&mdash;</div>
+            <div class="time">10:30 &ndash; 10:45</div>
+          </div>
           <div>
             <h3>Intervallo</h3>
-            <p style="font-style: italic; font-size: 0.94rem;">&mdash;</p>
+            <p style="font-style:italic; font-size:0.93rem;">&mdash;</p>
           </div>
         </article>
         <article class="card timeline-item">
-          <div class="time">10:45 &ndash; 11:20</div>
+          <div class="time-block">
+            <div class="step-badge">4</div>
+            <div class="time">10:45 &ndash; 11:20</div>
+          </div>
           <div>
             <h3>Prompt engineering per il settore healthcare</h3>
             <p>Metodo CLEAR applicato a contesti aziendali farmaceutici e healthcare: prompt pronti per report, procedure, mail formali, analisi di dati e comunicazioni interne.</p>
           </div>
         </article>
         <article class="card timeline-item">
-          <div class="time">11:20 &ndash; 11:50</div>
+          <div class="time-block">
+            <div class="step-badge">5</div>
+            <div class="time">11:20 &ndash; 11:50</div>
+          </div>
           <div>
             <h3>Panoramica scenari per area aziendale</h3>
             <p>Una sintesi ragionata dei casi d&rsquo;uso pi&ugrave; rilevanti per ciascuna funzione &mdash; Amministrazione, Marketing, Vendite, Controllo di Gestione &mdash; per preparare il passaggio ai percorsi verticali.</p>
           </div>
         </article>
         <article class="card timeline-item">
-          <div class="time">11:50 &ndash; 12:00</div>
+          <div class="time-block">
+            <div class="step-badge">6</div>
+            <div class="time">11:50 &ndash; 12:00</div>
+          </div>
           <div>
             <h3>Sicurezza, GDPR e Q&amp;A</h3>
             <p>Perimetro di accesso ai dati, assenza di training sui contenuti aziendali, gestione dei dati sensibili e verifica umana obbligatoria. Domande e chiusura.</p>
@@ -789,7 +879,7 @@
         </p>
       </div>
       <div class="grid-2">
-        <article class="card office">
+        <article class="card office" data-n="1">
           <h3>1. Amministrazione e gestione documentale</h3>
           <p>Un modulo dedicato alla redazione, revisione e organizzazione di documentazione interna: contratti, circolari, verbali, corrispondenza formale e reportistica amministrativa.</p>
           <ul>
@@ -798,7 +888,7 @@
             <li>Uniformazione del linguaggio formale interno</li>
           </ul>
         </article>
-        <article class="card office">
+        <article class="card office" data-n="2">
           <h3>2. Marketing e comunicazione</h3>
           <p>Un approfondimento su come Copilot supporta la produzione di contenuti, la preparazione di materiali promozionali e la gestione delle comunicazioni corporate e di prodotto.</p>
           <ul>
@@ -807,7 +897,7 @@
             <li>Revisione e declinazione dei messaggi chiave</li>
           </ul>
         </article>
-        <article class="card office">
+        <article class="card office" data-n="3">
           <h3>3. Vendite e supporto commerciale</h3>
           <p>Una sessione pensata per la forza vendita e il supporto commerciale: gestione delle offerte, preparazione di presentazioni cliente, follow-up e sintesi delle attivit&agrave; sul campo.</p>
           <ul>
@@ -816,7 +906,7 @@
             <li>Reportistica commerciale e CRM narrativo</li>
           </ul>
         </article>
-        <article class="card office">
+        <article class="card office" data-n="4">
           <h3>4. Controllo di gestione e analisi dati</h3>
           <p>Un modulo focalizzato sull&rsquo;uso di Copilot per commentare dati, produrre report direzionali e supportare la lettura di tabelle Excel e dashboard con linguaggio naturale.</p>
           <ul>
@@ -826,7 +916,6 @@
           </ul>
         </article>
       </div>
-
       <div class="note-box">
         <strong>Percorsi specialistici per le funzioni farmaceutiche</strong>
         Per le funzioni pi&ugrave; regolamentate &mdash; Regulatory Affairs, Quality Assurance, Medical Affairs, Pharmacovigilance &mdash; si potranno individuare percorsi verticali dedicati, con contenuti calibrati sulle specificit&agrave; del settore. Modalit&agrave;, argomenti e tempistiche vengono definiti congiuntamente con il cliente.
@@ -835,9 +924,9 @@
 
     <section id="conformita">
       <article class="card conformita-card">
-        <p class="eyebrow" style="color: #90bfef;">Sicurezza e affidabilit&agrave;</p>
+        <p class="eyebrow" style="color:#90bfef;">Sicurezza e affidabilit&agrave;</p>
         <h2>Una proposta credibile anche sotto il profilo della conformit&agrave;</h2>
-        <div class="grid-2">
+        <div class="grid-2" style="margin-top:22px;">
           <div>
             <p>
               Il modulo dedicato a sicurezza e privacy &egrave; uno dei passaggi fondanti della sessione:
@@ -863,7 +952,7 @@
       </article>
     </section>
 
-    <section id="materiali">
+    <section id="materiali" class="tinted">
       <div class="section-head">
         <div>
           <p class="eyebrow">Materiali consegnati</p>
@@ -876,11 +965,11 @@
         </p>
       </div>
       <div class="grid-2">
-        <article class="card office">
+        <article class="card office" data-n="1">
           <h3>Slide della sessione in formato PDF</h3>
           <p>Un supporto ordinato e consultabile per riprendere i contenuti principali, le logiche d&rsquo;uso di Copilot e i punti metodologici emersi durante la formazione.</p>
         </article>
-        <article class="card office">
+        <article class="card office" data-n="2">
           <h3>Scheda &ldquo;I prompt essenziali per il settore Healthcare&rdquo;</h3>
           <p>Una sintesi operativa di una pagina, pronta all&rsquo;uso, con esempi pratici e formulazioni utili per impostare richieste pi&ugrave; efficaci nei contesti di lavoro di Fresenius Kabi.</p>
         </article>
