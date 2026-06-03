@@ -407,45 +407,27 @@
     .timeline { display: grid; gap: 16px; }
 
     .timeline-item {
-      display: grid;
-      grid-template-columns: 176px 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .time-block {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      padding-top: 2px;
+      display: block;
     }
 
     .step-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px; height: 26px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       background: var(--accent);
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 700;
       font-family: "Albert Sans", sans-serif;
-      flex-shrink: 0;
+      margin-bottom: 12px;
     }
 
     .step-badge.break-badge {
       background: rgba(0,115,221,.15);
       color: var(--accent);
-    }
-
-    .time {
-      font-weight: 600;
-      color: var(--accent);
-      font-size: 0.86rem;
-      letter-spacing: 0.03em;
-      font-family: "Albert Sans", sans-serif;
-      line-height: 1.3;
+      font-size: 0.9rem;
     }
 
     /* ── TAGS ── */
@@ -460,6 +442,16 @@
       font-weight: 600;
       letter-spacing: 0.01em;
     }
+
+    .break-item {
+      background: rgba(0,115,221,.03);
+      box-shadow: none;
+      border: 1px dashed rgba(0,115,221,.18);
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    .break-item::before { display: none; }
 
     /* ── CONFORMITÀ ── */
     .conformita-card {
@@ -590,7 +582,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 980px) {
-      .hero-grid, .grid-3, .grid-2, .timeline-item {
+      .hero-grid, .grid-3, .grid-2 {
         grid-template-columns: 1fr;
       }
 
@@ -783,86 +775,52 @@
           <h2>Tre ore, due turni, cinque sedi</h2>
         </div>
         <p>
-          La prima fase &egrave; una sessione compatta da tre ore (pausa inclusa), con taglio pratico e orientato
+          Una sessione compatta da tre ore (pausa inclusa), con taglio pratico e orientato
           all&rsquo;uso immediato. Viene replicata due volte nella stessa giornata &mdash; un turno al mattino
           e uno al pomeriggio &mdash; per permettere a tutti di partecipare.
         </p>
       </div>
       <div class="timeline">
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge">1</div>
-            <div class="time">09:00 &ndash; 09:20</div>
-          </div>
-          <div>
-            <h3>Introduzione all&rsquo;AI generativa e a Copilot</h3>
-            <p>Cos&rsquo;&egrave; Copilot, come funziona e quali sono le caratteristiche della versione inclusa nel piano Microsoft 365. Opportunit&agrave; e limiti nel contesto aziendale.</p>
-          </div>
+        <article class="card timeline-item" data-n="1">
+          <div class="step-badge">1</div>
+          <h3>Capire Copilot</h3>
+          <p>Un&rsquo;introduzione diretta a cos&rsquo;&egrave; Copilot, come funziona e cosa ci si pu&ograve; realisticamente aspettare dalla versione inclusa in Microsoft 365. Vengono affrontati subito i temi di sicurezza e privacy: perimetro di accesso ai dati, assenza di training sui contenuti aziendali, conformit&agrave; GDPR e gestione corretta delle informazioni sensibili nel settore farmaceutico.</p>
+          <ul>
+            <li>Funzionamento e limiti della versione M365</li>
+            <li>Cosa Copilot vede e non vede dei tuoi dati</li>
+            <li>GDPR e dati sensibili: come usarlo correttamente</li>
+            <li>Verifica umana: perch&eacute; rimane sempre necessaria</li>
+          </ul>
         </article>
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge">2</div>
-            <div class="time">09:20 &ndash; 10:00</div>
-          </div>
-          <div>
-            <h3>Il flusso operativo di base</h3>
-            <p>Interazione via testo, caricamento documenti in chat, sintesi di report, bozze di comunicazioni interne ed e-mail. Confronto tra testi e creazione di riepiloghi strutturati.</p>
-          </div>
+        <article class="card timeline-item" data-n="2">
+          <div class="step-badge">2</div>
+          <h3>Usare Copilot con i documenti aziendali</h3>
+          <p>La parte centrale della sessione: il flusso concreto di upload-e-chat applicato ai file che si usano ogni giorno. Tre esempi pratici mostrano come lo stesso metodo funzioni su tipologie di documento diverse.</p>
+          <ul>
+            <li><strong>Word</strong> &mdash; sintesi di testi lunghi, riscrittura, bozze di comunicazioni formali</li>
+            <li><strong>Excel</strong> &mdash; lettura e commento di tabelle, interpretazione di reportistica, estrazione di punti chiave</li>
+            <li><strong>PowerPoint</strong> &mdash; estrazione dei contenuti principali, preparazione di briefing e note di sintesi</li>
+          </ul>
         </article>
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge">3</div>
-            <div class="time">10:00 &ndash; 10:30</div>
-          </div>
-          <div>
-            <h3>Copilot con i documenti aziendali</h3>
-            <p>Come lavorare tramite upload e chat con procedure Word, tabelle Excel e presentazioni: riscrittura, analisi dati, estrazione di punti chiave e preparazione di sintesi operative.</p>
-          </div>
+        <article class="card timeline-item break-item">
+          <div class="step-badge break-badge">&#9654;</div>
+          <h3 style="color:var(--muted); font-style:italic; font-size:1rem; font-weight:400;">Pausa</h3>
         </article>
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge break-badge">&mdash;</div>
-            <div class="time">10:30 &ndash; 10:45</div>
-          </div>
-          <div>
-            <h3>Intervallo</h3>
-            <p style="font-style:italic; font-size:0.93rem;">&mdash;</p>
-          </div>
-        </article>
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge">4</div>
-            <div class="time">10:45 &ndash; 11:20</div>
-          </div>
-          <div>
-            <h3>Prompt engineering per il settore healthcare</h3>
-            <p>Metodo CLEAR applicato a contesti aziendali farmaceutici e healthcare: prompt pronti per report, procedure, mail formali, analisi di dati e comunicazioni interne.</p>
-          </div>
-        </article>
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge">5</div>
-            <div class="time">11:20 &ndash; 11:50</div>
-          </div>
-          <div>
-            <h3>Panoramica scenari per area aziendale</h3>
-            <p>Una sintesi ragionata dei casi d&rsquo;uso pi&ugrave; rilevanti per ciascuna funzione &mdash; Amministrazione, Marketing, Vendite, Controllo di Gestione &mdash; per preparare il passaggio ai percorsi verticali.</p>
-          </div>
-        </article>
-        <article class="card timeline-item">
-          <div class="time-block">
-            <div class="step-badge">6</div>
-            <div class="time">11:50 &ndash; 12:00</div>
-          </div>
-          <div>
-            <h3>Sicurezza, GDPR e Q&amp;A</h3>
-            <p>Perimetro di accesso ai dati, assenza di training sui contenuti aziendali, gestione dei dati sensibili e verifica umana obbligatoria. Domande e chiusura.</p>
-          </div>
+        <article class="card timeline-item" data-n="3">
+          <div class="step-badge">3</div>
+          <h3>Fare le domande giuste</h3>
+          <p>Un modulo pratico sul metodo per costruire richieste efficaci: pochi principi chiari, applicati direttamente ai contesti lavorativi dei partecipanti. La sessione si chiude con domande aperte e confronto su casi concreti.</p>
+          <ul>
+            <li>Struttura di un buon prompt: contesto, istruzione, formato atteso</li>
+            <li>Esempi pronti all&rsquo;uso per i principali scenari aziendali</li>
+            <li>Errori comuni e come evitarli</li>
+            <li>Domande, casi portati dai partecipanti e chiusura</li>
+          </ul>
         </article>
       </div>
       <div class="note-box">
         <strong>Turno pomeridiano</strong>
-        Lo stesso programma viene replicato nel pomeriggio (es. 14:00&ndash;17:00) in ciascuna sede, consentendo ai partecipanti di dividersi in due gruppi e garantendo la copertura di tutta la popolazione aziendale.
+        Lo stesso programma viene replicato nel pomeriggio in ciascuna sede, consentendo ai partecipanti di dividersi in due gruppi e garantendo la copertura di tutta la popolazione aziendale.
       </div>
     </section>
 
