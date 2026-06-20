@@ -12,3 +12,27 @@ from = "/offerte/atalanta/*"
 to = "/Offerte/Atalanta/:splat"
 status = 200
 force = true
+
+[[redirects]]
+from = "/fresenius1"
+to = "/Offerte/Fresenius1/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/fresenius1/*"
+to = "/Offerte/Fresenius1/:splat"
+status = 200
+force = true
+
+[[redirects]]
+from = "/offerte/fresenius1"
+to = "/Offerte/Fresenius1/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/offerte/fresenius1/*"
+to = "/Offerte/Fresenius1/:splat"
+status = 200
+force = true

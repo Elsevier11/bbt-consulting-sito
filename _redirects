@@ -25,3 +25,9 @@
 /offerte/tecnostampi /Offerte/Tecnostampi/ 301
 /offerte/tecnostampi/* /Offerte/Tecnostampi/:splat 200
 
+/fresenius1 /Offerte/Fresenius1/ 301
+/fresenius1/* /Offerte/Fresenius1/:splat 200
+
+/offerte/fresenius1 /Offerte/Fresenius1/ 301
+/offerte/fresenius1/* /Offerte/Fresenius1/:splat 200
+
