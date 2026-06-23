@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArcaConnect MES | Soluzioni BBT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #08080e;
+  --bg2:    #0d0d18;
+  --bg3:    #111120;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --accent: #f59e0b;
+  --teal:   #fbbf24;
+  --red-d:  rgba(248,113,113,0.06);
+  --red-b:  rgba(248,113,113,0.22);
+  --text:   #f0efff;
+  --text2:  #7878a0;
+  --text3:  #3d3d60;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Chakra Petch', var(--font);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,8,14,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:14px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:12px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text2)}
+.nav-brand span{color:var(--accent)}
+.nav-back{font-size:13px;color:var(--text2);
+  display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--text);text-decoration:none}
+
+/* HERO */
+.hero{padding:96px 48px 80px;max-width:960px;margin:0 auto}
+.hero-tags{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:4px 13px;border-radius:20px;
+  border:1px solid var(--border2);color:var(--text2);background:var(--bg2)}
+.tag.hi{border-color:rgba(245,158,11,.5);color:var(--accent);
+  background:rgba(245,158,11,.08)}
+
+.hero h1{font-size:clamp(34px,5.5vw,62px);font-weight:800;line-height:1.1;
+  letter-spacing:-.025em;margin-bottom:22px;font-family:var(--font-display)}
+.hero h1 em{font-style:normal;
+  background:linear-gradient(130deg,var(--accent) 0%,#fbbf24 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero-sub{font-size:19px;color:var(--text2);line-height:1.65;
+  max-width:620px;margin-bottom:44px}
+
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--border)}
+.hm{font-size:13px;color:var(--text2)}
+.hm strong{color:var(--text3);display:block;font-size:10px;
+  text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+
+/* SECTIONS */
+.sec{padding:80px 48px}
+.sec.alt{background:var(--bg2)}
+.container{max-width:900px;margin:0 auto}
+
+.lbl{font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.h2{font-size:clamp(22px,3.5vw,36px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.2;margin-bottom:40px;font-family:var(--font-display)}
+
+/* PAIN */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pain-card{background:var(--red-d);border:1px solid var(--red-b);
+  border-radius:12px;padding:26px}
+.pain-icon{font-size:22px;margin-bottom:12px}
+.pain-title{font-size:15px;font-weight:600;margin-bottom:8px}
+.pain-body{font-size:14px;color:var(--text2);line-height:1.65}
+
+/* SOLUTION FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px}
+.feat{background:var(--bg3);border:1px solid var(--border2);
+  border-radius:12px;padding:26px;position:relative;overflow:hidden}
+.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),#fbbf24)}
+.feat-num{font-size:30px;font-weight:800;letter-spacing:-.02em;
+  color:var(--accent);margin-bottom:8px;line-height:1}
+.feat-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.feat-body{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* BROWSER FRAME */
+.browser{border-radius:12px;overflow:hidden;
+  border:1px solid var(--border2);
+  box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04);
+  max-width:840px;margin:0 auto}
+.browser-bar{background:#16162a;padding:10px 16px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.06)}
+.dots{display:flex;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot:nth-child(1){background:#ff5f57}
+.dot:nth-child(2){background:#ffbd2e}
+.dot:nth-child(3){background:#28c840}
+.url-bar{flex:1;margin:0 12px;background:rgba(255,255,255,.06);
+  border-radius:5px;padding:3px 12px;font-size:11px;
+  color:rgba(255,255,255,.35);font-family:monospace}
+
+/* MES UI PREVIEW */
+.mes{background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:#1e293b;font-size:12px}
+.mes-header{background:#1e3a5f;color:#fff;padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between}
+.mes-header-l{display:flex;align-items:center;gap:10px}
+.mes-logo-box{background:rgba(255,255,255,.15);padding:5px 7px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center}
+.mes-logo-icon{width:14px;height:14px;background:rgba(255,255,255,.8);
+  border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.8}50%{opacity:.4}}
+.mes-app-name{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.mes-app-sub{font-size:8px;color:#93c5fd;letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+.mes-header-r{display:flex;align-items:center;gap:8px}
+.mes-chip{font-size:9px;padding:3px 9px;border-radius:4px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;border:1px solid}
+.mes-chip-cfg{background:#1e293b;border-color:#334155;color:#94a3b8}
+.mes-chip-erp{background:#1e3a8a;border-color:#3b82f6;color:#bfdbfe}
+.mes-clock{font-size:9px;font-family:monospace;background:#0f172a;
+  padding:3px 9px;border-radius:4px;border:1px solid #1e3a5f;color:#93c5fd}
+.mes-operator-info{display:flex;flex-direction:column;align-items:flex-end}
+.mes-op-label{font-size:7px;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em}
+.mes-op-name{font-size:10px;font-weight:600;display:flex;align-items:center;gap:4px}
+.mes-op-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block}
+
+.mes-body{padding:14px 16px;display:flex;gap:12px}
+.mes-main{flex:1;display:flex;flex-direction:column;gap:10px}
+
+/* Order card */
+.mes-order-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+  padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.mes-order-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.mes-order-label{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748b}
+.mes-order-badge{font-size:8px;padding:2px 8px;border-radius:20px;
+  background:#fef3c7;color:#92400e;font-weight:600}
+.mes-order-id{font-size:16px;font-weight:800;letter-spacing:-.01em;margin-bottom:2px}
+.mes-order-desc{font-size:10px;color:#64748b;margin-bottom:8px}
+.mes-order-row{display:flex;gap:16px}
+.mes-order-kv{display:flex;flex-direction:column;gap:1px}
+.mes-order-k{font-size:7px;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8}
+.mes-order-v{font-size:10px;font-weight:700}
+.mes-phase-tag{font-size:9px;padding:2px 9px;border-radius:4px;
+  background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;font-weight:600}
+
+/* Timer section */
+.mes-timers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mes-timer-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+  padding:10px 12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.mes-timer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.mes-timer-label{font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b}
+.mes-timer-status{font-size:7px;padding:1px 6px;border-radius:10px;font-weight:600}
+.mes-status-done{background:#dcfce7;color:#166534}
+.mes-status-run{background:#fef9c3;color:#854d0e}
+.mes-timer-val{font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.mes-timer-val.done{color:#16a34a}
+.mes-timer-val.run{color:#d97706}
+.mes-timer-sub{font-size:8px;color:#94a3b8;margin-top:1px}
+
+/* Action buttons */
+.mes-actions{display:flex;gap:6px;flex-wrap:wrap}
+.mes-btn{font-size:9px;font-weight:700;padding:6px 12px;border-radius:6px;
+  letter-spacing:.05em;text-transform:uppercase;border:1px solid;cursor:pointer}
+.mes-btn-danger{background:#fef2f2;border-color:#fca5a5;color:#b91c1c}
+.mes-btn-primary{background:#1e3a8a;border-color:#3b82f6;color:#fff}
+.mes-btn-end{background:#166534;border-color:#22c55e;color:#fff}
+
+/* Progress bar */
+.mes-progress-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+  padding:10px 12px}
+.mes-progress-top{display:flex;justify-content:space-between;margin-bottom:4px}
+.mes-progress-label{font-size:8px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;color:#64748b}
+.mes-progress-pct{font-size:10px;font-weight:800;color:#16a34a}
+.mes-bar{height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden;margin-bottom:4px}
+.mes-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#16a34a,#22c55e)}
+.mes-progress-sub{font-size:8px;color:#94a3b8}
+
+/* ERP console */
+.mes-erp{width:130px;flex-shrink:0;background:#0f172a;border-radius:8px;
+  border:1px solid #1e293b;padding:8px;display:flex;flex-direction:column;gap:5px}
+.mes-erp-title{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:#3b82f6;margin-bottom:3px}
+.mes-erp-row{font-size:8px;padding:4px 6px;border-radius:4px;
+  background:#1e293b;color:#94a3b8;display:flex;gap:4px;align-items:flex-start}
+.mes-erp-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:1px}
+.mes-erp-dot-g{background:#22c55e}
+.mes-erp-dot-b{background:#3b82f6}
+.mes-erp-row span{line-height:1.3}
+
+/* MES Footer */
+.mes-footer{background:#e2e8f0;border-top:1px solid #cbd5e1;
+  padding:5px 16px;display:flex;align-items:center;justify-content:space-between}
+.mes-footer-item{font-size:7px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;color:#64748b;display:flex;align-items:center;gap:4px}
+.mes-footer-dot{width:6px;height:6px;border-radius:50%}
+.mes-footer-dot-g{background:#22c55e}
+.mes-footer-dot-b{background:#3b82f6}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:2px;border:1px solid var(--border2);border-radius:16px;overflow:hidden}
+.kpi{padding:44px 28px;background:var(--bg2);text-align:center}
+.kpi-n{font-size:clamp(40px,5.5vw,60px);font-weight:800;letter-spacing:-.03em;
+  line-height:1;margin-bottom:10px;
+  background:linear-gradient(130deg,var(--accent),#fbbf24);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-l{font-size:14px;color:var(--text2);line-height:1.45}
+
+/* CTA */
+.cta{padding:80px 48px;text-align:center}
+.cta h2{font-size:28px;font-weight:700;margin-bottom:10px}
+.cta p{color:var(--text2);margin-bottom:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border2);color:var(--text);
+  padding:13px 30px;border-radius:8px;font-size:14px;font-weight:600;
+  transition:all .2s}
+.btn:hover{background:var(--bg3);border-color:var(--accent);
+  color:var(--accent);text-decoration:none}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--text3)}
+
+@media(max-width:768px){
+  .nav,.sec,.hero,.cta,footer{padding-left:20px;padding-right:20px}
+  .hero{padding-top:60px;padding-bottom:50px}
+  .sec{padding-top:60px;padding-bottom:60px}
+  .mes-body{flex-direction:column}
+  .mes-erp{width:100%;flex-direction:row;flex-wrap:wrap;gap:4px}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BBT <span>Soluzioni</span></div>
+  <a href="../soluzioni/index.html" class="nav-back">← Tutte le soluzioni</a>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-tags">
+    <span class="tag hi">Produzione</span>
+    <span class="tag">MES</span>
+    <span class="tag">Arca Evolution</span>
+    <span class="tag">ERP Integration</span>
+  </div>
+  <h1>Dal barcode all'ERP.<br><em>Zero carta, zero ritardi.</em></h1>
+  <p class="hero-sub">
+    Il terminale MES che guida l'operatore di reparto dal riconoscimento badge
+    alla creazione automatica del documento CP in Arca Evolution.
+    Tempi tracciati al secondo, consuntivo inviato senza digitare nulla.
+  </p>
+  <div class="hero-meta">
+    <div class="hm"><strong>Settore</strong>Manifattura</div>
+    <div class="hm"><strong>Integrazione</strong>Arca Evolution · SQL Server</div>
+    <div class="hm"><strong>Deployment</strong>Web app · browser</div>
+    <div class="hm"><strong>Modalità</strong>Terminale fisso per stazione</div>
+  </div>
+</header>
+
+<!-- ── PROBLEMA ── -->
+<section class="sec alt">
+  <div class="container">
+    <div class="lbl">Il problema</div>
+    <h2 class="h2">La scheda di produzione:<br>carta, penna, ritardo garantito</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <div class="pain-title">La scheda cartacea</div>
+        <div class="pain-body">
+          L'operatore scrive a mano orario di inizio, fine, pezzi prodotti e scarti.
+          Il foglio arriva in ufficio a fine turno, spesso illeggibile,
+          e qualcuno lo reinserisce nel gestionale.
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⏱</div>
+        <div class="pain-title">Tempi invisibili</div>
+        <div class="pain-body">
+          Il responsabile non sa quando una fase è iniziata né quanto ha impiegato.
+          Stop, sospensioni e riprese restano sconosciuti fino a fine giornata,
+          quando ormai è tardi per intervenire.
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⌨️</div>
+        <div class="pain-title">Doppia digitazione nell'ERP</div>
+        <div class="pain-body">
+          L'addetto ufficio riscrive ogni giorno i dati di produzione in Arca Evolution.
+          Errori di trascrizione, ritardi di un giorno intero,
+          e nessuna traccia di chi ha prodotto cosa e quando.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOLUZIONE ── -->
+<section class="sec">
+  <div class="container">
+    <div class="lbl">La soluzione</div>
+    <h2 class="h2">Un flusso guidato: badge, barcode,<br>timer, consuntivo — tutto automatico</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-num">SCAN</div>
+        <div class="feat-title">Acquisizione ordine via barcode</div>
+        <div class="feat-body">L'operatore scansiona l'ordine di lavorazione e la fase. L'app recupera distinta base, quantità target e operazioni direttamente da Arca Evolution.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">▶ ⏸</div>
+        <div class="feat-title">Timer attrezzaggio e lavorazione</div>
+        <div class="feat-body">Cronometri separati per setup e machining. Sospensione con motivazione, ripresa con un tocco. Ogni evento registrato con timestamp preciso al secondo.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">CP</div>
+        <div class="feat-title">Documento CP automatico</div>
+        <div class="feat-body">A fine lavorazione l'operatore dichiara pezzi buoni, scarti e consumi materiali. Il documento CP viene creato in Arca Evolution in tempo reale, senza intervento manuale.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">SQL</div>
+        <div class="feat-title">Integrazione Arca Evolution</div>
+        <div class="feat-body">Connessione diretta al database SQL Server di Arca, con query e stored procedure configurabili dall'interfaccia. Modalità demo integrata per testing offline.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COME APPARE ── -->
+<section class="sec alt" style="padding-bottom:88px">
+  <div class="container">
+    <div class="lbl">Come appare</div>
+    <h2 class="h2" style="margin-bottom:32px">Il terminale MES in reparto</h2>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="url-bar">mes.interno:3000 — ArcaConnect MES</div>
+      </div>
+
+      <div class="mes">
+        <!-- Header -->
+        <div class="mes-header">
+          <div class="mes-header-l">
+            <div class="mes-logo-box">
+              <div class="mes-logo-icon"></div>
+            </div>
+            <div>
+              <div class="mes-app-name">ArcaConnect MES</div>
+              <div class="mes-app-sub">Integrated ERP Gateway</div>
+            </div>
+          </div>
+          <div class="mes-header-r">
+            <div class="mes-operator-info">
+              <div class="mes-op-label">Operatore Corrente</div>
+              <div class="mes-op-name">
+                <span class="mes-op-dot"></span>
+                M. Rossi
+              </div>
+            </div>
+            <div class="mes-clock">09:41:17 - 23/06/2026</div>
+            <div class="mes-chip mes-chip-cfg">Config</div>
+            <div class="mes-chip mes-chip-erp">● ERP</div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="mes-body">
+          <div class="mes-main">
+            <!-- Order card -->
+            <div class="mes-order-card">
+              <div class="mes-order-top">
+                <div class="mes-order-label">Ordine di lavorazione attivo</div>
+                <div class="mes-order-badge">In Corso</div>
+              </div>
+              <div class="mes-order-id">OL-2026-0482</div>
+              <div class="mes-order-desc">Flangia supporto albero motore ⌀120 — Acciaio C45</div>
+              <div class="mes-order-row">
+                <div class="mes-order-kv">
+                  <div class="mes-order-k">Target</div>
+                  <div class="mes-order-v">50 pz</div>
+                </div>
+                <div class="mes-order-kv">
+                  <div class="mes-order-k">Prodotti</div>
+                  <div class="mes-order-v">32 pz</div>
+                </div>
+                <div class="mes-order-kv">
+                  <div class="mes-order-k">Cliente</div>
+                  <div class="mes-order-v">Meccanica Nord</div>
+                </div>
+                <div class="mes-phase-tag">F02 · Tornitura CNC</div>
+              </div>
+            </div>
+
+            <!-- Timers -->
+            <div class="mes-timers">
+              <div class="mes-timer-card">
+                <div class="mes-timer-top">
+                  <div class="mes-timer-label">Attrezzaggio</div>
+                  <div class="mes-timer-status mes-status-done">Completato</div>
+                </div>
+                <div class="mes-timer-val done">00:18:42</div>
+                <div class="mes-timer-sub">Completato alle 08:52</div>
+              </div>
+              <div class="mes-timer-card">
+                <div class="mes-timer-top">
+                  <div class="mes-timer-label">Lavorazione</div>
+                  <div class="mes-timer-status mes-status-run">In corso</div>
+                </div>
+                <div class="mes-timer-val run">00:49:07</div>
+                <div class="mes-timer-sub">Avviata alle 08:52</div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="mes-actions">
+              <div class="mes-btn mes-btn-danger">⏸ Sospendi</div>
+              <div class="mes-btn mes-btn-end">✓ Termina lavorazione</div>
+              <div class="mes-btn mes-btn-primary">← Scanner</div>
+            </div>
+
+            <!-- Progress -->
+            <div class="mes-progress-card">
+              <div class="mes-progress-top">
+                <div class="mes-progress-label">Avanzamento ordine</div>
+                <div class="mes-progress-pct">64%</div>
+              </div>
+              <div class="mes-bar"><div class="mes-bar-fill" style="width:64%"></div></div>
+              <div class="mes-progress-sub">32 prodotti su 50 — 18 pezzi rimanenti</div>
+            </div>
+          </div>
+
+          <!-- ERP Console -->
+          <div class="mes-erp">
+            <div class="mes-erp-title">ERP Console</div>
+            <div class="mes-erp-row">
+              <div class="mes-erp-dot mes-erp-dot-g"></div>
+              <span>CP-1041 · Flangia ⌀120<br>50 pz → Inviato</span>
+            </div>
+            <div class="mes-erp-row">
+              <div class="mes-erp-dot mes-erp-dot-b"></div>
+              <span>LAVORAZIONE_INIZIO<br>OL-0482 · M.Rossi</span>
+            </div>
+            <div class="mes-erp-row">
+              <div class="mes-erp-dot mes-erp-dot-b"></div>
+              <span>ATTREZZAGGIO_FINE<br>00:18:42</span>
+            </div>
+            <div class="mes-erp-row">
+              <div class="mes-erp-dot mes-erp-dot-b"></div>
+              <span>ATTREZZAGGIO_INIZIO<br>08:33:15</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mes-footer">
+          <div class="mes-footer-item">
+            <div class="mes-footer-dot mes-footer-dot-g"></div>
+            ERP: Arca Evolution SQL
+          </div>
+          <div class="mes-footer-item">
+            <div class="mes-footer-dot mes-footer-dot-b"></div>
+            DB: SQL Server
+          </div>
+          <div class="mes-footer-item">Single terminal MES</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RISULTATI ── -->
+<section class="sec">
+  <div class="container">
+    <div class="lbl">I risultati</div>
+    <h2 class="h2">Numeri che parlano chiaro</h2>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-n">0"</div>
+        <div class="kpi-l">Tempo di trascrizione<br>manuale dei dati produzione</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">4</div>
+        <div class="kpi-l">Step guidati: badge<br>→ barcode → timer → CP</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">live</div>
+        <div class="kpi-l">Sincronizzazione con<br>Arca Evolution in tempo reale</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">CP</div>
+        <div class="kpi-l">Documento ERP generato<br>automaticamente a fine turno</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <h2>Vuoi una soluzione simile?</h2>
+  <p>Colleghiamo il tuo reparto al gestionale — senza carta, senza doppia digitazione.</p>
+  <a href="../soluzioni/index.html" class="btn">← Tutte le soluzioni BBT</a>
+</div>
+
+<footer>
+  <span>BBT Consulting · Soluzioni</span>
+  <span>© 2025</span>
+</footer>
+
+</body>
+</html>
