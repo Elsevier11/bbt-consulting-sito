@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIS2 Compliance Platform | Soluzioni BBT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #08080e;
+  --bg2:    #0d0d18;
+  --bg3:    #111120;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --accent: #38bdf8;
+  --teal:   #34d399;
+  --red-d:  rgba(248,113,113,0.06);
+  --red-b:  rgba(248,113,113,0.22);
+  --text:   #f0efff;
+  --text2:  #7878a0;
+  --text3:  #3d3d60;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Chakra Petch', var(--font);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,8,14,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:14px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:12px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text2)}
+.nav-brand span{color:var(--accent)}
+.nav-back{font-size:13px;color:var(--text2);
+  display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--text);text-decoration:none}
+
+/* HERO */
+.hero{padding:96px 48px 80px;max-width:960px;margin:0 auto}
+.hero-tags{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:4px 13px;border-radius:20px;
+  border:1px solid var(--border2);color:var(--text2);background:var(--bg2)}
+.tag.hi{border-color:rgba(56,189,248,.5);color:var(--accent);
+  background:rgba(56,189,248,.08)}
+
+.hero h1{font-size:clamp(34px,5.5vw,62px);font-weight:700;line-height:1.1;
+  letter-spacing:-.025em;margin-bottom:22px;font-family:var(--font-display)}
+.hero h1 em{font-style:normal;
+  background:linear-gradient(130deg,var(--accent) 0%,var(--teal) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero-sub{font-size:19px;color:var(--text2);line-height:1.65;
+  max-width:620px;margin-bottom:44px}
+
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--border)}
+.hm{font-size:13px;color:var(--text2)}
+.hm strong{color:var(--text3);display:block;font-size:10px;
+  text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+
+/* SECTIONS */
+.sec{padding:80px 48px}
+.sec.alt{background:var(--bg2)}
+.container{max-width:900px;margin:0 auto}
+
+.lbl{font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.h2{font-size:clamp(22px,3.5vw,36px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.2;margin-bottom:40px;font-family:var(--font-display)}
+
+/* PAIN */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pain-card{background:var(--red-d);border:1px solid var(--red-b);
+  border-radius:12px;padding:26px}
+.pain-icon{font-size:22px;margin-bottom:12px}
+.pain-title{font-size:15px;font-weight:600;margin-bottom:8px}
+.pain-body{font-size:14px;color:var(--text2);line-height:1.65}
+
+/* SOLUTION FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px}
+.feat{background:var(--bg3);border:1px solid var(--border2);
+  border-radius:12px;padding:26px;position:relative;overflow:hidden}
+.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--teal))}
+.feat-num{font-size:30px;font-weight:700;letter-spacing:-.02em;
+  color:var(--accent);margin-bottom:8px;line-height:1;font-family:var(--font-display)}
+.feat-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.feat-body{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* BROWSER FRAME */
+.browser{border-radius:12px;overflow:hidden;
+  border:1px solid var(--border2);
+  box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04);
+  max-width:840px;margin:0 auto}
+.browser-bar{background:#16162a;padding:10px 16px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.06)}
+.dots{display:flex;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot:nth-child(1){background:#ff5f57}
+.dot:nth-child(2){background:#ffbd2e}
+.dot:nth-child(3){background:#28c840}
+.url-bar{flex:1;margin:0 12px;background:rgba(255,255,255,.06);
+  border-radius:5px;padding:3px 12px;font-size:11px;
+  color:rgba(255,255,255,.35);font-family:monospace}
+
+/* MINI NIS2 DASHBOARD */
+.nis-app{background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:#0f172a;font-size:12px;display:flex;height:420px}
+
+/* Sidebar */
+.nis-sidebar{width:200px;background:#fff;border-right:1px solid #e2e8f0;
+  display:flex;flex-direction:column;flex-shrink:0}
+.nis-sb-header{padding:12px 14px;border-bottom:1px solid #e2e8f0}
+.nis-sb-org{font-size:11px;font-weight:700;color:#0ea5e9;letter-spacing:.04em}
+.nis-sb-client{font-size:10px;color:#64748b;margin-top:2px}
+.nis-sb-nav{padding:8px 0;flex:1;overflow:hidden}
+.nis-nav-item{display:flex;align-items:center;gap:8px;padding:7px 14px;
+  font-size:11px;cursor:pointer;color:#475569;border-left:2px solid transparent}
+.nis-nav-item.active{background:#f0f9ff;color:#0284c7;border-left-color:#0ea5e9;font-weight:600}
+.nis-nav-item svg{flex-shrink:0}
+.nis-sb-pct{margin:8px 14px 12px;background:#f1f5f9;border-radius:6px;padding:8px 10px}
+.nis-sb-pct-lbl{font-size:9px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;color:#94a3b8;margin-bottom:4px}
+.nis-sb-pct-bar{height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden;margin-bottom:3px}
+.nis-sb-pct-fill{height:100%;background:linear-gradient(90deg,#0ea5e9,#34d399);border-radius:2px}
+.nis-sb-pct-n{font-size:13px;font-weight:700;color:#0f172a}
+
+/* Main */
+.nis-main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.nis-topbar{background:#fff;border-bottom:1px solid #e2e8f0;
+  padding:8px 16px;display:flex;align-items:center;justify-content:space-between}
+.nis-topbar-l{font-size:13px;font-weight:700;color:#0f172a}
+.nis-topbar-r{display:flex;align-items:center;gap:8px}
+.nis-badge{font-size:9px;padding:2px 8px;border-radius:20px;font-weight:600}
+.nis-badge-ok{background:#dcfce7;color:#166534}
+.nis-badge-warn{background:#fef3c7;color:#92400e}
+.nis-badge-err{background:#fee2e2;color:#991b1b}
+
+.nis-content{padding:12px 16px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px}
+
+/* Gauge row */
+.nis-gauge-row{display:flex;gap:10px;align-items:stretch}
+.nis-gauge-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;
+  padding:14px 16px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;min-width:130px;flex-shrink:0}
+.nis-gauge-title{font-size:9px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;color:#64748b;margin-bottom:6px}
+.nis-gauge-pct{font-size:28px;font-weight:800;color:#0ea5e9;line-height:1}
+.nis-gauge-sub{font-size:9px;color:#94a3b8;margin-top:3px}
+
+/* Domain cards */
+.nis-domains{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px}
+.nis-domains-title{font-size:9px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;color:#64748b;margin-bottom:8px}
+.nis-domain{margin-bottom:7px}
+.nis-domain:last-child{margin-bottom:0}
+.nis-domain-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.nis-domain-code{font-size:9px;font-weight:700;letter-spacing:.06em;color:#475569}
+.nis-domain-label{font-size:10px;color:#64748b;flex:1;margin:0 6px}
+.nis-domain-pct{font-size:10px;font-weight:700;color:#0f172a}
+.nis-domain-bar{height:4px;background:#f1f5f9;border-radius:2px;overflow:hidden}
+.nis-domain-fill{height:100%;border-radius:2px}
+
+/* Blockers */
+.nis-blockers{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px}
+.nis-blockers-title{font-size:9px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;color:#dc2626;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.nis-blocker{font-size:9px;padding:4px 8px;background:#fef2f2;border-left:2px solid #dc2626;
+  border-radius:0 4px 4px 0;margin-bottom:4px;color:#374151}
+.nis-blocker:last-child{margin-bottom:0}
+.nis-blocker span{font-weight:700;color:#dc2626}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:2px;border:1px solid var(--border2);border-radius:16px;overflow:hidden}
+.kpi{padding:44px 28px;background:var(--bg2);text-align:center}
+.kpi-n{font-size:clamp(40px,5.5vw,60px);font-weight:700;letter-spacing:-.03em;
+  line-height:1;margin-bottom:10px;font-family:var(--font-display);
+  background:linear-gradient(130deg,var(--accent),var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-l{font-size:14px;color:var(--text2);line-height:1.45}
+
+/* CTA */
+.cta{padding:80px 48px;text-align:center}
+.cta h2{font-size:28px;font-weight:700;margin-bottom:10px}
+.cta p{color:var(--text2);margin-bottom:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border2);color:var(--text);
+  padding:13px 30px;border-radius:8px;font-size:14px;font-weight:600;
+  transition:all .2s}
+.btn:hover{background:var(--bg3);border-color:var(--accent);
+  color:var(--accent);text-decoration:none}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--text3)}
+
+@media(max-width:768px){
+  .nav,.sec,.hero,.cta,footer{padding-left:20px;padding-right:20px}
+  .hero{padding-top:60px;padding-bottom:50px}
+  .sec{padding-top:60px;padding-bottom:60px}
+  .nis-sidebar{display:none}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BBT <span>Soluzioni</span></div>
+  <a href="../soluzioni/index.html" class="nav-back">← Tutte le soluzioni</a>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-tags">
+    <span class="tag hi">Cybersecurity</span>
+    <span class="tag">NIS2 · D.Lgs 138/2024</span>
+    <span class="tag">Multi-tenant</span>
+    <span class="tag">Audit-ready</span>
+  </div>
+  <h1>Conformità NIS2 sotto controllo.<br><em>Per ogni cliente.</em></h1>
+  <p class="hero-sub">
+    Una piattaforma web multi-organizzazione che guida il compliance officer
+    attraverso tutte le 108 misure dell'Allegato 1, dalla valutazione iniziale
+    al report pronto per l'auditor — senza fogli Excel, senza dispersione documentale.
+  </p>
+  <div class="hero-meta">
+    <div class="hm"><strong>Ambito</strong>NIS2 · Allegato 1</div>
+    <div class="hm"><strong>Stack</strong>React + Node.js + SQLite</div>
+    <div class="hm"><strong>Deployment</strong>Web app · browser</div>
+    <div class="hm"><strong>Accesso</strong>Multi-utente · 2FA · RBAC</div>
+  </div>
+</header>
+
+<!-- ── PROBLEMA ── -->
+<section class="sec alt">
+  <div class="container">
+    <div class="lbl">Il problema</div>
+    <h2 class="h2">108 misure NIS2. Nessuno sa quante<br>sono davvero coperte.</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <div class="pain-title">Assessment su Excel, senza governance</div>
+        <div class="pain-body">
+          Le misure vengono censite in fogli condivisi senza storico delle modifiche,
+          senza responsabili assegnati e senza un unico stato di avanzamento leggibile
+          dalla direzione.
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔍</div>
+        <div class="pain-title">Zero visibilità su cosa blocca la conformità</div>
+        <div class="pain-body">
+          Impossibile sapere in un colpo d'occhio quante misure sono in stato critico,
+          quali scadenze si avvicinano e quali domini sono più scoperti — finché
+          arriva l'auditor.
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📁</div>
+        <div class="pain-title">Policy e procedure scollegati dai requisiti</div>
+        <div class="pain-body">
+          I documenti obbligatori (policy, procedure, verbali CdA) esistono
+          in cartelle di rete separate, non collegati alle misure che certificano
+          e senza workflow di approvazione tracciato.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOLUZIONE ── -->
+<section class="sec">
+  <div class="container">
+    <div class="lbl">La soluzione</div>
+    <h2 class="h2">Una piattaforma che struttura l'intero percorso di conformità</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-num">108</div>
+        <div class="feat-title">Misure strutturate</div>
+        <div class="feat-body">Tutte le misure NIS2 Allegato 1 precaricate per dominio e sotto-categoria. Stato, responsabile e scadenza su ogni singola misura. Autosave.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">BI</div>
+        <div class="feat-title">Dashboard di conformità</div>
+        <div class="feat-body">Gauge di completamento, radar chart per dominio, blockers in evidenza e scadenze in vista. La direzione ha tutto in un'unica schermata.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">DOC</div>
+        <div class="feat-title">Document Center</div>
+        <div class="feat-body">Template per policy, procedure e verbali. Upload, approvazione con firma digitale, storico versioni. Ogni documento è collegato alle misure che copre.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">PDF</div>
+        <div class="feat-title">Report audit-ready</div>
+        <div class="feat-body">Report tecnico per l'auditor e sintesi executive per il CdA, generati in un clic. Piano d'azione, gap analysis e storico snapshot inclusi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COME APPARE ── -->
+<section class="sec alt" style="padding-bottom:88px">
+  <div class="container">
+    <div class="lbl">Come appare</div>
+    <h2 class="h2" style="margin-bottom:32px">La dashboard di conformità in un colpo d'occhio</h2>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="url-bar">nis2.bbtconsulting.it · Acme S.p.A. · Dashboard</div>
+      </div>
+
+      <div class="nis-app">
+        <!-- Sidebar -->
+        <div class="nis-sidebar">
+          <div class="nis-sb-header">
+            <div class="nis-sb-org">NIS2 Platform</div>
+            <div class="nis-sb-client">Acme S.p.A.</div>
+          </div>
+          <div class="nis-sb-nav">
+            <div class="nis-nav-item active">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="1" width="6" height="6" rx="1" fill="#0ea5e9"/>
+                <rect x="9" y="1" width="6" height="6" rx="1" fill="#0ea5e9" opacity=".4"/>
+                <rect x="1" y="9" width="6" height="6" rx="1" fill="#0ea5e9" opacity=".4"/>
+                <rect x="9" y="9" width="6" height="6" rx="1" fill="#0ea5e9" opacity=".4"/>
+              </svg>
+              Dashboard
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M2 4h12M2 8h9M2 12h6" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              Requisiti NIS2
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <rect x="2" y="2" width="12" height="12" rx="2" stroke="#94a3b8" stroke-width="1.2"/>
+                <path d="M5 8h6M5 11h4" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              Documenti
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2l2 4h4l-3 3 1 4-4-2.5L4 13l1-4L2 6h4z" fill="#94a3b8" opacity=".5"/>
+              </svg>
+              Action Plan
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6" stroke="#94a3b8" stroke-width="1.2"/>
+                <path d="M8 5v3l2 1" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              Scadenze
+              <span style="margin-left:auto;background:#fef3c7;color:#92400e;font-size:8px;font-weight:700;padding:1px 5px;border-radius:8px">3</span>
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 12V6l5-4 5 4v6" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Fornitori
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2v4M8 10v4M2 8h4M10 8h4" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              Incidenti
+            </div>
+            <div class="nis-nav-item">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M2 12l3-8 3 5 2-3 4 6" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Report
+            </div>
+          </div>
+          <div class="nis-sb-pct">
+            <div class="nis-sb-pct-lbl">Completamento</div>
+            <div class="nis-sb-pct-bar">
+              <div class="nis-sb-pct-fill" style="width:63%"></div>
+            </div>
+            <div class="nis-sb-pct-n">63%</div>
+          </div>
+        </div>
+
+        <!-- Main -->
+        <div class="nis-main">
+          <div class="nis-topbar">
+            <div class="nis-topbar-l">Dashboard · Acme S.p.A.</div>
+            <div class="nis-topbar-r">
+              <span class="nis-badge nis-badge-warn">⚠ 4 blocchi</span>
+              <span class="nis-badge nis-badge-ok">autosave attivo</span>
+            </div>
+          </div>
+
+          <div class="nis-content">
+            <!-- Gauge + Domains row -->
+            <div class="nis-gauge-row">
+              <div class="nis-gauge-card">
+                <div class="nis-gauge-title">Conformità globale</div>
+                <svg width="90" height="50" viewBox="0 0 90 50">
+                  <path d="M10 45 A35 35 0 0 1 80 45" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>
+                  <path d="M10 45 A35 35 0 0 1 80 45" fill="none" stroke="url(#gGrad)" stroke-width="6" stroke-linecap="round"
+                        stroke-dasharray="110" stroke-dashoffset="40"/>
+                  <defs>
+                    <linearGradient id="gGrad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#0ea5e9"/>
+                      <stop offset="100%" stop-color="#34d399"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="nis-gauge-pct">63%</div>
+                <div class="nis-gauge-sub">68 / 108 misure</div>
+              </div>
+
+              <div class="nis-domains" style="flex:1">
+                <div class="nis-domains-title">Avanzamento per dominio</div>
+                <div class="nis-domain">
+                  <div class="nis-domain-header">
+                    <span class="nis-domain-code">GOVERN</span>
+                    <span class="nis-domain-label">Governo</span>
+                    <span class="nis-domain-pct">80%</span>
+                  </div>
+                  <div class="nis-domain-bar"><div class="nis-domain-fill" style="width:80%;background:#0ea5e9"></div></div>
+                </div>
+                <div class="nis-domain">
+                  <div class="nis-domain-header">
+                    <span class="nis-domain-code">PROTECT</span>
+                    <span class="nis-domain-label">Protezione</span>
+                    <span class="nis-domain-pct">71%</span>
+                  </div>
+                  <div class="nis-domain-bar"><div class="nis-domain-fill" style="width:71%;background:#06b6d4"></div></div>
+                </div>
+                <div class="nis-domain">
+                  <div class="nis-domain-header">
+                    <span class="nis-domain-code">DETECT</span>
+                    <span class="nis-domain-label">Rilevamento</span>
+                    <span class="nis-domain-pct">55%</span>
+                  </div>
+                  <div class="nis-domain-bar"><div class="nis-domain-fill" style="width:55%;background:#f59e0b"></div></div>
+                </div>
+                <div class="nis-domain">
+                  <div class="nis-domain-header">
+                    <span class="nis-domain-code">RESPOND</span>
+                    <span class="nis-domain-label">Risposta</span>
+                    <span class="nis-domain-pct">48%</span>
+                  </div>
+                  <div class="nis-domain-bar"><div class="nis-domain-fill" style="width:48%;background:#f97316"></div></div>
+                </div>
+                <div class="nis-domain">
+                  <div class="nis-domain-header">
+                    <span class="nis-domain-code">RECOVER</span>
+                    <span class="nis-domain-label">Recupero</span>
+                    <span class="nis-domain-pct">40%</span>
+                  </div>
+                  <div class="nis-domain-bar"><div class="nis-domain-fill" style="width:40%;background:#ef4444"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Blockers -->
+            <div class="nis-blockers">
+              <div class="nis-blockers-title">
+                <svg width="10" height="10" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#dc2626" opacity=".15"/><path d="M8 5v4" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r=".8" fill="#dc2626"/></svg>
+                Blocchi critici · 4
+              </div>
+              <div class="nis-blocker"><span>RS.MI-03</span> — Piano di ripristino non documentato · Risposta</div>
+              <div class="nis-blocker"><span>DE.AE-07</span> — Monitoraggio anomalie reti non attivo · Rilevamento</div>
+              <div class="nis-blocker"><span>GV.SC-07</span> — Contratti supply chain senza clausole NIS2 · Governo</div>
+              <div class="nis-blocker"><span>PR.AA-05</span> — Autenticazione MFA non abilitata su tutti i sistemi critici</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RISULTATI ── -->
+<section class="sec">
+  <div class="container">
+    <div class="lbl">I risultati</div>
+    <h2 class="h2">Numeri che parlano chiaro</h2>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-n">108</div>
+        <div class="kpi-l">Misure NIS2 Allegato 1<br>precaricate e strutturate</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">N</div>
+        <div class="kpi-l">Clienti/organizzazioni<br>gestibili in parallelo</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">1"</div>
+        <div class="kpi-l">Per generare report<br>tecnico o executive PDF</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">0</div>
+        <div class="kpi-l">Dipendenze esterne:<br>self-hosted, dati interni</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <h2>Hai clienti soggetti a NIS2?</h2>
+  <p>Porta la gestione della conformità fuori dagli Excel e dentro una piattaforma audit-ready.</p>
+  <a href="../soluzioni/index.html" class="btn">← Tutte le soluzioni BBT</a>
+</div>
+
+<footer>
+  <span>BBT Consulting · Soluzioni</span>
+  <span>© 2025</span>
+</footer>
+
+</body>
+</html>
