@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soluzioni BBT Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #08080e;
+  --bg2:    #0d0d18;
+  --bg3:    #111120;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --accent: #818cf8;
+  --teal:   #34d399;
+  --text:   #f0efff;
+  --text2:  #7878a0;
+  --text3:  #3d3d60;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Chakra Petch', var(--font);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+     line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{
+  border-bottom:1px solid var(--border);
+  padding:18px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-family:var(--font-display);font-size:16px;font-weight:700;
+  letter-spacing:.06em;color:var(--text)}
+.nav-brand span{color:var(--accent)}
+.nav-sub{font-size:12px;color:var(--text3);letter-spacing:.04em}
+
+/* HERO */
+.hero{padding:96px 48px 72px;max-width:960px;margin:0 auto}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.hero h1{font-family:var(--font-display);
+  font-size:clamp(36px,5vw,58px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.1;margin-bottom:20px}
+.hero h1 span{
+  background:linear-gradient(130deg,var(--accent),var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:18px;color:var(--text2);max-width:560px;line-height:1.65}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:0 48px}
+
+/* GRID */
+.grid-section{padding:72px 48px}
+.grid-label{font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text3);margin-bottom:32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+
+/* SOLUTION CARD */
+.card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;padding:32px;
+  display:flex;flex-direction:column;gap:16px;
+  transition:border-color .2s, background .2s, transform .2s;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--teal));
+  opacity:0;transition:opacity .2s;
+}
+.card:hover{
+  border-color:var(--border2);background:var(--bg3);
+  transform:translateY(-2px);
+}
+.card:hover::before{opacity:1}
+
+.card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.card-tag{font-size:10px;font-weight:600;letter-spacing:.07em;
+  text-transform:uppercase;padding:3px 10px;border-radius:20px;
+  border:1px solid var(--border2);color:var(--text2);background:transparent}
+.card-tag.hi{border-color:rgba(129,140,248,.4);color:var(--accent)}
+
+.card-title{font-family:var(--font-display);font-size:22px;font-weight:700;
+  letter-spacing:-.01em;line-height:1.2}
+.card-body{font-size:14px;color:var(--text2);line-height:1.6;flex:1}
+
+.card-footer{display:flex;align-items:center;justify-content:space-between;
+  padding-top:16px;border-top:1px solid var(--border)}
+.card-meta{font-size:12px;color:var(--text3)}
+.card-cta{font-size:13px;font-weight:600;color:var(--accent);
+  display:flex;align-items:center;gap:4px;transition:gap .15s}
+.card:hover .card-cta{gap:8px}
+
+/* PLACEHOLDER CARD */
+.card-ghost{
+  background:transparent;border:1px dashed var(--border);
+  border-radius:14px;padding:32px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;min-height:200px;
+}
+.card-ghost-icon{font-size:28px;opacity:.25}
+.card-ghost-label{font-size:13px;color:var(--text3)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:24px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--text3)}
+
+@media(max-width:768px){
+  .nav,.hero,.grid-section,footer,.divider{padding-left:20px;padding-right:20px}
+  .hero{padding-top:60px;padding-bottom:50px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div>
+    <div class="nav-brand">BBT <span>Consulting</span></div>
+    <div class="nav-sub">Soluzioni</div>
+  </div>
+  <div style="font-size:13px;color:var(--text3)">bbtconsulting.it</div>
+</nav>
+
+<header class="hero">
+  <div class="hero-kicker">Catalogo soluzioni</div>
+  <h1>Strumenti che <span>trasformano i dati</span><br>in vantaggio competitivo.</h1>
+  <p class="hero-sub">
+    Ogni soluzione nasce da un problema reale del cliente.
+    Integrazioni con gestionali esistenti, zero dipendenze esterne,
+    risultati misurabili dal primo giorno.
+  </p>
+</header>
+
+<div class="divider"></div>
+
+<section class="grid-section">
+  <div class="grid-label">Soluzioni disponibili</div>
+  <div class="grid">
+
+    <!-- FATTURATO MONITOR -->
+    <a href="fatturato-monitor.html" class="card">
+      <div class="card-tags">
+        <span class="card-tag hi">Finanza</span>
+        <span class="card-tag">BI</span>
+        <span class="card-tag">ERP</span>
+        <span class="card-tag">Live</span>
+      </div>
+      <div class="card-title">Fatturato Monitor</div>
+      <div class="card-body">
+        Proiezione del fatturato mensile in tempo reale, aggregando
+        cinque flussi del gestionale: fatture, contratti, prefatture,
+        DDT e ordini. Budget vs actual in un colpo d'occhio.
+      </div>
+      <div class="card-footer">
+        <span class="card-meta">Distribuzione B2B · SQL Server</span>
+        <span class="card-cta">Scopri →</span>
+      </div>
+    </a>
+
+    <!-- PLACEHOLDER -->
+    <div class="card-ghost">
+      <div class="card-ghost-icon">+</div>
+      <div class="card-ghost-label">Prossima soluzione in arrivo</div>
+    </div>
+
+    <div class="card-ghost">
+      <div class="card-ghost-icon">+</div>
+      <div class="card-ghost-label">Prossima soluzione in arrivo</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>BBT Consulting · Soluzioni</span>
+  <span>© 2025</span>
+</footer>
+
+</body>
+</html>

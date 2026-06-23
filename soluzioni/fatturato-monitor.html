@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fatturato Monitor | Soluzioni BBT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #08080e;
+  --bg2:    #0d0d18;
+  --bg3:    #111120;
+  --border: rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --accent: #818cf8;
+  --teal:   #34d399;
+  --red-d:  rgba(248,113,113,0.06);
+  --red-b:  rgba(248,113,113,0.22);
+  --text:   #f0efff;
+  --text2:  #7878a0;
+  --text3:  #3d3d60;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Syne', var(--font);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,8,14,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:14px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:12px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text2)}
+.nav-brand span{color:var(--accent)}
+.nav-back{font-size:13px;color:var(--text2);
+  display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--text);text-decoration:none}
+
+/* HERO */
+.hero{padding:96px 48px 80px;max-width:960px;margin:0 auto}
+.hero-tags{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:4px 13px;border-radius:20px;
+  border:1px solid var(--border2);color:var(--text2);background:var(--bg2)}
+.tag.hi{border-color:rgba(129,140,248,.5);color:var(--accent);
+  background:rgba(129,140,248,.08)}
+
+.hero h1{font-size:clamp(34px,5.5vw,62px);font-weight:800;line-height:1.1;
+  letter-spacing:-.025em;margin-bottom:22px;font-family:var(--font-display)}
+.hero h1 em{font-style:normal;
+  background:linear-gradient(130deg,var(--accent) 0%,var(--teal) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero-sub{font-size:19px;color:var(--text2);line-height:1.65;
+  max-width:620px;margin-bottom:44px}
+
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--border)}
+.hm{font-size:13px;color:var(--text2)}
+.hm strong{color:var(--text3);display:block;font-size:10px;
+  text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+
+/* SECTIONS */
+.sec{padding:80px 48px}
+.sec.alt{background:var(--bg2)}
+.container{max-width:900px;margin:0 auto}
+
+.lbl{font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.h2{font-size:clamp(22px,3.5vw,36px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.2;margin-bottom:40px;font-family:var(--font-display)}
+
+/* PAIN */
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pain-card{background:var(--red-d);border:1px solid var(--red-b);
+  border-radius:12px;padding:26px}
+.pain-icon{font-size:22px;margin-bottom:12px}
+.pain-title{font-size:15px;font-weight:600;margin-bottom:8px}
+.pain-body{font-size:14px;color:var(--text2);line-height:1.65}
+
+/* SOLUTION FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px}
+.feat{background:var(--bg3);border:1px solid var(--border2);
+  border-radius:12px;padding:26px;position:relative;overflow:hidden}
+.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--teal))}
+.feat-num{font-size:30px;font-weight:800;letter-spacing:-.02em;
+  color:var(--accent);margin-bottom:8px;line-height:1}
+.feat-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.feat-body{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* BROWSER FRAME */
+.browser{border-radius:12px;overflow:hidden;
+  border:1px solid var(--border2);
+  box-shadow:0 40px 100px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04);
+  max-width:840px;margin:0 auto}
+.browser-bar{background:#16162a;padding:10px 16px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.06)}
+.dots{display:flex;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot:nth-child(1){background:#ff5f57}
+.dot:nth-child(2){background:#ffbd2e}
+.dot:nth-child(3){background:#28c840}
+.url-bar{flex:1;margin:0 12px;background:rgba(255,255,255,.06);
+  border-radius:5px;padding:3px 12px;font-size:11px;
+  color:rgba(255,255,255,.35);font-family:monospace}
+
+/* MINI DASHBOARD */
+.dash{background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:#1a1d23;font-size:12px}
+.d-top{background:#fff;border-bottom:1px solid #e4e6ea;
+  padding:8px 16px;display:flex;align-items:center;justify-content:space-between}
+.d-top-l{font-size:13px;font-weight:700}
+.d-top-r{display:flex;align-items:center;gap:10px}
+.d-lbl{font-size:10px;color:#6c757d}
+.d-flag{font-size:9px;padding:2px 8px;border-radius:20px;
+  background:#fef3c7;color:#92400e;font-weight:500}
+.d-live{font-size:9px;padding:2px 8px;border-radius:20px;
+  background:#dcfce7;color:#166534;font-weight:500}
+
+.d-main{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+
+.d-hero{background:#fff;border:1px solid #e4e6ea;border-radius:10px;
+  padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.d-hero-meta{font-size:9px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:#6c757d;margin-bottom:6px}
+.d-hero-row{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.d-hero-num{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.d-badge-ok{display:inline-flex;font-size:11px;font-weight:700;
+  padding:2px 10px;border-radius:20px;background:#dcfce7;color:#166534}
+.d-progress{height:6px;background:#f0f1f3;border-radius:3px;
+  overflow:hidden;margin-bottom:6px}
+.d-fill-ok{height:100%;border-radius:3px;background:#16a34a}
+.d-fill-w {height:100%;border-radius:3px;background:#d97706}
+.d-hero-sub{font-size:10px;color:#6c757d}
+.d-hero-sub strong{color:#1a1d23}
+
+.d-adds{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.d-add{background:#fff;border:1px solid #e4e6ea;border-radius:8px;padding:9px 10px}
+.d-add-top{display:flex;align-items:center;gap:4px;margin-bottom:3px}
+.d-dot{width:7px;height:7px;border-radius:50%}
+.d-code{font-size:8px;font-weight:700;letter-spacing:.06em;color:#6c757d}
+.d-add-label{font-size:8px;color:#6c757d;margin-bottom:3px;line-height:1.3}
+.d-add-val{font-size:11px;font-weight:700}
+
+.d-stack{display:flex;flex-direction:column;gap:4px}
+.d-stack-bar{height:4px;border-radius:2px;overflow:hidden;display:flex}
+.d-legend{display:flex;gap:10px;flex-wrap:wrap}
+.d-leg{font-size:9px;color:#6c757d;display:flex;align-items:center;gap:3px}
+.d-leg-dot{width:7px;height:7px;border-radius:2px}
+
+.d-ytd{background:#fff;border:1px solid #e4e6ea;border-radius:10px;
+  padding:12px 18px;border-top:3px solid #1D9E75}
+.d-ytd-lbl{font-size:9px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:#1D9E75;margin-bottom:6px}
+.d-ytd-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.d-ytd-num{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.d-badge-w{font-size:10px;font-weight:700;padding:2px 9px;
+  border-radius:20px;background:#fef3c7;color:#92400e}
+.d-ytd-sub{font-size:10px;color:#6c757d}
+.d-ytd-sub strong{color:#1a1d23}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:2px;border:1px solid var(--border2);border-radius:16px;overflow:hidden}
+.kpi{padding:44px 28px;background:var(--bg2);text-align:center}
+.kpi-n{font-size:clamp(40px,5.5vw,60px);font-weight:800;letter-spacing:-.03em;
+  line-height:1;margin-bottom:10px;
+  background:linear-gradient(130deg,var(--accent),var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-l{font-size:14px;color:var(--text2);line-height:1.45}
+
+/* CTA */
+.cta{padding:80px 48px;text-align:center}
+.cta h2{font-size:28px;font-weight:700;margin-bottom:10px}
+.cta p{color:var(--text2);margin-bottom:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border2);color:var(--text);
+  padding:13px 30px;border-radius:8px;font-size:14px;font-weight:600;
+  transition:all .2s}
+.btn:hover{background:var(--bg3);border-color:var(--accent);
+  color:var(--accent);text-decoration:none}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--text3)}
+
+@media(max-width:768px){
+  .nav,.sec,.hero,.cta,footer{padding-left:20px;padding-right:20px}
+  .hero{padding-top:60px;padding-bottom:50px}
+  .sec{padding-top:60px;padding-bottom:60px}
+  .d-adds{grid-template-columns:repeat(3,1fr)}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BBT <span>Soluzioni</span></div>
+  <a href="index.html" class="nav-back">← Tutte le soluzioni</a>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-tags">
+    <span class="tag hi">Finanza</span>
+    <span class="tag">Business Intelligence</span>
+    <span class="tag">ERP Integration</span>
+    <span class="tag">Live Data</span>
+  </div>
+  <h1>Fotografia del fatturato.<br><em>In tempo reale.</em></h1>
+  <p class="hero-sub">
+    Addio query manuali. La direzione commerciale vede la proiezione
+    del mese, confrontata con il budget, in un colpo d'occhio:
+    da qualsiasi browser, sempre aggiornata.
+  </p>
+  <div class="hero-meta">
+    <div class="hm"><strong>Settore</strong>Distribuzione B2B</div>
+    <div class="hm"><strong>Integrazione</strong>Gestionale SQL Server</div>
+    <div class="hm"><strong>Deployment</strong>Web app · browser</div>
+    <div class="hm"><strong>Aggiornamento dati</strong>Tempo reale</div>
+  </div>
+</header>
+
+<!-- ── PROBLEMA ── -->
+<section class="sec alt">
+  <div class="container">
+    <div class="lbl">Il problema</div>
+    <h2 class="h2">Ogni mattina, 20 minuti per rispondere<br>a una domanda semplice</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">⏱</div>
+        <div class="pain-title">Il rito quotidiano</div>
+        <div class="pain-body">
+          Aprire il gestionale, navigare tra fatture emesse, contratti aperti,
+          prefatture, DDT e ordini (cinque sezioni diverse)
+          per ricostruire a mano la proiezione del mese.
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📊</div>
+        <div class="pain-title">Nessuna visione integrata</div>
+        <div class="pain-body">
+          I numeri esistevano, ma dispersi in sezioni diverse e non comparabili
+          in modo immediato. Zero semafori, zero confronto automatico con il budget.
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⚡</div>
+        <div class="pain-title">Reazione sempre in ritardo</div>
+        <div class="pain-body">
+          Quando il dato era finalmente pronto, il mese era già per metà consumato.
+          Impossibile correggere la rotta in tempo o comunicare lo stato alla direzione.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOLUZIONE ── -->
+<section class="sec">
+  <div class="container">
+    <div class="lbl">La soluzione</div>
+    <h2 class="h2">Un monitor live che aggrega tutto in automatico</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-num">5→1</div>
+        <div class="feat-title">Flussi unificati</div>
+        <div class="feat-body">Fatture emesse, contratti, prefatture, DDT e ordini: aggregati in un'unica proiezione mensile, calcolata in tempo reale dal gestionale.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">vs</div>
+        <div class="feat-title">Budget sempre visibile</div>
+        <div class="feat-body">La proiezione è confrontata istantaneamente con il budget mensile. Scarto percentuale e barra colorata: verde, giallo, rosso.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">YTD</div>
+        <div class="feat-title">Vista annuale</div>
+        <div class="feat-body">Fatturato reale accumulato mese per mese più proiezione del mese corrente. Budget YTD a confronto, sempre allineato.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">0</div>
+        <div class="feat-title">Zero installazione</div>
+        <div class="feat-body">Si apre nel browser. Nessun software da installare, nessun export manuale. Dati direttamente dal gestionale, in tempo reale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COME APPARE ── -->
+<section class="sec alt" style="padding-bottom:88px">
+  <div class="container">
+    <div class="lbl">Come appare</div>
+    <h2 class="h2" style="margin-bottom:32px">La dashboard in un colpo d'occhio</h2>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="url-bar">dashboard.interno/fatturato-monitor</div>
+      </div>
+
+      <div class="dash">
+        <div class="d-top">
+          <div class="d-top-l">fatturato monitor</div>
+          <div class="d-top-r">
+            <span class="d-lbl">maggio 2025</span>
+            <span class="d-flag">⏳ fatturazione aperta</span>
+            <span class="d-live">● live</span>
+          </div>
+        </div>
+
+        <div class="d-main">
+          <!-- hero mensile -->
+          <div class="d-hero">
+            <div class="d-hero-meta">proiezione · maggio 2025</div>
+            <div class="d-hero-row">
+              <div class="d-hero-num">€ 1.247.380</div>
+              <div class="d-badge-ok">+8,3%</div>
+            </div>
+            <div class="d-progress"><div class="d-fill-ok" style="width:100%"></div></div>
+            <div class="d-hero-sub">budget mensile: <strong>€ 1.151.000</strong></div>
+          </div>
+
+          <!-- addendi -->
+          <div class="d-adds">
+            <div class="d-add">
+              <div class="d-add-top">
+                <div class="d-dot" style="background:#378ADD"></div>
+                <div class="d-code">FATT</div>
+              </div>
+              <div class="d-add-label">fatturato emesso</div>
+              <div class="d-add-val">€ 683.210</div>
+            </div>
+            <div class="d-add">
+              <div class="d-add-top">
+                <div class="d-dot" style="background:#06b6d4"></div>
+                <div class="d-code">CO</div>
+              </div>
+              <div class="d-add-label">contratti: consegna entro mese</div>
+              <div class="d-add-val">€ 214.590</div>
+            </div>
+            <div class="d-add">
+              <div class="d-add-top">
+                <div class="d-dot" style="background:#1D9E75"></div>
+                <div class="d-code">PF</div>
+              </div>
+              <div class="d-add-label">prefatture aperte</div>
+              <div class="d-add-val">€ 187.440</div>
+            </div>
+            <div class="d-add">
+              <div class="d-add-top">
+                <div class="d-dot" style="background:#f59e0b"></div>
+                <div class="d-code">BO</div>
+              </div>
+              <div class="d-add-label">DDT aperti</div>
+              <div class="d-add-val">€ 91.820</div>
+            </div>
+            <div class="d-add">
+              <div class="d-add-top">
+                <div class="d-dot" style="background:#8b5cf6"></div>
+                <div class="d-code">OC</div>
+              </div>
+              <div class="d-add-label">ordini: consegna entro mese</div>
+              <div class="d-add-val">€ 70.320</div>
+            </div>
+          </div>
+
+          <!-- stack bar -->
+          <div class="d-stack">
+            <div class="d-stack-bar">
+              <div style="width:54.8%;background:#378ADD"></div>
+              <div style="width:17.2%;background:#06b6d4"></div>
+              <div style="width:15%;background:#1D9E75"></div>
+              <div style="width:7.4%;background:#f59e0b"></div>
+              <div style="width:5.6%;background:#8b5cf6"></div>
+            </div>
+            <div class="d-legend">
+              <span class="d-leg"><span class="d-leg-dot" style="background:#378ADD"></span>fatt 55%</span>
+              <span class="d-leg"><span class="d-leg-dot" style="background:#06b6d4"></span>co 17%</span>
+              <span class="d-leg"><span class="d-leg-dot" style="background:#1D9E75"></span>pf 15%</span>
+              <span class="d-leg"><span class="d-leg-dot" style="background:#f59e0b"></span>bo 7%</span>
+              <span class="d-leg"><span class="d-leg-dot" style="background:#8b5cf6"></span>oc 6%</span>
+            </div>
+          </div>
+
+          <!-- ytd -->
+          <div class="d-ytd">
+            <div class="d-ytd-lbl">YTD · gen → mag 2025</div>
+            <div class="d-ytd-row">
+              <div class="d-ytd-num">€ 5.832.110</div>
+              <div class="d-badge-w">-3,2%</div>
+            </div>
+            <div class="d-progress"><div class="d-fill-w" style="width:96.8%"></div></div>
+            <div class="d-ytd-sub">budget ytd: <strong>€ 6.025.000</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RISULTATI ── -->
+<section class="sec">
+  <div class="container">
+    <div class="lbl">I risultati</div>
+    <h2 class="h2">Numeri che parlano chiaro</h2>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-n">0"</div>
+        <div class="kpi-l">Tempo per avere<br>la fotografia del mese</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">5→1</div>
+        <div class="kpi-l">Sorgenti di dato<br>unificate in una vista</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">live</div>
+        <div class="kpi-l">Aggiornamento continuo<br>dal gestionale</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-n">∞</div>
+        <div class="kpi-l">Utenti che possono<br>accedervi in parallelo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <h2>Vuoi una soluzione simile?</h2>
+  <p>Trasformiamo i dati del tuo gestionale in visibilità immediata.</p>
+  <a href="index.html" class="btn">← Tutte le soluzioni BBT</a>
+</div>
+
+<footer>
+  <span>BBT Consulting · Soluzioni</span>
+  <span>© 2025</span>
+</footer>
+
+</body>
+</html>
