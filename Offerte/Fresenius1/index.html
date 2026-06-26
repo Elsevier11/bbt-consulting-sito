@@ -54,7 +54,7 @@
   }
   .nav-logo-zb { height: 26px; width: auto; display: block; }
 
-  section { padding: 88px 0; }
+  section { padding: 60px 0; }
   section:nth-child(odd) { background: var(--base); }
   section:nth-child(even) { background: var(--soft); }
   .container { max-width: 960px; margin: 0 auto; padding: 0 48px; }
@@ -71,19 +71,19 @@
     background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(47,127,212,.12) 0%, transparent 70%);
     pointer-events: none;
   }
-  .hero-inner { max-width: 960px; margin: 0 auto; padding: 60px 48px 80px; }
-  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 40px; }
+  .hero-inner { max-width: 960px; margin: 0 auto; padding: 40px 48px 56px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
   .hero-title {
     font-family: 'Fraunces', serif; font-weight: 300;
     font-size: clamp(30px, 4vw, 50px); color: #fff;
     line-height: 1.2; max-width: 780px; margin-bottom: 20px;
   }
   .hero-title em { font-style: italic; color: var(--on-dark); }
-  .hero-divider { width: 40px; height: 2px; background: var(--accent); margin: 36px 0; }
+  .hero-divider { width: 40px; height: 2px; background: var(--accent); margin: 20px 0; }
   .hero-sub { font-size: 18px; color: var(--on-dark); max-width: 600px; line-height: 1.75; font-weight: 300; }
 
   /* PROBLEMA */
-  #problema { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  #problema { padding: 52px 0; border-bottom: 1px solid var(--border); }
   .problema-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; text-align: center; }
   .problema-quote {
     font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
@@ -95,9 +95,9 @@
   .tag-bad { background: #FEE2E2; color: #991B1B; }
   .tag-good { background: #D1FAE5; color: #065F46; }
 
-  .section-label { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-  .section-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 3.5vw, 42px); font-weight: 400; line-height: 1.2; margin-bottom: 20px; }
-  .section-intro { font-size: 17px; color: var(--muted); max-width: 580px; margin-bottom: 52px; line-height: 1.75; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .section-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 3.5vw, 42px); font-weight: 400; line-height: 1.2; margin-bottom: 12px; }
+  .section-intro { font-size: 17px; color: var(--muted); max-width: 580px; margin-bottom: 28px; line-height: 1.75; }
 
   /* FASE 1 */
   .fase1-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
@@ -185,7 +185,7 @@
   #demo { background: var(--base); }
   .demo-tabs {
     display: flex; gap: 8px; flex-wrap: nowrap; overflow-x: auto;
-    margin-bottom: 28px; padding-bottom: 4px; scrollbar-width: none;
+    margin-bottom: 16px; padding-bottom: 4px; scrollbar-width: none;
   }
   .demo-tabs::-webkit-scrollbar { display: none; }
   .demo-tab {
@@ -198,26 +198,26 @@
   .demo-tab.active, .demo-tab:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .tab-icon { width: 18px; height: 18px; object-fit: contain; }
   .demo-stage { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.05); }
-  .demo-prompt-area { background: var(--ink); padding: 22px 26px; display: flex; gap: 14px; align-items: flex-start; }
+  .demo-prompt-area { background: var(--ink); padding: 16px 22px; display: flex; gap: 14px; align-items: flex-start; }
   .prompt-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); padding-top: 2px; flex-shrink: 0; width: 56px; }
   .prompt-text { font-size: 16px; color: #fff; line-height: 1.65; font-weight: 300; min-height: 44px; }
   .cursor { display: inline-block; width: 2px; height: 16px; background: var(--accent); margin-left: 2px; vertical-align: middle; animation: blink 1s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  .demo-output-area { padding: 26px; }
-  .output-header { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .demo-output-area { padding: 18px 22px; }
+  .output-header { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
   .output-content { font-size: 16px; color: var(--ink); line-height: 1.8; min-height: 100px; }
   .output-content ul { margin: 8px 0 8px 20px; }
   .output-content li { margin-bottom: 6px; }
   .output-placeholder { color: var(--border); font-style: italic; }
 
   /* MATERIALI */
-  .materiali-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-  .mat-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 26px; }
-  .mat-num { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 300; color: var(--border); margin-bottom: 14px; }
-  .mat-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
-  .mat-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
-  .checklist-items { list-style: none; margin-top: 10px; }
-  .checklist-items li { font-size: 14px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--border); line-height: 1.55; display: flex; gap: 8px; }
+  .materiali-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+  .mat-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .mat-num { display: inline; font-size: 10px; font-weight: 600; color: var(--muted); margin-right: 5px; letter-spacing: .1em; }
+  .mat-title { display: inline; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .mat-desc { display: block; font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 5px; }
+  .checklist-items { list-style: none; margin-top: 8px; }
+  .checklist-items li { font-size: 13px; color: var(--muted); padding: 4px 0; border-bottom: 1px solid var(--border); line-height: 1.5; display: flex; gap: 8px; }
   .checklist-items li:last-child { border-bottom: none; }
   .checklist-items li span { color: var(--accent); flex-shrink: 0; font-weight: 600; }
 
@@ -243,6 +243,8 @@
   .agente-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400; margin-bottom: 10px; }
   .agente-desc { font-size: 15px; color: var(--muted); line-height: 1.75; }
   .agente-desc strong { color: var(--ink); }
+  .agente-prompts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 20px; }
+  .agente-prompt { background: var(--soft); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--ink); line-height: 1.45; font-style: italic; }
 
   footer { background: var(--ink); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; }
   .footer-note { font-size: 12px; color: rgba(255,255,255,.28); }
@@ -265,7 +267,7 @@
     <li><a href="#fase1">Il percorso</a></li>
     <li><a href="#giornata">La sessione</a></li>
     <li><a href="#demo">Demo</a></li>
-    <li><a href="#fase2">Aree funzionali</a></li>
+    <li><a href="#fase2">Verticali</a></li>
     <li><a href="#passi">Prossimi passi</a></li>
   </ul>
   <div class="nav-logo-zb-wrap">
@@ -363,7 +365,7 @@
       <div class="slot-card accent">
         <div class="slot-title">Capire Copilot · 90 min</div>
         <ul class="slot-items">
-          <li>Cos'è Copilot e perché è diverso da ChatGPT e altri tool gratuiti</li>
+          <li>Cos'è Copilot e perché è diverso da ChatGPT e altri strumenti gratuiti</li>
           <li>Come funziona: logica conversazionale, contesto, memoria di sessione</li>
           <li>Cosa Copilot vede e cosa non vede nei tuoi file</li>
           <li>Perché usare lo strumento aziendale invece di quelli esterni</li>
@@ -495,8 +497,8 @@
 <section id="materiali">
   <div class="container">
     <div class="section-label">Materiali</div>
-    <h2 class="section-title">Quello che resta dopo la sessione.</h2>
-    <p class="section-intro">Strumenti operativi consegnati al termine di ogni sessione, pensati per essere usati subito.</p>
+    <h2 class="section-title">Quello che è incluso.</h2>
+    <p class="section-intro">Materiali operativi e supporto post-sessione, consegnati al termine di ogni giornata.</p>
     <div class="materiali-grid">
       <div class="mat-card">
         <div class="mat-num">01</div>
@@ -506,7 +508,7 @@
       <div class="mat-card">
         <div class="mat-num">02</div>
         <div class="mat-title">Scheda "Anatomia di un buon prompt"</div>
-        <div class="mat-desc">Formato da tenere sulla scrivania. La struttura R·C·C·E·V (Ruolo, Contesto, Compito, Esempi, Vincoli di formattazione), confronto tra esempi efficaci e non, errori comuni da evitare.</div>
+        <div class="mat-desc">Formato da tenere sulla scrivania. La struttura R·C·C·E·V (Ruolo, Contesto, Compito, Esempi, Vincoli di formattazione).</div>
       </div>
       <div class="mat-card">
         <div class="mat-num">03</div>
@@ -516,17 +518,12 @@
       <div class="mat-card">
         <div class="mat-num">04</div>
         <div class="mat-title">Guida all'uso corretto di Copilot</div>
-        <div class="mat-desc">Cosa condividere e cosa no, perché usare lo strumento aziendale invece di tool esterni, come mantenere il controllo sull'output.</div>
+        <div class="mat-desc">Cosa condividere e cosa no, perché usare lo strumento aziendale invece di strumenti esterni, come mantenere il controllo sull'output.</div>
       </div>
       <div class="mat-card">
         <div class="mat-num">05</div>
         <div class="mat-title">Prima di inviare, tre domande</div>
-        <div class="mat-desc">Un foglio da tenere a portata di mano — non per bloccarsi, ma per non rimpiangere.</div>
-        <ul class="checklist-items">
-          <li><span>1.</span> È accurato? I fatti, i numeri e le affermazioni sono verificati?</li>
-          <li><span>2.</span> È appropriato? Contiene informazioni che non dovrebbero uscire da questo contesto?</li>
-          <li><span>3.</span> È mio? Riflette davvero quello che voglio comunicare?</li>
-        </ul>
+        <div class="mat-desc">Scheda tascabile con tre domande per autoverificare un output prima di usarlo: è accurato, è appropriato al contesto, è davvero mio.</div>
       </div>
       <div class="mat-card">
         <div class="mat-num">06</div>
@@ -575,16 +572,20 @@
     <div class="agente-card">
       <div class="agente-label">Un esempio già reale</div>
       <div class="agente-title">L'agente tutor per la forza vendita</div>
-      <div class="agente-desc">
-        Un agente pensato per i commerciali: esamina le offerte preparate, suggerisce come migliorarle, prepara il venditore a gestire le obiezioni e costruisce un profilo dell'interlocutore — con le sue priorità, il suo stile decisionale, i suoi vincoli. Non un chatbot generico: uno strumento calibrato sul contesto di Fresenius Kabi.<br><br>
-        Questo è il livello successivo. La formazione è il prerequisito: <strong>chi non sa usare Copilot non costruirà mai un agente utile</strong>.
+      <div class="agente-desc">Uno strumento calibrato sul contesto di Fresenius Kabi. Il commerciale lo apre prima di una visita e gli chiede:</div>
+      <div class="agente-prompts">
+        <div class="agente-prompt">Preparami a presentare un'offerta commerciale per un cliente B2B</div>
+        <div class="agente-prompt">Analizza questa offerta e dimmi come renderla più convincente</div>
+        <div class="agente-prompt">Prepara le risposte alle obiezioni più probabili del cliente</div>
+        <div class="agente-prompt">Simuliamo una trattativa con CFO, Direttore Tecnico o CEO</div>
       </div>
+      <div class="agente-desc">Questo è il livello successivo. La formazione è il prerequisito: <strong>chi non sa usare Copilot non costruirà mai un agente utile</strong>.</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-note">Documento riservato · Fresenius Kabi Italia · Giugno 2026</div>
+  <div class="footer-note">Documento riservato · Zerobyte x Fresenius Kabi Italia · Giugno 2026</div>
   <div class="footer-note">Riproduzione o condivisione non autorizzata vietata</div>
 </footer>
 
