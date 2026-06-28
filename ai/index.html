@@ -4,327 +4,233 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI — BBT Consulting</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:     #08080e;
-  --bg2:    #0d0d18;
-  --bg3:    #111120;
-  --border: rgba(255,255,255,0.07);
-  --border2:rgba(255,255,255,0.13);
-  --accent: #818cf8;
-  --teal:   #34d399;
-  --text:   #f0efff;
-  --text2:  #7878a0;
-  --text3:  #3d3d60;
-  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Chakra Petch', var(--font);
+:root{
+  --bg:#0f1117;--bg2:#151825;--bg3:#1a2035;
+  --border:#252d44;--text:#e2e8f0;--text-muted:#64748b;
+  --accent:#6366f1;--radius:12px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--bg);color:var(--text);
-     line-height:1.6;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
 
-.nav{
-  border-bottom:1px solid var(--border);
-  padding:18px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-brand{font-family:var(--font-display);font-size:16px;font-weight:700;
-  letter-spacing:.06em;color:var(--text)}
-.nav-brand span{color:var(--accent)}
-.nav-sub{font-size:12px;color:var(--text3);letter-spacing:.04em}
-.nav-link{font-size:12px;color:var(--text3);transition:color .15s}
-.nav-link:hover{color:var(--accent)}
+/* HEADER */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{display:flex;align-items:center;gap:12px;}
+.bbt{background:#6366f1;color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;}
+.brand-name{font-size:16px;font-weight:700;}
+.brand-sep{color:var(--border);margin:0 2px;}
+.brand-sub{font-size:16px;font-weight:400;color:var(--text-muted);}
+.header-meta{font-size:12px;color:var(--text-muted);background:var(--bg3);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
 
-.hero{padding:96px 48px 72px;max-width:960px;margin:0 auto}
-.hero-kicker{font-size:11px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-.hero h1{font-family:var(--font-display);
-  font-size:clamp(36px,5vw,58px);font-weight:700;
-  letter-spacing:-.02em;line-height:1.1;margin-bottom:20px}
-.hero h1 span{
-  background:linear-gradient(130deg,var(--accent),var(--teal));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:18px;color:var(--text2);max-width:560px;line-height:1.65}
+/* HERO */
+.hero{padding:72px 40px 56px;max-width:960px;margin:0 auto;text-align:center;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#818cf8;margin-bottom:18px;}
+.hero h1{font-size:46px;font-weight:800;line-height:1.15;margin-bottom:18px;background:linear-gradient(135deg,#e2e8f0 30%,#a5b4fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:17px;color:var(--text-muted);max-width:580px;margin:0 auto 44px;line-height:1.7;}
+.stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 28px;min-width:120px;}
+.stat-n{font-size:28px;font-weight:800;color:#818cf8;line-height:1;}
+.stat-l{font-size:12px;color:var(--text-muted);margin-top:4px;}
 
-.divider{height:1px;background:var(--border);margin:0 48px}
+/* SECTIONS */
+.section{max-width:960px;margin:0 auto;padding:0 40px 64px;}
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.sec-title{font-size:21px;font-weight:700;}
+.sec-desc{font-size:14px;color:var(--text-muted);margin-top:4px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
 
-/* FEATURED */
-.featured-section{padding:64px 48px 0}
-.section-label{font-size:11px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--text3);margin-bottom:24px}
-
-.card-featured{
-  background:var(--bg2);border:1px solid var(--border2);
-  border-radius:16px;padding:40px;
-  display:flex;align-items:flex-start;gap:40px;
-  transition:border-color .2s, background .2s, transform .2s;
-  position:relative;overflow:hidden;
-}
-.card-featured::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--teal));
-}
-.card-featured:hover{background:var(--bg3);transform:translateY(-2px)}
-.card-featured-icon{
-  font-size:36px;flex-shrink:0;
-  width:72px;height:72px;border-radius:14px;
-  background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);
-  display:flex;align-items:center;justify-content:center;
-}
-.card-featured-body{flex:1}
-.card-featured-tag{
-  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;padding:3px 12px;border-radius:20px;
-  background:rgba(129,140,248,.15);color:var(--accent);
-  border:1px solid rgba(129,140,248,.3);margin-bottom:14px}
-.card-featured-title{
-  font-family:var(--font-display);font-size:28px;font-weight:700;
-  letter-spacing:-.01em;margin-bottom:10px}
-.card-featured-desc{font-size:15px;color:var(--text2);line-height:1.65;max-width:600px}
-.card-featured-footer{
-  margin-top:24px;display:flex;align-items:center;justify-content:space-between}
-.card-featured-stats{display:flex;gap:24px}
-.stat{text-align:center}
-.stat-n{font-family:var(--font-display);font-size:22px;color:var(--accent)}
-.stat-l{font-size:11px;color:var(--text3);letter-spacing:.04em}
-.card-cta{font-size:14px;font-weight:600;color:var(--accent);
-  display:flex;align-items:center;gap:6px;transition:gap .15s}
-.card-featured:hover .card-cta{gap:10px}
-
-/* GRID */
-.grid-section{padding:48px 48px 72px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
-
+/* CARD */
 .card{
   background:var(--bg2);border:1px solid var(--border);
-  border-radius:14px;padding:28px;
-  display:flex;flex-direction:column;gap:14px;
-  transition:border-color .2s, background .2s, transform .2s;
+  border-radius:var(--radius);padding:24px;
+  display:flex;flex-direction:column;gap:12px;
   position:relative;overflow:hidden;
+  transition:border-color .2s,background .2s,transform .15s;
+  cursor:pointer;
 }
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--cc,var(--accent)),var(--teal));
-  opacity:0;transition:opacity .2s;
+.card:hover{background:var(--bg3);border-color:#394160;transform:translateY(-2px);}
+.bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc);}
+.card-title{font-size:16px;font-weight:700;margin-top:6px;}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.55;flex:1;}
+.card-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px;}
+.tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:11px;padding:3px 8px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text-muted);}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.b-on{background:#14532d;color:#86efac;}
+
+/* FEATURED */
+.card-featured{
+  background:var(--bg2);border:1px solid #394160;
+  border-radius:var(--radius);padding:32px 36px;
+  display:flex;flex-direction:column;gap:14px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,background .2s,transform .15s;
+  cursor:pointer;margin-bottom:40px;
 }
-.card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
-.card:hover::before{opacity:1}
+.card-featured:hover{background:var(--bg3);border-color:#4f5a80;transform:translateY(-2px);}
+.bar-featured{position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#6366f1,#818cf8,#34d399);}
+.feat-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
+.feat-body{flex:1;}
+.feat-kicker{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#818cf8;margin-bottom:10px;}
+.feat-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+.feat-desc{font-size:14px;color:var(--text-muted);line-height:1.65;max-width:560px;}
+.feat-stats{display:flex;gap:24px;padding-top:16px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.fstat{text-align:center;min-width:60px;}
+.fstat-n{font-size:22px;font-weight:800;color:#818cf8;line-height:1;}
+.fstat-l{font-size:11px;color:var(--text-muted);margin-top:3px;}
 
-.card-icon{font-size:22px;margin-bottom:2px}
-.card-tags{display:flex;gap:6px;flex-wrap:wrap}
-.card-tag{font-size:10px;font-weight:600;letter-spacing:.07em;
-  text-transform:uppercase;padding:3px 10px;border-radius:20px;
-  border:1px solid var(--border2);color:var(--text2)}
-.card-tag.hi{border-color:rgba(129,140,248,.4);color:var(--accent)}
-.card-title{font-family:var(--font-display);font-size:18px;font-weight:700;
-  letter-spacing:-.01em;line-height:1.2}
-.card-body{font-size:13px;color:var(--text2);line-height:1.6;flex:1}
-.card-footer{display:flex;align-items:center;justify-content:space-between;
-  padding-top:12px;border-top:1px solid var(--border)}
-.card-meta{font-size:11px;color:var(--text3)}
-.card-arrow{font-size:13px;font-weight:600;color:var(--accent);
-  transition:transform .15s}
-.card:hover .card-arrow{transform:translateX(4px)}
-
-footer{border-top:1px solid var(--border);padding:24px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:12px;color:var(--text3)}
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;color:var(--text-muted);font-size:13px;}
 
 @media(max-width:768px){
-  .nav,.hero,.featured-section,.grid-section,footer,.divider{
-    padding-left:20px;padding-right:20px}
-  .hero{padding-top:56px;padding-bottom:48px}
-  .card-featured{flex-direction:column;gap:20px}
-  .card-featured-footer{flex-direction:column;align-items:flex-start;gap:16px}
+  .header{padding:14px 20px;}
+  .hero{padding:48px 20px 40px;}
+  .hero h1{font-size:32px;}
+  .section{padding:0 20px 48px;}
+  footer{padding:24px 20px;}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div>
-    <div class="nav-brand">BBT <span>Consulting</span></div>
-    <div class="nav-sub">AI</div>
+<header class="header">
+  <div class="brand">
+    <a href="https://bbtconsulting.it" style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;margin-right:8px;transition:color .15s" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='var(--text-muted)'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> BBT</a>
+    <span class="bbt">AI</span>
+    <span class="brand-name">Playbook</span>
+    <span class="brand-sep">|</span>
+    <span class="brand-sub">BBT Consulting</span>
   </div>
-  <a href="https://bbtconsulting.it" class="nav-link">bbtconsulting.it</a>
-</nav>
-
-<header class="hero">
-  <div class="hero-kicker">Playbook formativo</div>
-  <h1>Dall'esperto umano<br>all'<span>agente AI</span>.</h1>
-  <p class="hero-sub">
-    Sette risorse strutturate per imparare a usare l'intelligenza artificiale
-    sul lavoro: dai primi prompt agli agenti autonomi, dalla teoria alla pratica quotidiana.
-  </p>
+  <span class="header-meta">7 risorse · 5 livelli</span>
 </header>
 
-<div class="divider"></div>
+<div class="hero">
+  <div class="eyebrow">Playbook formativo</div>
+  <h1>Dall'esperto umano<br>all'agente AI.</h1>
+  <p>Sette risorse per imparare a usare l'intelligenza artificiale sul lavoro: dai primi prompt agli agenti autonomi, dalla tecnica alla governance.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">82</div><div class="stat-l">prompt pronti</div></div>
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">agenti AI</div></div>
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">livelli formativi</div></div>
+    <div class="stat"><div class="stat-n">7</div><div class="stat-l">risorse</div></div>
+  </div>
+</div>
 
-<section class="featured-section">
-  <div class="section-label">Inizia qui</div>
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-title">Inizia qui</div>
+      <div class="sec-desc">Il percorso guidato consigliato se stai seguendo un corso o vuoi una visione d'insieme.</div>
+    </div>
+  </div>
 
   <a href="home.html" class="card-featured">
-    <div class="card-featured-icon">🗺️</div>
-    <div class="card-featured-body">
-      <div class="card-featured-tag">Percorso guidato</div>
-      <div class="card-featured-title">Il Playbook AI</div>
-      <div class="card-featured-desc">
-        Cinque livelli formativi in sequenza: fondamenti, tecnica del prompt,
-        agenti AI, workflow multi-step e governance. Il punto di partenza
-        consigliato se stai iniziando o stai seguendo un corso.
+    <div class="bar-featured"></div>
+    <div class="feat-top">
+      <div class="feat-body">
+        <div class="feat-kicker">Percorso guidato · 5 livelli</div>
+        <div class="feat-title">Il Playbook AI completo</div>
+        <div class="feat-desc">Fondamenti, tecnica del prompt, agenti AI, workflow multi-step e governance: un percorso strutturato che porta da zero all'adozione consapevole dell'AI in azienda.</div>
       </div>
-      <div class="card-featured-footer">
-        <div class="card-featured-stats">
-          <div class="stat"><div class="stat-n">5</div><div class="stat-l">livelli</div></div>
-          <div class="stat"><div class="stat-n">7</div><div class="stat-l">risorse</div></div>
-          <div class="stat"><div class="stat-n">180+</div><div class="stat-l">prompt</div></div>
-        </div>
-        <span class="card-cta">Apri il percorso →</span>
-      </div>
+      <span style="font-size:13px;font-weight:600;color:#818cf8;flex-shrink:0;align-self:flex-end">Apri →</span>
+    </div>
+    <div class="feat-stats">
+      <div class="fstat"><div class="fstat-n">L1</div><div class="fstat-l">Fondamenti</div></div>
+      <div class="fstat"><div class="fstat-n">L2</div><div class="fstat-l">Prompt</div></div>
+      <div class="fstat"><div class="fstat-n">L3</div><div class="fstat-l">Agenti</div></div>
+      <div class="fstat"><div class="fstat-n">L4</div><div class="fstat-l">Workflow</div></div>
+      <div class="fstat"><div class="fstat-n">L5</div><div class="fstat-l">Governance</div></div>
     </div>
   </a>
 </section>
 
-<section class="grid-section">
-  <div class="section-label">Risorse singole</div>
-  <div class="grid">
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-title">Risorse singole</div>
+      <div class="sec-desc">Accesso diretto a ogni strumento, indipendentemente dal percorso.</div>
+    </div>
+  </div>
+
+  <div class="cards">
 
     <a href="prompts.html" class="card" style="--cc:#6366f1">
-      <div class="card-icon">📚</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Libreria</span>
-        <span class="card-tag">82 prompt</span>
-        <span class="card-tag">8 reparti</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Libreria Prompt</div>
-      <div class="card-body">
-        Ottantadue prompt pronti all'uso, organizzati per reparto aziendale
-        e calibrati per dimensione dell'azienda. Filtrabili e copiabili con un click.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Vendite · Finance · HR · IT · altro</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">82 prompt pronti all'uso per 8 reparti aziendali. Filtrabili per reparto e dimensione azienda, copiabili con un click.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">82 prompt</span><span class="tag">8 reparti</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
     <a href="cocv.html" class="card" style="--cc:#818cf8">
-      <div class="card-icon">🧩</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Tecnica</span>
-        <span class="card-tag">50+ prompt</span>
-        <span class="card-tag">Framework</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Framework C·O·C·V</div>
-      <div class="card-body">
-        Il metodo in quattro blocchi — Contesto, Obiettivo, Compito, Vincoli —
-        per costruire prompt efficaci. Cinquanta esempi strutturati per settore.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Prompt engineering · Struttura</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">Il metodo in quattro blocchi per costruire prompt efficaci. 50+ esempi strutturati per settore e caso d'uso.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">50+ prompt</span><span class="tag">Struttura</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
     <a href="agents.html" class="card" style="--cc:#a78bfa">
-      <div class="card-icon">🤖</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Agenti</span>
-        <span class="card-tag">8 agenti</span>
-        <span class="card-tag">System prompt</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Agenti AI</div>
-      <div class="card-body">
-        Otto agenti specializzati con system prompt pronti: vendite, finance,
-        HR, legal, marketing, operations. Configurabili su Claude, ChatGPT e Copilot.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Automazione · Assistenti verticali</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">8 agenti specializzati con system prompt pronti per vendite, finance, HR, legal, marketing e operations.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">8 agenti</span><span class="tag">System prompt</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
     <a href="glossario.html" class="card" style="--cc:#3b82f6">
-      <div class="card-icon">📖</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Glossario</span>
-        <span class="card-tag">43 termini</span>
-        <span class="card-tag">5 categorie</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Glossario AI</div>
-      <div class="card-body">
-        Quarantatré termini del mondo AI con definizione chiara e un esempio
-        concreto per ciascuno. Ricercabile in tempo reale, filtrabili per categoria.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Architettura · Interazione · Rischi</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">43 termini del mondo AI con definizione chiara e un esempio concreto. Ricercabile e filtrabile per categoria.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">43 termini</span><span class="tag">5 categorie</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
     <a href="strumenti.html" class="card" style="--cc:#34d399">
-      <div class="card-icon">⚖️</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Confronto</span>
-        <span class="card-tag">5 strumenti</span>
-        <span class="card-tag">Guida</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Strumenti AI</div>
-      <div class="card-body">
-        Claude, ChatGPT, Gemini, Copilot e Perplexity a confronto: punti di forza,
-        limiti, costi e una guida decisionale per scegliere il tool giusto.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Confronto · Guida decisionale</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">Claude, ChatGPT, Gemini, Copilot e Perplexity a confronto. Guida decisionale per scegliere il tool giusto.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">5 strumenti</span><span class="tag">Confronto</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
     <a href="ricette.html" class="card" style="--cc:#f59e0b">
-      <div class="card-icon">🍳</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Workflow</span>
-        <span class="card-tag">8 ricette</span>
-        <span class="card-tag">Multi-step</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Ricette AI</div>
-      <div class="card-body">
-        Otto workflow completi passo per passo: proposta commerciale, analisi
-        contratto, onboarding, report performance e altri casi d'uso aziendali.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Vendite · HR · Finance · Legal</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">8 workflow completi passo per passo: proposta commerciale, analisi contratto, onboarding, report e altri casi d'uso.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">8 workflow</span><span class="tag">Multi-step</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
     <a href="governance.html" class="card" style="--cc:#14b8a6">
-      <div class="card-icon">🏛️</div>
-      <div class="card-tags">
-        <span class="card-tag hi">Governance</span>
-        <span class="card-tag">GDPR</span>
-        <span class="card-tag">Roadmap</span>
-      </div>
+      <div class="bar"></div>
       <div class="card-title">Governance & Roadmap</div>
-      <div class="card-body">
-        Linee guida per un uso responsabile dell'AI in azienda: cosa non condividere,
-        gestione delle allucinazioni, conformità GDPR e roadmap di adozione in cinque livelli.
-      </div>
-      <div class="card-footer">
-        <span class="card-meta">Uso responsabile · Adozione</span>
-        <span class="card-arrow">→</span>
+      <div class="card-desc">Uso responsabile dell'AI in azienda: cosa non condividere, GDPR, gestione allucinazioni e roadmap di adozione in 5 livelli.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">GDPR</span><span class="tag">Roadmap</span></div>
+        <span class="badge b-on">Disponibile</span>
       </div>
     </a>
 
   </div>
 </section>
 
-<footer>
-  <span>BBT Consulting · AI</span>
-  <span>bbtconsulting.it/ai</span>
-</footer>
+<footer>BBT Consulting · AI &nbsp;·&nbsp; bbtconsulting.it/ai</footer>
 
 </body>
 </html>
