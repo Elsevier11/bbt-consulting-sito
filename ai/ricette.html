@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ricette AI — BBT Consulting</title>
+<style>
+:root{--bg:#0f1117;--bg2:#151825;--bg3:#1a2035;--border:#252d44;--text:#e2e8f0;--muted:#64748b;--accent:#6366f1;--radius:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;display:flex;flex-direction:column;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.hbrand{display:flex;align-items:center;gap:12px;}
+.bbt{background:#6366f1;color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;}
+.htitle{font-size:15px;font-weight:700;}
+.hbadge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.layout{display:flex;flex:1;min-height:0;}
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:20px 12px;position:sticky;top:61px;height:calc(100vh - 61px);overflow-y:auto;flex-shrink:0;}
+.sidebar-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 10px;margin-bottom:10px;}
+.dept-btn{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;color:var(--muted);padding:9px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;font-weight:500;text-align:left;transition:background .15s,color .15s;}
+.dept-btn:hover{background:var(--bg3);color:var(--text);}
+.dept-btn.active{background:#1e2440;color:#a5b4fc;font-weight:700;}
+.dept-icon{font-size:16px;width:20px;text-align:center;}
+.dept-count{margin-left:auto;font-size:11px;font-weight:700;background:var(--bg3);padding:2px 7px;border-radius:10px;}
+.main{flex:1;padding:28px;overflow-x:hidden;}
+.dept-header{margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+.dept-title{font-size:26px;font-weight:800;display:flex;align-items:center;gap:10px;}
+.dept-desc{font-size:14px;color:var(--muted);margin-top:8px;max-width:680px;}
+/* RECIPE LIST */
+.recipe-list{display:flex;flex-direction:column;gap:16px;}
+.recipe-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s;}
+.recipe-card:hover{border-color:#394160;}
+.recipe-head{padding:18px 22px 14px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.recipe-title{font-size:17px;font-weight:700;}
+.recipe-desc{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5;}
+.recipe-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;flex-shrink:0;}
+.b-level{color:var(--lc);background:var(--lc-bg);border:1px solid var(--lc-border);}
+.b-tool{background:var(--bg3);border:1px solid var(--border);color:var(--muted);}
+.b-time{background:var(--bg3);border:1px solid var(--border);color:var(--muted);}
+.b-upload{background:#1e3a5f;border:1px solid #1d4ed8;color:#93c5fd;}
+.recipe-output{font-size:12px;color:#818cf8;display:flex;align-items:center;gap:5px;margin-top:6px;}
+.toggle-icon{font-size:12px;color:var(--muted);transition:transform .2s;flex-shrink:0;margin-top:3px;}
+.toggle-icon.open{transform:rotate(180deg);}
+.steps-section{display:none;padding:20px 22px;}
+.steps-section.open{display:block;}
+.step{display:grid;grid-template-columns:40px 1fr;gap:0 16px;margin-bottom:20px;}
+.step:last-child{margin-bottom:0;}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--rc);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-title{font-size:14px;font-weight:700;margin-bottom:6px;margin-top:4px;}
+.step-prompt{background:#0c0f1a;border:1px solid #1e2538;border-radius:7px;padding:12px 14px;font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;color:#94a3b8;white-space:pre-wrap;line-height:1.6;position:relative;}
+.step-note{font-size:12px;color:var(--muted);margin-top:7px;display:flex;gap:6px;}
+.step-note::before{content:"💡";}
+.copy-btn{position:absolute;top:8px;right:8px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer;transition:color .15s;}
+.copy-btn:hover{color:var(--text);}
+.step-line{grid-column:1;display:flex;justify-content:center;padding-top:4px;}
+.step-line-inner{width:2px;background:var(--border);height:calc(100% + 20px);margin-top:36px;}
+.output-box{background:#0d1f0d;border:1px solid #166534;border-radius:7px;padding:12px 16px;font-size:13px;color:#86efac;display:flex;gap:8px;align-items:flex-start;margin-top:16px;}
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="home.html" style="font-size:13px;color:#64748b;text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .15s;" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='#64748b'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Playbook</a>
+  <div class="hbrand">
+    <span class="bbt">BBT</span>
+    <span class="htitle">Ricette AI</span>
+  </div>
+  <span class="hbadge">Workflow · Livello 4</span>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+const RECIPES = [{"id": "proposta-commerciale", "dept": "vendite", "title": "Prepara una proposta commerciale B2B", "desc": "Trasforma le informazioni su un cliente e un'esigenza specifica in una proposta strutturata, persuasiva e personalizzata.", "livello": "intermedio", "tempo": "30–45 min", "strumenti": ["Claude", "ChatGPT", "Gemini"], "upload": true, "output": "Documento di proposta commerciale pronto per revisione e invio", "steps": [{"n": 1, "titolo": "Profilazione del cliente", "prompt": "Sei un consulente commerciale B2B esperto. Ho un potenziale cliente con queste caratteristiche:\n- Settore: [settore]\n- Dimensione: [PMI/corporate]\n- Problema principale: [descrizione]\n- Budget indicativo: [range]\n- Decisore: [ruolo]\n\nGenerami un profilo sintetico del cliente con: esigenze implicite non dette, criteri di acquisto probabili per questo tipo di decisore, e le 3 domande che probabilmente si farà prima di firmare.", "note": "Compila le parentesi con le informazioni reali del cliente."}, {"n": 2, "titolo": "Struttura della proposta", "prompt": "Sulla base del profilo cliente che abbiamo definito, progetta la struttura ideale per una proposta commerciale di massimo 6 pagine. Per ogni sezione indica: titolo, contenuto chiave, lunghezza consigliata e perché quella sezione è importante per questo decisore specifico.", "note": "Il modello adatta la struttura al profilo creato nel passo 1."}, {"n": 3, "titolo": "Redazione del testo", "prompt": "Ora scrivi il testo completo della proposta seguendo la struttura definita. Tono: professionale ma diretto. Stile: centrato sui benefici per il cliente, non sulle caratteristiche del prodotto. Ogni affermazione deve essere concreta e quantificabile dove possibile. Includi una sezione ROI stimato anche con dati ipotetici esplicitamente etichettati come tali.", "note": "Se hai già una bozza o documenti del prodotto/servizio, allegali prima di questo step."}, {"n": 4, "titolo": "Revisione e ottimizzazione", "prompt": "Rivedi la proposta che abbiamo scritto con gli occhi del cliente. Identifica:\n1. Le 3 affermazioni più deboli o generiche\n2. Le 2 sezioni che potrebbero generare dubbi o obiezioni\n3. Cosa aggiungere o togliere per renderla più convincente\nPoi riscrivi le parti indicate con queste correzioni.", "note": "Passaggio critico: spesso la prima versione è buona, ma questa revisione la rende eccellente."}, {"n": 5, "titolo": "Executive summary e oggetto email", "prompt": "Scrivi:\n1. Un executive summary di 150 parole per chi non ha tempo di leggere tutto\n2. L'oggetto dell'email di accompagnamento (max 60 caratteri, deve stimolare apertura)\n3. Il testo dell'email di accompagnamento (max 150 parole)", "note": "Questi tre elementi determinano se la proposta viene letta o archiviata."}]}, {"id": "analisi-contratto", "dept": "legal", "title": "Analisi e revisione di un contratto", "desc": "Leggi, sintetizza e individua criticità in un contratto prima della firma, con focus sui punti di rischio per la tua parte.", "livello": "intermedio", "tempo": "20–30 min", "strumenti": ["Claude", "ChatGPT"], "upload": true, "output": "Sintesi del contratto, mappa dei rischi e lista di punti da negoziare", "steps": [{"n": 1, "titolo": "Carica e sintetizza", "prompt": "Sei un consulente legale esperto in contratti commerciali B2B. Allego un contratto. Producimi:\n1. Una sintesi di 300 parole in linguaggio non legale\n2. Le 5 clausole più importanti con spiegazione del loro impatto pratico\n3. Le date e scadenze chiave\n4. Le obbligazioni principali di ciascuna parte", "note": "Allega il PDF o incolla il testo del contratto prima di inviare."}, {"n": 2, "titolo": "Mappa dei rischi", "prompt": "Analizza le stesse clausole dal punto di vista dei rischi per [la mia azienda / il fornitore / il cliente — specifica il tuo ruolo]. Classifica ogni rischio come Alto / Medio / Basso e spiega perché. Segnala in particolare:\n- Clausole di responsabilità asimmetrica\n- Condizioni di recesso squilibrate\n- Penali o SLA difficili da rispettare\n- Ambiguità interpretative che potrebbero generare dispute", "note": "Specifica il tuo ruolo nel contratto per un'analisi calibrata."}, {"n": 3, "titolo": "Punti da negoziare", "prompt": "Sulla base dei rischi identificati, elenca i 5 punti prioritari da portare in negoziazione. Per ciascuno:\n- Clausola attuale (citazione testuale)\n- Perché è problematica\n- Formulazione alternativa proposta\n- Spazio di negoziazione consigliato (cosa accettare come compromesso)", "note": "Output direttamente utilizzabile come base per la trattativa."}, {"n": 4, "titolo": "Domande per il legale", "prompt": "Genera un elenco di 8–10 domande specifiche da porre al legale o alla controparte prima della firma, basate sulle ambiguità e i rischi che hai identificato. Le domande devono essere precise e riferite a clausole specifiche del testo.", "note": "Utile anche se hai un legale interno: gli fa risparmiare tempo e li guida sui punti critici."}]}, {"id": "piano-onboarding", "dept": "hr", "title": "Piano di onboarding per un nuovo collaboratore", "desc": "Progetta un piano strutturato di inserimento per un nuovo assunto, personalizzato per ruolo e funzione aziendale.", "livello": "base", "tempo": "20–25 min", "strumenti": ["Claude", "ChatGPT", "Gemini", "M365 Copilot"], "upload": false, "output": "Piano di onboarding a 90 giorni con attività, milestone e materiali", "steps": [{"n": 1, "titolo": "Definizione del contesto", "prompt": "Devo progettare un piano di onboarding per un nuovo collaboratore con questo profilo:\n- Ruolo: [titolo]\n- Funzione aziendale: [reparto]\n- Esperienza: [junior/senior]\n- Data di ingresso: [data]\n- Lavoro: [in sede / remoto / ibrido]\n\nQuali sono le aree chiave da coprire nelle prime 2 settimane, nel primo mese e nei primi 90 giorni? Struttura la risposta come framework.", "note": "Più dettagliato è il profilo, più il piano sarà specifico e utile."}, {"n": 2, "titolo": "Piano dettagliato a 90 giorni", "prompt": "Espandi il framework in un piano dettagliato con:\n- Giorni 1–5: attività giornaliere, persone da incontrare, strumenti da configurare\n- Settimane 2–4: obiettivi di apprendimento, prime responsabilità, checkpoint\n- Mese 2: autonomia progressiva, primo progetto o deliverable\n- Mese 3: valutazione dell'inserimento, obiettivi per i 6 mesi\n\nPer ogni fase indica chi è responsabile (HR, manager, buddy) e come misurare il successo.", "note": ""}, {"n": 3, "titolo": "Materiali di benvenuto", "prompt": "Scrivi:\n1. Email di benvenuto dal manager diretto (tono caldo, concreto, non burocratico)\n2. Agenda del primo giorno con orari e attività\n3. Checklist di 15 cose da fare nella prima settimana\n4. 5 domande che il nuovo collaboratore probabilmente si farà e le relative risposte", "note": "Questi materiali si consegnano o inviano prima del primo giorno."}, {"n": 4, "titolo": "Scheda buddy/mentore", "prompt": "Crea una scheda di 1 pagina per il buddy o mentore assegnato, con:\n- Il suo ruolo nel processo di onboarding\n- Le 5 conversazioni chiave da fare nel primo mese\n- Come riconoscere se l'inserimento sta andando bene o male\n- Come gestire le prime domande difficili del nuovo collaboratore", "note": ""}]}, {"id": "report-performance", "dept": "finance", "title": "Report mensile di performance finanziaria", "desc": "Trasforma dati grezzi di bilancio o forecast in un report narrativo chiaro per il management, con commento e raccomandazioni.", "livello": "avanzato", "tempo": "25–35 min", "strumenti": ["Claude", "ChatGPT"], "upload": true, "output": "Report finanziario mensile con narrazione, analisi degli scostamenti e raccomandazioni", "steps": [{"n": 1, "titolo": "Importa e struttura i dati", "prompt": "Allego i dati finanziari del mese [mese/anno]. Struttura i dati in una tabella con: voce, valore attuale, budget, scostamento assoluto e scostamento percentuale. Poi evidenzia automaticamente le 5 voci con scostamento più significativo (positivo o negativo).", "note": "Puoi allegare un file Excel/CSV o incollare i dati direttamente."}, {"n": 2, "titolo": "Analisi degli scostamenti", "prompt": "Per ciascuno dei 5 scostamenti più significativi scrivi un'analisi di 3–4 righe che spieghi: cosa è successo, perché è importante e se è un segnale strutturale o un evento puntuale. Usa un linguaggio da CFO: preciso, diretto, senza tecnicismi inutili.", "note": "Se conosci le cause reali, aggiungile prima di inviare per rendere l'analisi più accurata."}, {"n": 3, "titolo": "Narrazione per il management", "prompt": "Scrivi il testo di apertura del report (300–400 parole) che il CFO leggerà al management. Deve:\n- Dare il quadro generale del mese in 2 frasi\n- Segnalare le 2–3 notizie più importanti (positive e negative)\n- Anticipare le implicazioni per il trimestre/anno\n- Proporre 2–3 azioni da discutere in riunione\nTono: autorevole, chiaro, orientato alle decisioni.", "note": ""}, {"n": 4, "titolo": "Slide executive summary", "prompt": "Struttura il contenuto per 3 slide di executive summary:\n- Slide 1: KPI principali del mese (da mostrare con numeri grandi)\n- Slide 2: Analisi degli scostamenti (grafico a barre suggerito + commento)\n- Slide 3: Outlook e azioni (2 colonne: rischi / opportunità)\n\nFornisci il testo da inserire in ciascuna slide con indicazioni di layout.", "note": ""}]}, {"id": "brief-marketing", "dept": "marketing", "title": "Brief creativo per una campagna marketing", "desc": "Definisci in modo strutturato gli obiettivi, il target, il messaggio e i canali di una nuova campagna, partendo dall'esigenza di business.", "livello": "base", "tempo": "15–20 min", "strumenti": ["Claude", "ChatGPT", "Gemini", "M365 Copilot"], "upload": false, "output": "Brief creativo completo pronto per briefing all'agenzia o al team", "steps": [{"n": 1, "titolo": "Definizione dell'esigenza", "prompt": "Ho bisogno di pianificare una campagna marketing. Ecco il contesto:\n- Prodotto/servizio: [descrizione]\n- Obiettivo di business: [es. generare lead, aumentare retention, lanciare prodotto]\n- Budget indicativo: [range]\n- Tempistica: [durata/periodo]\n- Mercato target: [B2B/B2C, settore, dimensione]\n\nAiutami a trasformare questa esigenza in un obiettivo di campagna SMART (specifico, misurabile, raggiungibile, rilevante, temporizzato).", "note": ""}, {"n": 2, "titolo": "Definizione del target", "prompt": "Sulla base dell'obiettivo definito, crea 2 profili di buyer persona per questa campagna. Per ciascuno:\n- Nome di fantasia, età, ruolo, settore\n- Le 3 preoccupazioni principali nel suo lavoro\n- Come prende decisioni di acquisto\n- Dove si informa (canali, fonti, community)\n- Il messaggio che lo convince vs quello che lo respinge", "note": ""}, {"n": 3, "titolo": "Messaggio e creatività", "prompt": "Genera:\n1. Il concept creativo centrale della campagna (1 headline + 1 concept di 50 parole)\n2. 5 varianti di headline per test A/B\n3. Il body copy principale (150 parole per email/landing)\n4. 3 call-to-action alternative con tono diverso (urgenza / beneficio / curiosità)\n\nTutto deve essere coerente con il target e l'obiettivo definiti.", "note": ""}, {"n": 4, "titolo": "Piano media e brief finale", "prompt": "Ora compila il brief creativo finale in formato strutturato con:\n- Background e obiettivo\n- Target primario e secondario\n- Messaggio chiave e tone of voice\n- Canali consigliati con priorità e budget % suggerito\n- KPI di campagna e metodo di misurazione\n- Deliverable richiesti all'agenzia o al team\n- Timeline e milestone principali", "note": "Questo documento è quello che consegnerai all'agenzia o al team creativo."}]}, {"id": "documentazione-processo", "dept": "operations", "title": "Documentazione di un processo operativo", "desc": "Trascrivi, struttura e standardizza un processo aziendale esistente in una procedura leggibile, condivisibile e aggiornabile.", "livello": "base", "tempo": "20–30 min", "strumenti": ["Claude", "ChatGPT", "Gemini", "M365 Copilot"], "upload": false, "output": "Procedura operativa standard (SOP) con flow, responsabilità e checklist", "steps": [{"n": 1, "titolo": "Descrizione del processo", "prompt": "Devo documentare il seguente processo aziendale:\n- Nome del processo: [nome]\n- Funzione aziendale: [reparto]\n- Frequenza: [quotidiano/settimanale/mensile/ad evento]\n- Attori coinvolti: [ruoli]\n- Input del processo: [cosa scatta il processo]\n- Output atteso: [risultato finale]\n\nDescrivilo in modo narrativo: [descrivi il processo come lo fai oggi, anche in modo grezzo].\n\nRiorganizza questa descrizione in una sequenza logica di passaggi numerati.", "note": "Anche una descrizione imperfetta è sufficiente: il modello la struttura."}, {"n": 2, "titolo": "SOP strutturata", "prompt": "Trasforma la sequenza di passaggi in una Procedura Operativa Standard (SOP) con:\n- Intestazione: nome, versione, data, responsabile\n- Scopo e ambito di applicazione\n- Definizioni e termini chiave\n- Procedura dettagliata (numerata con sotto-passaggi)\n- Responsabilità per ogni fase (RACI semplificato)\n- Eccezioni e casi particolari\n- Riferimenti a sistemi o documenti correlati", "note": ""}, {"n": 3, "titolo": "Checklist operativa", "prompt": "Crea una checklist di controllo da usare durante l'esecuzione del processo. Deve essere:\n- Stampabile su una pagina\n- Con caselle di spunta per ogni passaggio critico\n- Con campo data e firma del responsabile\n- Con spazio per annotazioni su eccezioni\n\nFormattala come tabella con colonne: N° / Attività / Responsabile / Fatto ✓ / Note", "note": ""}, {"n": 4, "titolo": "Versione per la formazione", "prompt": "Crea una versione semplificata del processo per i nuovi collaboratori, con:\n- Spiegazione del perché esiste questo processo (obiettivo di business)\n- I 5 passi fondamentali che non si possono saltare mai\n- I 3 errori più comuni e come evitarli\n- A chi rivolgersi in caso di dubbio o eccezione", "note": ""}]}, {"id": "board-presentation", "dept": "executive", "title": "Presentazione strategica per il board", "desc": "Costruisci una presentazione efficace per comunicare una decisione strategica, un risultato o una proposta al Consiglio di Amministrazione.", "livello": "avanzato", "tempo": "40–60 min", "strumenti": ["Claude", "ChatGPT"], "upload": true, "output": "Struttura della presentazione con testi, dati e speaker notes per ogni slide", "steps": [{"n": 1, "titolo": "Definizione del messaggio centrale", "prompt": "Devo presentare al CdA il seguente argomento:\n- Oggetto: [descrizione]\n- Decisione richiesta: [cosa deve approvare il board]\n- Contesto: [situazione attuale dell'azienda]\n- Stakeholder presenti: [composizione del board]\n- Tempo disponibile: [minuti]\n\nQual è il messaggio principale che voglio che il board ricordi dopo 24 ore? Aiutami a formularlo in una frase di 20 parole, poi in 3 bullet point di supporto.", "note": "Il messaggio centrale orienta tutto il resto della presentazione."}, {"n": 2, "titolo": "Struttura della presentazione", "prompt": "Progetta la struttura della presentazione in max 10 slide. Per ogni slide:\n- Titolo\n- Contenuto chiave (3 bullet max)\n- Tipo di visual suggerito (grafico, tabella, immagine, testo)\n- Messaggio da portare a casa da quella slide\n\nLa struttura deve seguire la logica: situazione → complicazione → domanda → risposta → implicazioni → raccomandazione.", "note": "Struttura ispirata al metodo SCR (Situation-Complication-Resolution) di McKinsey."}, {"n": 3, "titolo": "Testo e dati per ogni slide", "prompt": "Scrivi il contenuto completo per ciascuna slide: titolo definitivo, testo da inserire (conciso, diretto, al massimo 50 parole per slide), e per le slide quantitative indica quali dati mostrare e in che formato.\n\nPer ogni slide aggiungi anche le speaker notes (100 parole) con quello che il presentatore dirà a voce.", "note": "Allega eventuali dati o documenti di supporto prima di questo step."}, {"n": 4, "titolo": "Gestione Q&A", "prompt": "Anticipa le 8 domande più difficili che il board potrebbe fare su questa presentazione. Per ciascuna:\n- La domanda esatta formulata come la farebbe un consigliere\n- La risposta ideale (100 parole, diretta e fondata sui dati)\n- Come gestire se non si conosce la risposta (risposta onesta che mantiene la credibilità)", "note": ""}]}, {"id": "analisi-feedback", "dept": "vendite", "title": "Analisi del feedback dei clienti", "desc": "Trasforma un insieme di feedback grezzi (email, recensioni, sondaggi, note di CRM) in insight strutturati e azioni prioritarie.", "livello": "intermedio", "tempo": "20–30 min", "strumenti": ["Claude", "ChatGPT"], "upload": true, "output": "Mappa dei temi principali, sentiment analysis e piano d'azione prioritizzato", "steps": [{"n": 1, "titolo": "Raccolta e pulizia", "prompt": "Ho raccolto i seguenti feedback dei clienti: [incolla o allega i feedback].\n\nPrima di analizzarli:\n1. Identifica e segnala eventuali feedback duplicati o poco significativi\n2. Standardizza il formato (data, fonte, cliente se disponibile, testo)\n3. Conta quanti feedback per fonte (email, recensione, survey, ecc.)", "note": "Puoi includere feedback in formati diversi: il modello li normalizza."}, {"n": 2, "titolo": "Categorizzazione e temi", "prompt": "Analizza tutti i feedback e categorizzali per tema. Per ogni tema:\n- Nome del tema\n- Numero di menzioni\n- Sentiment prevalente (positivo/neutro/negativo)\n- 2–3 citazioni rappresentative\n- Se è un tema urgente, strutturale o episodico\n\nOrdina i temi per frequenza.", "note": ""}, {"n": 3, "titolo": "Insight e pattern", "prompt": "Sulla base della categorizzazione, identifica:\n1. Le 3 cose che i clienti apprezzano di più (con citazioni)\n2. Le 3 criticità più ricorrenti (con impatto stimato sulla retention)\n3. 1–2 segnali deboli che indicano rischi futuri\n4. Differenze significative tra segmenti di clienti (se i dati lo permettono)\n5. Confronto qualitativo con il periodo precedente (se hai dati storici)", "note": ""}, {"n": 4, "titolo": "Piano d'azione", "prompt": "Trasforma gli insight in un piano d'azione con:\n- 3 azioni immediate (entro 30 giorni) con responsabile suggerito\n- 2 iniziative a medio termine (30–90 giorni)\n- 1 raccomandazione strategica per il management\n\nPer ogni azione indica: cosa fare, chi coinvolgere, come misurare il successo e quale feedback indirizza.", "note": "Output pronto per essere presentato in team o al management."}]}];
+const DEPT = {"vendite": {"icon": "💼", "color": "#6366f1"}, "legal": {"icon": "⚖️", "color": "#ef4444"}, "hr": {"icon": "👥", "color": "#8b5cf6"}, "finance": {"icon": "💰", "color": "#f59e0b"}, "marketing": {"icon": "📣", "color": "#ec4899"}, "operations": {"icon": "⚙️", "color": "#14b8a6"}, "executive": {"icon": "🎯", "color": "#3b82f6"}};
+const LEVEL = {"base": {"label": "Base", "color": "#10b981"}, "intermedio": {"label": "Intermedio", "color": "#f59e0b"}, "avanzato": {"label": "Avanzato", "color": "#ef4444"}};
+
+let currentDept = 'all';
+
+const depts = ['all',...Object.keys(DEPT)];
+const COPY_SVG = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+const OK_SVG = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+function buildSidebar(){
+  const nav = document.getElementById('sidebar');
+  nav.innerHTML = '<div class="sidebar-label">Funzione</div>';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'dept-btn active';
+  allBtn.dataset.dept = 'all';
+  allBtn.innerHTML = `<span class="dept-icon">📋</span>Tutte<span class="dept-count">${RECIPES.length}</span>`;
+  allBtn.onclick = () => showDept('all');
+  nav.appendChild(allBtn);
+  Object.entries(DEPT).forEach(([k,v]) => {
+    const count = RECIPES.filter(r=>r.dept===k).length;
+    if(!count) return;
+    const b = document.createElement('button');
+    b.className='dept-btn'; b.dataset.dept=k;
+    b.innerHTML=`<span class="dept-icon">${v.icon}</span>${k.charAt(0).toUpperCase()+k.slice(1)}<span class="dept-count">${count}</span>`;
+    b.onclick=()=>showDept(k);
+    nav.appendChild(b);
+  });
+}
+
+function showDept(dept){
+  window.scrollTo({top:0,behavior:'smooth'});
+  currentDept = dept;
+  document.querySelectorAll('.dept-btn').forEach(b=>b.classList.toggle('active',b.dataset.dept===dept));
+  renderMain();
+}
+
+function renderMain(){
+  const main = document.getElementById('main');
+  const filtered = currentDept==='all' ? RECIPES : RECIPES.filter(r=>r.dept===currentDept);
+  const dm = currentDept==='all' ? {icon:'📋',color:'#6366f1'} : DEPT[currentDept];
+
+  const title = currentDept==='all' ? 'Tutte le ricette' : currentDept.charAt(0).toUpperCase()+currentDept.slice(1);
+  const desc = currentDept==='all'
+    ? 'Workflow pratici e testati per le principali funzioni aziendali. Ogni ricetta è una sequenza di prompt da usare in ordine per completare un task complesso.'
+    : `${filtered.length} ${filtered.length===1?'ricetta':'ricette'} per la funzione ${title.toLowerCase()}.`;
+
+  main.innerHTML = `
+    <div class="dept-header">
+      <div class="dept-title">${dm.icon} ${title}</div>
+      <div class="dept-desc">${desc}</div>
+    </div>
+    <div class="recipe-list">${filtered.map(buildCard).join('')}</div>`;
+
+  main.querySelectorAll('.recipe-head').forEach(h=>{
+    h.addEventListener('click',()=>toggleCard(h));
+  });
+  main.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const text = btn.dataset.text;
+      navigator.clipboard.writeText(text).catch(()=>{
+        const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+      });
+      btn.innerHTML = OK_SVG+' Copiato';
+      setTimeout(()=>{btn.innerHTML=COPY_SVG+' Copia';},1500);
+    });
+  });
+}
+
+function toggleCard(head){
+  const body = head.nextElementSibling;
+  const icon = head.querySelector('.toggle-icon');
+  const open = body.classList.toggle('open');
+  icon.classList.toggle('open',open);
+}
+
+function buildCard(r){
+  const dm = DEPT[r.dept]||{icon:'📋',color:'#6366f1'};
+  const lm = LEVEL[r.livello]||{label:r.livello,color:'#6366f1'};
+  const stepsHtml = r.steps.map((s,i)=>{
+    const isLast = i===r.steps.length-1;
+    return `<div class="step">
+      <div>
+        <div class="step-num" style="background:${dm.color}">${s.n}</div>
+        ${!isLast?'<div class="step-line"><div class="step-line-inner"></div></div>':''}
+      </div>
+      <div>
+        <div class="step-title">${s.titolo}</div>
+        <div class="step-prompt" style="--rc:${dm.color}">
+          <button class="copy-btn" data-text="${s.prompt.replace(/"/g,'&quot;')}">${COPY_SVG} Copia</button>
+          ${escH(s.prompt)}
+        </div>
+        ${s.note?`<div class="step-note">${s.note}</div>`:''}</div>
+    </div>`;
+  }).join('');
+  const tools = r.strumenti.map(t=>`<span class="badge b-tool">${t}</span>`).join('');
+  const uploadBadge = r.upload?`<span class="badge b-upload">📎 upload file</span>`:'';
+  return `<div class="recipe-card" style="--rc:${dm.color}">
+    <div class="recipe-head">
+      <div style="flex:1">
+        <div class="recipe-title">${dm.icon} ${r.title}</div>
+        <div class="recipe-desc">${r.desc}</div>
+        <div class="recipe-meta">
+          <span class="badge b-level" style="--lc:${lm.color};--lc-bg:${lm.color}22;--lc-border:${lm.color}44">${lm.label}</span>
+          <span class="badge b-time">⏱ ${r.tempo}</span>
+          ${tools}${uploadBadge}
+        </div>
+        <div class="recipe-output">🎯 Output: ${r.output}</div>
+      </div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="steps-section">
+      ${stepsHtml}
+      <div class="output-box">🎯 <strong>Output atteso:</strong>&nbsp;${r.output}</div>
+    </div>
+  </div>`;
+}
+
+function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+buildSidebar();
+renderMain();
+</script>
+</body>
+</html>

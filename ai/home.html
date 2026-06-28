@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Playbook — BBT Consulting</title>
+<style>
+:root{
+  --bg:#0f1117;--bg2:#151825;--bg3:#1a2035;
+  --border:#252d44;--text:#e2e8f0;--text-muted:#64748b;
+  --accent:#6366f1;--radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+
+/* HEADER */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{display:flex;align-items:center;gap:12px;}
+.bbt{background:#6366f1;color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;}
+.brand-name{font-size:16px;font-weight:700;}
+.brand-sep{color:var(--border);margin:0 2px;}
+.brand-sub{font-size:16px;font-weight:400;color:var(--text-muted);}
+.header-meta{font-size:12px;color:var(--text-muted);background:var(--bg3);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+/* HERO */
+.hero{padding:72px 40px 56px;max-width:960px;margin:0 auto;text-align:center;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#818cf8;margin-bottom:18px;}
+.hero h1{font-size:46px;font-weight:800;line-height:1.15;margin-bottom:18px;background:linear-gradient(135deg,#e2e8f0 30%,#a5b4fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:17px;color:var(--text-muted);max-width:580px;margin:0 auto 44px;line-height:1.7;}
+.stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 28px;min-width:120px;}
+.stat-n{font-size:28px;font-weight:800;color:#818cf8;line-height:1;}
+.stat-l{font-size:12px;color:var(--text-muted);margin-top:4px;}
+
+/* PATH */
+.path-wrap{max-width:840px;margin:0 auto;padding:0 40px 64px;}
+.path-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);text-align:center;margin-bottom:28px;}
+.path{display:flex;align-items:center;justify-content:center;}
+.pnode{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:opacity .15s;}
+.pnode:hover .pcircle{transform:scale(1.1);}
+.pcircle{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:15px;
+  transition:transform .2s;
+  border:2px solid transparent;
+}
+.pcircle.on{background:var(--nc);color:#fff;}
+.pcircle.off{background:var(--bg2);border-color:var(--border);color:var(--text-muted);}
+.plabel{font-size:11px;font-weight:600;color:var(--text-muted);text-align:center;max-width:72px;line-height:1.3;}
+.pline{flex:1;height:2px;background:var(--border);min-width:24px;max-width:72px;}
+.pline.on{background:linear-gradient(90deg,var(--lc1),var(--lc2));}
+
+/* SECTIONS */
+.section{max-width:960px;margin:0 auto;padding:0 40px 64px;}
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.sec-num{
+  width:38px;height:38px;border-radius:9px;
+  background:var(--sc);color:#fff;
+  font-weight:800;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+}
+.sec-text{}
+.sec-title{font-size:21px;font-weight:700;}
+.sec-desc{font-size:14px;color:var(--text-muted);margin-top:4px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
+
+/* CARD */
+.card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.card.link{cursor:pointer;}
+.card.link:hover{background:var(--bg3);border-color:#394160;transform:translateY(-2px);}
+.card.dim{opacity:.55;}
+.bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc);}
+.card-icon{font-size:30px;line-height:1;}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.card-title{font-size:16px;font-weight:700;margin-top:6px;}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.55;flex:1;}
+.card-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px;}
+.tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:11px;padding:3px 8px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text-muted);}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;flex-shrink:0;}
+.b-on{background:#14532d;color:#86efac;}
+.b-off{background:#1e1b4b;color:#a5b4fc;}
+.arrow{color:#818cf8;font-size:13px;font-weight:600;display:flex;align-items:center;gap:3px;flex-shrink:0;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;color:var(--text-muted);font-size:13px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">
+    <a href="index.html" style="font-size:12px;color:#7878a0;text-decoration:none;display:flex;align-items:center;gap:5px;margin-right:16px;transition:color .15s;letter-spacing:.04em" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='#7878a0'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> AI</a>
+    <span class="bbt">BBT</span>
+    <span class="brand-name">AI Playbook</span>
+    <span class="brand-sep">|</span>
+    <span class="brand-sub">BBT Consulting</span>
+  </div>
+  <span class="header-meta">Formazione &amp; Reference · 5 livelli</span>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Il tuo playbook completo sull&rsquo;intelligenza artificiale</div>
+  <h1>Dal prompt all&rsquo;agente.<br>Passo dopo passo.</h1>
+  <p>Strumenti, framework e guide per usare l&rsquo;AI in azienda con metodo — dalla comprensione dei fondamenti all&rsquo;adozione consapevole.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">82</div><div class="stat-l">Prompt M365</div></div>
+    <div class="stat"><div class="stat-n">43</div><div class="stat-l">Prompt C·O·C·V</div></div>
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">Agenti AI</div></div>
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">Livelli formativi</div></div>
+  </div>
+</div>
+
+<!-- PERCORSO -->
+<div class="path-wrap">
+  <div class="path-label">Il percorso formativo</div>
+  <div class="path">
+    <div class="pnode" onclick="document.getElementById('l1').scrollIntoView({behavior:'smooth'})">
+      <div class="pcircle on" style="--nc:#3b82f6">1</div>
+      <div class="plabel">Fondamenti</div>
+    </div>
+    <div class="pline on" style="--lc1:#3b82f6;--lc2:#6366f1"></div>
+    <div class="pnode" onclick="document.getElementById('l2').scrollIntoView({behavior:'smooth'})">
+      <div class="pcircle on" style="--nc:#6366f1">2</div>
+      <div class="plabel">Prompt</div>
+    </div>
+    <div class="pline on" style="--lc1:#6366f1;--lc2:#8b5cf6"></div>
+    <div class="pnode" onclick="document.getElementById('l3').scrollIntoView({behavior:'smooth'})">
+      <div class="pcircle on" style="--nc:#8b5cf6">3</div>
+      <div class="plabel">Agenti</div>
+    </div>
+    <div class="pline on" style="--lc1:#8b5cf6;--lc2:#f59e0b"></div>
+    <div class="pnode" onclick="document.getElementById('l4').scrollIntoView({behavior:'smooth'})">
+      <div class="pcircle on" style="--nc:#f59e0b">4</div>
+      <div class="plabel">Workflow</div>
+    </div>
+    <div class="pline on" style="--lc1:#f59e0b;--lc2:#14b8a6"></div>
+    <div class="pnode" onclick="document.getElementById('l5').scrollIntoView({behavior:'smooth'})">
+      <div class="pcircle on" style="--nc:#14b8a6">5</div>
+      <div class="plabel">Governance</div>
+    </div>
+  </div>
+</div>
+
+<!-- L1: FONDAMENTI -->
+<div class="section" id="l1">
+  <div class="sec-head">
+    <div class="sec-num" style="--sc:#3b82f6">1</div>
+    <div class="sec-text">
+      <div class="sec-title">Fondamenti</div>
+      <div class="sec-desc">Vocabolario, orientamento e scelta degli strumenti. Il punto di partenza per chiunque si avvicini all'AI in azienda, dal manager al team operativo.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <a class="card link" href="glossario.html" style="--cc:#3b82f6">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">📖</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Glossario AI</div>
+      <div class="card-desc">Termini chiave spiegati in plain language con esempi aziendali concreti. Da LLM a RAG, da allucinazione a context window: tutto ciò che serve per capire di cosa si parla.</div>
+      <div class="card-foot"><div class="tags"><span class="tag">Tutti i livelli</span><span class="tag">Reference</span><span class="tag">43 termini</span></div><span class="arrow">Apri →</span></div>
+    </a>
+    <a class="card link" href="strumenti.html" style="--cc:#3b82f6">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">🛠️</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Confronto strumenti</div>
+      <div class="card-desc">Matrice comparativa di Claude, ChatGPT, Gemini, Copilot e Perplexity: punti di forza, casi d'uso ideali, costi e limitazioni. Per scegliere con criterio.</div>
+      <div class="card-foot"><div class="tags"><span class="tag">Decisori</span><span class="tag">Strategia</span><span class="tag">5 strumenti</span></div><span class="arrow">Apri →</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- L2: PROMPT -->
+<div class="section" id="l2">
+  <div class="sec-head">
+    <div class="sec-num" style="--sc:#6366f1">2</div>
+    <div class="sec-text">
+      <div class="sec-title">Prompt</div>
+      <div class="sec-desc">Librerie di prompt pronti all'uso per le principali funzioni aziendali, con due approcci complementari: ottimizzato per M365 Copilot o universale con struttura C·O·C·V.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <a class="card link" href="prompts.html" style="--cc:#6366f1">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">📋</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Prompt M365 Copilot</div>
+      <div class="card-desc">82 prompt ottimizzati per Word, Excel, Outlook, Teams, PowerPoint e Copilot Chat. Filtrabili per funzione aziendale e superficie applicativa.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">Microsoft 365</span><span class="tag">82 prompt</span><span class="tag">8 reparti</span></div>
+        <span class="arrow">Apri →</span>
+      </div>
+    </a>
+    <a class="card link" href="cocv.html" style="--cc:#6366f1">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">⚙️</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Prompt C·O·C·V</div>
+      <div class="card-desc">43 prompt costruiti con il framework Contesto · Obiettivo · Compito · Vincoli: la struttura che produce risultati consistenti su qualsiasi LLM.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">Tutti gli LLM</span><span class="tag">43 prompt</span><span class="tag">Framework</span></div>
+        <span class="arrow">Apri →</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- L3: AGENTI -->
+<div class="section" id="l3">
+  <div class="sec-head">
+    <div class="sec-num" style="--sc:#8b5cf6">3</div>
+    <div class="sec-text">
+      <div class="sec-title">Agenti</div>
+      <div class="sec-desc">System prompt completi per agenti AI specializzati per funzione aziendale. Configurabili su Claude, ChatGPT, Gemini e M365 Copilot con Agent Builder.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <a class="card link" href="agents.html" style="--cc:#8b5cf6">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">🤖</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Agenti AI per funzione aziendale</div>
+      <div class="card-desc">8 agenti con flusso guidato in 4 fasi: dal discovery alla simulazione di roleplay. Ogni agente include system prompt completo e conversation starters pronti all'uso.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">Multi-platform</span><span class="tag">8 agenti</span><span class="tag">Flusso guidato</span></div>
+        <span class="arrow">Apri →</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- L4: WORKFLOW -->
+<div class="section" id="l4">
+  <div class="sec-head">
+    <div class="sec-num" style="--sc:#f59e0b">4</div>
+    <div class="sec-text">
+      <div class="sec-title">Workflow</div>
+      <div class="sec-desc">Il salto tra il singolo prompt e l'agente autonomo. Sequenze operative testate per task aziendali ricorrenti, con prompt da concatenare in ordine.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <a class="card link" href="ricette.html" style="--cc:#f59e0b">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">🔄</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Ricette AI</div>
+      <div class="card-desc">Workflow multi-step per i task aziendali più comuni: prepara una proposta, analizza un bilancio, gestisci un'onboarding. Ogni ricetta mostra la sequenza esatta di prompt da usare.</div>
+      <div class="card-foot"><div class="tags"><span class="tag">Intermedio</span><span class="tag">Operativo</span><span class="tag">8 ricette</span></div><span class="arrow">Apri →</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- L5: GOVERNANCE -->
+<div class="section" id="l5">
+  <div class="sec-head">
+    <div class="sec-num" style="--sc:#14b8a6">5</div>
+    <div class="sec-text">
+      <div class="sec-title">Governance</div>
+      <div class="sec-desc">Adottare l'AI con criterio. Linee guida operative su privacy, rischi, policy e introduzione organizzativa: il livello che trasforma l'utilizzo individuale in vantaggio aziendale sostenibile.</div>
+    </div>
+  </div>
+  <div class="cards">
+    <a class="card link" href="governance.html" style="--cc:#14b8a6">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">⚖️</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Uso responsabile dell'AI</div>
+      <div class="card-desc">Cosa non condividere con un LLM, come riconoscere e gestire le allucinazioni, GDPR e riservatezza dei dati, policy aziendali e checklist per l'adozione sicura.</div>
+      <div class="card-foot"><div class="tags"><span class="tag">Compliance</span><span class="tag">Rischi</span><span class="tag">Policy</span></div><span class="arrow">Apri →</span></div>
+    </a>
+    <a class="card link" href="governance.html#tab-roadmap" style="--cc:#14b8a6">
+      <div class="bar"></div>
+      <div class="card-top">
+        <div class="card-icon">🗺️</div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+      <div class="card-title">Roadmap di adozione</div>
+      <div class="card-desc">Framework strategico per introdurre l'AI in azienda: valutazione della maturità digitale, piano di rollout per funzione e livello, indicatori di successo.</div>
+      <div class="card-foot"><div class="tags"><span class="tag">Strategia</span><span class="tag">Leadership</span><span class="tag">Change</span></div><span class="arrow">Apri →</span></div>
+    </a>
+  </div>
+</div>
+
+<footer>AI Playbook · BBT Consulting · Materiale formativo riservato</footer>
+
+</body>
+</html>

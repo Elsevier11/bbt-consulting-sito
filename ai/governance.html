@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance AI — BBT Consulting</title>
+<style>
+:root{--bg:#0f1117;--bg2:#151825;--bg3:#1a2035;--border:#252d44;--text:#e2e8f0;--muted:#64748b;--radius:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+a{text-decoration:none;color:inherit;}
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.hbrand{display:flex;align-items:center;gap:12px;}
+.bbt{background:#6366f1;color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;}
+.htitle{font-size:15px;font-weight:700;}
+.hbadge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+/* TABS */
+.tabs-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 28px;display:flex;gap:0;}
+.tab{padding:14px 22px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
+.tab:hover{color:var(--text);}
+.tab.active{color:#a5b4fc;border-bottom-color:#6366f1;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+/* CONTENT */
+.content{max-width:860px;margin:0 auto;padding:40px 28px 60px;}
+.page-title{font-size:30px;font-weight:800;margin-bottom:10px;}
+.page-intro{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:36px;max-width:680px;}
+/* SECTIONS */
+h2{font-size:19px;font-weight:800;margin:36px 0 14px;display:flex;align-items:center;gap:10px;}
+h2:first-of-type{margin-top:0;}
+p{font-size:14px;color:#cbd5e1;line-height:1.7;margin-bottom:12px;}
+/* CARDS */
+.cards-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.card-icon{font-size:24px;margin-bottom:10px;}
+.card-title{font-size:14px;font-weight:700;margin-bottom:6px;}
+.card-body{font-size:13px;color:var(--muted);line-height:1.6;}
+/* ALERT BOXES */
+.alert{border-radius:var(--radius);padding:16px 20px;margin:16px 0;display:flex;gap:12px;align-items:flex-start;}
+.alert-danger{background:#2d0f0f;border:1px solid #7f1d1d;color:#fca5a5;}
+.alert-warn{background:#2d1f0a;border:1px solid #78350f;color:#fcd34d;}
+.alert-ok{background:#0d1f0d;border:1px solid #166534;color:#86efac;}
+.alert-info{background:#0f1f30;border:1px solid #1e3a5f;color:#93c5fd;}
+.alert-icon{font-size:18px;flex-shrink:0;}
+.alert-text{font-size:13px;line-height:1.6;}
+.alert-title{font-weight:700;margin-bottom:4px;}
+/* LISTS */
+ul.clean{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0;}
+ul.clean li{font-size:13.5px;color:#cbd5e1;line-height:1.5;display:flex;gap:10px;}
+ul.clean li::before{content:"→";color:#6366f1;font-weight:700;flex-shrink:0;}
+ul.clean.red li::before{content:"✗";color:#ef4444;}
+ul.clean.green li::before{content:"✓";color:#10b981;}
+/* CHECKLIST */
+.checklist{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0;}
+.checklist-head{padding:14px 18px;background:var(--bg3);font-size:13px;font-weight:700;color:#a5b4fc;border-bottom:1px solid var(--border);}
+.checklist-item{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;font-size:13px;color:#cbd5e1;line-height:1.5;}
+.checklist-item:last-child{border-bottom:none;}
+.check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.check.done{background:#6366f1;border-color:#6366f1;}
+.check.done::after{content:"✓";color:#fff;font-size:10px;font-weight:700;}
+/* MATURITY */
+.maturity{display:flex;flex-direction:column;gap:12px;margin:16px 0;}
+.mat-level{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.mat-head{padding:12px 16px;display:flex;align-items:center;gap:12px;border-left:4px solid var(--mc);}
+.mat-num{font-size:11px;font-weight:800;background:var(--mc);color:#fff;padding:2px 8px;border-radius:4px;}
+.mat-name{font-size:15px;font-weight:700;}
+.mat-desc{font-size:13px;color:var(--muted);margin-top:2px;}
+.mat-body{padding:12px 16px;background:var(--bg2);}
+.mat-indicators{display:flex;flex-wrap:wrap;gap:6px;}
+.mat-tag{font-size:11px;padding:3px 9px;border-radius:4px;background:var(--mc-bg);color:var(--mc);border:1px solid var(--mc-border);}
+/* PHASES */
+.phases{display:flex;flex-direction:column;gap:0;}
+.phase{display:grid;grid-template-columns:60px 1fr;gap:0 16px;}
+.phase-num{display:flex;flex-direction:column;align-items:center;}
+.phase-circle{width:44px;height:44px;border-radius:50%;background:var(--pc);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.phase-line{width:2px;background:var(--border);flex:1;margin:6px auto;}
+.phase-body{padding-bottom:28px;}
+.phase-title{font-size:16px;font-weight:700;margin:10px 0 6px;}
+.phase-period{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--pc);}
+.phase-desc{font-size:13.5px;color:#cbd5e1;line-height:1.6;}
+.phase-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.phase-action{font-size:11px;padding:3px 9px;border-radius:4px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);}
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="home.html" style="font-size:13px;color:#64748b;text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .15s;" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='#64748b'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Playbook</a>
+  <div class="hbrand">
+    <span class="bbt">BBT</span>
+    <span class="htitle">Governance AI</span>
+  </div>
+  <span class="hbadge">Governance · Livello 5</span>
+</div>
+
+<div class="tabs-bar">
+  <div class="tab active" data-tab="responsabile">⚖️ Uso responsabile</div>
+  <div class="tab" data-tab="roadmap">🗺️ Roadmap di adozione</div>
+</div>
+
+<!-- TAB 1: USO RESPONSABILE -->
+<div class="tab-content active" id="tab-responsabile">
+<div class="content">
+  <div class="page-title">Uso responsabile dell'AI</div>
+  <p class="page-intro">L'AI generativa è uno strumento potente e, come ogni strumento, richiede consapevolezza dei rischi. Questa guida raccoglie le regole pratiche per usare LLM e agenti AI in modo efficace e sicuro in contesto aziendale.</p>
+
+  <h2>🔴 Cosa non condividere mai con un LLM</h2>
+  <p>Ogni testo inviato a un modello AI transita e viene elaborato sui server dell'azienda fornitrice. Alcune piattaforme usano le conversazioni per addestrare futuri modelli (salvo opt-out). Regola fondamentale: tratta un LLM come tratteresti una email inviata a un indirizzo esterno.</p>
+
+  <div class="alert alert-danger">
+    <div class="alert-icon">🚫</div>
+    <div class="alert-text">
+      <div class="alert-title">Non condividere mai</div>
+      Dati personali di dipendenti, clienti o candidati (nome, CF, dati sanitari, stipendi) · Credenziali di accesso e password · Segreti commerciali, brevetti in fase di registrazione, offerte non pubbliche · Informazioni finanziarie riservate pre-annuncio · Dati coperti da NDA · Piani strategici non comunicati al mercato
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text">
+      <div class="alert-title">Condividere con cautela (verifica la policy della piattaforma)</div>
+      Dati di clienti in forma anonimizzata · Informazioni su fornitori in trattativa · Bozze di comunicazioni interne su temi sensibili · Dati finanziari aggregati · Feedback di dipendenti
+    </div>
+  </div>
+
+  <div class="alert alert-ok">
+    <div class="alert-icon">✅</div>
+    <div class="alert-text">
+      <div class="alert-title">Sicuro da condividere</div>
+      Documenti pubblici (siti web, comunicati stampa, report pubblici) · Testi da revisionare senza dati sensibili · Brief creativi con informazioni generali · Domande metodologiche o di framework · Richieste di brainstorming su argomenti non riservati
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>🧠 Gestire le allucinazioni</h2>
+  <p>Un LLM produce testo statisticamente plausibile, non necessariamente vero. Può citare normative inesistenti, inventare referenze bibliografiche o confondere dati. Questo non è un bug ma una caratteristica strutturale dei modelli probabilistici.</p>
+
+  <div class="cards-2">
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">Quando il rischio è alto</div>
+      <div class="card-body">Dati numerici precisi · Citazioni di leggi e normative · Date e nomi propri · Statistiche di mercato · Informazioni recenti (post data cutoff) · Informazioni specifiche di un settore di nicchia</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">Come mitigare</div>
+      <div class="card-body">Fornisci tu i dati e chiedi al modello di elaborarli · Usa RAG o Perplexity per dati aggiornati · Chiedi "Sei sicuro di questo? Indica se non lo sai" · Verifica sempre su fonti primarie prima di usare dati critici</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-icon">💡</div>
+    <div class="alert-text">
+      <div class="alert-title">Regola pratica</div>
+      Quanto più l'informazione è specifica, numerica o recente, tanto più è necessaria la verifica su fonte primaria. Un LLM è affidabile nella struttura e nel ragionamento; meno affidabile nei dati fattuali puntuali.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>🔒 GDPR e privacy: gli aspetti pratici</h2>
+
+  <ul class="clean">
+    <li>Verifica se la piattaforma AI che usi ha il Data Processing Agreement (DPA) — necessario per le aziende UE che trattano dati personali.</li>
+    <li>Microsoft 365 Copilot, Google Workspace e alcune versioni enterprise di ChatGPT garantiscono che i dati non vengano usati per l'addestramento. Verifica la versione che stai usando.</li>
+    <li>Prima di condividere dati di dipendenti o clienti, anonimizza: sostituisci nomi con ruoli, codici fiscali con ID anonimi, nomi di aziende con categorie.</li>
+    <li>Se usi API, controlla le condizioni del provider: alcuni permettono opt-out dall'addestramento, altri no per default.</li>
+    <li>Considera l'uso di modelli open-source on-premise (es. Llama) per le funzioni con i dati più sensibili.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>📋 Checklist per l'uso responsabile in azienda</h2>
+  <p>Usa questa checklist prima di avviare un progetto che prevede l'integrazione di AI in processi aziendali.</p>
+
+  <div class="checklist">
+    <div class="checklist-head">Prima di usare un LLM per un task aziendale</div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>Ho verificato che il testo che invierò non contiene dati personali o informazioni riservate.</div></div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>Ho controllato la policy sulla privacy della piattaforma che sto usando (training opt-out, DPA, data residency).</div></div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>So che l'output potrebbe contenere errori fattuali e ho pianificato una fase di verifica.</div></div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>Il testo finale sarà revisionato da una persona prima dell'invio o della pubblicazione.</div></div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>Per dati numerici o normativi, ho una fonte primaria da citare che verificherò.</div></div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>Se uso l'AI per decisioni che impattano persone (HR, credito, selezione), ho predisposto un processo di supervisione umana.</div></div>
+    <div class="checklist-item"><div class="check" onclick="this.classList.toggle('done')"></div><div>Ho informato il team delle modalità di utilizzo e delle regole condivise sull'AI.</div></div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>⚡ Livelli di autonomia: una guida pratica</h2>
+  <p>Non tutte le attività si prestano allo stesso livello di autonomia AI. Una delle decisioni più importanti nella governance è scegliere quanto lasciare decidere all'AI e quando richiedere supervisione umana.</p>
+
+  <div class="cards-3">
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <div class="card-title">Copilot (suggerisce)</div>
+      <div class="card-body">L'AI propone, l'umano decide e approva prima di ogni azione. Adatto per: comunicazioni verso clienti, decisioni su persone, approvazione di pagamenti, contenuti pubblici.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Assistito (revisionato)</div>
+      <div class="card-body">L'AI esegue, l'umano rivede il risultato prima che abbia effetto esterno. Adatto per: redazione di documenti interni, analisi dati, sintesi di meeting, classificazione di email.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">Autonomo (monitorato)</div>
+      <div class="card-body">L'AI esegue task ripetitivi e a basso rischio in modo autonomo, con log e supervisione periodica. Adatto per: tagging di documenti, routing di richieste, report automatici su dati strutturati.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- TAB 2: ROADMAP -->
+<div class="tab-content" id="tab-roadmap">
+<div class="content">
+  <div class="page-title">Roadmap di adozione AI</div>
+  <p class="page-intro">Introdurre l'AI in azienda non è un evento ma un percorso. Questo framework guida l'organizzazione dalla prima sperimentazione individuale all'adozione sistematica, con una progressione realistica e misurabile.</p>
+
+  <h2>📊 Il modello di maturità AI</h2>
+  <p>Prima di pianificare il percorso, è utile capire a che livello si trova oggi l'organizzazione. Ogni livello ha caratteristiche distinctive e richiede interventi specifici.</p>
+
+  <div class="maturity">
+    <div class="mat-level">
+      <div class="mat-head" style="--mc:#64748b">
+        <span class="mat-num">1</span>
+        <div><div class="mat-name">Inconsapevole</div><div class="mat-desc">L'AI non è un tema aziendale. Uso sporadico e individuale non strutturato.</div></div>
+      </div>
+      <div class="mat-body">
+        <div class="mat-indicators">
+          <span class="mat-tag" style="--mc:#64748b;--mc-bg:#64748b22;--mc-border:#64748b44">Nessuna policy AI</span>
+          <span class="mat-tag" style="--mc:#64748b;--mc-bg:#64748b22;--mc-border:#64748b44">Uso personale non coordinato</span>
+          <span class="mat-tag" style="--mc:#64748b;--mc-bg:#64748b22;--mc-border:#64748b44">Nessuna formazione</span>
+          <span class="mat-tag" style="--mc:#64748b;--mc-bg:#64748b22;--mc-border:#64748b44">Leadership non coinvolta</span>
+        </div>
+      </div>
+    </div>
+    <div class="mat-level">
+      <div class="mat-head" style="--mc:#f59e0b">
+        <span class="mat-num">2</span>
+        <div><div class="mat-name">Esplorativo</div><div class="mat-desc">Alcuni team sperimentano autonomamente. Entusiasmo e confusione coesistono.</div></div>
+      </div>
+      <div class="mat-body">
+        <div class="mat-indicators">
+          <span class="mat-tag" style="--mc:#f59e0b;--mc-bg:#f59e0b22;--mc-border:#f59e0b44">Sperimentazione bottom-up</span>
+          <span class="mat-tag" style="--mc:#f59e0b;--mc-bg:#f59e0b22;--mc-border:#f59e0b44">Risultati inconsistenti</span>
+          <span class="mat-tag" style="--mc:#f59e0b;--mc-bg:#f59e0b22;--mc-border:#f59e0b44">Nessuno standard condiviso</span>
+          <span class="mat-tag" style="--mc:#f59e0b;--mc-bg:#f59e0b22;--mc-border:#f59e0b44">Formazione informale</span>
+        </div>
+      </div>
+    </div>
+    <div class="mat-level">
+      <div class="mat-head" style="--mc:#6366f1">
+        <span class="mat-num">3</span>
+        <div><div class="mat-name">Strutturato</div><div class="mat-desc">L'AI è un tema con ownership chiara. Esistono policy e strumenti condivisi.</div></div>
+      </div>
+      <div class="mat-body">
+        <div class="mat-indicators">
+          <span class="mat-tag" style="--mc:#6366f1;--mc-bg:#6366f122;--mc-border:#6366f144">Policy AI definita</span>
+          <span class="mat-tag" style="--mc:#6366f1;--mc-bg:#6366f122;--mc-border:#6366f144">Strumenti aziendali scelti</span>
+          <span class="mat-tag" style="--mc:#6366f1;--mc-bg:#6366f122;--mc-border:#6366f144">Formazione strutturata</span>
+          <span class="mat-tag" style="--mc:#6366f1;--mc-bg:#6366f122;--mc-border:#6366f144">Casi d'uso misurati</span>
+        </div>
+      </div>
+    </div>
+    <div class="mat-level">
+      <div class="mat-head" style="--mc:#10b981">
+        <span class="mat-num">4</span>
+        <div><div class="mat-name">Integrato</div><div class="mat-desc">L'AI è embedded nei processi aziendali chiave. Misurazione sistematica del valore.</div></div>
+      </div>
+      <div class="mat-body">
+        <div class="mat-indicators">
+          <span class="mat-tag" style="--mc:#10b981;--mc-bg:#10b98122;--mc-border:#10b98144">AI nei workflow core</span>
+          <span class="mat-tag" style="--mc:#10b981;--mc-bg:#10b98122;--mc-border:#10b98144">ROI misurato</span>
+          <span class="mat-tag" style="--mc:#10b981;--mc-bg:#10b98144;--mc-border:#10b98144">Agenti specializzati in uso</span>
+          <span class="mat-tag" style="--mc:#10b981;--mc-bg:#10b98122;--mc-border:#10b98144">Centro di competenza AI</span>
+        </div>
+      </div>
+    </div>
+    <div class="mat-level">
+      <div class="mat-head" style="--mc:#8b5cf6">
+        <span class="mat-num">5</span>
+        <div><div class="mat-name">Trasformativo</div><div class="mat-desc">L'AI ridefinisce i modelli operativi e di business. Vantaggio competitivo strutturale.</div></div>
+      </div>
+      <div class="mat-body">
+        <div class="mat-indicators">
+          <span class="mat-tag" style="--mc:#8b5cf6;--mc-bg:#8b5cf622;--mc-border:#8b5cf644">Nuovi prodotti/servizi AI-native</span>
+          <span class="mat-tag" style="--mc:#8b5cf6;--mc-bg:#8b5cf622;--mc-border:#8b5cf644">Automazione di processo estesa</span>
+          <span class="mat-tag" style="--mc:#8b5cf6;--mc-bg:#8b5cf622;--mc-border:#8b5cf644">AI come vantaggio competitivo</span>
+          <span class="mat-tag" style="--mc:#8b5cf6;--mc-bg:#8b5cf622;--mc-border:#8b5cf644">Cultura AI-first</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>🗓️ Il percorso di adozione: 4 fasi</h2>
+  <p>Indipendentemente dal livello di maturità attuale, il percorso di adozione segue fasi che non si possono saltare. La velocità di transizione dipende dalle risorse e dalla cultura aziendale.</p>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle" style="--pc:#3b82f6">1</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-period" style="color:#3b82f6">Mesi 1–2 · Consapevolezza</div>
+        <div class="phase-title">Costruire la cultura e le basi</div>
+        <div class="phase-desc">Prima di qualsiasi implementazione, la leadership deve capire cosa è l'AI e cosa non è. Formazione di base per i decision maker, definizione della policy di utilizzo, scelta degli strumenti standard aziendali.</div>
+        <div class="phase-actions">
+          <span class="phase-action">Workshop AI per il management</span>
+          <span class="phase-action">Definire policy di utilizzo</span>
+          <span class="phase-action">Scegliere gli strumenti aziendali</span>
+          <span class="phase-action">Identificare 2–3 champion interni</span>
+          <span class="phase-action">Assessment del livello di maturità</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle" style="--pc:#6366f1">2</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-period" style="color:#6366f1">Mesi 2–4 · Sperimentazione guidata</div>
+        <div class="phase-title">Pilota su casi d'uso concreti</div>
+        <div class="phase-desc">Selezionare 2–3 funzioni aziendali volonterose e identificare task ripetitivi a basso rischio dove testare l'AI. Misurare il tempo risparmiato e la qualità dell'output. Imparare dagli errori in ambiente controllato.</div>
+        <div class="phase-actions">
+          <span class="phase-action">Formazione operativa per team pilota</span>
+          <span class="phase-action">Libreria di prompt condivisa</span>
+          <span class="phase-action">Misurazione tempo pre/post</span>
+          <span class="phase-action">Raccolta feedback settimanale</span>
+          <span class="phase-action">Primo report pilota</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle" style="--pc:#8b5cf6">3</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-period" style="color:#8b5cf6">Mesi 4–8 · Scaling</div>
+        <div class="phase-title">Estendere i casi d'uso validati</div>
+        <div class="phase-desc">I casi d'uso che hanno funzionato nel pilota vengono estesi ad altri team. Si introducono strumenti più avanzati (agenti, automazioni). La formazione diventa strutturata e obbligatoria per i nuovi assunti.</div>
+        <div class="phase-actions">
+          <span class="phase-action">Rollout formazione a tutta l'azienda</span>
+          <span class="phase-action">Agenti AI per funzioni chiave</span>
+          <span class="phase-action">Integrazione nei processi HR e onboarding</span>
+          <span class="phase-action">KPI di adozione per team</span>
+          <span class="phase-action">Centro di competenza AI (anche informale)</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle" style="--pc:#10b981">4</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-period" style="color:#10b981">Mesi 8–12 e oltre · Ottimizzazione</div>
+        <div class="phase-title">Misurare, ottimizzare e innovare</div>
+        <div class="phase-desc">L'AI è parte dei processi standard. Il focus si sposta dall'adozione alla misurazione del ROI, all'ottimizzazione dei workflow e all'esplorazione di opportunità di business nuove abilitate dall'AI.</div>
+        <div class="phase-actions">
+          <span class="phase-action">Report ROI semestrale sull'AI</span>
+          <span class="phase-action">Review e aggiornamento della policy</span>
+          <span class="phase-action">Esplorazione automazioni avanzate</span>
+          <span class="phase-action">Benchmark vs mercato e competitor</span>
+          <span class="phase-action">Piano AI per l'anno successivo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>🎯 I fattori critici di successo</h2>
+  <div class="cards-2">
+    <div class="card">
+      <div class="card-icon">👆</div>
+      <div class="card-title">Leadership visibile</div>
+      <div class="card-body">L'adozione AI non può essere solo bottom-up. I manager devono usare gli strumenti, comunicare il valore e dare l'esempio. La cultura segue il comportamento della leadership, non le circolari.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏆</div>
+      <div class="card-title">Champion interni</div>
+      <div class="card-body">Identificare 1–2 persone per team che siano entusiaste dell'AI e possano supportare i colleghi. I peer trainer sono più efficaci della formazione top-down per l'adozione operativa.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📏</div>
+      <div class="card-title">Misurare subito</div>
+      <div class="card-body">Definire metriche di successo prima del pilota, non dopo. Anche semplici: ore risparmiate per task, qualità percepita dell'output, soddisfazione degli utenti. Senza dati non si difende l'investimento.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Iterare, non pianificare tutto</div>
+      <div class="card-body">Il mercato AI evolve ogni trimestre. Un piano rigido a 2 anni è già obsoleto. Preferire sprint da 90 giorni con obiettivi concreti, revisione frequente e capacità di cambiare direzione rapidamente.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+});
+</script>
+</body>
+</html>

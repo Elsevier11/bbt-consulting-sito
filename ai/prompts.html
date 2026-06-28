@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libreria Prompt Copilot M365 — BBT Consulting</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #181c27;
+    --bg3: #1e2235;
+    --accent: #2563eb;
+    --accent2: #1d4ed8;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #2a3044;
+    --card: #1a1f30;
+    --card-hover: #212740;
+    --green: #10b981;
+    --purple: #8b5cf6;
+    --orange: #f59e0b;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+    --badge-word: #2563eb;
+    --badge-excel: #16a34a;
+    --badge-outlook: #0284c7;
+    --badge-teams: #7c3aed;
+    --badge-ppt: #dc2626;
+    --badge-m365: #0f766e;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+  .header h1 { font-size: 16px; font-weight: 600; color: var(--text); }
+  .header h1 span { color: var(--text-muted); font-weight: 400; }
+  .search-wrap { position: relative; }
+  .search-wrap input {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 8px 14px 8px 36px;
+    font-size: 14px;
+    width: 260px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--text-muted); }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  /* LAYOUT */
+  .layout { display: flex; min-height: calc(100vh - 61px); }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 220px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 20px 12px;
+    position: sticky;
+    top: 61px;
+    height: calc(100vh - 61px);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 10px 10px;
+  }
+  .dept-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 9px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
+  .dept-btn:hover { background: var(--bg3); color: var(--text); }
+  .dept-btn.active { background: rgba(37,99,235,0.15); color: #60a5fa; }
+  .dept-btn .count {
+    margin-left: auto;
+    background: var(--bg3);
+    color: var(--text-muted);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .dept-btn.active .count { background: rgba(37,99,235,0.2); color: #60a5fa; }
+  .dept-icon { font-size: 16px; width: 20px; text-align: center; }
+
+  /* MAIN */
+  .main { flex: 1; padding: 28px; overflow-x: hidden; }
+
+  /* DEPT SECTION */
+  .dept-section { display: none; }
+  .dept-section.visible { display: block; }
+
+  .dept-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dept-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .dept-header p { color: var(--text-muted); font-size: 14px; max-width: 720px; line-height: 1.6; }
+  .dept-meta { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .dept-meta span {
+    font-size: 12px;
+    background: var(--bg3);
+    color: var(--text-muted);
+    padding: 3px 9px;
+    border-radius: 12px;
+  }
+
+  /* ALL section */
+  .dept-separator {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 28px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* PROMPT GRID */
+  .prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 16px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .card:hover { background: var(--card-hover); border-color: #394160; }
+
+  .card-head {
+    padding: 14px 16px 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-title { font-weight: 600; font-size: 14.5px; color: var(--text); }
+  .surface-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sb-word { background: rgba(37,99,235,0.2); color: #93c5fd; }
+  .sb-excel { background: rgba(22,163,74,0.2); color: #86efac; }
+  .sb-outlook { background: rgba(2,132,199,0.2); color: #7dd3fc; }
+  .sb-teams { background: rgba(124,58,237,0.2); color: #c4b5fd; }
+  .sb-ppt { background: rgba(220,38,38,0.2); color: #fca5a5; }
+  .sb-m365 { background: rgba(15,118,110,0.2); color: #5eead4; }
+
+  /* SIZE BADGES */
+  .size-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
+  .sz-pmi      { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+  .sz-corporate{ background: rgba(245,158,11,0.15);  color: #fcd34d; }
+  .sz-enterprise{ background: rgba(139,92,246,0.15); color: #c4b5fd; }
+
+  .card-prompt {
+    margin: 0 16px 12px;
+    background: #111520;
+    border: 1px solid #252c40;
+    border-radius: 7px;
+    padding: 12px 14px;
+  }
+  .card-prompt pre {
+    font-family: 'SFMono-Regular', Consolas, 'Courier New', monospace;
+    font-size: 12.5px;
+    color: #a5b4fc;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .card-prompt pre .placeholder {
+    color: #f9a8d4;
+    font-style: italic;
+  }
+  .card-footer {
+    padding: 0 16px 12px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .copy-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .copy-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .copy-btn.copied { background: var(--green); border-color: var(--green); color: #fff; }
+
+  .card-outcome {
+    padding: 0 16px 14px;
+  }
+  .card-outcome-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .card-outcome p { font-size: 13px; color: #94a3b8; }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; color: #60a5fa; }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* NO RESULTS */
+  .no-results { color: var(--text-muted); text-align: center; padding: 60px 20px; font-size: 15px; }
+
+  /* FOOTER NOTE */
+  .page-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 24px 0 8px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  /* SURFACE FILTER BAR */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .fc {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 20px;
+    padding: 5px 13px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .fc:hover { color: var(--text); border-color: #4a5568; }
+  .fc.active            { background: rgba(37,99,235,0.18);  border-color: #60a5fa;  color: #60a5fa; }
+  .fc.active.fc-word    { background: rgba(37,99,235,0.18);  border-color: #93c5fd;  color: #93c5fd; }
+  .fc.active.fc-excel   { background: rgba(22,163,74,0.18);  border-color: #86efac;  color: #86efac; }
+  .fc.active.fc-outlook { background: rgba(2,132,199,0.18);  border-color: #7dd3fc;  color: #7dd3fc; }
+  .fc.active.fc-teams   { background: rgba(124,58,237,0.18); border-color: #c4b5fd;  color: #c4b5fd; }
+  .fc.active.fc-ppt     { background: rgba(220,38,38,0.18);  border-color: #fca5a5;  color: #fca5a5; }
+  .fc.active.fc-m365    { background: rgba(15,118,110,0.18); border-color: #5eead4;  color: #5eead4; }
+
+  @media (max-width: 860px) {
+    .sidebar { display: none; }
+    .prompt-grid { grid-template-columns: 1fr; }
+    .search-wrap input { width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <a href="home.html" style="font-size:13px;color:#64748b;text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .15s;" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='#64748b'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Playbook</a>
+  <div class="header-left">
+    <span class="logo-badge">BBT</span>
+    <h1>Libreria Prompt Copilot M365 <span>· 82 prompt · 8 reparti</span></h1>
+  </div>
+  <div class="search-wrap">
+    <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Cerca prompt..." oninput="filterPrompts()">
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-label">Reparti</div>
+    <button class="dept-btn active" onclick="showDept('all', this)">
+      <span class="dept-icon">🗂️</span> Tutti i prompt
+      <span class="count">82</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('vendite', this)">
+      <span class="dept-icon">📈</span> Vendite
+      <span class="count">12</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('finance', this)">
+      <span class="dept-icon">💰</span> Finance
+      <span class="count">10</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('hr', this)">
+      <span class="dept-icon">👥</span> HR
+      <span class="count">10</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('it', this)">
+      <span class="dept-icon">🖥️</span> IT Helpdesk
+      <span class="count">10</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('marketing', this)">
+      <span class="dept-icon">📣</span> Marketing
+      <span class="count">10</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('operations', this)">
+      <span class="dept-icon">⚙️</span> Operations
+      <span class="count">10</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('executive', this)">
+      <span class="dept-icon">🎯</span> Executive
+      <span class="count">10</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('legal', this)">
+      <span class="dept-icon">⚖️</span> Legal
+      <span class="count">10</span>
+    </button>
+  </nav>
+
+  <main class="main">
+
+    <!-- FILTRO SUPERFICIE -->
+    <div class="filter-bar">
+      <span class="filter-label">Superficie:</span>
+      <button class="fc active"        onclick="setSurface('all',     this)">Tutte</button>
+      <button class="fc fc-m365"       onclick="setSurface('m365',    this)">M365 Chat</button>
+      <button class="fc fc-word"       onclick="setSurface('word',    this)">Word</button>
+      <button class="fc fc-excel"      onclick="setSurface('excel',   this)">Excel</button>
+      <button class="fc fc-outlook"    onclick="setSurface('outlook', this)">Outlook</button>
+      <button class="fc fc-teams"      onclick="setSurface('teams',   this)">Teams</button>
+      <button class="fc fc-ppt"        onclick="setSurface('ppt',     this)">PowerPoint</button>
+    </div>
+
+    <!-- SEZIONE ALL -->
+    <div id="section-all" class="dept-section visible">
+      <div class="dept-header">
+        <h2>Tutti i prompt</h2>
+        <p>82 prompt per Microsoft 365 Copilot organizzati per reparto. Copia, incolla, sostituisci le variabili tra parentesi graffe e affina l'output.</p>
+        <div class="stats-bar" style="margin-top:16px; margin-bottom:0">
+          <div class="stat"><div class="stat-num">82</div><div class="stat-label">Prompt totali</div></div>
+          <div class="stat"><div class="stat-num">8</div><div class="stat-label">Reparti</div></div>
+          <div class="stat"><div class="stat-num">6</div><div class="stat-label">Superfici M365</div></div>
+        </div>
+      </div>
+      <div id="all-cards"></div>
+      <div id="no-results" class="no-results" style="display:none">Nessun prompt trovato per questa ricerca.</div>
+    </div>
+
+    <!-- SEZIONE VENDITE -->
+    <div id="section-vendite" class="dept-section">
+      <div class="dept-header">
+        <h2>📈 Vendite</h2>
+        <p>Le vendite sono il ruolo con il maggior ritorno sull'investimento in Copilot: i risparmi di tempo sono concreti, i flussi di lavoro sono ripetitivi e i dati di input (CRM, email, calendario) risiedono nell'ecosistema Microsoft 365.</p>
+        <div class="dept-meta"><span>12 prompt</span><span>M365 Chat</span><span>Word</span><span>Excel</span><span>Outlook</span><span>PowerPoint</span><span>Teams</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-vendite"></div>
+    </div>
+
+    <!-- SEZIONE FINANCE -->
+    <div id="section-finance" class="dept-section">
+      <div class="dept-header">
+        <h2>💰 Finance</h2>
+        <p>Finance è il secondo ruolo per ritorno sull'investimento in Copilot: alto volume di analisi ripetitive, molti commenti non strutturati e la maggior parte dei dati vive in Excel e SharePoint.</p>
+        <div class="dept-meta"><span>10 prompt</span><span>Excel</span><span>Word</span><span>Outlook</span><span>M365 Chat</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-finance"></div>
+    </div>
+
+    <!-- SEZIONE HR -->
+    <div id="section-hr" class="dept-section">
+      <div class="dept-header">
+        <h2>👥 HR</h2>
+        <p>Copilot accelera il lavoro di redazione che richiede conoscenze di base approfondite, ma non sostituisce il giudizio HR. I prompt seguenti presuppongono che un professionista HR senior riveda sempre l'output.</p>
+        <div class="dept-meta"><span>10 prompt</span><span>Word</span><span>M365 Chat</span><span>Outlook</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-hr"></div>
+    </div>
+
+    <!-- SEZIONE IT -->
+    <div id="section-it" class="dept-section">
+      <div class="dept-header">
+        <h2>🖥️ IT Helpdesk</h2>
+        <p>Copilot riduce il lavoro amministrativo e accelera le analisi più complesse. I prompt presuppongono che l'analista IT mantenga sempre la responsabilità della decisione tecnica.</p>
+        <div class="dept-meta"><span>10 prompt</span><span>M365 Chat</span><span>Word</span><span>Outlook</span><span>Excel</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-it"></div>
+    </div>
+
+    <!-- SEZIONE MARKETING -->
+    <div id="section-marketing" class="dept-section">
+      <div class="dept-header">
+        <h2>📣 Marketing</h2>
+        <p>Il marketing beneficia di Copilot in due modi: accelerazione della redazione (brief, post, articoli, deck) e accelerazione dell'analisi (performance campagna, ricerca audience, analisi della concorrenza).</p>
+        <div class="dept-meta"><span>10 prompt</span><span>Word</span><span>M365 Chat</span><span>Outlook</span><span>Excel</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-marketing"></div>
+    </div>
+
+    <!-- SEZIONE OPERATIONS -->
+    <div id="section-operations" class="dept-section">
+      <div class="dept-header">
+        <h2>⚙️ Operations</h2>
+        <p>I ruoli operativi hanno in comune un elevato volume di documentazione, comunicazioni e lavoro sui processi. Copilot elimina l'amministrativo affinché i responsabili possano concentrarsi sulle decisioni operative.</p>
+        <div class="dept-meta"><span>10 prompt</span><span>Word</span><span>Outlook</span><span>PowerPoint</span><span>M365 Chat</span><span>Excel</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-operations"></div>
+    </div>
+
+    <!-- SEZIONE EXECUTIVE -->
+    <div id="section-executive" class="dept-section">
+      <div class="dept-header">
+        <h2>🎯 Executive</h2>
+        <p>L'utilizzo di Copilot da parte degli executive ha il rendimento orario più elevato: meno ore, ma ciascuna è la più costosa dell'organizzazione. I prompt sono testati su CEO e senior executive di aziende di medie e grandi dimensioni.</p>
+        <div class="dept-meta"><span>10 prompt</span><span>Word</span><span>Outlook</span><span>M365 Chat</span><span>Teams</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-executive"></div>
+    </div>
+
+    <!-- SEZIONE LEGAL -->
+    <div id="section-legal" class="dept-section">
+      <div class="dept-header">
+        <h2>⚖️ Legal</h2>
+        <p>I team legali che usano Copilot devono mantenere la massima disciplina nella verifica: ogni output è una bozza, non un parere. Con questa disciplina, Copilot accelera il lavoro routinario. I prompt presuppongono che un avvocato qualificato riveda tutto prima che esca dal team.</p>
+        <div class="dept-meta"><span>10 prompt</span><span>Word</span><span>M365 Chat</span><span>Outlook</span></div>
+      </div>
+      <div class="prompt-grid" id="grid-legal"></div>
+    </div>
+
+    <div class="page-footer">Libreria prompt M365 Copilot · BBT Consulting · Copia, adatta, usa.</div>
+  </main>
+</div>
+
+<script>
+const PROMPTS = [
+  // ─── VENDITE ──────────────────────────────────────────────────────────────
+  { dept: "vendite", size: "pmi", title: "Briefing pre-riunione", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Forniscimi un briefing su {Nome Account} prima del mio incontro con {Nome Contatto} alle {Ora}. Estrai da email, chat Teams e file SharePoint condivisi su questo account negli ultimi 12 mesi. Riassumi: storia della relazione, ultima conversazione commerciale, problemi aperti, altri contatti interni coinvolti.`,
+    outcome: "Un briefing di 5–8 paragrafi su storia, stato, elementi aperti e referenti interni." },
+
+  { dept: "vendite", size: "corporate", title: "Bozza risposta a gara", surface: "word", surfaceLabel: "Word",
+    prompt: `Usando il documento di gara allegato e i materiali commerciali in {Cartella SharePoint Offerte}, redigi una prima bozza di risposta alle sezioni {Numeri Sezioni}. Mantieni ogni risposta a 3–5 frasi. Segnala le sezioni per cui non abbiamo contenuti disponibili.`,
+    outcome: "Prima bozza con lacune evidenziate per la revisione." },
+
+  { dept: "vendite", size: "corporate", title: "Sintesi stato trattativa", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Riassumi lo stato della trattativa {Nome Trattativa}. Estrai le ultime email, il thread di approvazione prezzi su Teams e l'offerta tecnica su SharePoint. Output: fase, valore €, data di decisione attesa, blocchi, prossima azione, responsabile.`,
+    outcome: "Sintesi di una pagina della trattativa per la revisione di pipeline." },
+
+  { dept: "vendite", size: "corporate", title: "Analisi pipeline", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Analizza questo export della pipeline commerciale. Identifica: trattative ferme in {Fase} da più di 60 giorni; trattative superiori a € {Soglia} senza progressi negli ultimi 30 giorni; trattative senza attività recente. Suggerisci la prossima azione per ognuna.`,
+    outcome: "Pipeline ordinata per priorità con prossime azioni per ogni trattativa in stallo." },
+
+  { dept: "vendite", size: "pmi", title: "Email di rientro", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi una email di rientro per {Nome Contatto}. Ci siamo sentiti l'ultima volta {Ultimo Contatto} riguardo a {Ultimo Argomento}. Fai riferimento a una notizia di settore recente rilevante per {Settore} degli ultimi 30 giorni. Italiano, linguaggio semplice, senza tecnicismi. Meno di 120 parole.`,
+    outcome: "Email di rientro concisa con aggancio di attualità." },
+
+  { dept: "vendite", size: "pmi", title: "Preparazione domande di qualifica", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Ho una chiamata di qualifica con un'azienda di {Settore} di circa {N. Dipendenti} persone che ha mostrato interesse per {Argomento}. Suggerisci 8 domande aperte su: obiettivo di business, situazione attuale, processo decisionale, requisiti tecnici, budget, tempi, criteri di successo e rischio percepito.`,
+    outcome: "Set strutturato di domande per qualificare il potenziale cliente." },
+
+  { dept: "vendite", size: "corporate", title: "Analisi trattative perse", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Analizza le trattative chiuse-perse nel {Periodo} nell'export allegato. Identifica schemi ricorrenti nel campo 'motivo di perdita', nei dati tempo-per-fase e nel campo concorrente. Suggerisci due modifiche concrete al processo di vendita.`,
+    outcome: "Analisi degli schemi con due azioni specifiche di miglioramento." },
+
+  { dept: "vendite", size: "corporate", title: "Prioritizzazione lista account", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Assegna un punteggio di priorità a questa lista di aziende rispetto al nostro profilo cliente ideale: {Descrizione Profilo Cliente}. Valuta ciascuna da 0 a 5 per: settore di appartenenza, dimensione, tecnologie adottate, area geografica. Evidenzia i 20 account con punteggio più alto e spiega brevemente perché.`,
+    outcome: "Lista account con punteggi e motivazione per i top 20." },
+
+  { dept: "vendite", size: "pmi", title: "Risposta a obiezione sul concorrente", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Un potenziale cliente mi ha appena detto che sta valutando anche {Concorrente}. Redigi una risposta che riconosca il loro punto di forza in {Punto di Forza Concorrente}, evidenzi i nostri due differenziatori principali e si chiuda con una domanda per chiarire le priorità del cliente.`,
+    outcome: "Risposta competitiva in tre paragrafi." },
+
+  { dept: "vendite", size: "corporate", title: "Presentazione revisione trimestrale cliente", surface: "ppt", surfaceLabel: "PowerPoint",
+    prompt: `Prepara una presentazione di 10 slide per la revisione trimestrale con {Nome Cliente}. Estrai dai dati di utilizzo, dall'export dei ticket di supporto e dalla data di rinnovo. Ordine slide: agenda, sintesi esecutiva, valore consegnato nell'ultimo trimestre, andamento dell'utilizzo, problemi aperti, novità di prodotto rilevanti, opportunità di crescita, condizioni di rinnovo, richieste al cliente, prossimi passi.`,
+    outcome: "Prima bozza della presentazione trimestrale da revisionare." },
+
+  { dept: "vendite", size: "pmi", title: "Coaching su chiamata di vendita", surface: "teams", surfaceLabel: "Teams",
+    prompt: `Analizza questa trascrizione di chiamata di vendita. Identifica: rapporto domande aperte/chiuse, tempo di parola del commerciale vs del cliente, menzioni di concorrenti e come sono state gestite, i momenti migliori e peggiori della chiamata, tre cose specifiche che questo commerciale potrebbe migliorare.`,
+    outcome: "Feedback di coaching con tre azioni di miglioramento concrete." },
+
+  { dept: "vendite", size: "corporate", title: "Commento al forecast di vendita", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi la sezione commenti per il forecast di vendita del {Trimestre}. Usa i dati di pipeline allegati e il confronto con il trimestre precedente. Tratta: totale confermato, scenario ottimistico, movimenti chiave delle trattative (vinte, perse, slittate), copertura della pipeline rispetto all'obiettivo e rischi sul totale confermato.`,
+    outcome: "Commento al forecast di una pagina per la direzione commerciale." },
+
+  // ─── FINANCE ──────────────────────────────────────────────────────────────
+  { dept: "finance", size: "pmi", title: "Commento agli scostamenti", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Confronta i consuntivi di questo mese con il budget per il centro di costo {CC}. Per ogni scostamento superiore a {Soglia}% o € {Importo}, prepara un commento che indichi: cosa ha causato lo scostamento, se è una tantum o strutturale, e quale azione sta adottando il management.`,
+    outcome: "Righe di commento agli scostamenti per il report di gestione." },
+
+  { dept: "finance", size: "corporate", title: "Commento CFO per la relazione al CdA", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi il commento del CFO per la relazione al Consiglio di Amministrazione di {Mese}. Usa il conto economico allegato, il commento del mese precedente in {Cartella SharePoint Finance} e i thread Teams rilevanti del mese. Tratta: sintesi ricavi, andamento del margine lordo, principali voci di costo operativo, posizione di cassa, rischi principali. Meno di 600 parole.`,
+    outcome: "Prima bozza del commento CFO da revisionare prima dell'invio al CdA." },
+
+  { dept: "finance", size: "pmi", title: "Revisione eccezioni contabilità fornitori", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Revisiona questo report delle eccezioni nella contabilità fornitori. Raggruppa le eccezioni per tipo, identifica i fornitori con eccezioni ripetute e suggerisci la prossima azione per ciascuna (approva, sospendi, scala alla direzione, richiedi informazioni aggiuntive).`,
+    outcome: "Lista eccezioni con priorità e azioni raccomandate." },
+
+  { dept: "finance", size: "pmi", title: "Sollecito pagamento", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi una email di sollecito a {Nome Cliente} per la fattura {Numero Fattura}, scaduta da {Giorni} giorni per un importo di € {Importo}. Tono: professionale, fermo, non aggressivo. Fai riferimento a eventuali impegni di pagamento precedenti. Italiano.`,
+    outcome: "Email di sollecito pagamento pronta per l'invio." },
+
+  { dept: "finance", size: "pmi", title: "Scostamento previsione di cassa", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Confronta i consuntivi di cassa di questa settimana con la previsione a 13 settimane. Identifica i tre scostamenti più significativi per importo. Per ciascuno suggerisci la causa più probabile e se la previsione debba essere aggiornata.`,
+    outcome: "Analisi degli scostamenti con raccomandazioni di aggiornamento previsione." },
+
+  { dept: "finance", size: "corporate", title: "Preparazione audit — selezione campione", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Abbiamo un audit esterno di {Processo} che inizia il {Data}. Aiutami a preparare il campione. Estrai tutte le transazioni dell'ultimo trimestre superiori a € {Soglia}. Identifica quelle con registrazioni manuali, quelle approvate fuori policy e quelle con rettifiche di periodi precedenti.`,
+    outcome: "Campione pronto per l'audit con segnalazioni." },
+
+  { dept: "finance", size: "pmi", title: "Preparazione liquidazione IVA", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Prepara la sintesi della liquidazione IVA per {Periodo}. Estrai IVA a debito, IVA a credito, acconti IRES, acconti IRAP. Segnala le transazioni con trattamento IVA anomalo per la revisione umana. Formato coerente con il modello standard.`,
+    outcome: "Prima bozza della liquidazione IVA con elementi segnalati." },
+
+  { dept: "finance", size: "pmi", title: "Verifica conformità note spese", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Revisiona le note spese di questo mese rispetto alla nostra policy rimborsi ({Policy Rimborsi Spese}). Segnala eventuali rimborsi che potrebbero violare la policy, in particolare: rimborsi per alcolici che richiedono approvazione, pernottamenti oltre il limite per notte, taxi per spostamenti locali, ricevute mancanti oltre la soglia.`,
+    outcome: "Note spese revisionate con riferimenti specifici alla policy." },
+
+  { dept: "finance", size: "pmi", title: "Pulizia anagrafica fornitori", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Analizza questo file dell'anagrafica fornitori. Identifica: fornitori duplicati (stesso codice fiscale/P.IVA o nome simile), fornitori inattivi senza transazioni negli ultimi 24 mesi, fornitori con campi critici mancanti (P.IVA, coordinate bancarie, termini di pagamento). Suggerisci una lista di priorità per la pulizia.`,
+    outcome: "Lista di priorità per la pulizia dell'anagrafica fornitori." },
+
+  { dept: "finance", size: "corporate", title: "Revisione contratto — condizioni economiche", surface: "word", surfaceLabel: "Word",
+    prompt: `Revisiona questo contratto in bozza per le condizioni economiche. Evidenzia: termini di pagamento in giorni, valuta, clausole di sconto o provvigione, meccanismi di adeguamento prezzi, penali per risoluzione anticipata, interessi di mora, massimali di indennizzo. Segnala qualsiasi elemento fuori dai nostri standard contrattuali ({Standard Contrattuali Aziendali}).`,
+    outcome: "Sintesi delle condizioni economiche con segnalazione degli elementi non standard." },
+
+  // ─── HR ───────────────────────────────────────────────────────────────────
+  { dept: "hr", size: "corporate", title: "Prima bozza annuncio di ricerca", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi l'annuncio di ricerca per il ruolo di {Titolo Ruolo} a livello {Livello}. Usa le descrizioni esistenti in {Archivio Descrizioni Ruoli HR} come riferimento di stile. Includi: finalità del ruolo, responsabilità principali (5–7), competenze richieste, esperienza, qualifiche, RAL indicativa € {Range}, sede, a chi riporta. Usa un linguaggio inclusivo, evita termini di genere.`,
+    outcome: "Prima bozza dell'annuncio con tono e struttura coerenti con gli altri ruoli." },
+
+  { dept: "hr", size: "corporate", title: "Preparazione valutazione della performance", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Aiutami a preparare la valutazione intermedia di {Nome Dipendente}. Estrai dai loro obiettivi in {Archivio Obiettivi HR}, dalle note 1:1 in OneNote e dalle email di feedback recenti. Riassumi: avanzamento obiettivi, competenze dimostrate, aree di miglioramento, risultati principali, dove ha bisogno di supporto.`,
+    outcome: "Briefing strutturato pre-colloquio per il manager." },
+
+  { dept: "hr", size: "pmi", title: "Aggiornamento policy", surface: "word", surfaceLabel: "Word",
+    prompt: `Aggiorna la nostra policy {Nome Policy} per recepire {Motivo della Modifica}. Usa la policy esistente come base e traccia chiaramente le modifiche. Mantieni un linguaggio italiano semplice e una struttura 'chi, cosa, quando, come'. Segnala le sezioni che potrebbero richiedere revisione legale.`,
+    outcome: "Policy aggiornata con revisioni tracciate e segnalazioni per il legale." },
+
+  { dept: "hr", size: "pmi", title: "Checklist onboarding dipendente", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Prepara un piano di onboarding a 30/60/90 giorni per un nuovo {Titolo Ruolo} che inizia il {Data}. Includi: attività amministrative pre-ingresso, presentazioni della prima settimana, tappe formative, prime consegne, check-in con il manager, affiancamento con un collega senior, setup IT e accessi. Formato come lista importabile in Planner.`,
+    outcome: "Piano di onboarding per fasi, pronto per l'importazione in Planner." },
+
+  { dept: "hr", size: "pmi", title: "Bozza comunicazione a tutto il personale", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi una comunicazione a tutto il personale su {Argomento}. Tono: caldo, italiano semplice, non formale. Evita le frasi di circostanza. Termina con l'azione che le persone devono intraprendere e dove fare domande. Meno di 250 parole.`,
+    outcome: "Bozza email a tutto il personale." },
+
+  { dept: "hr", size: "pmi", title: "Sintesi feedback dipendenti", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Analizza questo feedback testuale raccolto nel sondaggio sul clima aziendale. Raggruppa i commenti per tema, identifica i tre aspetti positivi e i tre problemi più citati, riporta citazioni specifiche che illustrano bene ogni tema. Anonimizza le citazioni che nominano individui.`,
+    outcome: "Sintesi tematica del sondaggio con citazioni anonimizzate." },
+
+  { dept: "hr", size: "pmi", title: "Rapporto incidente sul lavoro", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi il rapporto formale dell'incidente per {Incidente}. Usa le dichiarazioni dei testimoni e le note iniziali del responsabile. Tratta: cosa è successo, fattori che hanno contribuito, risposta immediata adottata, analisi delle cause (5 Perché), azioni correttive con responsabili e date, data di revisione.`,
+    outcome: "Prima bozza del rapporto formale di incidente." },
+
+  { dept: "hr", size: "pmi", title: "Classificazione CCNL", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Aiutami a classificare un ruolo secondo il {Nome CCNL}. Responsabilità del ruolo: {Descrizione}. Confronta con i livelli di classificazione del CCNL e raccomanda il livello più probabile con la motivazione. Segnala quali informazioni aggiuntive sarebbero necessarie per esserne certi.`,
+    outcome: "Classificazione consigliata con motivazione e lacune informative." },
+
+  { dept: "hr", size: "corporate", title: "Sintesi colloqui di uscita", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Analizza le trascrizioni dei colloqui di uscita del {Periodo}. Identifica: i tre principali motivi di abbandono, temi ricorrenti per team o manager, schemi preoccupanti (es. menzioni ripetute dello stesso problema) e tre modifiche concrete che il management potrebbe valutare. Anonimizza i dipendenti nell'output.`,
+    outcome: "Sintesi anonimizzata dei colloqui di uscita con raccomandazioni." },
+
+  { dept: "hr", size: "pmi", title: "Bozza lettera di assunzione", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi una lettera di assunzione per {Nome Candidato} per il ruolo di {Titolo Ruolo} a livello {Livello}. Includi: posizione, riporto, data di inizio {Data}, RAL € {Importo} annui lordi più TFR, tipo di contratto, periodo di prova, sede e modalità di lavoro da remoto, riferimento al contratto allegato, istruzioni per l'accettazione e scadenza dell'offerta.`,
+    outcome: "Bozza lettera di assunzione per approvazione." },
+
+  // ─── IT HELPDESK ──────────────────────────────────────────────────────────
+  { dept: "it", size: "pmi", title: "Triage ticket", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Analizza i ticket aperti nell'export allegato. Raggruppa per categoria probabile (password, accessi, email, dispositivo, problema M365, rete). Suggerisci una priorità per ciascuno in base all'impatto sull'utente e agli SLA. Segnala quelli che sembrano incidenti di sicurezza.`,
+    outcome: "Lista ticket con priorità e segnalazioni di sicurezza." },
+
+  { dept: "it", size: "corporate", title: "Bozza runbook", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un runbook per {Problema Comune}. Tratta: sintomo, cause probabili, passi diagnostici in ordine, passi correttivi, percorso di escalation se la risoluzione non riesce e cosa registrare dopo la chiusura. Usa il formato coerente con i runbook esistenti in {Archivio Runbook IT}.`,
+    outcome: "Bozza runbook pronta per la revisione tecnica." },
+
+  { dept: "it", size: "pmi", title: "Comunicazione incidente", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi un aggiornamento di stato per l'incidente in corso {Incidente}. Tratta: cosa è coinvolto, cosa non è coinvolto, stato attuale dell'analisi, orario del prossimo aggiornamento, chi contattare per problemi urgenti. Italiano semplice, senza gergo tecnico, senza speculazioni. Aggiorna ogni 30 minuti fino alla risoluzione.`,
+    outcome: "Comunicazione incidente pronta per l'invio." },
+
+  { dept: "it", size: "pmi", title: "Analisi causa radice", surface: "word", surfaceLabel: "Word",
+    prompt: `Effettua un'analisi 5 Perché per {Nome Incidente}. Usa i dati della timeline, il log delle modifiche e il thread chat successivo all'incidente. Identifica la causa superficiale e risali fino alla causa radice. Termina con tre azioni correttive specifiche con responsabili e date.`,
+    outcome: "Analisi causa radice strutturata con azioni correttive." },
+
+  { dept: "it", size: "pmi", title: "Triage avvisi Microsoft 365 Admin Center", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Analizza gli avvisi di salute del servizio Microsoft 365 attualmente aperti. Riassumi: quali riguardano i servizi che usiamo ({Servizi in uso}), quali richiedono un'azione immediata, quali sono puramente informativi e qual è l'impatto sugli utenti per ciascuno.`,
+    outcome: "Triage degli avvisi di servizio con impatto per utente." },
+
+  { dept: "it", size: "pmi", title: "Checklist IT per nuovo assunto", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Genera la checklist di setup IT per un nuovo {Titolo Ruolo} che inizia il {Data}. Tratta: assegnazione licenza M365, creazione mailbox, aggiunta a Teams, configurazione OneDrive, iscrizione alle liste di distribuzione, accesso ai siti SharePoint, registrazione MFA, assegnazione dispositivo, installazione software.`,
+    outcome: "Checklist IT di onboarding pronta per il runbook." },
+
+  { dept: "it", size: "corporate", title: "Triage segnalazione phishing", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Abbiamo ricevuto una segnalazione di phishing da {Utente}. Analizza l'email e le intestazioni allegate: autenticità del mittente, reputazione dei link, spoofing del dominio, rischio degli allegati. Raccomanda una delle seguenti azioni: metti in quarantena e avvisa, blocca il mittente, segnala a Microsoft Defender for Office 365, o chiudi come email legittima.`,
+    outcome: "Analisi phishing con azione raccomandata." },
+
+  { dept: "it", size: "corporate", title: "Ottimizzazione assegnazioni licenze M365", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Analizza questo export delle assegnazioni licenze Microsoft 365 rispetto ai dati di accesso degli ultimi 90 giorni. Identifica: utenti con licenza E5 che non hanno usato funzionalità esclusive E5; utenti su E3 che per profilo e utilizzo potrebbero passare a una licenza Frontline (F1/F3); account disabilitati ancora con licenza attiva; account guest con licenza completa. Suggerisci l'azione per ogni riga.`,
+    outcome: "Raccomandazioni di ottimizzazione licenze per ogni utente." },
+
+  { dept: "it", size: "corporate", title: "Documentazione richiesta di modifica", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi la documentazione tecnica per la richiesta di modifica {Descrizione Modifica}. Tratta: motivazione, perimetro, passi tecnici di implementazione, piano di ripristino in caso di errore, approccio al testing, impatto previsto sugli utenti, piano di comunicazione, finestra di intervento. Usa il modello standard in {Archivio Change Management IT}.`,
+    outcome: "Documentazione pronta per la revisione del comitato modifiche." },
+
+  { dept: "it", size: "enterprise", title: "Verifica accessi privilegiati", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Revisiona questo export degli accessi privilegiati da Microsoft Entra. Identifica: account Global Admin con accesso permanente (non protetto da PIM); utenti con più ruoli privilegiati sovrapposti; account inattivi negli ultimi 30 giorni; account privi di verifica MFA recente. Per ogni riga raccomanda: revoca accesso, converti in accesso Just-In-Time tramite PIM, mantieni, o approfondisci.`,
+    outcome: "Revisione accessi privilegiati con azione raccomandata per ogni riga." },
+
+  // ─── MARKETING ────────────────────────────────────────────────────────────
+  { dept: "marketing", size: "pmi", title: "Brief di campagna", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un brief di campagna per {Nome Campagna} rivolta a {Pubblico Target}. Usa il nostro modello standard. Tratta: obiettivo e KPI, descrizione del pubblico target, messaggio principale, gerarchia dei messaggi, mix di canali, budget € {Importo}, timeline, criteri di successo.`,
+    outcome: "Bozza di brief pronta per la revisione degli stakeholder." },
+
+  { dept: "marketing", size: "pmi", title: "Prima bozza articolo blog", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un articolo di 1.200 parole su '{Argomento}' per {Pubblico Target}. Italiano. Linguaggio semplice, senza gergo, senza frasi di riempimento. Struttura: apertura ad effetto, tre sottosezioni con titolo, spunto pratico finale. Mantieni il tono coerente con gli articoli già presenti in {Archivio Contenuti Marketing}.`,
+    outcome: "Prima bozza pronta per la revisione editoriale." },
+
+  { dept: "marketing", size: "pmi", title: "Post LinkedIn — opinione e posizionamento", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Redigi tre post LinkedIn per {Nome Autore} su '{Argomento}'. Ciascuno: 200–280 parole. Voce: diretta, basata su un'opinione personale, linguaggio semplice, senza tecnicismi. Termina ciascuno con una domanda che inviti al commento. Italiano.`,
+    outcome: "Tre bozze di post nella voce dell'autore." },
+
+  { dept: "marketing", size: "pmi", title: "Comunicato stampa", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un comunicato stampa che annuncia {Annuncio}. Struttura standard: titolo, data, paragrafo di apertura, dettagli di supporto, citazione di {Portavoce}, citazione del cliente se disponibile, presentazione dell'azienda, contatti. Meno di 400 parole.`,
+    outcome: "Bozza comunicato pronta per la revisione e la distribuzione ai media." },
+
+  { dept: "marketing", size: "pmi", title: "Analisi posizionamento competitivo", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Estrai ciò che sappiamo di {Concorrente} dalla nostra ricerca interna, dalle email recenti e dai file SharePoint. Riassumi: il loro posizionamento, l'approccio al pricing, la base clienti, i loro punti di forza nei nostri confronti, i loro punti deboli. Suggerisci due modifiche al nostro messaggio per differenziarci meglio.`,
+    outcome: "Scheda competitiva con raccomandazioni sul posizionamento." },
+
+  { dept: "marketing", size: "pmi", title: "Abstract webinar", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un abstract per il webinar '{Titolo Webinar}'. Pubblico: {Pubblico Target}. Relatore/i: {Relatori}. Tratta: apertura che cattura l'attenzione, tre cose concrete che i partecipanti porteranno a casa, formato della sessione, a chi è rivolto, come iscriversi. Circa 150 parole. Chiudi con l'invito all'iscrizione.`,
+    outcome: "Abstract webinar per landing page ed email di promozione." },
+
+  { dept: "marketing", size: "corporate", title: "Sequenza email di accompagnamento contatto", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi una sequenza di 4 email per accompagnare {Tipo Contatto} che ha scaricato {Contenuto}. Email 1: ringraziamento e spunto principale (giorno 0). Email 2: caso di successo cliente (giorno 4). Email 3: approfondimento tematico (giorno 9). Email 4: invito a parlare con un consulente (giorno 14). Ciascuna meno di 120 parole. Italiano, linguaggio diretto.`,
+    outcome: "Sequenza di 4 email pronta per la piattaforma di marketing automation." },
+
+  { dept: "marketing", size: "corporate", title: "Commento alla performance della campagna", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Analizza questo export della performance della campagna. Confronta con gli obiettivi in {Archivio Campagna}. Tratta: spesa vs budget €, contatti generati vs obiettivo, tassi di conversione per canale, costo per contatto per canale. Suggerisci due ottimizzazioni specifiche.`,
+    outcome: "Commento alla campagna con suggerimenti di ottimizzazione." },
+
+  { dept: "marketing", size: "pmi", title: "Revisione testimonianza cliente", surface: "word", surfaceLabel: "Word",
+    prompt: `Rifinisci questa trascrizione grezza della testimonianza cliente per renderla pubblicabile. Mantieni la voce del cliente — non riscrivere. Estrai 2 citazioni brevi in stile titolo (meno di 25 parole ciascuna) e 1 paragrafo più lungo (60–80 parole). Segnala eventuali affermazioni da verificare prima della pubblicazione.`,
+    outcome: "Citazioni elaborate più un paragrafo con segnalazioni per il fact-check." },
+
+  { dept: "marketing", size: "corporate", title: "Definizione segmento di clientela", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Definisci il segmento di clientela '{Nome Segmento}' per {Prodotto/Servizio}. Usa i dati clienti in {Archivio Dati Clienti Marketing}. Tratta: caratteristiche aziendali (settore, dimensione, area geografica), profilo del decisore, segnali comportamentali, principali problemi, trigger di acquisto, canali di riferimento. Output: brief di una pagina.`,
+    outcome: "Brief di segmento di clientela di una pagina." },
+
+  // ─── OPERATIONS ───────────────────────────────────────────────────────────
+  { dept: "operations", size: "corporate", title: "Bozza procedura operativa (SOP)", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi una procedura operativa standard per '{Nome Processo}'. Usa il nostro modello in {Archivio Template Operations}. Tratta: finalità, perimetro, responsabilità, materiali necessari, processo passo per passo, controlli di qualità, gestione delle eccezioni, documenti correlati. Italiano, linguaggio semplice, passi numerati.`,
+    outcome: "Bozza SOP pronta per la revisione del responsabile di processo." },
+
+  { dept: "operations", size: "pmi", title: "Follow-up fornitore", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi un follow-up a {Nome Fornitore} riguardo a {Problema}. Fai riferimento al livello di servizio previsto nel contratto. Tono: fermo, professionale, fattuale. Specifica la risoluzione necessaria e la data entro cui la si attende. Italiano. Meno di 150 parole.`,
+    outcome: "Email di follow-up al fornitore pronta per l'invio." },
+
+  { dept: "operations", size: "pmi", title: "Rapporto incidente operativo", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi il rapporto di incidente per {Incidente}. Usa le dichiarazioni dei testimoni, i log di produzione e le note iniziali del team. Tratta: sintesi dell'incidente, impatto immediato, azioni di risposta adottate, analisi causa radice (5 Perché), azioni correttive con responsabili e date.`,
+    outcome: "Bozza rapporto incidente operativo." },
+
+  { dept: "operations", size: "corporate", title: "Presentazione review operativa settimanale", surface: "ppt", surfaceLabel: "PowerPoint",
+    prompt: `Prepara la presentazione per la review operativa di questa settimana. Estrai dall'export dei dati di produzione, dal log degli incidenti, dai problemi di qualità aperti e dal piano di manutenzione. Ordine slide: KPI vs obiettivo, i tre problemi principali, attività pianificate per la settimana, richieste al management. Massimo 8 slide.`,
+    outcome: "Bozza presentazione review operativa settimanale." },
+
+  { dept: "operations", size: "corporate", title: "Coordinamento risposta a gara", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Stiamo rispondendo a {Nome Gara} con scadenza {Data}. Analizza il documento di gara e la copertura della nostra risposta in {Archivio Gare Operations}. Identifica: quali sezioni sono complete, quali richiedono input da quale funzione, quali sono a rischio di ritardo. Output come tracker giornaliero per il team.`,
+    outcome: "Tracker risposta gara con segnalazioni di rischio." },
+
+  { dept: "operations", size: "pmi", title: "Analisi scostamenti inventario", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Analizza questo report degli scostamenti di inventario. Identifica le righe con scostamento superiore a {Soglia} unità o € {Importo}. Per ciascuna suggerisci la causa più probabile (errore di conteggio, furto, rottura, errore di sistema, merce in transito). Raccomanda la prossima azione per ogni riga.`,
+    outcome: "Triage scostamenti inventario con azioni raccomandate." },
+
+  { dept: "operations", size: "pmi", title: "Bozza valutazione dei rischi", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi una valutazione dei rischi per {Attività}. Usa il nostro formato standard. Tratta: pericoli identificati, chi potrebbe essere coinvolto, valutazione di probabilità e gravità, misure di controllo esistenti, misure aggiuntive necessarie, responsabili, data di revisione. Fai riferimento al D.Lgs. 81/08 dove pertinente.`,
+    outcome: "Bozza valutazione dei rischi per la revisione del responsabile sicurezza." },
+
+  { dept: "operations", size: "corporate", title: "Analisi capacità produttiva", surface: "excel", surfaceLabel: "Excel",
+    prompt: `Analizza questo export di utilizzo della capacità per {Gruppo Impianti}. Identifica periodi di picco, periodi di sottoutilizzo e colli di bottiglia. Confronta con la previsione della domanda. Suggerisci due interventi sulla capacità e quantifica il potenziale impatto economico per ciascuno.`,
+    outcome: "Analisi capacità con raccomandazioni quantificate." },
+
+  { dept: "operations", size: "corporate", title: "Report livelli di servizio", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi il report dei livelli di servizio di {Periodo} per {Cliente o Stakeholder Interno}. Usa gli obiettivi definiti nel contratto/accordo di servizio ({Accordo SLA}) e l'export dei consuntivi. Per ogni indicatore: obiettivo, consuntivo, stato (raggiunto/non raggiunto), commento sulle eventuali violazioni, azione correttiva.`,
+    outcome: "Report livelli di servizio pronto per la revisione degli stakeholder." },
+
+  { dept: "operations", size: "pmi", title: "Proposta di miglioramento processo", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi una proposta di miglioramento per {Processo}. Tratta: stato attuale, descrizione del problema con impatto quantificato (tempo, €, errori), modifica proposta, benefici attesi, costi e tempi di implementazione, rischi. Formato: sintesi esecutiva di una pagina più appendice con dettaglio.`,
+    outcome: "Proposta di miglioramento processo per la revisione dello sponsor." },
+
+  // ─── EXECUTIVE ────────────────────────────────────────────────────────────
+  { dept: "executive", size: "corporate", title: "Documento per il Consiglio di Amministrazione", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi il documento per il Consiglio di Amministrazione su {Argomento}. Usa il nostro modello. Struttura: sintesi esecutiva (3 righe), raccomandazione, contesto, analisi delle opzioni, rischi, implicazioni finanziarie €, impatto sugli stakeholder, decisione richiesta. Meno di 4 pagine.`,
+    outcome: "Bozza documento per il CdA pronta per la revisione del presidente." },
+
+  { dept: "executive", size: "pmi", title: "Triage inbox giornaliero", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Classifica le mie email non lette delle ultime 24 ore in quattro gruppi: urgenti (decisione necessaria oggi), importanti (decisione necessaria questa settimana), informative (da leggere in seguito), delegabili a {Nome Assistente}. Per le urgenti riassumi la decisione e l'azione raccomandata.`,
+    outcome: "Inbox classificata con raccomandazioni sugli elementi urgenti." },
+
+  { dept: "executive", size: "pmi", title: "Briefing pre-riunione", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Preparami prima dell'incontro con {Persona} alle {Ora}. Estrai dalle nostre email recenti, chat Teams, storico del calendario e file SharePoint condivisi. Tratta: storia della relazione, ultima conversazione, elementi aperti che potrebbero sollevare, impegni che ho preso nei loro confronti.`,
+    outcome: "Briefing pre-riunione su storia e probabili argomenti." },
+
+  { dept: "executive", size: "corporate", title: "Memo decisionale", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un memo decisionale su {Decisione}. Struttura: decisione richiesta, raccomandazione, tre opzioni praticabili, principali trade-off, implicazioni finanziarie €, rischi, posizione degli stakeholder principali, tempistiche, mia raccomandazione. Massimo una pagina.`,
+    outcome: "Memo decisionale di una pagina per il team di direzione." },
+
+  { dept: "executive", size: "pmi", title: "Sintesi riunione", surface: "teams", surfaceLabel: "Teams",
+    prompt: `Sintetizza questa trascrizione della riunione. Output: decisioni prese, azioni concordate (con responsabile e data), questioni aperte rinviate, posizioni espresse dai partecipanti. Segnala qualsiasi elemento in contraddizione con decisioni precedenti in {Archivio Decisioni Executive}.`,
+    outcome: "Sintesi riunione con registro azioni e segnalazioni di contraddizioni." },
+
+  { dept: "executive", size: "pmi", title: "Messaggio a tutto il personale", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi un messaggio a tutto il personale su {Argomento}. Tono: diretto, caldo, italiano semplice. Evita le frasi di circostanza. Inizia con ciò che conta per chi legge. Termina con un'azione chiara e dove fare domande. Meno di 300 parole.`,
+    outcome: "Bozza messaggio a tutto il personale da revisionare." },
+
+  { dept: "executive", size: "enterprise", title: "Aggiornamento agli investitori", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi l'aggiornamento agli investitori di questo trimestre. Usa il formato dell'aggiornamento precedente in {Archivio Aggiornamenti Investitori}. Tratta: risultati finanziari €, nuovi clienti acquisiti e clienti persi, aggiornamenti di prodotto, variazioni nel team di direzione, principali rischi e opportunità, richieste. Italiano.`,
+    outcome: "Bozza aggiornamento investitori per la revisione del Consiglio." },
+
+  { dept: "executive", size: "corporate", title: "Analisi opzioni strategiche", surface: "word", surfaceLabel: "Word",
+    prompt: `Analizza le opzioni strategiche per {Domanda Strategica}. Estrai dai documenti di strategia in {Archivio Strategia}. Tratta: tre opzioni praticabili, allineamento con la strategia attuale, gap di competenze da colmare, profilo finanziario €, orizzonte temporale, rischi principali. Chiudi con una raccomandazione motivata.`,
+    outcome: "Analisi opzioni strategiche per la discussione del Consiglio." },
+
+  { dept: "executive", size: "corporate", title: "Bozza discorso", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un discorso di 12 minuti su '{Argomento}' per {Pubblico}. Voce: diretta, basata su opinioni personali, con storie concrete. Italiano. Struttura: apertura forte (60 secondi), tre punti chiave con una storia o un dato per punto, call to action finale. Ritmo di lettura ~140 parole/minuto = circa 1.700 parole totali.`,
+    outcome: "Bozza discorso pronta per la revisione dell'executive." },
+
+  { dept: "executive", size: "pmi", title: "Preparazione colloquio con collaboratore diretto", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Preparami per il colloquio 1:1 con {Nome Collaboratore Diretto}. Estrai dalle nostre ultime tre note di colloquio (in OneNote), dalle loro priorità aperte, dalle azioni in sospeso di entrambe le parti e dai feedback recenti che ho ricevuto su di loro. Suggerisci tre argomenti di discussione.`,
+    outcome: "Briefing per il colloquio con argomenti di discussione suggeriti." },
+
+  // ─── LEGAL ────────────────────────────────────────────────────────────────
+  { dept: "legal", size: "corporate", title: "Prima revisione contratto", surface: "word", surfaceLabel: "Word",
+    prompt: `Revisiona questo contratto in bozza rispetto alla nostra posizione standard ({Standard Contrattuali Legali}). Evidenzia le deviazioni che riguardano: durata, recesso, massimale di responsabilità, manleva, proprietà intellettuale, riservatezza, legge applicabile, risoluzione delle controversie. Per ogni deviazione indica se è accettabile, richiede negoziazione o è uno stop definitivo.`,
+    outcome: "Prima revisione contratto da verificare da parte del legale." },
+
+  { dept: "legal", size: "pmi", title: "Redazione policy", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi la nostra policy '{Nome Policy}'. Fai riferimento alla normativa italiana applicabile: {Normative Pertinenti}. Usa il nostro modello in {Archivio Policy Legale}. Tratta: finalità, perimetro, definizioni, ruoli e responsabilità, disposizioni della policy, processo per le eccezioni, ciclo di revisione, documenti correlati. Linguaggio semplice. Italiano.`,
+    outcome: "Bozza policy per revisione legale." },
+
+  { dept: "legal", size: "pmi", title: "Monitoraggio modifiche normative", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Riassumi il provvedimento di {Autorità} su {Argomento}. Tratta: cosa è cambiato rispetto alla norma precedente, a chi si applica, quando entra in vigore, quale azione deve intraprendere la nostra organizzazione, quali policy interne potrebbero dover essere aggiornate. Fai riferimento al documento fonte.`,
+    outcome: "Sintesi del provvedimento con azioni interne da adottare." },
+
+  { dept: "legal", size: "pmi", title: "Bozza informativa privacy", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un'informativa privacy aggiornata per {Servizio}. Tratta i principi del GDPR e del Codice Privacy in linguaggio semplice e comprensibile: dati raccolti, finalità del trattamento, condivisione con terzi, sicurezza, diritti dell'interessato, tempi di conservazione. Includi il contatto del responsabile della protezione dei dati (DPO). Meno di 800 parole. Italiano.`,
+    outcome: "Bozza informativa privacy da verificare rispetto al GDPR vigente." },
+
+  { dept: "legal", size: "enterprise", title: "Avviso di blocco conservativo documenti", surface: "outlook", surfaceLabel: "Outlook",
+    prompt: `Redigi un avviso di blocco conservativo (litigation hold) per {Procedura}. Destinatari: {Soggetti Coinvolti}. Tratta: descrizione sintetica della procedura (senza dettagli riservati), obbligo di conservare tutti i documenti pertinenti, perimetro dei materiali interessati (email, file, chat), conseguenze in caso di mancato rispetto, modalità per richiedere chiarimenti. Usa il modello standard in {Archivio Legal}.`,
+    outcome: "Avviso di blocco conservativo per la revisione del responsabile legale." },
+
+  { dept: "legal", size: "corporate", title: "Aggiornamento stato procedura legale", surface: "word", surfaceLabel: "Word",
+    prompt: `Riassumi lo stato della procedura {Procedura}. Estrai dal fascicolo in {Fascicolo SharePoint} e dalle email recenti. Tratta: fase attuale, attività recente, prossime scadenze, rischi principali, costi sostenuti a oggi €. Formato: aggiornamento di una pagina per la direzione.`,
+    outcome: "Aggiornamento stato procedura di una pagina." },
+
+  { dept: "legal", size: "pmi", title: "Revisione NDA", surface: "word", surfaceLabel: "Word",
+    prompt: `Revisiona questo accordo di riservatezza (NDA). Confronta con il nostro modello standard in {Archivio Contratti Standard Legale}. Evidenzia le deviazioni che riguardano: definizione di informazioni riservate, durata dell'obbligo, restituzione o distruzione dei dati, eccezioni, legge applicabile, giurisdizione, rimedi in caso di violazione. Segnala qualsiasi obbligo inusuale.`,
+    outcome: "Revisione NDA con segnalazione delle deviazioni." },
+
+  { dept: "legal", size: "pmi", title: "Memo formazione compliance", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi un memo che annuncia il ciclo di formazione obbligatoria su compliance per l'anno {Anno}. Tratta: argomenti della formazione, chi deve completarla, scadenza, modalità di completamento, conseguenze del mancato completamento, referente per domande. Italiano. Meno di 300 parole.`,
+    outcome: "Memo formazione compliance pronto per la distribuzione." },
+
+  { dept: "legal", size: "corporate", title: "Verifica conflitti di interesse", surface: "m365", surfaceLabel: "M365 Chat",
+    prompt: `Effettua una verifica dei conflitti di interesse per la nuova procedura '{Descrizione Procedura}' che coinvolge le parti {Parti}. Cerca nei nostri fascicoli attivi e archiviati in {Archivio Fascicoli Legale} e nella corrispondenza email recente. Segnala eventuali conflitti reali o potenziali identificati.`,
+    outcome: "Report di verifica conflitti con le criticità identificate." },
+
+  { dept: "legal", size: "corporate", title: "Bozza risposta all'autorità", surface: "word", surfaceLabel: "Word",
+    prompt: `Redigi una risposta a {Autorità} per la {Tipo di Richiesta} del {Data}. Usa il documento di richiesta e i fascicoli pertinenti. Tono: collaborativo, fattuale, senza ammissioni implicite o esplicite. Affronta ciascun punto della richiesta in ordine. Fai riferimento agli allegati pertinenti. Il responsabile legale deve revisionare prima dell'invio.`,
+    outcome: "Bozza risposta all'autorità per la verifica del responsabile legale." },
+];
+
+// Surface badge class mapping
+function surfaceClass(s) {
+  return { word:'sb-word', excel:'sb-excel', outlook:'sb-outlook', teams:'sb-teams', ppt:'sb-ppt', m365:'sb-m365' }[s] || 'sb-m365';
+}
+
+// Escape HTML attribute value
+function escAttr(s) {
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Build card HTML
+function buildCard(p) {
+  const promptHighlighted = p.prompt.replace(/\{[^}]+\}/g, m => `<span class="placeholder">${m}</span>`);
+  const sizeLabel = { pmi: 'PMI', corporate: 'Corporate', enterprise: 'Enterprise' }[p.size] || 'PMI';
+  const sizeClass = { pmi: 'sz-pmi', corporate: 'sz-corporate', enterprise: 'sz-enterprise' }[p.size] || 'sz-pmi';
+  return `<div class="card" data-dept="${p.dept}" data-surface="${p.surface}" data-text="${escAttr((p.title+' '+p.prompt+' '+p.outcome).toLowerCase())}">
+    <div class="card-head">
+      <span class="card-title">${p.title}</span>
+      <div style="display:flex;gap:5px;align-items:center;flex-shrink:0">
+        <span class="size-badge ${sizeClass}">${sizeLabel}</span>
+        <span class="surface-badge ${surfaceClass(p.surface)}">${p.surfaceLabel}</span>
+      </div>
+    </div>
+    <div class="card-prompt">
+      <pre>${promptHighlighted}</pre>
+    </div>
+    <div class="card-outcome">
+      <div class="card-outcome-label">Risultato atteso</div>
+      <p>${p.outcome}</p>
+    </div>
+    <div class="card-footer">
+      <button class="copy-btn" data-prompt="${escAttr(p.prompt)}" onclick="copyPrompt(this)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copia prompt
+      </button>
+    </div>
+  </div>`;
+}
+
+// Render grids
+function renderGrids() {
+  const depts = ['vendite','finance','hr','it','marketing','operations','executive','legal'];
+  depts.forEach(d => {
+    const grid = document.getElementById('grid-'+d);
+    if (grid) grid.innerHTML = PROMPTS.filter(p=>p.dept===d).map(buildCard).join('');
+  });
+  const allContainer = document.getElementById('all-cards');
+  const labels = {
+    vendite:'\u{1F4C8} Vendite', finance:'\u{1F4B0} Finance', hr:'\u{1F465} HR', it:'\u{1F5A5}️ IT Helpdesk',
+    marketing:'\u{1F4E3} Marketing', operations:'⚙️ Operations', executive:'\u{1F3AF} Executive', legal:'⚖️ Legal'
+  };
+  allContainer.innerHTML = depts.map(d => {
+    const cards = PROMPTS.filter(p=>p.dept===d).map(buildCard).join('');
+    return `<div class="dept-separator" data-dept-sep="${d}">${labels[d]}</div><div class="prompt-grid" id="all-grid-${d}">${cards}</div>`;
+  }).join('');
+}
+
+// State
+let currentDept    = 'all';
+let currentSurface = 'all';
+
+// Show department
+function showDept(dept, btn) {
+  document.querySelectorAll('.dept-section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.dept-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+dept).classList.add('visible');
+  btn.classList.add('active');
+  currentDept = dept;
+  document.getElementById('searchInput').value = '';
+  applyFilters();
+}
+
+// Surface filter
+function setSurface(surface, btn) {
+  currentSurface = surface;
+  document.querySelectorAll('.fc').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// Text search
+function filterPrompts() {
+  if (currentDept !== 'all') {
+    currentDept = 'all';
+    document.querySelectorAll('.dept-section').forEach(s=>s.classList.remove('visible'));
+    document.getElementById('section-all').classList.add('visible');
+    document.querySelectorAll('.dept-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector('.dept-btn').classList.add('active');
+  }
+  applyFilters();
+}
+
+// Unified filter
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (currentDept === 'all') {
+    const allCards = document.querySelectorAll('#all-cards .card');
+    const deptSeps = document.querySelectorAll('[data-dept-sep]');
+    let total = 0;
+    const deptHas = {};
+    allCards.forEach(c => {
+      const ok = (currentSurface === 'all' || c.dataset.surface === currentSurface)
+               && (!q || c.dataset.text.includes(q));
+      c.style.display = ok ? '' : 'none';
+      if (ok) { total++; deptHas[c.dataset.dept] = true; }
+    });
+    deptSeps.forEach(s => { s.style.display = deptHas[s.dataset.deptSep] ? '' : 'none'; });
+    document.getElementById('no-results').style.display = total === 0 ? '' : 'none';
+  } else {
+    const cards = document.querySelectorAll(`#grid-${currentDept} .card`);
+    let total = 0;
+    cards.forEach(c => {
+      const ok = (currentSurface === 'all' || c.dataset.surface === currentSurface)
+               && (!q || c.dataset.text.includes(q));
+      c.style.display = ok ? '' : 'none';
+      if (ok) total++;
+    });
+    document.getElementById('no-results').style.display = total === 0 ? '' : 'none';
+  }
+}
+
+// Copy prompt
+function copyPrompt(btn) {
+  const text = btn.getAttribute('data-prompt');
+  const iconCopy = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+  const iconOk   = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+  function feedback() {
+    btn.classList.add('copied');
+    btn.innerHTML = iconOk + ' Copiato!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = iconCopy + ' Copia prompt'; }, 2000);
+  }
+  function fallback() {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); feedback(); } catch(e) { alert('Copia manuale:\n' + text); }
+    document.body.removeChild(ta);
+  }
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(feedback).catch(fallback);
+  } else {
+    fallback();
+  }
+}
+
+renderGrids();
+</script>
+</body>
+</html>
