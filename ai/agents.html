@@ -143,7 +143,27 @@
 
   #no-results{text-align:center;padding:80px 20px;color:var(--text-muted);display:none;}
   #no-results h3{font-size:18px;margin-bottom:8px;color:var(--text);}
+  /* TEMA CHIARO */
+  .theme-btn{background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:7px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s,color .15s;flex-shrink:0;}
+  .theme-btn:hover{border-color:#6366f1;color:#818cf8;}
+  html.light .ico-sun{display:none!important;}
+  html.light .ico-moon{display:inline-block!important;}
+  html.light{--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--text-muted:#64748b;--card:#ffffff;--card-hover:#f1f5f9;}
+  html.light .agent-desc{color:#334155;}
+  html.light .starter-item{background:#f1f5f9;border-color:#e2e8f0;}
+  html.light .starter-item:hover{background:#e2e8f0;border-color:#6366f1;}
+  html.light .starter-text{color:#4338ca;}
+  html.light .prompt-box{background:#f8fafc;border-color:#e2e8f0;color:#475569;}
+  html.light .prompt-box::-webkit-scrollbar-thumb{background:#cbd5e1;}
+  html.light .sz-pmi{background:rgba(16,185,129,.15);color:#065f46;}
+  html.light .sz-corporate{background:rgba(245,158,11,.15);color:#92400e;}
+  html.light .sz-enterprise{background:rgba(139,92,246,.15);color:#5b21b6;}
+  html.light .compat-claude{background:rgba(217,119,6,.15);color:#b45309;}
+  html.light .compat-chatgpt{background:rgba(16,185,129,.15);color:#065f46;}
+  html.light .compat-gemini{background:rgba(59,130,246,.15);color:#1d4ed8;}
+  html.light .compat-upload{background:rgba(100,116,139,.1);color:#475569;}
 </style>
+<script>if(localStorage.getItem('ai-theme')==='light')document.documentElement.classList.add('light');</script>
 </head>
 <body>
 <header class="header">
@@ -155,9 +175,12 @@
     </div>
     <span class="ai-badge">AI Agents</span>
   </div>
-  <div class="search-wrap">
-    <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Cerca agente…" oninput="filterAgents()">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="theme-btn" onclick="toggleTheme()" title="Cambia tema"><svg class="ico-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="ico-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Cerca agente…" oninput="filterAgents()">
+    </div>
   </div>
 </header>
 
@@ -476,5 +499,6 @@ function copyStarter(text,item){
 
 renderGrids();
 </script>
+<script>function toggleTheme(){document.documentElement.classList.toggle('light');localStorage.setItem('ai-theme',document.documentElement.classList.contains('light')?'light':'dark');}</script>
 </body>
 </html>

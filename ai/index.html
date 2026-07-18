@@ -85,6 +85,14 @@ a{text-decoration:none;color:inherit;}
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;color:var(--text-muted);font-size:13px;}
 
+/* TEMA CHIARO */
+.theme-btn{background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:7px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s,color .15s;flex-shrink:0;}
+.theme-btn:hover{border-color:#6366f1;color:#818cf8;}
+html.light .ico-sun{display:none!important;}
+html.light .ico-moon{display:inline-block!important;}
+html.light{--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--text-muted:#64748b;--accent:#6366f1;}
+html.light .b-on{background:#dcfce7;color:#166534;}
+html.light .b-off{background:#ede9fe;color:#5b21b6;}
 @media(max-width:768px){
   .header{padding:14px 20px;}
   .hero{padding:48px 20px 40px;}
@@ -93,6 +101,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
   footer{padding:24px 20px;}
 }
 </style>
+<script>if(localStorage.getItem('ai-theme')==='light')document.documentElement.classList.add('light');</script>
 </head>
 <body>
 
@@ -103,7 +112,8 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
     <span class="brand-sep">|</span>
     <span class="brand-sub">BBT Consulting</span>
   </div>
-  <span class="header-meta">7 risorse · 5 livelli</span>
+  <button class="theme-btn" onclick="toggleTheme()" title="Cambia tema"><svg class="ico-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="ico-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  <span class="header-meta">8 risorse · 5 livelli</span>
 </header>
 
 <div class="hero">
@@ -112,7 +122,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
   <p>Sette risorse per imparare a usare l'intelligenza artificiale sul lavoro: dai primi prompt agli agenti autonomi, dalla tecnica alla governance.</p>
   <div class="stats">
     <div class="stat"><div class="stat-n">82</div><div class="stat-l">prompt pronti</div></div>
-    <div class="stat"><div class="stat-n">8</div><div class="stat-l">agenti AI</div></div>
+    <div class="stat"><div class="stat-n">10</div><div class="stat-l">agenti AI</div></div>
     <div class="stat"><div class="stat-n">5</div><div class="stat-l">livelli formativi</div></div>
     <div class="stat"><div class="stat-n">7</div><div class="stat-l">risorse</div></div>
   </div>
@@ -171,7 +181,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
       <div class="card-title">Framework C·O·C·V</div>
       <div class="card-desc">Il metodo in quattro blocchi per costruire prompt efficaci. 50+ esempi strutturati per settore e caso d'uso.</div>
       <div class="card-foot">
-        <div class="tags"><span class="tag">50+ prompt</span><span class="tag">Struttura</span></div>
+        <div class="tags"><span class="tag">43 prompt</span><span class="tag">Struttura</span></div>
         <span class="badge b-on">Disponibile</span>
       </div>
     </a>
@@ -181,7 +191,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
       <div class="card-title">Agenti AI</div>
       <div class="card-desc">8 agenti specializzati con system prompt pronti per vendite, finance, HR, legal, marketing e operations.</div>
       <div class="card-foot">
-        <div class="tags"><span class="tag">8 agenti</span><span class="tag">System prompt</span></div>
+        <div class="tags"><span class="tag">10 agenti</span><span class="tag">System prompt</span></div>
         <span class="badge b-on">Disponibile</span>
       </div>
     </a>
@@ -218,10 +228,20 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
 
     <a href="governance.html" class="card" style="--cc:#14b8a6">
       <div class="bar"></div>
-      <div class="card-title">Governance & Roadmap</div>
-      <div class="card-desc">Uso responsabile dell'AI in azienda: cosa non condividere, GDPR, gestione allucinazioni e roadmap di adozione in 5 livelli.</div>
+      <div class="card-title">Governance AI</div>
+      <div class="card-desc">Uso responsabile dell'AI in azienda: cosa non condividere, GDPR e gestione delle allucinazioni. Policy per l'adozione sicura.</div>
       <div class="card-foot">
-        <div class="tags"><span class="tag">GDPR</span><span class="tag">Roadmap</span></div>
+        <div class="tags"><span class="tag">GDPR</span><span class="tag">Policy</span></div>
+        <span class="badge b-on">Disponibile</span>
+      </div>
+    </a>
+
+    <a href="governance.html#tab-roadmap" class="card" style="--cc:#14b8a6">
+      <div class="bar"></div>
+      <div class="card-title">Roadmap di adozione</div>
+      <div class="card-desc">Framework strategico per introdurre l'AI in azienda: maturità digitale, piano di rollout per funzione e indicatori di successo.</div>
+      <div class="card-foot">
+        <div class="tags"><span class="tag">Strategia</span><span class="tag">Leadership</span></div>
         <span class="badge b-on">Disponibile</span>
       </div>
     </a>
@@ -231,5 +251,6 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;co
 
 <footer>BBT Consulting · AI &nbsp;·&nbsp; bbtconsulting.it/ai</footer>
 
+<script>function toggleTheme(){document.documentElement.classList.toggle('light');localStorage.setItem('ai-theme',document.documentElement.classList.contains('light')?'light':'dark');}</script>
 </body>
 </html>
