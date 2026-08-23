@@ -3,213 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soluzioni BBT Consulting</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<title>Soluzioni — BBT Consulting</title>
 <style>
-:root {
-  --bg:     #08080e;
-  --bg2:    #0d0d18;
-  --bg3:    #111120;
-  --border: rgba(255,255,255,0.07);
-  --border2:rgba(255,255,255,0.13);
-  --accent: #818cf8;
-  --teal:   #34d399;
-  --text:   #f0efff;
-  --text2:  #7878a0;
-  --text3:  #3d3d60;
-  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Chakra Petch', var(--font);
+:root{
+  --bg:#0f1117;--bg2:#151825;--bg3:#1a2035;
+  --border:#252d44;--text:#e2e8f0;--text-muted:#64748b;
+  --accent:#6366f1;--radius:12px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--bg);color:var(--text);
-     line-height:1.6;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
 
-/* NAV */
-.nav{
-  border-bottom:1px solid var(--border);
-  padding:18px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-brand{font-family:var(--font-display);font-size:16px;font-weight:700;
-  letter-spacing:.06em;color:var(--text)}
-.nav-brand span{color:var(--accent)}
-.nav-sub{font-size:12px;color:var(--text3);letter-spacing:.04em}
+/* HEADER */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-name{font-size:16px;font-weight:700;}
+.brand-sep{color:var(--border);margin:0 2px;}
+.brand-sub{font-size:16px;font-weight:400;color:var(--text-muted);}
+.header-meta{font-size:12px;color:var(--text-muted);background:var(--bg3);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-link{font-size:13px;color:var(--text-muted);transition:color .15s;}
+.nav-link:hover{color:var(--accent);}
 
 /* HERO */
-.hero{padding:96px 48px 72px;max-width:960px;margin:0 auto}
-.hero-kicker{font-size:11px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-.hero h1{font-family:var(--font-display);
-  font-size:clamp(36px,5vw,58px);font-weight:700;
-  letter-spacing:-.02em;line-height:1.1;margin-bottom:20px}
-.hero h1 span{
-  background:linear-gradient(130deg,var(--accent),var(--teal));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:18px;color:var(--text2);max-width:560px;line-height:1.65}
+.hero{padding:72px 40px 56px;max-width:960px;margin:0 auto;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#818cf8;margin-bottom:18px;}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.15;margin-bottom:18px;background:linear-gradient(135deg,#e2e8f0 30%,#a5b4fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:17px;color:var(--text-muted);max-width:560px;line-height:1.7;margin-bottom:44px;}
+.stats{display:flex;gap:16px;flex-wrap:wrap;}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 28px;min-width:120px;}
+.stat-n{font-size:28px;font-weight:800;color:#818cf8;line-height:1;}
+.stat-l{font-size:12px;color:var(--text-muted);margin-top:4px;}
 
-/* DIVIDER */
-.divider{height:1px;background:var(--border);margin:0 48px}
+/* SECTION */
+.section{max-width:960px;margin:0 auto;padding:0 40px 72px;}
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.sec-title{font-size:21px;font-weight:700;}
+.sec-desc{font-size:14px;color:var(--text-muted);margin-top:4px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
 
-/* GRID */
-.grid-section{padding:72px 48px}
-.grid-label{font-size:11px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--text3);margin-bottom:32px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-
-/* SOLUTION CARD */
+/* CARD */
 .card{
   background:var(--bg2);border:1px solid var(--border);
-  border-radius:14px;padding:32px;
-  display:flex;flex-direction:column;gap:16px;
-  transition:border-color .2s, background .2s, transform .2s;
+  border-radius:var(--radius);padding:24px;
+  display:flex;flex-direction:column;gap:12px;
   position:relative;overflow:hidden;
+  transition:border-color .2s,background .2s,transform .15s;
+  cursor:pointer;
 }
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--teal));
-  opacity:0;transition:opacity .2s;
-}
-.card:hover{
-  border-color:var(--border2);background:var(--bg3);
-  transform:translateY(-2px);
-}
-.card:hover::before{opacity:1}
+.card:hover{background:var(--bg3);border-color:#394160;transform:translateY(-2px);}
+.bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc);}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.tag{font-size:11px;padding:3px 8px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);color:var(--text-muted);}
+.tag.hi{border-color:rgba(99,102,241,.4);color:#818cf8;background:rgba(99,102,241,.08);}
+.card-title{font-size:17px;font-weight:700;line-height:1.25;}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.6;flex:1;}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px;border-top:1px solid var(--border);}
+.card-meta{font-size:11px;color:var(--text-muted);}
+.card-cta{font-size:13px;font-weight:600;color:#818cf8;flex-shrink:0;transition:transform .15s;}
+.card:hover .card-cta{transform:translateX(3px);}
 
-.card-tags{display:flex;gap:6px;flex-wrap:wrap}
-.card-tag{font-size:10px;font-weight:600;letter-spacing:.07em;
-  text-transform:uppercase;padding:3px 10px;border-radius:20px;
-  border:1px solid var(--border2);color:var(--text2);background:transparent}
-.card-tag.hi{border-color:rgba(129,140,248,.4);color:var(--accent)}
-
-.card-title{font-family:var(--font-display);font-size:22px;font-weight:700;
-  letter-spacing:-.01em;line-height:1.2}
-.card-body{font-size:14px;color:var(--text2);line-height:1.6;flex:1}
-
-.card-footer{display:flex;align-items:center;justify-content:space-between;
-  padding-top:16px;border-top:1px solid var(--border)}
-.card-meta{font-size:12px;color:var(--text3)}
-.card-cta{font-size:13px;font-weight:600;color:var(--accent);
-  display:flex;align-items:center;gap:4px;transition:gap .15s}
-.card:hover .card-cta{gap:8px}
-
-/* PLACEHOLDER CARD */
+/* GHOST */
 .card-ghost{
   background:transparent;border:1px dashed var(--border);
-  border-radius:14px;padding:32px;
+  border-radius:var(--radius);padding:32px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:10px;min-height:200px;
 }
-.card-ghost-icon{font-size:28px;opacity:.25}
-.card-ghost-label{font-size:13px;color:var(--text3)}
+.card-ghost-icon{font-size:28px;opacity:.2;}
+.card-ghost-label{font-size:13px;color:var(--text-muted);opacity:.5;}
 
 /* FOOTER */
-footer{border-top:1px solid var(--border);padding:24px 48px;
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:12px;color:var(--text3)}
+footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text-muted);}
 
 @media(max-width:768px){
-  .nav,.hero,.grid-section,footer,.divider{padding-left:20px;padding-right:20px}
-  .hero{padding-top:60px;padding-bottom:50px}
+  .header{padding:14px 20px;}
+  .hero{padding:48px 20px 40px;}
+  .section{padding:0 20px 48px;}
+  footer{padding:24px 20px;}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div>
-    <div style="display:flex;align-items:center;gap:10px;">
-      <img src="../Favicon/apple-touch-icon.png" alt="BBT" style="width:34px;height:34px;object-fit:contain;border-radius:6px;">
-      <div>
-        <div class="nav-brand"><span>Consulting</span></div>
-        <div class="nav-sub">Soluzioni</div>
-      </div>
-    </div>
+<header class="header">
+  <div class="brand">
+    <a href="https://bbtconsulting.it"><img src="../Favicon/apple-touch-icon.png" alt="BBT" style="width:34px;height:34px;object-fit:contain;border-radius:6px;flex-shrink:0;opacity:.9;transition:opacity .15s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.9'"></a>
+    <span class="brand-name">Soluzioni</span>
+    <span class="brand-sep">|</span>
+    <span class="brand-sub">BBT Consulting</span>
   </div>
-  <div style="display:flex;align-items:center;gap:24px">
-    <a href="/ai/" style="font-size:13px;color:var(--text3);text-decoration:none;letter-spacing:.04em;transition:color .15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text3)'">AI →</a>
-    <span style="font-size:13px;color:var(--text3)">bbtconsulting.it</span>
+  <div class="nav-right">
+    <a href="/ai/" class="nav-link">AI →</a>
+    <span class="header-meta">3 soluzioni disponibili</span>
   </div>
-</nav>
-
-<header class="hero">
-  <div class="hero-kicker">Catalogo soluzioni</div>
-  <h1>Strumenti che <span>trasformano i dati</span><br>in vantaggio competitivo.</h1>
-  <p class="hero-sub">
-    Ogni soluzione nasce da un problema reale del cliente.
-    Integrazioni con gestionali esistenti, zero dipendenze esterne,
-    risultati misurabili dal primo giorno.
-  </p>
 </header>
 
-<div class="divider"></div>
+<div class="hero">
+  <div class="eyebrow">Catalogo soluzioni</div>
+  <h1>Strumenti che trasformano<br>i dati in vantaggio competitivo.</h1>
+  <p>Ogni soluzione nasce da un problema reale del cliente. Integrazioni con gestionali esistenti, zero dipendenze esterne, risultati misurabili dal primo giorno.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">soluzioni live</div></div>
+    <div class="stat"><div class="stat-n">0</div><div class="stat-l">dipendenze esterne</div></div>
+    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">utenti in parallelo</div></div>
+  </div>
+</div>
 
-<section class="grid-section">
-  <div class="grid-label">Soluzioni disponibili</div>
-  <div class="grid">
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-title">Soluzioni disponibili</div>
+      <div class="sec-desc">Applicazioni verticali pronte all'uso, costruite su misura per processi aziendali specifici.</div>
+    </div>
+  </div>
 
-    <!-- FATTURATO MONITOR -->
-    <a href="fatturato-monitor.html" class="card">
+  <div class="cards">
+
+    <a href="fatturato-monitor.html" class="card" style="--cc:#6366f1">
+      <div class="bar"></div>
       <div class="card-tags">
-        <span class="card-tag hi">Finanza</span>
-        <span class="card-tag">BI</span>
-        <span class="card-tag">ERP</span>
-        <span class="card-tag">Live</span>
+        <span class="tag hi">Finanza</span>
+        <span class="tag">BI</span>
+        <span class="tag">ERP</span>
+        <span class="tag">Live</span>
       </div>
       <div class="card-title">Fatturato Monitor</div>
-      <div class="card-body">
-        Proiezione del fatturato mensile in tempo reale, aggregando
-        cinque flussi del gestionale: fatture, contratti, prefatture,
-        DDT e ordini. Budget vs actual in un colpo d'occhio.
-      </div>
-      <div class="card-footer">
+      <div class="card-desc">Proiezione del fatturato mensile in tempo reale, aggregando cinque flussi del gestionale: fatture, contratti, prefatture, DDT e ordini. Budget vs actual in un colpo d'occhio.</div>
+      <div class="card-foot">
         <span class="card-meta">Distribuzione B2B · SQL Server</span>
         <span class="card-cta">Scopri →</span>
       </div>
     </a>
 
-    <!-- ARCACONNECT MES -->
-    <a href="arca-rileva.html" class="card">
+    <a href="arca-rileva.html" class="card" style="--cc:#f59e0b">
+      <div class="bar"></div>
       <div class="card-tags">
-        <span class="card-tag hi">Produzione</span>
-        <span class="card-tag">MES</span>
-        <span class="card-tag">Arca Evolution</span>
-        <span class="card-tag">ERP</span>
+        <span class="tag hi">Produzione</span>
+        <span class="tag">MES</span>
+        <span class="tag">Arca Evolution</span>
+        <span class="tag">ERP</span>
       </div>
       <div class="card-title">ArcaConnect MES</div>
-      <div class="card-body">
-        Terminale MES per operatori di reparto: badge, barcode ordine, timer
-        attrezzaggio e lavorazione, consuntivo pezzi e materiali.
-        Documento CP creato automaticamente in Arca Evolution a fine turno.
-      </div>
-      <div class="card-footer">
+      <div class="card-desc">Terminale MES per operatori di reparto: badge, barcode ordine, timer attrezzaggio e lavorazione, consuntivo pezzi e materiali. Documento CP creato automaticamente in Arca Evolution a fine turno.</div>
+      <div class="card-foot">
         <span class="card-meta">Manifattura · SQL Server</span>
         <span class="card-cta">Scopri →</span>
       </div>
     </a>
 
-    <!-- NIS2 COMPLIANCE PLATFORM -->
-    <a href="nis2-compliance.html" class="card">
+    <a href="nis2-compliance.html" class="card" style="--cc:#ef4444">
+      <div class="bar"></div>
       <div class="card-tags">
-        <span class="card-tag hi">Cybersecurity</span>
-        <span class="card-tag">NIS2</span>
-        <span class="card-tag">Compliance</span>
-        <span class="card-tag">Multi-tenant</span>
+        <span class="tag hi">Cybersecurity</span>
+        <span class="tag">NIS2</span>
+        <span class="tag">Compliance</span>
+        <span class="tag">Multi-tenant</span>
       </div>
       <div class="card-title">NIS2 Compliance Platform</div>
-      <div class="card-body">
-        Piattaforma web per la gestione della conformità NIS2 Allegato 1:
-        108 misure strutturate per dominio, dashboard di avanzamento,
-        Document Center con workflow approvativo e report audit-ready in PDF.
-      </div>
-      <div class="card-footer">
+      <div class="card-desc">Piattaforma web per la gestione della conformità NIS2 Allegato 1: 108 misure strutturate per dominio, dashboard di avanzamento, Document Center con workflow approvativo e report audit-ready in PDF.</div>
+      <div class="card-foot">
         <span class="card-meta">Soggetti NIS2 · Self-hosted</span>
         <span class="card-cta">Scopri →</span>
       </div>
     </a>
 
-    <!-- PLACEHOLDER -->
     <div class="card-ghost">
       <div class="card-ghost-icon">+</div>
       <div class="card-ghost-label">Prossima soluzione in arrivo</div>
@@ -220,7 +178,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;
 
 <footer>
   <span>BBT Consulting · Soluzioni</span>
-  <span>© 2025</span>
+  <span>bbtconsulting.it/soluzioni</span>
 </footer>
 
 </body>
