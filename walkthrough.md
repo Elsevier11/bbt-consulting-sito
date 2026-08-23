@@ -6,7 +6,7 @@ La versione live del sito e ora la pagina statica in `index.html`.
 
 - Sito pubblicato: `index.html`
 - Vecchia SPA: `legacy-spa/`
-- Deploy Netlify: root del repository, senza build della SPA
+- Deploy Cloudflare Pages: root del repository, senza build della SPA
 
 ## Nota
 
