@@ -11,7 +11,6 @@
     --text:#e2e8f0;--text-muted:#94a3b8;--border:#2a3044;
     --card:#1a1f30;--card-hover:#212740;
     --green:#10b981;--purple:#8b5cf6;--orange:#f59e0b;--cyan:#06b6d4;
-    --c-vis:#06b6d4;--c-mkt:#ec4899;--c-scr:#10b981;--c-str:#8b5cf6;
     --radius:10px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -20,7 +19,6 @@
   /* HEADER */
   .header{background:var(--bg2);border-bottom:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
   .header-left{display:flex;align-items:center;gap:14px;}
-  .logo-badge{background:var(--accent);color:#fff;font-weight:700;font-size:13px;letter-spacing:.05em;padding:5px 10px;border-radius:6px;}
   .slash-badge{background:rgba(6,182,212,.18);color:#67e8f9;font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;letter-spacing:.06em;font-family:'SFMono-Regular',Consolas,monospace;}
   .header h1{font-size:16px;font-weight:600;color:var(--text);}
   .header h1 span{color:var(--text-muted);font-weight:400;}
@@ -36,6 +34,7 @@
   /* SIDEBAR */
   .sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:20px 12px;position:sticky;top:61px;height:calc(100vh - 61px);overflow-y:auto;flex-shrink:0;}
   .sidebar-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);padding:0 10px 10px;}
+  .sidebar-divider{height:1px;background:var(--border);margin:14px 10px;}
   .dept-btn{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;color:var(--text-muted);padding:9px 10px;border-radius:7px;cursor:pointer;font-size:13.5px;font-weight:500;text-align:left;transition:background .15s,color .15s;}
   .dept-btn:hover{background:var(--bg3);color:var(--text);}
   .dept-btn.active{background:rgba(37,99,235,.15);color:#60a5fa;}
@@ -43,32 +42,63 @@
   .dept-btn.active .count{background:rgba(37,99,235,.2);color:#60a5fa;}
   .dept-icon{font-size:16px;width:20px;text-align:center;}
 
+  /* ACTION SIDEBAR BUTTONS */
+  .act-btn{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;color:var(--text-muted);padding:7px 10px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:500;text-align:left;transition:background .15s,color .15s;}
+  .act-btn:hover{background:var(--bg3);color:var(--text);}
+  .act-btn.active{background:rgba(37,99,235,.12);color:#93c5fd;}
+  .act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .dot-crea{background:#10b981;}
+  .dot-trasforma{background:#06b6d4;}
+  .dot-analizza{background:#f59e0b;}
+  .dot-pianifica{background:#8b5cf6;}
+  .dot-struttura{background:#ec4899;}
+
   /* MAIN */
   .main{flex:1;padding:28px;overflow-x:hidden;}
   .dept-section{display:none;}
   .dept-section.visible{display:block;}
-  .dept-header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+  .dept-header{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
   .dept-header h2{font-size:22px;font-weight:700;margin-bottom:6px;}
   .dept-header p{color:var(--text-muted);font-size:14px;max-width:720px;line-height:1.6;}
-  .dept-meta{display:flex;align-items:center;gap:8px;margin-top:10px;}
+  .dept-meta{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
   .dept-meta span{font-size:12px;background:var(--bg3);color:var(--text-muted);padding:3px 9px;border-radius:12px;}
-  .dept-separator{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin:28px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+
+  /* ACTION CHIPS (sopra griglia) */
+  .chips-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:all .15s;white-space:nowrap;}
+  .chip-all{background:var(--bg3);color:var(--text-muted);border-color:var(--border);}
+  .chip-all.active,.chip-all:hover{background:rgba(37,99,235,.15);color:#60a5fa;border-color:rgba(37,99,235,.3);}
+  .chip-crea{background:rgba(16,185,129,.1);color:#6ee7b7;border-color:rgba(16,185,129,.2);}
+  .chip-crea.active,.chip-crea:hover{background:rgba(16,185,129,.22);border-color:#10b981;}
+  .chip-trasforma{background:rgba(6,182,212,.1);color:#67e8f9;border-color:rgba(6,182,212,.2);}
+  .chip-trasforma.active,.chip-trasforma:hover{background:rgba(6,182,212,.22);border-color:#06b6d4;}
+  .chip-analizza{background:rgba(245,158,11,.1);color:#fcd34d;border-color:rgba(245,158,11,.2);}
+  .chip-analizza.active,.chip-analizza:hover{background:rgba(245,158,11,.22);border-color:#f59e0b;}
+  .chip-pianifica{background:rgba(139,92,246,.1);color:#c4b5fd;border-color:rgba(139,92,246,.2);}
+  .chip-pianifica.active,.chip-pianifica:hover{background:rgba(139,92,246,.22);border-color:#8b5cf6;}
+  .chip-struttura{background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.2);}
+  .chip-struttura.active,.chip-struttura:hover{background:rgba(236,72,153,.22);border-color:#ec4899;}
 
   /* CMD GRID */
   .cmd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
-  .cmd-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;transition:border-color .2s,background .2s;cursor:default;}
+  .cmd-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:5px;transition:border-color .2s,background .2s;}
   .cmd-card:hover{background:var(--card-hover);border-color:#394160;}
   .cmd-name{font-family:'SFMono-Regular',Consolas,monospace;font-size:13px;font-weight:700;color:#67e8f9;}
   .cmd-desc{font-size:12.5px;color:var(--text-muted);line-height:1.45;}
-  .cmd-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px;}
-  .cmd-tag{font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;}
+  .cmd-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;}
+  .cmd-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em;}
   .tag-vis{background:rgba(6,182,212,.13);color:#67e8f9;}
   .tag-mkt{background:rgba(236,72,153,.13);color:#f9a8d4;}
   .tag-scr{background:rgba(16,185,129,.13);color:#6ee7b7;}
   .tag-str{background:rgba(139,92,246,.13);color:#c4b5fd;}
+  .tag-crea{background:rgba(16,185,129,.1);color:#6ee7b7;}
+  .tag-trasforma{background:rgba(6,182,212,.1);color:#67e8f9;}
+  .tag-analizza{background:rgba(245,158,11,.1);color:#fcd34d;}
+  .tag-pianifica{background:rgba(139,92,246,.1);color:#c4b5fd;}
+  .tag-struttura{background:rgba(236,72,153,.1);color:#f9a8d4;}
 
   /* GUIDA */
-  .guide{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:32px;overflow:hidden;}
+  .guide{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;overflow:hidden;}
   .guide-toggle-btn{width:100%;background:none;border:none;color:var(--text);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;}
   .guide-toggle-btn:hover{background:var(--bg3);}
   .guide-left{display:flex;align-items:center;gap:12px;}
@@ -88,8 +118,12 @@
   .step-desc{font-size:12.5px;color:var(--text-muted);line-height:1.5;}
   .code-block{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;background:#111520;border:1px solid #252c40;border-radius:6px;padding:10px 13px;color:#a5b4fc;line-height:1.6;margin:12px 0;white-space:pre-wrap;}
 
+  /* RESULT LABEL */
+  .result-label{font-size:12px;color:var(--text-muted);margin-bottom:12px;}
+  .result-label strong{color:var(--text);}
+
   /* NO RESULTS */
-  #no-results{text-align:center;padding:80px 20px;color:var(--text-muted);display:none;}
+  #no-results{text-align:center;padding:60px 20px;color:var(--text-muted);display:none;}
   #no-results h3{font-size:18px;margin-bottom:8px;color:var(--text);}
 
   /* TEMA CHIARO */
@@ -99,18 +133,30 @@
   html.light .ico-moon{display:inline-block!important;}
   html.light{--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--text-muted:#64748b;--card:#ffffff;--card-hover:#f1f5f9;}
   html.light .cmd-name{color:#0369a1;}
+  html.light .cmd-desc{color:#475569;}
   html.light .tag-vis{background:rgba(6,182,212,.1);color:#0369a1;}
   html.light .tag-mkt{background:rgba(236,72,153,.1);color:#9d174d;}
   html.light .tag-scr{background:rgba(16,185,129,.1);color:#065f46;}
   html.light .tag-str{background:rgba(139,92,246,.1);color:#5b21b6;}
+  html.light .tag-crea{background:rgba(16,185,129,.1);color:#065f46;}
+  html.light .tag-trasforma{background:rgba(6,182,212,.1);color:#0369a1;}
+  html.light .tag-analizza{background:rgba(245,158,11,.1);color:#92400e;}
+  html.light .tag-pianifica{background:rgba(139,92,246,.1);color:#5b21b6;}
+  html.light .tag-struttura{background:rgba(236,72,153,.1);color:#9d174d;}
   html.light .code-block{background:#f1f5f9;border-color:#e2e8f0;color:#4338ca;}
   html.light .step{background:#f1f5f9;}
-  html.light .cmd-desc{color:#475569;}
+  html.light .chip-all{background:#f1f5f9;color:#475569;border-color:#e2e8f0;}
+  html.light .chip-all.active,.chip-all:hover{background:rgba(37,99,235,.08);color:#1d4ed8;border-color:rgba(37,99,235,.2);}
+  html.light .chip-crea{background:rgba(16,185,129,.07);color:#065f46;border-color:rgba(16,185,129,.15);}
+  html.light .chip-trasforma{background:rgba(6,182,212,.07);color:#0369a1;border-color:rgba(6,182,212,.15);}
+  html.light .chip-analizza{background:rgba(245,158,11,.07);color:#92400e;border-color:rgba(245,158,11,.15);}
+  html.light .chip-pianifica{background:rgba(139,92,246,.07);color:#5b21b6;border-color:rgba(139,92,246,.15);}
+  html.light .chip-struttura{background:rgba(236,72,153,.07);color:#9d174d;border-color:rgba(236,72,153,.15);}
 
   @media(max-width:768px){
     .sidebar{display:none;}
-    .prompt-grid,.cmd-grid{grid-template-columns:1fr;}
-    .search-wrap input{width:200px;}
+    .cmd-grid{grid-template-columns:1fr;}
+    .search-wrap input{width:180px;}
   }
 </style>
 <script>if(localStorage.getItem('ai-theme')==='light')document.documentElement.classList.add('light');</script>
@@ -136,26 +182,47 @@
 
 <div class="layout">
   <aside class="sidebar">
-    <div class="sidebar-label">Categorie</div>
-    <button class="dept-btn active" onclick="showDept('all',this)">
+    <div class="sidebar-label">Categoria</div>
+    <button class="dept-btn active" onclick="showDept('all',this)" id="db-all">
       <span class="dept-icon">⚡</span> Tutti
       <span class="count" id="cnt-all">350</span>
     </button>
-    <button class="dept-btn" onclick="showDept('vis',this)">
+    <button class="dept-btn" onclick="showDept('vis',this)" id="db-vis">
       <span class="dept-icon">🔷</span> Pensiero Visivo
       <span class="count" id="cnt-vis">85</span>
     </button>
-    <button class="dept-btn" onclick="showDept('mkt',this)">
+    <button class="dept-btn" onclick="showDept('mkt',this)" id="db-mkt">
       <span class="dept-icon">📣</span> Contenuti & Marketing
       <span class="count" id="cnt-mkt">90</span>
     </button>
-    <button class="dept-btn" onclick="showDept('scr',this)">
+    <button class="dept-btn" onclick="showDept('scr',this)" id="db-scr">
       <span class="dept-icon">✍️</span> Scrittura & Codice
       <span class="count" id="cnt-scr">90</span>
     </button>
-    <button class="dept-btn" onclick="showDept('str',this)">
+    <button class="dept-btn" onclick="showDept('str',this)" id="db-str">
       <span class="dept-icon">🧠</span> Creatività & Strategia
       <span class="count" id="cnt-str">85</span>
+    </button>
+
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label">Azione</div>
+    <button class="act-btn active" onclick="filterAction('all',this)" id="ab-all">
+      <span class="act-dot" style="background:#6366f1"></span> Tutte
+    </button>
+    <button class="act-btn" onclick="filterAction('crea',this)" id="ab-crea">
+      <span class="act-dot dot-crea"></span> Creare
+    </button>
+    <button class="act-btn" onclick="filterAction('trasforma',this)" id="ab-trasforma">
+      <span class="act-dot dot-trasforma"></span> Trasformare
+    </button>
+    <button class="act-btn" onclick="filterAction('analizza',this)" id="ab-analizza">
+      <span class="act-dot dot-analizza"></span> Analizzare
+    </button>
+    <button class="act-btn" onclick="filterAction('pianifica',this)" id="ab-pianifica">
+      <span class="act-dot dot-pianifica"></span> Pianificare
+    </button>
+    <button class="act-btn" onclick="filterAction('struttura',this)" id="ab-struttura">
+      <span class="act-dot dot-struttura"></span> Strutturare
     </button>
   </aside>
 
@@ -174,504 +241,486 @@
         <span class="guide-chevron" id="guide-chev">▼</span>
       </button>
       <div class="guide-body" id="guide-body">
-        <p class="guide-intro">I <strong>comandi slash</strong> sono scorciatoie mnemoniche che configurate nelle istruzioni personalizzate del modello AI. Digiti <code style="background:rgba(6,182,212,.12);color:#67e8f9;padding:1px 5px;border-radius:3px;font-size:12px;">/diagramma</code> e l'AI sa già cosa fare — senza dover riscrivere ogni volta le istruzioni. Funzionano su ChatGPT (memoria/istruzioni personalizzate), Claude (Projects) e altri modelli che supportano istruzioni di sistema.</p>
+        <p class="guide-intro">I <strong>comandi slash</strong> sono scorciatoie mnemoniche da configurare nelle istruzioni del modello AI. Digiti <code style="background:rgba(6,182,212,.12);color:#67e8f9;padding:1px 5px;border-radius:3px;font-size:12px;">/diagramma</code> e l'AI sa già cosa fare — senza dover riscrivere ogni volta le istruzioni. Funzionano su ChatGPT (istruzioni personalizzate), Claude (Projects) e altri modelli con istruzioni di sistema.</p>
         <div class="steps">
           <div class="step">
             <div class="step-num">Passo 1</div>
-            <div class="step-title">Apri le impostazioni del modello</div>
-            <div class="step-desc">Su ChatGPT: <em>Profilo → Personalizza ChatGPT → Istruzioni personalizzate</em>. Su Claude: crea un <em>Project</em> e aggiungi istruzioni di progetto.</div>
+            <div class="step-title">Apri le impostazioni</div>
+            <div class="step-desc">Su ChatGPT: <em>Profilo → Personalizza ChatGPT → Istruzioni personalizzate</em>. Su Claude: crea un <em>Project</em> con istruzioni di progetto.</div>
           </div>
           <div class="step">
             <div class="step-num">Passo 2</div>
             <div class="step-title">Incolla il blocco di istruzioni</div>
-            <div class="step-desc">Aggiungi un blocco come questo per ogni comando che vuoi abilitare:</div>
+            <div class="step-desc">Aggiungi una riga di istruzione per ogni comando che vuoi abilitare, nel formato mostrato qui sotto.</div>
           </div>
           <div class="step">
             <div class="step-num">Passo 3</div>
             <div class="step-title">Usa il comando nella chat</div>
-            <div class="step-desc">Nella conversazione digita semplicemente <code style="font-size:11px;background:rgba(6,182,212,.12);color:#67e8f9;padding:1px 4px;border-radius:3px;">/nome-comando [testo]</code> e l'AI applica le istruzioni associate.</div>
+            <div class="step-desc">Digita <code style="font-size:11px;background:rgba(6,182,212,.12);color:#67e8f9;padding:1px 4px;border-radius:3px;">/nome-comando [testo]</code> nella conversazione — l'AI applica le istruzioni associate.</div>
           </div>
           <div class="step">
             <div class="step-num">Consiglio</div>
             <div class="step-title">Inizia con 10–15 comandi</div>
-            <div class="step-desc">Non caricare tutti i 350 in una volta. Scegli quelli più utili al tuo ruolo e aggiungine gradualmente in base all'uso reale.</div>
+            <div class="step-desc">Non caricare tutto in una volta. Scegli quelli più utili al tuo ruolo e aggiungine in base all'uso reale.</div>
           </div>
         </div>
-        <div class="code-block">Quando scrivo /diagramma [testo], crea un diagramma Mermaid o ASCII del concetto descritto, con titolo, nodi etichettati e relazioni chiare.
+        <div class="code-block">Quando scrivo /diagramma [testo], crea un diagramma Mermaid o ASCII del concetto, con titolo, nodi etichettati e relazioni chiare.
 
-Quando scrivo /riassumi [testo], produci un riassunto strutturato con: punti chiave (bullet), conclusione principale, e lunghezza proporzionale all'originale.
+Quando scrivo /riassumi [testo], produci un riassunto con: punti chiave (bullet), conclusione principale e lunghezza proporzionale all'originale.
 
-Quando scrivo /hook [argomento], scrivi 3 varianti di apertura ad alto impatto per post/email/presentazioni, una per ogni stile: dati, storia, domanda provocatoria.</div>
+Quando scrivo /hook [argomento], scrivi 3 aperture ad alto impatto per post/email/presentazioni, una per stile: dati, storia, domanda provocatoria.</div>
       </div>
     </div>
 
-    <!-- SEZIONE TUTTI -->
-    <div class="dept-section visible" id="sect-all">
-      <div class="dept-header">
-        <h2>Tutti i comandi</h2>
-        <p>350 comandi slash organizzati in 4 categorie per uso professionale: Pensiero Visivo, Contenuti & Marketing, Scrittura & Codice, Creatività & Strategia.</p>
-        <div class="dept-meta">
-          <span>⚡ 350 comandi</span><span>ChatGPT · Claude · Gemini</span>
-        </div>
-      </div>
-      <div class="cmd-grid" id="grid-all"></div>
-      <div id="no-results"><h3>Nessun risultato</h3><p>Prova con un termine diverso.</p></div>
+    <!-- CHIPS (visibili nel main) -->
+    <div class="chips-bar" id="chips-bar">
+      <span class="chip chip-all active" onclick="filterAction('all',null)">Tutte le azioni</span>
+      <span class="chip chip-crea" onclick="filterAction('crea',null)">🟢 Creare</span>
+      <span class="chip chip-trasforma" onclick="filterAction('trasforma',null)">🔵 Trasformare</span>
+      <span class="chip chip-analizza" onclick="filterAction('analizza',null)">🟡 Analizzare</span>
+      <span class="chip chip-pianifica" onclick="filterAction('pianifica',null)">🟣 Pianificare</span>
+      <span class="chip chip-struttura" onclick="filterAction('struttura',null)">🩷 Strutturare</span>
     </div>
 
-    <!-- SEZIONE PENSIERO VISIVO -->
-    <div class="dept-section" id="sect-vis">
-      <div class="dept-header">
-        <h2>🔷 Pensiero Visivo</h2>
-        <p>Comandi per trasformare idee complesse in strutture visive: diagrammi, flussi, mappe, tabelle e schemi. Ideali per presentazioni, documentazione tecnica e comunicazione strategica.</p>
-        <div class="dept-meta"><span>85 comandi</span></div>
-      </div>
-      <div class="cmd-grid" id="grid-vis"></div>
-    </div>
+    <!-- RESULT LABEL -->
+    <div class="result-label" id="result-label"></div>
 
-    <!-- SEZIONE CONTENUTI & MARKETING -->
-    <div class="dept-section" id="sect-mkt">
-      <div class="dept-header">
-        <h2>📣 Contenuti & Marketing</h2>
-        <p>Comandi per creare contenuti ad alto impatto: post, email, script, headline, campagne. Pensati per chi lavora su comunicazione, sales e brand.</p>
-        <div class="dept-meta"><span>90 comandi</span></div>
-      </div>
-      <div class="cmd-grid" id="grid-mkt"></div>
-    </div>
-
-    <!-- SEZIONE SCRITTURA & CODICE -->
-    <div class="dept-section" id="sect-scr">
-      <div class="dept-header">
-        <h2>✍️ Scrittura & Codice</h2>
-        <p>Comandi per editing, riscrittura, ricerca e sviluppo software. Dal miglioramento di un testo al refactoring di codice — tutto con un solo comando.</p>
-        <div class="dept-meta"><span>90 comandi</span></div>
-      </div>
-      <div class="cmd-grid" id="grid-scr"></div>
-    </div>
-
-    <!-- SEZIONE CREATIVITÀ & STRATEGIA -->
-    <div class="dept-section" id="sect-str">
-      <div class="dept-header">
-        <h2>🧠 Creatività & Strategia</h2>
-        <p>Comandi per brainstorming, analisi strategica, simulazioni e meta-prompting. Utili per decision-making, problem solving e workshop facilitati.</p>
-        <div class="dept-meta"><span>85 comandi</span></div>
-      </div>
-      <div class="cmd-grid" id="grid-str"></div>
-    </div>
+    <!-- GRIGLIA UNICA (filtrata via JS) -->
+    <div class="cmd-grid" id="main-grid"></div>
+    <div id="no-results"><h3>Nessun risultato</h3><p>Prova con un termine diverso o cambia filtro.</p></div>
 
   </main>
 </div>
 
 <script>
+// ── DATI ──────────────────────────────────────────────────────────────────
+// c = categoria, a = azione
 const CMDS = [
-  // ── PENSIERO VISIVO ──────────────────────────────────────────────────────
-  {n:'/diagramma',d:'Crea un diagramma visivo del concetto descritto',c:'vis'},
-  {n:'/flusso',d:'Genera un flowchart del processo passo per passo',c:'vis'},
-  {n:'/mindmap',d:'Espandi il tema in mappa mentale gerarchica',c:'vis'},
-  {n:'/mappa-concetti',d:'Collega concetti chiave con relazioni etichettate',c:'vis'},
-  {n:'/gerarchia',d:'Struttura l\'informazione in albero gerarchico',c:'vis'},
-  {n:'/timeline',d:'Disponi eventi su linea temporale con date',c:'vis'},
-  {n:'/gantt',d:'Crea piano di progetto in formato Gantt semplificato',c:'vis'},
-  {n:'/roadmap',d:'Visualizza fasi evolutive su linea temporale',c:'vis'},
-  {n:'/tabella',d:'Organizza dati in tabella strutturata con intestazioni',c:'vis'},
-  {n:'/confronto',d:'Tabella comparativa tra due o più opzioni',c:'vis'},
-  {n:'/matrice',d:'Matrice 2×2 per classificare elementi per due criteri',c:'vis'},
-  {n:'/swot',d:'Analisi SWOT con punti di forza, debolezze, opportunità, minacce',c:'vis'},
-  {n:'/radar',d:'Schema radar con punteggi su più dimensioni',c:'vis'},
-  {n:'/organigramma',d:'Struttura organizzativa con ruoli e linee di riporto',c:'vis'},
-  {n:'/sequenza',d:'Diagramma di sequenza per interazioni tra sistemi',c:'vis'},
-  {n:'/processo',d:'Mappa il processo con input, attività e output',c:'vis'},
-  {n:'/architettura',d:'Schema architetturale di sistema o applicazione',c:'vis'},
-  {n:'/rete',d:'Visualizza nodi e connessioni di una rete',c:'vis'},
-  {n:'/kanban',d:'Board kanban con colonne To Do / In corso / Fatto',c:'vis'},
-  {n:'/eisenhower',d:'Matrice urgente/importante per prioritizzare task',c:'vis'},
-  {n:'/causa-effetto',d:'Diagramma a lisca di pesce per analisi delle cause',c:'vis'},
-  {n:'/venn',d:'Diagramma di Venn per intersezione tra insiemi',c:'vis'},
-  {n:'/quadrante',d:'Schema a quattro quadranti con assi personalizzati',c:'vis'},
-  {n:'/blueprint',d:'Mappa dettagliata di un servizio o sistema',c:'vis'},
-  {n:'/customer-journey',d:'Mappa l\'esperienza utente per fasi e touchpoint',c:'vis'},
-  {n:'/empathy-map',d:'Mappa empatica: pensa, sente, vede, sente dire',c:'vis'},
-  {n:'/business-model',d:'Canvas del modello di business con 9 blocchi',c:'vis'},
-  {n:'/value-proposition',d:'Schema proposta di valore: benefici, dolori, guadagni',c:'vis'},
-  {n:'/stakeholder-map',d:'Mappa stakeholder per influenza e interesse',c:'vis'},
-  {n:'/pert',d:'Schema PERT con dipendenze tra attività di progetto',c:'vis'},
-  {n:'/lean',d:'Mappa del flusso di valore in ottica lean',c:'vis'},
-  {n:'/sprint-board',d:'Board sprint agile con epiche e story points',c:'vis'},
-  {n:'/decision-tree',d:'Albero decisionale con condizioni e outcomes',c:'vis'},
-  {n:'/funnel',d:'Funnel a imbuto con fasi e tassi di conversione',c:'vis'},
-  {n:'/piramide',d:'Struttura piramidale per messaggi o priorità',c:'vis'},
-  {n:'/mappa-mentale-espansa',d:'Mindmap con tre livelli di profondità',c:'vis'},
-  {n:'/dashboard-kpi',d:'Layout dashboard con metriche chiave e grafici',c:'vis'},
-  {n:'/report-visivo',d:'Struttura visiva per report esecutivo a una pagina',c:'vis'},
-  {n:'/infografica',d:'Struttura informazioni come infografica narrata',c:'vis'},
-  {n:'/presentazione-outline',d:'Scaletta slide con titolo e messaggio chiave per slide',c:'vis'},
-  {n:'/mappa-rischi',d:'Matrice probabilità/impatto per risk management',c:'vis'},
-  {n:'/ciclo',d:'Rappresenta un ciclo o processo ricorrente a fasi',c:'vis'},
-  {n:'/sistema',d:'Diagramma componenti di un sistema con interazioni',c:'vis'},
-  {n:'/entità-relazioni',d:'Schema ER per modellazione dati o database',c:'vis'},
-  {n:'/protocollo',d:'Sequenza passo-passo di un protocollo o procedura',c:'vis'},
-  {n:'/rete-valore',d:'Mappa della rete del valore con fornitori e partner',c:'vis'},
-  {n:'/curva',d:'Curva di adozione o ciclo di vita con fasi',c:'vis'},
-  {n:'/piano-d\'azione',d:'Tabella con azioni, responsabili, scadenze e priorità',c:'vis'},
-  {n:'/checklist-visiva',d:'Lista di controllo strutturata a sezioni con icone',c:'vis'},
-  {n:'/heatmap',d:'Matrice di intensità per confronti multi-variabile',c:'vis'},
-  {n:'/workflow',d:'Diagramma flusso di lavoro con ruoli e responsabilità',c:'vis'},
-  {n:'/mockup-testo',d:'Struttura ASCII di un\'interfaccia o layout pagina',c:'vis'},
-  {n:'/albero-obiettivi',d:'Gerarchia obiettivo finale, sotto-obiettivi, KR',c:'vis'},
-  {n:'/mappa-competenze',d:'Schema competenze del team su aree e livelli',c:'vis'},
-  {n:'/piano-comunicazione',d:'Matrice messaggi per stakeholder e canali',c:'vis'},
-  {n:'/benchmark',d:'Tabella benchmark con competitori su criteri multipli',c:'vis'},
-  {n:'/piano-formazione',d:'Piano learning con moduli, tempi e obiettivi',c:'vis'},
-  {n:'/analisi-gap',d:'Schema gap tra stato attuale e stato desiderato',c:'vis'},
-  {n:'/scenario-planning',d:'Schema a tre scenari: pessimista, base, ottimista',c:'vis'},
-  {n:'/catena-del-valore',d:'Catena del valore Porter con attività primarie e di supporto',c:'vis'},
-  {n:'/quadro-logico',d:'Logical framework matrix per progetto o intervento',c:'vis'},
-  {n:'/mappa-empatica-team',d:'Mappa empatica per comprendere utenti interni o team',c:'vis'},
-  {n:'/okr-tree',d:'Albero OKR con obiettivi e risultati chiave',c:'vis'},
-  {n:'/five-forces',d:'Schema Cinque Forze di Porter per analisi settoriale',c:'vis'},
-  {n:'/pestel',d:'Analisi PESTEL: Politica, Economia, Sociale, Tech, Eco, Legale',c:'vis'},
-  {n:'/ansia-cambiamento',d:'Curva di Kübler-Ross applicata a progetti di change',c:'vis'},
-  {n:'/piramide-bisogni',d:'Gerarchia dei bisogni applicata a prodotto o servizio',c:'vis'},
-  {n:'/curva-apprendimento',d:'Proiezione curva di apprendimento per nuova competenza',c:'vis'},
-  {n:'/schema-causa-radice',d:'5 Perché strutturati per identificare causa radice',c:'vis'},
-  {n:'/mappa-dati',d:'Flusso dati tra sistemi, input/output e trasformazioni',c:'vis'},
-  {n:'/rete-influenza',d:'Mappa di influenza con nodi chiave e connessioni',c:'vis'},
-  {n:'/piano-test',d:'Matrice scenari di test con input, attesi e risultati',c:'vis'},
-  {n:'/mappa-funzionale',d:'Struttura funzionale di un prodotto per aree',c:'vis'},
-  {n:'/ciclo-pdca',d:'Schema Plan-Do-Check-Act per miglioramento continuo',c:'vis'},
-  {n:'/framework-visivo',d:'Visualizza qualsiasi framework teorico in schema',c:'vis'},
-  {n:'/analisi-portafoglio',d:'Matrice portafoglio prodotti/servizi per segmento',c:'vis'},
-  {n:'/tabella-priorità',d:'Ranking prioritizzato con pesi e punteggi per opzione',c:'vis'},
-  {n:'/piano-rollout',d:'Piano lancio con fasi, milestones e responsabili',c:'vis'},
-  {n:'/mappa-processi-aziendali',d:'Overview processi aziendali interconnessi',c:'vis'},
-  {n:'/grafico-testo',d:'Rappresenta dati numerici come grafico ASCII',c:'vis'},
-  {n:'/genitore-figlio',d:'Struttura genitore-figlio per categorie o taxonomie',c:'vis'},
-  {n:'/mappa-esperienza',d:'Experience map con emozioni, azioni e opportunità',c:'vis'},
-  {n:'/schema-api',d:'Schema chiamate API con endpoint, payload e risposta',c:'vis'},
+  // PENSIERO VISIVO
+  {n:'/diagramma',d:'Crea un diagramma visivo del concetto descritto',c:'vis',a:'struttura'},
+  {n:'/flusso',d:'Genera un flowchart del processo passo per passo',c:'vis',a:'struttura'},
+  {n:'/mindmap',d:'Espandi il tema in mappa mentale gerarchica',c:'vis',a:'struttura'},
+  {n:'/mappa-concetti',d:'Collega concetti chiave con relazioni etichettate',c:'vis',a:'struttura'},
+  {n:'/gerarchia',d:'Struttura l\'informazione in albero gerarchico',c:'vis',a:'struttura'},
+  {n:'/timeline',d:'Disponi eventi su linea temporale con date',c:'vis',a:'struttura'},
+  {n:'/gantt',d:'Crea piano di progetto in formato Gantt semplificato',c:'vis',a:'pianifica'},
+  {n:'/roadmap',d:'Visualizza fasi evolutive su linea temporale',c:'vis',a:'pianifica'},
+  {n:'/tabella',d:'Organizza dati in tabella strutturata con intestazioni',c:'vis',a:'struttura'},
+  {n:'/confronto',d:'Tabella comparativa tra due o più opzioni',c:'vis',a:'analizza'},
+  {n:'/matrice',d:'Matrice 2×2 per classificare elementi su due criteri',c:'vis',a:'struttura'},
+  {n:'/swot',d:'Analisi SWOT con punti di forza, debolezze, opportunità, minacce',c:'vis',a:'analizza'},
+  {n:'/radar',d:'Schema radar con punteggi su più dimensioni',c:'vis',a:'analizza'},
+  {n:'/organigramma',d:'Struttura organizzativa con ruoli e linee di riporto',c:'vis',a:'struttura'},
+  {n:'/sequenza',d:'Diagramma di sequenza per interazioni tra sistemi',c:'vis',a:'struttura'},
+  {n:'/processo',d:'Mappa il processo con input, attività e output',c:'vis',a:'struttura'},
+  {n:'/architettura',d:'Schema architetturale di sistema o applicazione',c:'vis',a:'struttura'},
+  {n:'/rete',d:'Visualizza nodi e connessioni di una rete',c:'vis',a:'struttura'},
+  {n:'/kanban',d:'Board kanban con colonne To Do / In corso / Fatto',c:'vis',a:'struttura'},
+  {n:'/eisenhower',d:'Matrice urgente/importante per prioritizzare task',c:'vis',a:'analizza'},
+  {n:'/causa-effetto',d:'Diagramma a lisca di pesce per analisi delle cause',c:'vis',a:'analizza'},
+  {n:'/venn',d:'Diagramma di Venn per intersezione tra insiemi',c:'vis',a:'struttura'},
+  {n:'/quadrante',d:'Schema a quattro quadranti con assi personalizzati',c:'vis',a:'struttura'},
+  {n:'/blueprint',d:'Mappa dettagliata di un servizio o sistema',c:'vis',a:'struttura'},
+  {n:'/customer-journey',d:'Mappa l\'esperienza utente per fasi e touchpoint',c:'vis',a:'struttura'},
+  {n:'/empathy-map',d:'Mappa empatica: pensa, sente, vede, sente dire',c:'vis',a:'struttura'},
+  {n:'/business-model',d:'Canvas del modello di business con 9 blocchi',c:'vis',a:'struttura'},
+  {n:'/value-proposition',d:'Schema proposta di valore: benefici, dolori, guadagni',c:'vis',a:'struttura'},
+  {n:'/stakeholder-map',d:'Mappa stakeholder per influenza e interesse',c:'vis',a:'struttura'},
+  {n:'/pert',d:'Schema PERT con dipendenze tra attività di progetto',c:'vis',a:'pianifica'},
+  {n:'/lean',d:'Mappa del flusso di valore in ottica lean',c:'vis',a:'struttura'},
+  {n:'/sprint-board',d:'Board sprint agile con epiche e story points',c:'vis',a:'pianifica'},
+  {n:'/decision-tree',d:'Albero decisionale con condizioni e outcomes',c:'vis',a:'analizza'},
+  {n:'/funnel',d:'Funnel a imbuto con fasi e tassi di conversione',c:'vis',a:'struttura'},
+  {n:'/piramide',d:'Struttura piramidale per messaggi o priorità',c:'vis',a:'struttura'},
+  {n:'/mappa-mentale-espansa',d:'Mindmap con tre livelli di profondità',c:'vis',a:'struttura'},
+  {n:'/dashboard-kpi',d:'Layout dashboard con metriche chiave e grafici',c:'vis',a:'struttura'},
+  {n:'/report-visivo',d:'Struttura visiva per report esecutivo a una pagina',c:'vis',a:'struttura'},
+  {n:'/infografica',d:'Struttura informazioni come infografica narrata',c:'vis',a:'struttura'},
+  {n:'/presentazione-outline',d:'Scaletta slide con titolo e messaggio chiave per slide',c:'vis',a:'pianifica'},
+  {n:'/mappa-rischi',d:'Matrice probabilità/impatto per risk management',c:'vis',a:'analizza'},
+  {n:'/ciclo',d:'Rappresenta un ciclo o processo ricorrente a fasi',c:'vis',a:'struttura'},
+  {n:'/sistema',d:'Diagramma componenti di un sistema con interazioni',c:'vis',a:'struttura'},
+  {n:'/entità-relazioni',d:'Schema ER per modellazione dati o database',c:'vis',a:'struttura'},
+  {n:'/protocollo',d:'Sequenza passo-passo di un protocollo o procedura',c:'vis',a:'struttura'},
+  {n:'/rete-valore',d:'Mappa della rete del valore con fornitori e partner',c:'vis',a:'struttura'},
+  {n:'/curva',d:'Curva di adozione o ciclo di vita con fasi',c:'vis',a:'struttura'},
+  {n:'/piano-d-azione',d:'Tabella con azioni, responsabili, scadenze e priorità',c:'vis',a:'pianifica'},
+  {n:'/checklist-visiva',d:'Lista di controllo strutturata a sezioni con icone',c:'vis',a:'struttura'},
+  {n:'/heatmap',d:'Matrice di intensità per confronti multi-variabile',c:'vis',a:'analizza'},
+  {n:'/workflow',d:'Diagramma flusso di lavoro con ruoli e responsabilità',c:'vis',a:'struttura'},
+  {n:'/mockup-testo',d:'Struttura ASCII di un\'interfaccia o layout pagina',c:'vis',a:'struttura'},
+  {n:'/albero-obiettivi',d:'Gerarchia obiettivo finale, sotto-obiettivi, KR',c:'vis',a:'pianifica'},
+  {n:'/mappa-competenze',d:'Schema competenze del team su aree e livelli',c:'vis',a:'struttura'},
+  {n:'/piano-comunicazione',d:'Matrice messaggi per stakeholder e canali',c:'vis',a:'pianifica'},
+  {n:'/benchmark',d:'Tabella benchmark con competitori su criteri multipli',c:'vis',a:'analizza'},
+  {n:'/piano-formazione',d:'Piano learning con moduli, tempi e obiettivi',c:'vis',a:'pianifica'},
+  {n:'/analisi-gap',d:'Schema gap tra stato attuale e stato desiderato',c:'vis',a:'analizza'},
+  {n:'/scenario-planning',d:'Schema a tre scenari: pessimista, base, ottimista',c:'vis',a:'analizza'},
+  {n:'/catena-del-valore',d:'Catena del valore Porter con attività primarie e di supporto',c:'vis',a:'analizza'},
+  {n:'/quadro-logico',d:'Logical framework matrix per progetto o intervento',c:'vis',a:'struttura'},
+  {n:'/okr-tree',d:'Albero OKR con obiettivi e risultati chiave',c:'vis',a:'pianifica'},
+  {n:'/five-forces',d:'Schema Cinque Forze di Porter per analisi settoriale',c:'vis',a:'analizza'},
+  {n:'/pestel',d:'Analisi PESTEL: Politica, Economia, Sociale, Tech, Eco, Legale',c:'vis',a:'analizza'},
+  {n:'/schema-causa-radice',d:'5 Perché strutturati per identificare causa radice',c:'vis',a:'analizza'},
+  {n:'/mappa-dati',d:'Flusso dati tra sistemi, input/output e trasformazioni',c:'vis',a:'struttura'},
+  {n:'/rete-influenza',d:'Mappa di influenza con nodi chiave e connessioni',c:'vis',a:'struttura'},
+  {n:'/piano-test',d:'Matrice scenari di test con input, attesi e risultati',c:'vis',a:'pianifica'},
+  {n:'/mappa-funzionale',d:'Struttura funzionale di un prodotto per aree',c:'vis',a:'struttura'},
+  {n:'/ciclo-pdca',d:'Schema Plan-Do-Check-Act per miglioramento continuo',c:'vis',a:'struttura'},
+  {n:'/framework-visivo',d:'Visualizza qualsiasi framework teorico in schema',c:'vis',a:'struttura'},
+  {n:'/analisi-portafoglio',d:'Matrice portafoglio prodotti/servizi per segmento',c:'vis',a:'analizza'},
+  {n:'/tabella-priorita',d:'Ranking prioritizzato con pesi e punteggi per opzione',c:'vis',a:'analizza'},
+  {n:'/piano-rollout',d:'Piano lancio con fasi, milestones e responsabili',c:'vis',a:'pianifica'},
+  {n:'/mappa-processi',d:'Overview processi aziendali interconnessi',c:'vis',a:'struttura'},
+  {n:'/grafico-testo',d:'Rappresenta dati numerici come grafico ASCII',c:'vis',a:'struttura'},
+  {n:'/genitore-figlio',d:'Struttura genitore-figlio per categorie o taxonomie',c:'vis',a:'struttura'},
+  {n:'/mappa-esperienza',d:'Experience map con emozioni, azioni e opportunità',c:'vis',a:'struttura'},
+  {n:'/schema-api',d:'Schema chiamate API con endpoint, payload e risposta',c:'vis',a:'struttura'},
+  {n:'/curva-apprendimento',d:'Proiezione curva di apprendimento per nuova competenza',c:'vis',a:'analizza'},
+  {n:'/ansia-cambiamento',d:'Curva di Kübler-Ross applicata a progetti di change',c:'vis',a:'analizza'},
+  {n:'/piramide-bisogni',d:'Gerarchia dei bisogni applicata a prodotto o servizio',c:'vis',a:'struttura'},
 
-  // ── CONTENUTI & MARKETING ────────────────────────────────────────────────
-  {n:'/virale',d:'Riscrivi il contenuto per massimizzare la diffusione',c:'mkt'},
-  {n:'/hook',d:'3 aperture ad alto impatto per post, email o pitch',c:'mkt'},
-  {n:'/headline',d:'5 titoli alternativi ottimizzati per click e lettura',c:'mkt'},
-  {n:'/email-fredda',d:'Email di outreach personalizzata con problema e CTA',c:'mkt'},
-  {n:'/follow-up',d:'Sequenza di follow-up in 3 email non invasive',c:'mkt'},
-  {n:'/cta',d:'3 varianti di call-to-action per il contesto indicato',c:'mkt'},
-  {n:'/post-linkedin',d:'Post LinkedIn professionale con hook, corpo e hashtag',c:'mkt'},
-  {n:'/thread-x',d:'Thread X (Twitter) a 5 tweet con apertura forte',c:'mkt'},
-  {n:'/newsletter',d:'Newsletter settimanale con sezioni e tono di voce coerente',c:'mkt'},
-  {n:'/landing',d:'Struttura testi landing page: headline, benefici, CTA',c:'mkt'},
-  {n:'/caso-studio',d:'Caso studio B2B: problema, soluzione, risultati misurabili',c:'mkt'},
-  {n:'/testimonial',d:'Rielabora una recensione in testimonial narrativo efficace',c:'mkt'},
-  {n:'/elevator-pitch',d:'Pitch 60 secondi: problema, soluzione, differenziatore',c:'mkt'},
-  {n:'/storytelling',d:'Struttura narrativa problem-solution-result con emozione',c:'mkt'},
-  {n:'/obiezione',d:'Rispondi a 5 obiezioni comuni in modo persuasivo',c:'mkt'},
-  {n:'/faq',d:'Genera 10 FAQ rilevanti con risposte chiare e brevi',c:'mkt'},
-  {n:'/press-release',d:'Comunicato stampa con lede, citazione e boilerplate',c:'mkt'},
-  {n:'/script-video',d:'Script per video breve: apertura, corpo, chiusura con CTA',c:'mkt'},
-  {n:'/script-podcast',d:'Scaletta episodio podcast con domande e transizioni',c:'mkt'},
-  {n:'/bio',d:'Bio professionale breve (100 parole) adattata al canale',c:'mkt'},
-  {n:'/about',d:'Sezione "Chi siamo" per sito web con tono e brand',c:'mkt'},
-  {n:'/unique-value',d:'Unique Value Proposition in una frase cristallina',c:'mkt'},
-  {n:'/slogan',d:'5 slogan alternativi per prodotto o servizio',c:'mkt'},
-  {n:'/campagna-email',d:'Sequenza email per campagna: benvenuto, nurturing, conversione',c:'mkt'},
-  {n:'/content-calendar',d:'Piano editoriale mensile per canale con temi e formati',c:'mkt'},
-  {n:'/social-captions',d:'3 caption per Instagram/LinkedIn sullo stesso tema',c:'mkt'},
-  {n:'/descrizione-prodotto',d:'Descrizione e-commerce con benefici e SEO-friendly',c:'mkt'},
-  {n:'/upsell',d:'Messaggio upsell che valorizza l\'offerta superiore',c:'mkt'},
-  {n:'/reengagement',d:'Email per riattivare contatti inattivi con offerta',c:'mkt'},
-  {n:'/onboarding-email',d:'Serie onboarding 3 email per nuovo cliente o utente',c:'mkt'},
-  {n:'/pitch-deck-outline',d:'Struttura pitch deck investitori: problema, mercato, traction',c:'mkt'},
-  {n:'/proposta-commerciale',d:'Struttura proposta offerta con valore, prezzo e termini',c:'mkt'},
-  {n:'/annuncio',d:'Annuncio pubblicitario breve con beneficio e urgenza',c:'mkt'},
-  {n:'/comparison-page',d:'Testo pagina confronto con competitore in modo equilibrato',c:'mkt'},
-  {n:'/articolo-blog',d:'Articolo blog 800 parole: intro, sezioni, conclusione actionable',c:'mkt'},
-  {n:'/seo-meta',d:'Meta title e description ottimizzati per la parola chiave',c:'mkt'},
-  {n:'/outline-articolo',d:'Scaletta dettagliata per articolo con H2, H3 e angolo',c:'mkt'},
-  {n:'/riformula-brand',d:'Riscrivi il testo rispettando il tono di voce del brand',c:'mkt'},
-  {n:'/semplifica-messaggio',d:'Rendi il messaggio comprensibile a un pubblico generale',c:'mkt'},
-  {n:'/localizza',d:'Adatta il contenuto per pubblico e contesto italiano',c:'mkt'},
-  {n:'/aggiungi-urgenza',d:'Inserisci leva di urgenza o scarsità nel testo',c:'mkt'},
-  {n:'/storytelling-dati',d:'Narra i dati come storia con protagonista e svolta',c:'mkt'},
-  {n:'/risposta-commento',d:'Risposta professionale a commento negativo o critica',c:'mkt'},
-  {n:'/welcome-message',d:'Messaggio di benvenuto caldo e orientato al valore',c:'mkt'},
-  {n:'/nurturing',d:'Sequenza contenuti di valore per lead nel funnel medio',c:'mkt'},
-  {n:'/pensiero-leadership',d:'Post thought leadership su tendenza del settore',c:'mkt'},
-  {n:'/annuncio-evento',d:'Testo annuncio evento con data, valore e CTA registrazione',c:'mkt'},
-  {n:'/case-marketing',d:'Analisi campagna di marketing con apprendimenti chiave',c:'mkt'},
-  {n:'/analisi-competitor',d:'Analisi competitore su posizionamento, punti forza e deboli',c:'mkt'},
-  {n:'/naming',d:'5 proposte di nome per prodotto, servizio o progetto',c:'mkt'},
-  {n:'/tagline-varianti',d:'7 varianti di tagline su registri diversi (serio, ironic, bold)',c:'mkt'},
-  {n:'/brief-agenzia',d:'Brief creativo per agenzia con obiettivi, target e vincoli',c:'mkt'},
-  {n:'/benchmark-contenuti',d:'Analisi 5 contenuti di successo del settore con pattern',c:'mkt'},
-  {n:'/storytelling-fondatore',d:'Storia del fondatore come narrativa ispirazionale',c:'mkt'},
-  {n:'/email-re-engagement',d:'Email per riconnettersi con prospect freddo dopo 90 giorni',c:'mkt'},
-  {n:'/manifesto',d:'Manifesto del brand: valori, promessa, posizione nel mondo',c:'mkt'},
-  {n:'/pitch-investitori',d:'Pitch a investitori: problema, mercato, soluzione, team, ask',c:'mkt'},
-  {n:'/webinar-outline',d:'Struttura webinar con intro, contenuto, demo e Q&A',c:'mkt'},
-  {n:'/social-proof',d:'Raccolta social proof: come raccoglierla e dove mostrarla',c:'mkt'},
-  {n:'/pain-point',d:'Articola i pain point del target in modo empatico e diretto',c:'mkt'},
-  {n:'/perché-noi',d:'Risposta convincente a "Perché scegliere voi?"',c:'mkt'},
-  {n:'/abstract',d:'Abstract sintetico per articolo, report o ricerca',c:'mkt'},
-  {n:'/executive-summary',d:'Executive summary di documento lungo in una pagina',c:'mkt'},
-  {n:'/highlights',d:'I 5 punti più importanti di qualsiasi contenuto',c:'mkt'},
-  {n:'/riformula-formale',d:'Versione formale e professionale del testo dato',c:'mkt'},
-  {n:'/riformula-informale',d:'Versione conversazionale e diretta del testo dato',c:'mkt'},
-  {n:'/aggiungi-esempi',d:'Arricchisci il testo con 3 esempi concreti e rilevanti',c:'mkt'},
-  {n:'/cambia-angolo',d:'Riscrivi lo stesso messaggio da un angolo diverso',c:'mkt'},
-  {n:'/tono-autorevole',d:'Adatta il tono per suonare esperto e credibile',c:'mkt'},
-  {n:'/accorcia',d:'Riduci il testo al 50% senza perdere il messaggio chiave',c:'mkt'},
-  {n:'/espandi',d:'Approfondisci il testo con argomentazioni e dettagli',c:'mkt'},
-  {n:'/benefici',d:'Lista dei benefici concreti per il cliente, non le feature',c:'mkt'},
-  {n:'/problema-soluzione',d:'Struttura il testo come problema → conseguenza → soluzione',c:'mkt'},
-  {n:'/apertura-forte',d:'Riscriva la prima frase per catturare subito l\'attenzione',c:'mkt'},
-  {n:'/chiusura-forte',d:'Finale del testo che lascia segno e invita all\'azione',c:'mkt'},
-  {n:'/target-persona',d:'Profilo buyer persona dettagliato con motivazioni e obiezioni',c:'mkt'},
-  {n:'/messaggio-chiave',d:'Estrai il messaggio centrale da comunicare in una frase',c:'mkt'},
-  {n:'/content-repurposing',d:'Piani di riutilizzo di un contenuto su 5 formati diversi',c:'mkt'},
-  {n:'/ghook-curiosità',d:'Apertura che sfrutta la curiosità con gap informativo',c:'mkt'},
-  {n:'/ghook-dati',d:'Apertura con dato sorprendente o contro-intuitivo',c:'mkt'},
-  {n:'/ghook-storia',d:'Apertura con micro-storia in 2-3 frasi ad alta tensione',c:'mkt'},
-  {n:'/script-vendita',d:'Script conversazione sales: apertura, qualifica, proposta, chiusura',c:'mkt'},
-  {n:'/report-mensile',d:'Struttura report mensile per stakeholder: KPI, insight, next steps',c:'mkt'},
+  // CONTENUTI & MARKETING
+  {n:'/virale',d:'Riscrivi il contenuto per massimizzare la diffusione',c:'mkt',a:'trasforma'},
+  {n:'/hook',d:'3 aperture ad alto impatto per post, email o pitch',c:'mkt',a:'crea'},
+  {n:'/headline',d:'5 titoli alternativi ottimizzati per click e lettura',c:'mkt',a:'crea'},
+  {n:'/email-fredda',d:'Email di outreach personalizzata con problema e CTA',c:'mkt',a:'crea'},
+  {n:'/follow-up',d:'Sequenza di follow-up in 3 email non invasive',c:'mkt',a:'crea'},
+  {n:'/cta',d:'3 varianti di call-to-action per il contesto indicato',c:'mkt',a:'crea'},
+  {n:'/post-linkedin',d:'Post LinkedIn professionale con hook, corpo e hashtag',c:'mkt',a:'crea'},
+  {n:'/thread-x',d:'Thread X (Twitter) a 5 tweet con apertura forte',c:'mkt',a:'crea'},
+  {n:'/newsletter',d:'Newsletter settimanale con sezioni e tono di voce coerente',c:'mkt',a:'crea'},
+  {n:'/landing',d:'Struttura testi landing page: headline, benefici, CTA',c:'mkt',a:'crea'},
+  {n:'/caso-studio',d:'Caso studio B2B: problema, soluzione, risultati misurabili',c:'mkt',a:'crea'},
+  {n:'/testimonial',d:'Rielabora una recensione in testimonial narrativo efficace',c:'mkt',a:'trasforma'},
+  {n:'/elevator-pitch',d:'Pitch 60 secondi: problema, soluzione, differenziatore',c:'mkt',a:'crea'},
+  {n:'/storytelling',d:'Struttura narrativa problem-solution-result con emozione',c:'mkt',a:'trasforma'},
+  {n:'/obiezione',d:'Rispondi a 5 obiezioni comuni in modo persuasivo',c:'mkt',a:'crea'},
+  {n:'/faq',d:'Genera 10 FAQ rilevanti con risposte chiare e brevi',c:'mkt',a:'crea'},
+  {n:'/press-release',d:'Comunicato stampa con lede, citazione e boilerplate',c:'mkt',a:'crea'},
+  {n:'/script-video',d:'Script per video breve: apertura, corpo, chiusura con CTA',c:'mkt',a:'crea'},
+  {n:'/script-podcast',d:'Scaletta episodio podcast con domande e transizioni',c:'mkt',a:'crea'},
+  {n:'/bio',d:'Bio professionale breve adattata al canale',c:'mkt',a:'crea'},
+  {n:'/about',d:'Sezione "Chi siamo" per sito web con tono e brand',c:'mkt',a:'crea'},
+  {n:'/unique-value',d:'Unique Value Proposition in una frase cristallina',c:'mkt',a:'crea'},
+  {n:'/slogan',d:'5 slogan alternativi per prodotto o servizio',c:'mkt',a:'crea'},
+  {n:'/campagna-email',d:'Sequenza email: benvenuto, nurturing, conversione',c:'mkt',a:'pianifica'},
+  {n:'/content-calendar',d:'Piano editoriale mensile per canale con temi e formati',c:'mkt',a:'pianifica'},
+  {n:'/social-captions',d:'3 caption per Instagram/LinkedIn sullo stesso tema',c:'mkt',a:'crea'},
+  {n:'/descrizione-prodotto',d:'Descrizione e-commerce con benefici e SEO-friendly',c:'mkt',a:'crea'},
+  {n:'/upsell',d:'Messaggio upsell che valorizza l\'offerta superiore',c:'mkt',a:'crea'},
+  {n:'/reengagement',d:'Email per riattivare contatti inattivi con offerta',c:'mkt',a:'crea'},
+  {n:'/onboarding-email',d:'Serie onboarding 3 email per nuovo cliente o utente',c:'mkt',a:'crea'},
+  {n:'/pitch-deck-outline',d:'Struttura pitch deck investitori: problema, mercato, traction',c:'mkt',a:'pianifica'},
+  {n:'/proposta-commerciale',d:'Struttura proposta offerta con valore, prezzo e termini',c:'mkt',a:'crea'},
+  {n:'/annuncio',d:'Annuncio pubblicitario breve con beneficio e urgenza',c:'mkt',a:'crea'},
+  {n:'/comparison-page',d:'Testo pagina confronto con competitore in modo equilibrato',c:'mkt',a:'crea'},
+  {n:'/articolo-blog',d:'Articolo blog 800 parole: intro, sezioni, conclusione actionable',c:'mkt',a:'crea'},
+  {n:'/seo-meta',d:'Meta title e description ottimizzati per la parola chiave',c:'mkt',a:'crea'},
+  {n:'/outline-articolo',d:'Scaletta dettagliata per articolo con H2, H3 e angolo',c:'mkt',a:'pianifica'},
+  {n:'/riformula-brand',d:'Riscrivi il testo rispettando il tono di voce del brand',c:'mkt',a:'trasforma'},
+  {n:'/semplifica-messaggio',d:'Rendi il messaggio comprensibile a un pubblico generale',c:'mkt',a:'trasforma'},
+  {n:'/localizza',d:'Adatta il contenuto per pubblico e contesto italiano',c:'mkt',a:'trasforma'},
+  {n:'/aggiungi-urgenza',d:'Inserisci leva di urgenza o scarsità nel testo',c:'mkt',a:'trasforma'},
+  {n:'/storytelling-dati',d:'Narra i dati come storia con protagonista e svolta',c:'mkt',a:'trasforma'},
+  {n:'/risposta-commento',d:'Risposta professionale a commento negativo o critica',c:'mkt',a:'crea'},
+  {n:'/welcome-message',d:'Messaggio di benvenuto caldo e orientato al valore',c:'mkt',a:'crea'},
+  {n:'/nurturing',d:'Sequenza contenuti di valore per lead nel funnel medio',c:'mkt',a:'pianifica'},
+  {n:'/pensiero-leadership',d:'Post thought leadership su tendenza del settore',c:'mkt',a:'crea'},
+  {n:'/annuncio-evento',d:'Testo annuncio evento con data, valore e CTA registrazione',c:'mkt',a:'crea'},
+  {n:'/case-marketing',d:'Analisi campagna di marketing con apprendimenti chiave',c:'mkt',a:'analizza'},
+  {n:'/analisi-competitor',d:'Analisi competitore su posizionamento, punti forza e deboli',c:'mkt',a:'analizza'},
+  {n:'/naming',d:'5 proposte di nome per prodotto, servizio o progetto',c:'mkt',a:'crea'},
+  {n:'/tagline-varianti',d:'7 varianti di tagline su registri diversi',c:'mkt',a:'crea'},
+  {n:'/brief-agenzia',d:'Brief creativo per agenzia con obiettivi, target e vincoli',c:'mkt',a:'crea'},
+  {n:'/benchmark-contenuti',d:'Analisi 5 contenuti di successo del settore con pattern',c:'mkt',a:'analizza'},
+  {n:'/storytelling-fondatore',d:'Storia del fondatore come narrativa ispirazionale',c:'mkt',a:'crea'},
+  {n:'/email-reengagement',d:'Email per riconnettersi con prospect freddo dopo 90 giorni',c:'mkt',a:'crea'},
+  {n:'/manifesto',d:'Manifesto del brand: valori, promessa, posizione nel mondo',c:'mkt',a:'crea'},
+  {n:'/pitch-investitori',d:'Pitch a investitori: problema, mercato, soluzione, team, ask',c:'mkt',a:'crea'},
+  {n:'/webinar-outline',d:'Struttura webinar con intro, contenuto, demo e Q&A',c:'mkt',a:'pianifica'},
+  {n:'/social-proof',d:'Come raccogliere e dove mostrare le prove sociali',c:'mkt',a:'struttura'},
+  {n:'/pain-point',d:'Articola i pain point del target in modo empatico e diretto',c:'mkt',a:'analizza'},
+  {n:'/perche-noi',d:'Risposta convincente a "Perché scegliere voi?"',c:'mkt',a:'crea'},
+  {n:'/abstract',d:'Abstract sintetico per articolo, report o ricerca',c:'mkt',a:'trasforma'},
+  {n:'/executive-summary',d:'Executive summary di documento lungo in una pagina',c:'mkt',a:'trasforma'},
+  {n:'/highlights',d:'I 5 punti più importanti di qualsiasi contenuto',c:'mkt',a:'trasforma'},
+  {n:'/riformula-formale',d:'Versione formale e professionale del testo dato',c:'mkt',a:'trasforma'},
+  {n:'/riformula-informale',d:'Versione conversazionale e diretta del testo dato',c:'mkt',a:'trasforma'},
+  {n:'/aggiungi-esempi',d:'Arricchisci il testo con 3 esempi concreti e rilevanti',c:'mkt',a:'trasforma'},
+  {n:'/cambia-angolo',d:'Riscrivi lo stesso messaggio da un angolo diverso',c:'mkt',a:'trasforma'},
+  {n:'/tono-autorevole',d:'Adatta il tono per suonare esperto e credibile',c:'mkt',a:'trasforma'},
+  {n:'/accorcia',d:'Riduci il testo al 50% senza perdere il messaggio chiave',c:'mkt',a:'trasforma'},
+  {n:'/espandi',d:'Approfondisci il testo con argomentazioni e dettagli',c:'mkt',a:'trasforma'},
+  {n:'/benefici',d:'Lista dei benefici concreti per il cliente, non le feature',c:'mkt',a:'trasforma'},
+  {n:'/problema-soluzione',d:'Struttura il testo come problema → conseguenza → soluzione',c:'mkt',a:'trasforma'},
+  {n:'/apertura-forte',d:'Riscriva la prima frase per catturare subito l\'attenzione',c:'mkt',a:'trasforma'},
+  {n:'/chiusura-forte',d:'Finale del testo che lascia segno e invita all\'azione',c:'mkt',a:'trasforma'},
+  {n:'/target-persona',d:'Profilo buyer persona dettagliato con motivazioni e obiezioni',c:'mkt',a:'struttura'},
+  {n:'/messaggio-chiave',d:'Estrai il messaggio centrale da comunicare in una frase',c:'mkt',a:'analizza'},
+  {n:'/content-repurposing',d:'Piano di riutilizzo di un contenuto su 5 formati diversi',c:'mkt',a:'pianifica'},
+  {n:'/ghook-curiosita',d:'Apertura che sfrutta la curiosità con gap informativo',c:'mkt',a:'crea'},
+  {n:'/ghook-dati',d:'Apertura con dato sorprendente o contro-intuitivo',c:'mkt',a:'crea'},
+  {n:'/ghook-storia',d:'Apertura con micro-storia in 2-3 frasi ad alta tensione',c:'mkt',a:'crea'},
+  {n:'/script-vendita',d:'Script conversazione sales: apertura, qualifica, proposta, chiusura',c:'mkt',a:'crea'},
+  {n:'/report-mensile',d:'Struttura report mensile per stakeholder: KPI, insight, next steps',c:'mkt',a:'struttura'},
 
-  // ── SCRITTURA & CODICE ───────────────────────────────────────────────────
-  {n:'/riassumi',d:'Riassunto con punti chiave, conclusione e lunghezza proporzionale',c:'scr'},
-  {n:'/espandi-testo',d:'Sviluppa il testo con argomenti, contesto e dettagli',c:'scr'},
-  {n:'/semplifica',d:'Rendi il testo comprensibile a livello quinta superiore',c:'scr'},
-  {n:'/chiarisci',d:'Riformula eliminando ambiguità e costrutti complessi',c:'scr'},
-  {n:'/revisiona',d:'Revisione completa: grammatica, stile, chiarezza, flusso',c:'scr'},
-  {n:'/traduci',d:'Traduci il testo in italiano accurato e naturale',c:'scr'},
-  {n:'/en',d:'Traduci in inglese professionale neutro (US)',c:'scr'},
-  {n:'/formatta',d:'Formatta il testo con titoli, bullet e paragrafi logici',c:'scr'},
-  {n:'/bullet',d:'Converti testo in lista di bullet sintetici e paralleli',c:'scr'},
-  {n:'/titoli',d:'Aggiungi titoli H2 e H3 per migliorare la navigazione',c:'scr'},
-  {n:'/struttura',d:'Riorganizza il contenuto con struttura logica chiara',c:'scr'},
-  {n:'/parafrasi',d:'Parafrasare mantenendo il significato ma cambiando forma',c:'scr'},
-  {n:'/tono-accademico',d:'Riscrivere in stile accademico formale con citazioni',c:'scr'},
-  {n:'/tono-tecnico',d:'Versione tecnica precisa per pubblico specializzato',c:'scr'},
-  {n:'/tono-esecutivo',d:'Versione concisa e orientata ai risultati per C-level',c:'scr'},
-  {n:'/elimina-gergo',d:'Rimuovi tecnicismi e sostituisci con linguaggio comune',c:'scr'},
-  {n:'/attiva-passivo',d:'Converti frasi passive in costruzioni attive e dirette',c:'scr'},
-  {n:'/correggi-grammatica',d:'Correggi errori grammaticali e di punteggiatura',c:'scr'},
-  {n:'/coerenza',d:'Verifica coerenza di tono, stile e terminologia nel testo',c:'scr'},
-  {n:'/cita',d:'Aggiungi citazioni e riferimenti nel formato richiesto',c:'scr'},
-  {n:'/evidenzia',d:'Identifica le frasi più impattanti del testo',c:'scr'},
-  {n:'/proofreading',d:'Revisione finale per refusi, inconsistenze e imprecisioni',c:'scr'},
-  {n:'/codice',d:'Scrivi codice per la funzionalità descritta con commenti',c:'scr'},
-  {n:'/debug',d:'Analizza il codice e identifica bug con spiegazione e fix',c:'scr'},
-  {n:'/commenta',d:'Aggiungi commenti inline al codice spiegando il "perché"',c:'scr'},
-  {n:'/refactor',d:'Refactoring: migliora leggibilità e manutenibilità del codice',c:'scr'},
-  {n:'/test',d:'Scrivi test unitari per il codice fornito con casi edge',c:'scr'},
-  {n:'/documenta',d:'Genera documentazione tecnica per funzione o API',c:'scr'},
-  {n:'/spiega-codice',d:'Spiega il codice riga per riga in italiano semplice',c:'scr'},
-  {n:'/ottimizza',d:'Ottimizza il codice per performance e leggibilità',c:'scr'},
-  {n:'/converti',d:'Converti il codice nel linguaggio o framework indicato',c:'scr'},
-  {n:'/regex',d:'Genera espressione regolare per il pattern descritto',c:'scr'},
-  {n:'/query-sql',d:'Scrivi query SQL ottimizzata per il caso d\'uso',c:'scr'},
-  {n:'/shell',d:'Script bash/PowerShell per automazione del compito indicato',c:'scr'},
-  {n:'/pseudocodice',d:'Pseudocodice leggibile per l\'algoritmo descritto',c:'scr'},
-  {n:'/architettura-codice',d:'Proponi architettura software con componenti e pattern',c:'scr'},
-  {n:'/api-design',d:'Progetta API REST con endpoint, metodi e payload',c:'scr'},
-  {n:'/revisione-codice',d:'Code review focalizzata su sicurezza, performance e stile',c:'scr'},
-  {n:'/git-commit',d:'Messaggio di commit convenzionale dal diff fornito',c:'scr'},
-  {n:'/changelog',d:'Changelog strutturato da lista di commit o feature',c:'scr'},
-  {n:'/readme',d:'README completo con installazione, uso e esempi',c:'scr'},
-  {n:'/prompt-sistema',d:'System prompt per agente AI su ruolo e compiti specificati',c:'scr'},
-  {n:'/email-professionale',d:'Email formale con oggetto, corpo strutturato e chiusura',c:'scr'},
-  {n:'/verbale',d:'Verbale di riunione da appunti: decisioni, azioni, responsabili',c:'scr'},
-  {n:'/relazione',d:'Relazione tecnica strutturata con executive summary',c:'scr'},
-  {n:'/proposta',d:'Proposta scritta con problema, approccio, benefici e costi',c:'scr'},
-  {n:'/presentazione-testi',d:'Testi per slide: titolo breve + 3 bullet per ogni pagina',c:'scr'},
-  {n:'/minuti',d:'Minuta di riunione sintetica in meno di una pagina',c:'scr'},
-  {n:'/lettera',d:'Lettera formale con apertura, corpo, chiusura corrette',c:'scr'},
-  {n:'/policy',d:'Bozza di policy interna su argomento indicato',c:'scr'},
-  {n:'/procedura',d:'Procedura operativa step-by-step con responsabilità',c:'scr'},
-  {n:'/glossario',d:'Glossario terminologico per documento o progetto',c:'scr'},
-  {n:'/indice',d:'Indice analitico del documento con riferimenti alle sezioni',c:'scr'},
-  {n:'/note-margin',d:'Note a margine e commenti su testo tecnico o legale',c:'scr'},
-  {n:'/abstract-ricerca',d:'Abstract accademico da paper o studio completo',c:'scr'},
-  {n:'/executive-brief',d:'Brief esecutivo: 1 pagina con contesto, raccomandazione, rischi',c:'scr'},
-  {n:'/gap-analisi-testo',d:'Identifica cosa manca nel testo rispetto all\'obiettivo',c:'scr'},
-  {n:'/punti-forza-testo',d:'Valuta i punti forti del testo e cosa funziona bene',c:'scr'},
-  {n:'/controllo-fatti',d:'Verifica affermazioni nel testo e segnala incertezze',c:'scr'},
-  {n:'/trova-contraddizioni',d:'Trova contraddizioni o inconsistenze logiche nel testo',c:'scr'},
-  {n:'/domande-da-testo',d:'Genera 10 domande comprensione dal testo fornito',c:'scr'},
-  {n:'/flashcard',d:'Crea flashcard domanda-risposta dal contenuto',c:'scr'},
-  {n:'/schema-studio',d:'Schema di studio con concetti chiave e connessioni',c:'scr'},
-  {n:'/esempio-pratico',d:'Genera 3 esempi pratici per il concetto astratto',c:'scr'},
-  {n:'/analogia',d:'Spiega il concetto complesso con un\'analogia quotidiana',c:'scr'},
-  {n:'/eli5',d:'Spiega come a un bambino di 5 anni — massima semplicità',c:'scr'},
-  {n:'/deep-dive',d:'Approfondimento tecnico dettagliato sul tema indicato',c:'scr'},
-  {n:'/ricerca',d:'Sintesi delle principali fonti e prospettive sul tema',c:'scr'},
-  {n:'/confronta-approcci',d:'Confronta due approcci con pro, contro e quando usarli',c:'scr'},
-  {n:'/storia-tema',d:'Evoluzione storica del tema con tappe chiave',c:'scr'},
-  {n:'/stato-dell-arte',d:'Overview corrente del settore: trend, attori, sfide',c:'scr'},
-  {n:'/letteratura',d:'Principali autori, teorie e libri di riferimento sul tema',c:'scr'},
-  {n:'/caso-pratico',d:'Caso pratico realistico per applicare il concetto',c:'scr'},
-  {n:'/errori-comuni',d:'I 5 errori più frequenti su questo argomento e come evitarli',c:'scr'},
-  {n:'/miti',d:'Sfata i 3 miti più diffusi sull\'argomento con argomentazioni',c:'scr'},
-  {n:'/tendenze',d:'Principali tendenze emergenti nel prossimo triennio',c:'scr'},
-  {n:'/impatto',d:'Analisi dell\'impatto potenziale di questa decisione o cambiamento',c:'scr'},
-  {n:'/pro-contro',d:'Lista strutturata di pro e contro con pesi per decidere',c:'scr'},
-  {n:'/risk-assessment',d:'Valutazione rischi con probabilità, impatto e mitigazione',c:'scr'},
-  {n:'/tabella-confronto',d:'Tabella confronto opzioni su criteri ponderati',c:'scr'},
-  {n:'/report-ricerca',d:'Report sintetico di ricerca con metodologia e conclusioni',c:'scr'},
-  {n:'/estratto',d:'Estrai le informazioni rilevanti per l\'obiettivo indicato',c:'scr'},
-  {n:'/classifica',d:'Classifica gli elementi per il criterio specificato',c:'scr'},
-  {n:'/aggiungi-dati',d:'Suggerisci dati e statistiche rilevanti per supportare la tesi',c:'scr'},
-  {n:'/formatta-markdown',d:'Converti il testo in Markdown ben strutturato',c:'scr'},
-  {n:'/formatta-html',d:'Converti il testo in HTML semantico pulito',c:'scr'},
-  {n:'/formatta-json',d:'Struttura i dati come oggetto JSON valido',c:'scr'},
-  {n:'/formatta-csv',d:'Converti i dati tabulari in formato CSV',c:'scr'},
+  // SCRITTURA & CODICE
+  {n:'/riassumi',d:'Riassunto con punti chiave, conclusione e lunghezza proporzionale',c:'scr',a:'trasforma'},
+  {n:'/espandi-testo',d:'Sviluppa il testo con argomenti, contesto e dettagli',c:'scr',a:'trasforma'},
+  {n:'/semplifica',d:'Rendi il testo comprensibile a livello quinta superiore',c:'scr',a:'trasforma'},
+  {n:'/chiarisci',d:'Riformula eliminando ambiguità e costrutti complessi',c:'scr',a:'trasforma'},
+  {n:'/revisiona',d:'Revisione completa: grammatica, stile, chiarezza, flusso',c:'scr',a:'trasforma'},
+  {n:'/traduci',d:'Traduci il testo in italiano accurato e naturale',c:'scr',a:'trasforma'},
+  {n:'/en',d:'Traduci in inglese professionale neutro (US)',c:'scr',a:'trasforma'},
+  {n:'/formatta',d:'Formatta il testo con titoli, bullet e paragrafi logici',c:'scr',a:'trasforma'},
+  {n:'/bullet',d:'Converti testo in lista di bullet sintetici e paralleli',c:'scr',a:'trasforma'},
+  {n:'/titoli',d:'Aggiungi titoli H2 e H3 per migliorare la navigazione',c:'scr',a:'trasforma'},
+  {n:'/struttura',d:'Riorganizza il contenuto con struttura logica chiara',c:'scr',a:'trasforma'},
+  {n:'/parafrasi',d:'Parafrasa mantenendo il significato ma cambiando forma',c:'scr',a:'trasforma'},
+  {n:'/tono-accademico',d:'Riscrivere in stile accademico formale con citazioni',c:'scr',a:'trasforma'},
+  {n:'/tono-tecnico',d:'Versione tecnica precisa per pubblico specializzato',c:'scr',a:'trasforma'},
+  {n:'/tono-esecutivo',d:'Versione concisa e orientata ai risultati per C-level',c:'scr',a:'trasforma'},
+  {n:'/elimina-gergo',d:'Rimuovi tecnicismi e sostituisci con linguaggio comune',c:'scr',a:'trasforma'},
+  {n:'/attiva-passivo',d:'Converti frasi passive in costruzioni attive e dirette',c:'scr',a:'trasforma'},
+  {n:'/correggi-grammatica',d:'Correggi errori grammaticali e di punteggiatura',c:'scr',a:'trasforma'},
+  {n:'/coerenza',d:'Verifica coerenza di tono, stile e terminologia nel testo',c:'scr',a:'analizza'},
+  {n:'/cita',d:'Aggiungi citazioni e riferimenti nel formato richiesto',c:'scr',a:'trasforma'},
+  {n:'/evidenzia',d:'Identifica le frasi più impattanti del testo',c:'scr',a:'analizza'},
+  {n:'/proofreading',d:'Revisione finale per refusi, inconsistenze e imprecisioni',c:'scr',a:'analizza'},
+  {n:'/codice',d:'Scrivi codice per la funzionalità descritta con commenti',c:'scr',a:'crea'},
+  {n:'/debug',d:'Analizza il codice e identifica bug con spiegazione e fix',c:'scr',a:'analizza'},
+  {n:'/commenta',d:'Aggiungi commenti inline al codice spiegando il "perché"',c:'scr',a:'trasforma'},
+  {n:'/refactor',d:'Refactoring: migliora leggibilità e manutenibilità del codice',c:'scr',a:'trasforma'},
+  {n:'/test',d:'Scrivi test unitari per il codice fornito con casi edge',c:'scr',a:'crea'},
+  {n:'/documenta',d:'Genera documentazione tecnica per funzione o API',c:'scr',a:'crea'},
+  {n:'/spiega-codice',d:'Spiega il codice riga per riga in italiano semplice',c:'scr',a:'analizza'},
+  {n:'/ottimizza',d:'Ottimizza il codice per performance e leggibilità',c:'scr',a:'trasforma'},
+  {n:'/converti',d:'Converti il codice nel linguaggio o framework indicato',c:'scr',a:'trasforma'},
+  {n:'/regex',d:'Genera espressione regolare per il pattern descritto',c:'scr',a:'crea'},
+  {n:'/query-sql',d:'Scrivi query SQL ottimizzata per il caso d\'uso',c:'scr',a:'crea'},
+  {n:'/shell',d:'Script bash/PowerShell per automazione del compito indicato',c:'scr',a:'crea'},
+  {n:'/pseudocodice',d:'Pseudocodice leggibile per l\'algoritmo descritto',c:'scr',a:'crea'},
+  {n:'/architettura-codice',d:'Proponi architettura software con componenti e pattern',c:'scr',a:'crea'},
+  {n:'/api-design',d:'Progetta API REST con endpoint, metodi e payload',c:'scr',a:'crea'},
+  {n:'/revisione-codice',d:'Code review focalizzata su sicurezza, performance e stile',c:'scr',a:'analizza'},
+  {n:'/git-commit',d:'Messaggio di commit convenzionale dal diff fornito',c:'scr',a:'crea'},
+  {n:'/changelog',d:'Changelog strutturato da lista di commit o feature',c:'scr',a:'crea'},
+  {n:'/readme',d:'README completo con installazione, uso e esempi',c:'scr',a:'crea'},
+  {n:'/prompt-sistema',d:'System prompt per agente AI su ruolo e compiti specificati',c:'scr',a:'crea'},
+  {n:'/email-professionale',d:'Email formale con oggetto, corpo strutturato e chiusura',c:'scr',a:'crea'},
+  {n:'/verbale',d:'Verbale di riunione da appunti: decisioni, azioni, responsabili',c:'scr',a:'crea'},
+  {n:'/relazione',d:'Relazione tecnica strutturata con executive summary',c:'scr',a:'crea'},
+  {n:'/proposta',d:'Proposta scritta con problema, approccio, benefici e costi',c:'scr',a:'crea'},
+  {n:'/presentazione-testi',d:'Testi per slide: titolo breve + 3 bullet per ogni pagina',c:'scr',a:'crea'},
+  {n:'/minuti',d:'Minuta di riunione sintetica in meno di una pagina',c:'scr',a:'crea'},
+  {n:'/lettera',d:'Lettera formale con apertura, corpo, chiusura corrette',c:'scr',a:'crea'},
+  {n:'/policy',d:'Bozza di policy interna su argomento indicato',c:'scr',a:'crea'},
+  {n:'/procedura',d:'Procedura operativa step-by-step con responsabilità',c:'scr',a:'crea'},
+  {n:'/glossario',d:'Glossario terminologico per documento o progetto',c:'scr',a:'crea'},
+  {n:'/indice',d:'Indice analitico del documento con riferimenti alle sezioni',c:'scr',a:'struttura'},
+  {n:'/note-margin',d:'Note a margine e commenti su testo tecnico o legale',c:'scr',a:'trasforma'},
+  {n:'/abstract-ricerca',d:'Abstract accademico da paper o studio completo',c:'scr',a:'trasforma'},
+  {n:'/executive-brief',d:'Brief esecutivo: 1 pagina con contesto, raccomandazione, rischi',c:'scr',a:'trasforma'},
+  {n:'/gap-analisi-testo',d:'Identifica cosa manca nel testo rispetto all\'obiettivo',c:'scr',a:'analizza'},
+  {n:'/punti-forza-testo',d:'Valuta i punti forti del testo e cosa funziona bene',c:'scr',a:'analizza'},
+  {n:'/controllo-fatti',d:'Verifica affermazioni nel testo e segnala incertezze',c:'scr',a:'analizza'},
+  {n:'/trova-contraddizioni',d:'Trova contraddizioni o inconsistenze logiche nel testo',c:'scr',a:'analizza'},
+  {n:'/domande-da-testo',d:'Genera 10 domande comprensione dal testo fornito',c:'scr',a:'crea'},
+  {n:'/flashcard',d:'Crea flashcard domanda-risposta dal contenuto',c:'scr',a:'crea'},
+  {n:'/schema-studio',d:'Schema di studio con concetti chiave e connessioni',c:'scr',a:'struttura'},
+  {n:'/esempio-pratico',d:'Genera 3 esempi pratici per il concetto astratto',c:'scr',a:'crea'},
+  {n:'/analogia',d:'Spiega il concetto complesso con un\'analogia quotidiana',c:'scr',a:'crea'},
+  {n:'/eli5',d:'Spiega come a un bambino di 5 anni — massima semplicità',c:'scr',a:'trasforma'},
+  {n:'/deep-dive',d:'Approfondimento tecnico dettagliato sul tema indicato',c:'scr',a:'analizza'},
+  {n:'/ricerca',d:'Sintesi delle principali fonti e prospettive sul tema',c:'scr',a:'analizza'},
+  {n:'/confronta-approcci',d:'Confronta due approcci con pro, contro e quando usarli',c:'scr',a:'analizza'},
+  {n:'/storia-tema',d:'Evoluzione storica del tema con tappe chiave',c:'scr',a:'analizza'},
+  {n:'/stato-dell-arte',d:'Overview corrente del settore: trend, attori, sfide',c:'scr',a:'analizza'},
+  {n:'/letteratura',d:'Principali autori, teorie e libri di riferimento sul tema',c:'scr',a:'analizza'},
+  {n:'/caso-pratico',d:'Caso pratico realistico per applicare il concetto',c:'scr',a:'crea'},
+  {n:'/errori-comuni',d:'I 5 errori più frequenti su questo argomento e come evitarli',c:'scr',a:'analizza'},
+  {n:'/miti',d:'Sfata i 3 miti più diffusi sull\'argomento con argomentazioni',c:'scr',a:'analizza'},
+  {n:'/tendenze',d:'Principali tendenze emergenti nel prossimo triennio',c:'scr',a:'analizza'},
+  {n:'/impatto',d:'Analisi dell\'impatto potenziale di questa decisione o cambiamento',c:'scr',a:'analizza'},
+  {n:'/pro-contro',d:'Lista strutturata di pro e contro con pesi per decidere',c:'scr',a:'analizza'},
+  {n:'/risk-assessment',d:'Valutazione rischi con probabilità, impatto e mitigazione',c:'scr',a:'analizza'},
+  {n:'/tabella-confronto',d:'Tabella confronto opzioni su criteri ponderati',c:'scr',a:'analizza'},
+  {n:'/report-ricerca',d:'Report sintetico di ricerca con metodologia e conclusioni',c:'scr',a:'crea'},
+  {n:'/estratto',d:'Estrai le informazioni rilevanti per l\'obiettivo indicato',c:'scr',a:'trasforma'},
+  {n:'/classifica',d:'Classifica gli elementi per il criterio specificato',c:'scr',a:'analizza'},
+  {n:'/aggiungi-dati',d:'Suggerisci dati e statistiche rilevanti per supportare la tesi',c:'scr',a:'trasforma'},
+  {n:'/formatta-markdown',d:'Converti il testo in Markdown ben strutturato',c:'scr',a:'trasforma'},
+  {n:'/formatta-html',d:'Converti il testo in HTML semantico pulito',c:'scr',a:'trasforma'},
+  {n:'/formatta-json',d:'Struttura i dati come oggetto JSON valido',c:'scr',a:'trasforma'},
+  {n:'/formatta-csv',d:'Converti i dati tabulari in formato CSV',c:'scr',a:'trasforma'},
 
-  // ── CREATIVITÀ & STRATEGIA ───────────────────────────────────────────────
-  {n:'/brainstorm',d:'20 idee originali senza filtri per il problema indicato',c:'str'},
-  {n:'/devil-advocate',d:'Contesta la tesi con le migliori argomentazioni opposte',c:'str'},
-  {n:'/esperto',d:'Rispondi come esperto senior del settore specificato',c:'str'},
-  {n:'/scenario',d:'3 scenari plausibili: pessimista, base, ottimista',c:'str'},
-  {n:'/analizza',d:'Analisi strutturata con contesto, dati, interpretazione',c:'str'},
-  {n:'/critica',d:'Feedback critico costruttivo su un\'idea o lavoro',c:'str'},
-  {n:'/alternativa',d:'3 approcci alternativi a quello già proposto',c:'str'},
-  {n:'/second-opinion',d:'Secondo parere indipendente sul ragionamento esposto',c:'str'},
-  {n:'/sintetizza',d:'Sintesi del pensiero complesso in 3 punti essenziali',c:'str'},
-  {n:'/valuta',d:'Valutazione comparata su criteri ponderati esplicitati',c:'str'},
-  {n:'/prioritizza',d:'Ranking delle opzioni per impatto e fattibilità',c:'str'},
-  {n:'/decisione',d:'Framework decisionale: opzioni, criteri, raccomandazione',c:'str'},
-  {n:'/rischi',d:'Analisi dei rischi principali e piani di mitigazione',c:'str'},
-  {n:'/opportunità',d:'Opportunità non ovvie celate nel problema o contesto',c:'str'},
-  {n:'/futuro',d:'Proiezione a 3-5 anni con fattori determinanti',c:'str'},
-  {n:'/retrospettiva',d:'Retrospettiva strutturata: cosa ha funzionato, cosa no, next',c:'str'},
-  {n:'/pre-mortem',d:'Pre-mortem: come potrebbe fallire questo progetto',c:'str'},
-  {n:'/post-mortem',d:'Post-mortem: cause radice di un fallimento o incidente',c:'str'},
-  {n:'/laterale',d:'Approccio laterale e inatteso al problema',c:'str'},
-  {n:'/prima-principi',d:'Ragionamento dai principi fondamentali senza assunti',c:'str'},
-  {n:'/pensiero-invertito',d:'Inverte il problema: come garantire il fallimento?',c:'str'},
-  {n:'/sei-cappelli',d:'Analisi a 6 cappelli di De Bono sul tema proposto',c:'str'},
-  {n:'/worst-case',d:'Analisi del caso peggiore e come prepararsi',c:'str'},
-  {n:'/best-practice',d:'Best practice del settore per il problema indicato',c:'str'},
-  {n:'/modelli-mentali',d:'Applica 3 modelli mentali diversi al problema',c:'str'},
-  {n:'/frame',d:'Riformula il problema come opportunità con nuovo frame',c:'str'},
-  {n:'/assunti',d:'Identifica gli assunti impliciti nel ragionamento',c:'str'},
-  {n:'/scopo',d:'Chiarisci il vero scopo dietro la richiesta apparente',c:'str'},
-  {n:'/domande-potenti',d:'10 domande potenti che nessuno ha ancora fatto',c:'str'},
-  {n:'/workshop',d:'Scaletta workshop 3h con obiettivi, attività e output',c:'str'},
-  {n:'/facilitazione',d:'Piano facilitazione per riunione difficile o conflittuale',c:'str'},
-  {n:'/ice-breaker',d:'5 attività rompighiaccio per team di nuova formazione',c:'str'},
-  {n:'/retrospettiva-sprint',d:'Retrospettiva sprint con Start/Stop/Continue',c:'str'},
-  {n:'/ods',d:'Ordine del giorno strutturato con tempi e obiettivi',c:'str'},
-  {n:'/sintesi-riunione',d:'Sintesi decisioni e azioni da trascrizione di meeting',c:'str'},
-  {n:'/conflitto',d:'Mediazione strutturata per gestire disaccordo nel team',c:'str'},
-  {n:'/feedback-costruttivo',d:'Feedback 360° SBI: Situazione, Comportamento, Impatto',c:'str'},
-  {n:'/motivazione',d:'Strategie di motivazione per il contesto indicato',c:'str'},
-  {n:'/delega',d:'Piano di delega con task, livello autonomia e checkpoint',c:'str'},
-  {n:'/obiettivi-smart',d:'Converti gli obiettivi in formato SMART verificabile',c:'str'},
-  {n:'/kpi',d:'Proponi 5 KPI misurabili per l\'obiettivo indicato',c:'str'},
-  {n:'/piano-90gg',d:'Piano d\'azione 90 giorni con milestones e responsabili',c:'str'},
-  {n:'/north-star',d:'North Star Metric: la metrica che guida tutte le altre',c:'str'},
-  {n:'/strategic-review',d:'Review strategica trimestrale: risultati, gap, aggiustamenti',c:'str'},
-  {n:'/pivot',d:'Analisi pivot: quando, come e verso dove cambiare rotta',c:'str'},
-  {n:'/make-buy',d:'Framework Make vs Buy vs Partner per la decisione',c:'str'},
-  {n:'/roi',d:'Calcolo ROI con assunti esplicitati e break-even',c:'str'},
-  {n:'/business-case',d:'Business case sintetico: problema, soluzione, benefici, costi',c:'str'},
-  {n:'/go-no-go',d:'Criteri Go/No-Go per una decisione critica',c:'str'},
-  {n:'/mvp',d:'Definizione MVP: feature minime e criterio di successo',c:'str'},
-  {n:'/user-story',d:'User stories in formato "Come [ruolo] voglio [azione]..."',c:'str'},
-  {n:'/acceptance-criteria',d:'Criteri di accettazione verificabili per una feature',c:'str'},
-  {n:'/sprint-planning',d:'Sprint planning: obiettivo, backlog, capacity e rischi',c:'str'},
-  {n:'/change-management',d:'Piano change management: comunicazione, training, resistenze',c:'str'},
-  {n:'/stakeholder-engagement',d:'Piano coinvolgimento stakeholder con messaggi e frequenza',c:'str'},
-  {n:'/piano-comunicazione-prog',d:'Piano comunicazione progetto per tipo di stakeholder',c:'str'},
-  {n:'/negotiation',d:'Preparazione negoziazione: BATNA, interessi, concessioni',c:'str'},
-  {n:'/conflict-resolution',d:'Framework risoluzione conflitti con passi strutturati',c:'str'},
-  {n:'/innovation-sprint',d:'Sprint di innovazione 2gg: problema, ideazione, prototipo',c:'str'},
-  {n:'/design-thinking',d:'Processo Design Thinking per il problema indicato',c:'str'},
-  {n:'/lean-canvas',d:'Lean Canvas per nuova idea di business o prodotto',c:'str'},
-  {n:'/impact-effort',d:'Matrice impatto/sforzo per prioritizzare iniziative',c:'str'},
-  {n:'/kano',d:'Analisi Kano per classificare feature per soddisfazione utente',c:'str'},
-  {n:'/moscow',d:'Prioritizzazione MoSCoW: Must/Should/Could/Won\'t',c:'str'},
-  {n:'/rice',d:'Scoring RICE: Reach, Impact, Confidence, Effort',c:'str'},
-  {n:'/jobs-to-be-done',d:'Jobs To Be Done: qual è il vero lavoro che l\'utente vuole fare',c:'str'},
-  {n:'/war-gaming',d:'Simulazione competitiva: cosa farebbe il competitor A o B',c:'str'},
-  {n:'/red-team',d:'Red team: attacca il piano con le critiche più dure',c:'str'},
-  {n:'/blue-sky',d:'Blue sky thinking: ignora i vincoli e pensa in grande',c:'str'},
-  {n:'/vincoli',d:'Identifica tutti i vincoli (tecnici, umani, finanziari) del progetto',c:'str'},
-  {n:'/assunzioni',d:'Mappa assunzioni chiave e crea test di validazione',c:'str'},
-  {n:'/lezione-appresa',d:'Lesson learned strutturata con causa, impatto, azione',c:'str'},
-  {n:'/analisi-dati',d:'Interpreta i dati forniti e estrai 3 insight azionabili',c:'str'},
-  {n:'/pattern',d:'Identifica pattern ricorrenti in una serie di dati o eventi',c:'str'},
-  {n:'/ipotesi',d:'Genera 5 ipotesi da testare per validare l\'idea',c:'str'},
-  {n:'/esperimento',d:'Progetta esperimento lean per testare l\'ipotesi in 2 settimane',c:'str'},
-  {n:'/metriche',d:'Definisci metriche lagging e leading per l\'obiettivo',c:'str'},
-  {n:'/cultura',d:'Analisi cultura organizzativa con valori, norme e gap',c:'str'},
-  {n:'/employer-branding',d:'Strategia employer branding per attrarre i profili target',c:'str'},
-  {n:'/talent-strategy',d:'Strategia talent: acquisizione, sviluppo, retention',c:'str'},
-  {n:'/succession-planning',d:'Piano successione per ruoli chiave dell\'organizzazione',c:'str'},
-  {n:'/meta-prompt',d:'Prompt per generare prompt ottimali per il caso d\'uso',c:'str'},
-  {n:'/valuta-prompt',d:'Valuta la qualità di questo prompt e suggerisci miglioramenti',c:'str'},
-  {n:'/chain-of-thought',d:'Ragiona passo per passo ad alta voce prima di rispondere',c:'str'},
-  {n:'/few-shot',d:'Fornisci 3 esempi input-output per guidare la risposta',c:'str'},
-  {n:'/role-play',d:'Simula una conversazione con il ruolo indicato',c:'str'},
+  // CREATIVITÀ & STRATEGIA
+  {n:'/brainstorm',d:'20 idee originali senza filtri per il problema indicato',c:'str',a:'crea'},
+  {n:'/devil-advocate',d:'Contesta la tesi con le migliori argomentazioni opposte',c:'str',a:'analizza'},
+  {n:'/esperto',d:'Rispondi come esperto senior del settore specificato',c:'str',a:'crea'},
+  {n:'/scenario',d:'3 scenari plausibili: pessimista, base, ottimista',c:'str',a:'analizza'},
+  {n:'/analizza',d:'Analisi strutturata con contesto, dati, interpretazione',c:'str',a:'analizza'},
+  {n:'/critica',d:'Feedback critico costruttivo su un\'idea o lavoro',c:'str',a:'analizza'},
+  {n:'/alternativa',d:'3 approcci alternativi a quello già proposto',c:'str',a:'crea'},
+  {n:'/second-opinion',d:'Secondo parere indipendente sul ragionamento esposto',c:'str',a:'analizza'},
+  {n:'/sintetizza',d:'Sintesi del pensiero complesso in 3 punti essenziali',c:'str',a:'trasforma'},
+  {n:'/valuta',d:'Valutazione comparata su criteri ponderati esplicitati',c:'str',a:'analizza'},
+  {n:'/prioritizza',d:'Ranking delle opzioni per impatto e fattibilità',c:'str',a:'analizza'},
+  {n:'/decisione',d:'Framework decisionale: opzioni, criteri, raccomandazione',c:'str',a:'analizza'},
+  {n:'/rischi',d:'Analisi dei rischi principali e piani di mitigazione',c:'str',a:'analizza'},
+  {n:'/opportunita',d:'Opportunità non ovvie celate nel problema o contesto',c:'str',a:'analizza'},
+  {n:'/futuro',d:'Proiezione a 3-5 anni con fattori determinanti',c:'str',a:'analizza'},
+  {n:'/retrospettiva',d:'Retrospettiva strutturata: cosa ha funzionato, cosa no, next',c:'str',a:'analizza'},
+  {n:'/pre-mortem',d:'Pre-mortem: come potrebbe fallire questo progetto',c:'str',a:'analizza'},
+  {n:'/post-mortem',d:'Post-mortem: cause radice di un fallimento o incidente',c:'str',a:'analizza'},
+  {n:'/laterale',d:'Approccio laterale e inatteso al problema',c:'str',a:'crea'},
+  {n:'/prima-principi',d:'Ragionamento dai principi fondamentali senza assunti',c:'str',a:'analizza'},
+  {n:'/pensiero-invertito',d:'Inverte il problema: come garantire il fallimento?',c:'str',a:'analizza'},
+  {n:'/sei-cappelli',d:'Analisi a 6 cappelli di De Bono sul tema proposto',c:'str',a:'analizza'},
+  {n:'/worst-case',d:'Analisi del caso peggiore e come prepararsi',c:'str',a:'analizza'},
+  {n:'/best-practice',d:'Best practice del settore per il problema indicato',c:'str',a:'analizza'},
+  {n:'/modelli-mentali',d:'Applica 3 modelli mentali diversi al problema',c:'str',a:'analizza'},
+  {n:'/frame',d:'Riformula il problema come opportunità con nuovo frame',c:'str',a:'trasforma'},
+  {n:'/assunti',d:'Identifica gli assunti impliciti nel ragionamento',c:'str',a:'analizza'},
+  {n:'/scopo',d:'Chiarisci il vero scopo dietro la richiesta apparente',c:'str',a:'analizza'},
+  {n:'/domande-potenti',d:'10 domande potenti che nessuno ha ancora fatto',c:'str',a:'crea'},
+  {n:'/workshop',d:'Scaletta workshop 3h con obiettivi, attività e output',c:'str',a:'pianifica'},
+  {n:'/facilitazione',d:'Piano facilitazione per riunione difficile o conflittuale',c:'str',a:'pianifica'},
+  {n:'/ice-breaker',d:'5 attività rompighiaccio per team di nuova formazione',c:'str',a:'crea'},
+  {n:'/retrospettiva-sprint',d:'Retrospettiva sprint con Start/Stop/Continue',c:'str',a:'analizza'},
+  {n:'/ods',d:'Ordine del giorno strutturato con tempi e obiettivi',c:'str',a:'struttura'},
+  {n:'/sintesi-riunione',d:'Sintesi decisioni e azioni da trascrizione di meeting',c:'str',a:'trasforma'},
+  {n:'/conflitto',d:'Mediazione strutturata per gestire disaccordo nel team',c:'str',a:'analizza'},
+  {n:'/feedback-costruttivo',d:'Feedback 360° SBI: Situazione, Comportamento, Impatto',c:'str',a:'crea'},
+  {n:'/motivazione',d:'Strategie di motivazione per il contesto indicato',c:'str',a:'analizza'},
+  {n:'/delega',d:'Piano di delega con task, livello autonomia e checkpoint',c:'str',a:'pianifica'},
+  {n:'/obiettivi-smart',d:'Converti gli obiettivi in formato SMART verificabile',c:'str',a:'trasforma'},
+  {n:'/kpi',d:'Proponi 5 KPI misurabili per l\'obiettivo indicato',c:'str',a:'crea'},
+  {n:'/piano-90gg',d:'Piano d\'azione 90 giorni con milestones e responsabili',c:'str',a:'pianifica'},
+  {n:'/north-star',d:'North Star Metric: la metrica che guida tutte le altre',c:'str',a:'analizza'},
+  {n:'/strategic-review',d:'Review strategica trimestrale: risultati, gap, aggiustamenti',c:'str',a:'analizza'},
+  {n:'/pivot',d:'Analisi pivot: quando, come e verso dove cambiare rotta',c:'str',a:'analizza'},
+  {n:'/make-buy',d:'Framework Make vs Buy vs Partner per la decisione',c:'str',a:'analizza'},
+  {n:'/roi',d:'Calcolo ROI con assunti esplicitati e break-even',c:'str',a:'analizza'},
+  {n:'/business-case',d:'Business case sintetico: problema, soluzione, benefici, costi',c:'str',a:'crea'},
+  {n:'/go-no-go',d:'Criteri Go/No-Go per una decisione critica',c:'str',a:'analizza'},
+  {n:'/mvp',d:'Definizione MVP: feature minime e criterio di successo',c:'str',a:'crea'},
+  {n:'/user-story',d:'User stories in formato "Come [ruolo] voglio [azione]..."',c:'str',a:'crea'},
+  {n:'/acceptance-criteria',d:'Criteri di accettazione verificabili per una feature',c:'str',a:'crea'},
+  {n:'/sprint-planning',d:'Sprint planning: obiettivo, backlog, capacity e rischi',c:'str',a:'pianifica'},
+  {n:'/change-management',d:'Piano change management: comunicazione, training, resistenze',c:'str',a:'pianifica'},
+  {n:'/stakeholder-engagement',d:'Piano coinvolgimento stakeholder con messaggi e frequenza',c:'str',a:'pianifica'},
+  {n:'/piano-comunicazione-prog',d:'Piano comunicazione progetto per tipo di stakeholder',c:'str',a:'pianifica'},
+  {n:'/negotiation',d:'Preparazione negoziazione: BATNA, interessi, concessioni',c:'str',a:'pianifica'},
+  {n:'/conflict-resolution',d:'Framework risoluzione conflitti con passi strutturati',c:'str',a:'analizza'},
+  {n:'/innovation-sprint',d:'Sprint di innovazione 2gg: problema, ideazione, prototipo',c:'str',a:'pianifica'},
+  {n:'/design-thinking',d:'Processo Design Thinking per il problema indicato',c:'str',a:'pianifica'},
+  {n:'/lean-canvas',d:'Lean Canvas per nuova idea di business o prodotto',c:'str',a:'struttura'},
+  {n:'/impact-effort',d:'Matrice impatto/sforzo per prioritizzare iniziative',c:'str',a:'analizza'},
+  {n:'/kano',d:'Analisi Kano per classificare feature per soddisfazione utente',c:'str',a:'analizza'},
+  {n:'/moscow',d:'Prioritizzazione MoSCoW: Must/Should/Could/Won\'t',c:'str',a:'analizza'},
+  {n:'/rice',d:'Scoring RICE: Reach, Impact, Confidence, Effort',c:'str',a:'analizza'},
+  {n:'/jobs-to-be-done',d:'Jobs To Be Done: qual è il vero lavoro che l\'utente vuole fare',c:'str',a:'analizza'},
+  {n:'/war-gaming',d:'Simulazione competitiva: cosa farebbe il competitor A o B',c:'str',a:'analizza'},
+  {n:'/red-team',d:'Red team: attacca il piano con le critiche più dure',c:'str',a:'analizza'},
+  {n:'/blue-sky',d:'Blue sky thinking: ignora i vincoli e pensa in grande',c:'str',a:'crea'},
+  {n:'/vincoli',d:'Identifica tutti i vincoli (tecnici, umani, finanziari) del progetto',c:'str',a:'analizza'},
+  {n:'/assunzioni',d:'Mappa assunzioni chiave e crea test di validazione',c:'str',a:'analizza'},
+  {n:'/lezione-appresa',d:'Lesson learned strutturata con causa, impatto, azione',c:'str',a:'analizza'},
+  {n:'/analisi-dati',d:'Interpreta i dati forniti e estrai 3 insight azionabili',c:'str',a:'analizza'},
+  {n:'/pattern',d:'Identifica pattern ricorrenti in una serie di dati o eventi',c:'str',a:'analizza'},
+  {n:'/ipotesi',d:'Genera 5 ipotesi da testare per validare l\'idea',c:'str',a:'crea'},
+  {n:'/esperimento',d:'Progetta esperimento lean per testare l\'ipotesi in 2 settimane',c:'str',a:'pianifica'},
+  {n:'/metriche',d:'Definisci metriche lagging e leading per l\'obiettivo',c:'str',a:'crea'},
+  {n:'/cultura',d:'Analisi cultura organizzativa con valori, norme e gap',c:'str',a:'analizza'},
+  {n:'/employer-branding',d:'Strategia employer branding per attrarre i profili target',c:'str',a:'pianifica'},
+  {n:'/talent-strategy',d:'Strategia talent: acquisizione, sviluppo, retention',c:'str',a:'pianifica'},
+  {n:'/succession-planning',d:'Piano successione per ruoli chiave dell\'organizzazione',c:'str',a:'pianifica'},
+  {n:'/meta-prompt',d:'Prompt per generare prompt ottimali per il caso d\'uso',c:'str',a:'crea'},
+  {n:'/valuta-prompt',d:'Valuta la qualità di questo prompt e suggerisci miglioramenti',c:'str',a:'analizza'},
+  {n:'/chain-of-thought',d:'Ragiona passo per passo ad alta voce prima di rispondere',c:'str',a:'analizza'},
+  {n:'/few-shot',d:'Fornisci 3 esempi input-output per guidare la risposta',c:'str',a:'crea'},
+  {n:'/role-play',d:'Simula una conversazione con il ruolo indicato',c:'str',a:'crea'},
 ];
 
-// ── Build grids ────────────────────────────────────────────────────────────
-const TAG_CLASS = {vis:'tag-vis',mkt:'tag-mkt',scr:'tag-scr',str:'tag-str'};
-const TAG_LABEL = {vis:'Visivo',mkt:'Marketing',scr:'Scrittura',str:'Strategia'};
+// ── COSTANTI UI ────────────────────────────────────────────────────────────
+const CAT_LABEL = {vis:'Visivo',mkt:'Marketing',scr:'Scrittura',str:'Strategia'};
+const CAT_CLASS = {vis:'tag-vis',mkt:'tag-mkt',scr:'tag-scr',str:'tag-str'};
+const ACT_LABEL = {crea:'Creare',trasforma:'Trasformare',analizza:'Analizzare',pianifica:'Pianificare',struttura:'Strutturare'};
+const ACT_CLASS = {crea:'tag-crea',trasforma:'tag-trasforma',analizza:'tag-analizza',pianifica:'tag-pianifica',struttura:'tag-struttura'};
 
+// ── STATO ─────────────────────────────────────────────────────────────────
+let currentCat = 'all';
+let currentAct = 'all';
+let currentQ   = '';
+
+// ── RENDER CARD ────────────────────────────────────────────────────────────
 function makeCard(cmd) {
-  return `<div class="cmd-card" data-cat="${cmd.c}" data-text="${(cmd.n+' '+cmd.d).toLowerCase()}">
+  return `<div class="cmd-card" data-cat="${cmd.c}" data-act="${cmd.a}" data-text="${(cmd.n+' '+cmd.d).toLowerCase()}">
     <div class="cmd-name">${cmd.n}</div>
     <div class="cmd-desc">${cmd.d}</div>
-    <div class="cmd-tags"><span class="cmd-tag ${TAG_CLASS[cmd.c]}">${TAG_LABEL[cmd.c]}</span></div>
+    <div class="cmd-tags">
+      <span class="cmd-tag ${CAT_CLASS[cmd.c]}">${CAT_LABEL[cmd.c]}</span>
+      <span class="cmd-tag ${ACT_CLASS[cmd.a]}">${ACT_LABEL[cmd.a]}</span>
+    </div>
   </div>`;
 }
 
-const grids = {all:'grid-all',vis:'grid-vis',mkt:'grid-mkt',scr:'grid-scr',str:'grid-str'};
+// Costruisci griglia una sola volta
+document.getElementById('main-grid').innerHTML = CMDS.map(makeCard).join('');
 
-// populate all grids
-document.getElementById('grid-all').innerHTML = CMDS.map(makeCard).join('');
-['vis','mkt','scr','str'].forEach(cat => {
-  document.getElementById('grid-'+cat).innerHTML = CMDS.filter(c=>c.c===cat).map(makeCard).join('');
-});
-
-// update sidebar counts
-document.getElementById('cnt-all').textContent = CMDS.length;
-['vis','mkt','scr','str'].forEach(cat => {
-  document.getElementById('cnt-'+cat).textContent = CMDS.filter(c=>c.c===cat).length;
-});
-
-// ── Nav ────────────────────────────────────────────────────────────────────
-let currentDept = 'all';
-function showDept(dept, btn) {
-  document.querySelectorAll('.dept-section').forEach(s=>s.classList.remove('visible'));
-  document.querySelectorAll('.dept-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sect-'+dept).classList.add('visible');
-  btn.classList.add('active');
-  currentDept = dept;
-  document.getElementById('searchInput').value = '';
-  document.getElementById('no-results').style.display = 'none';
-  document.querySelectorAll('#grid-all .cmd-card').forEach(c=>c.style.display='');
+// ── FILTRO ─────────────────────────────────────────────────────────────────
+function applyFilters() {
+  const cards = document.querySelectorAll('#main-grid .cmd-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const catOk  = currentCat === 'all' || card.dataset.cat === currentCat;
+    const actOk  = currentAct === 'all' || card.dataset.act === currentAct;
+    const textOk = !currentQ  || card.dataset.text.includes(currentQ);
+    const show   = catOk && actOk && textOk;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('no-results').style.display = visible ? 'none' : 'block';
+  // aggiorna label risultati
+  const lbl = document.getElementById('result-label');
+  if (currentCat !== 'all' || currentAct !== 'all' || currentQ) {
+    lbl.innerHTML = `<strong>${visible}</strong> comandi trovati`;
+  } else {
+    lbl.innerHTML = '';
+  }
 }
 
-// ── Search ─────────────────────────────────────────────────────────────────
+// ── NAVIGAZIONE CATEGORIE ──────────────────────────────────────────────────
+function showDept(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.dept-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  applyFilters();
+}
+
+// ── NAVIGAZIONE AZIONI ─────────────────────────────────────────────────────
+function filterAction(act, btn) {
+  currentAct = act;
+  // Aggiorna sidebar act-btn
+  document.querySelectorAll('.act-btn').forEach(b => b.classList.remove('active'));
+  const sidebarBtn = document.getElementById('ab-' + act);
+  if (sidebarBtn) sidebarBtn.classList.add('active');
+  // Aggiorna chips bar
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  const chip = document.querySelector(`.chip-${act === 'all' ? 'all' : act}`);
+  if (chip) chip.classList.add('active');
+  applyFilters();
+}
+
+// ── SEARCH ─────────────────────────────────────────────────────────────────
 document.getElementById('searchInput').addEventListener('input', function(){
-  const q = this.value.toLowerCase().trim();
-  if (!q) {
-    document.querySelectorAll('.cmd-card').forEach(c=>c.style.display='');
-    document.getElementById('no-results').style.display='none';
-    return;
-  }
-  // search only in current section
-  const grid = document.getElementById('grid-'+currentDept);
-  const cards = grid.querySelectorAll('.cmd-card');
-  let found = 0;
-  cards.forEach(c => {
-    const match = c.dataset.text.includes(q);
-    c.style.display = match ? '' : 'none';
-    if(match) found++;
-  });
-  document.getElementById('no-results').style.display = found ? 'none' : 'block';
+  currentQ = this.value.toLowerCase().trim();
+  applyFilters();
 });
 
-// ── Guide toggle ───────────────────────────────────────────────────────────
+// ── GUIDA TOGGLE ───────────────────────────────────────────────────────────
 function toggleGuide() {
   const body = document.getElementById('guide-body');
   const chev = document.getElementById('guide-chev');
@@ -679,10 +728,10 @@ function toggleGuide() {
   chev.classList.toggle('open', open);
 }
 
-// ── Theme ──────────────────────────────────────────────────────────────────
+// ── TEMA ───────────────────────────────────────────────────────────────────
 function toggleTheme(){
   document.documentElement.classList.toggle('light');
-  localStorage.setItem('ai-theme', document.documentElement.classList.contains('light')?'light':'dark');
+  localStorage.setItem('ai-theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
 }
 </script>
 </body>
