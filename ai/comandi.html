@@ -91,6 +91,7 @@
   .tag-mkt{background:rgba(236,72,153,.13);color:#f9a8d4;}
   .tag-scr{background:rgba(16,185,129,.13);color:#6ee7b7;}
   .tag-str{background:rgba(139,92,246,.13);color:#c4b5fd;}
+  .tag-img{background:rgba(251,146,60,.13);color:#fdba74;}
   .tag-crea{background:rgba(16,185,129,.1);color:#6ee7b7;}
   .tag-trasforma{background:rgba(6,182,212,.1);color:#67e8f9;}
   .tag-analizza{background:rgba(245,158,11,.1);color:#fcd34d;}
@@ -138,6 +139,7 @@
   html.light .tag-mkt{background:rgba(236,72,153,.1);color:#9d174d;}
   html.light .tag-scr{background:rgba(16,185,129,.1);color:#065f46;}
   html.light .tag-str{background:rgba(139,92,246,.1);color:#5b21b6;}
+  html.light .tag-img{background:rgba(251,146,60,.1);color:#c2410c;}
   html.light .tag-crea{background:rgba(16,185,129,.1);color:#065f46;}
   html.light .tag-trasforma{background:rgba(6,182,212,.1);color:#0369a1;}
   html.light .tag-analizza{background:rgba(245,158,11,.1);color:#92400e;}
@@ -185,7 +187,7 @@
     <div class="sidebar-label">Categoria</div>
     <button class="dept-btn active" onclick="showDept('all',this)" id="db-all">
       <span class="dept-icon">⚡</span> Tutti
-      <span class="count" id="cnt-all">350</span>
+      <span class="count" id="cnt-all">430</span>
     </button>
     <button class="dept-btn" onclick="showDept('vis',this)" id="db-vis">
       <span class="dept-icon">🔷</span> Pensiero Visivo
@@ -202,6 +204,10 @@
     <button class="dept-btn" onclick="showDept('str',this)" id="db-str">
       <span class="dept-icon">🧠</span> Creatività & Strategia
       <span class="count" id="cnt-str">85</span>
+    </button>
+    <button class="dept-btn" onclick="showDept('img',this)" id="db-img">
+      <span class="dept-icon">🎨</span> Immagini & Video
+      <span class="count" id="cnt-img">80</span>
     </button>
 
     <div class="sidebar-divider"></div>
@@ -642,11 +648,89 @@ const CMDS = [
   {n:'/chain-of-thought',d:'Ragiona passo per passo ad alta voce prima di rispondere',c:'str',a:'analizza'},
   {n:'/few-shot',d:'Fornisci 3 esempi input-output per guidare la risposta',c:'str',a:'crea'},
   {n:'/role-play',d:'Simula una conversazione con il ruolo indicato',c:'str',a:'crea'},
+
+  // IMMAGINI & VIDEO — Prompt AI generativi
+  {n:'/prompt-immagine',d:'Prompt completo per generatore AI con soggetto, stile e parametri',c:'img',a:'crea'},
+  {n:'/midjourney',d:'Prompt Midjourney ottimizzato con stile, lighting e composizione',c:'img',a:'crea'},
+  {n:'/dalle',d:'Prompt DALL-E con descrizione dettagliata di soggetto e contesto',c:'img',a:'crea'},
+  {n:'/flux',d:'Prompt per Flux/Stable Diffusion con tag tecnici e artistici',c:'img',a:'crea'},
+  {n:'/negative-prompt',d:'Lista elementi da escludere per affinare il risultato AI',c:'img',a:'crea'},
+  {n:'/variazione-stile',d:'3 varianti stilistiche dello stesso soggetto per confronto',c:'img',a:'crea'},
+  {n:'/prompt-serie',d:'Prompt coerente per serie di immagini di una campagna o brand',c:'img',a:'crea'},
+  {n:'/stile-brand-img',d:'Adatta il prompt allo stile visivo e ai colori del brand',c:'img',a:'trasforma'},
+  {n:'/colori-immagine',d:'Definisci la palette cromatica dominante per il prompt',c:'img',a:'crea'},
+  {n:'/mood-visivo',d:'Descrivi il mood/atmosfera con termini tecnici per il prompt',c:'img',a:'crea'},
+  {n:'/composizione',d:'Regole di composizione da inserire nel prompt (rule of thirds ecc.)',c:'img',a:'crea'},
+  {n:'/illuminazione',d:'Setup di luce da specificare nel prompt per l\'effetto desiderato',c:'img',a:'crea'},
+  {n:'/upscale-prompt',d:'Aggiungi dettagli al prompt per output ad alta risoluzione',c:'img',a:'trasforma'},
+  {n:'/aspect-ratio',d:'Suggerisci formato e orientamento ottimale per l\'uso previsto',c:'img',a:'analizza'},
+  {n:'/descrivi-immagine',d:'Descrivi un\'immagine in modo preciso per replicarla o modificarla',c:'img',a:'analizza'},
+
+  // IMMAGINI & VIDEO — Stili fotografici
+  {n:'/ritratto-professionale',d:'Prompt ritratto corporate con luce, postura e sfondo',c:'img',a:'crea'},
+  {n:'/product-shot',d:'Prompt product photography pulita su sfondo neutro o in scena',c:'img',a:'crea'},
+  {n:'/lifestyle',d:'Prompt scena lifestyle con prodotto integrato naturalmente',c:'img',a:'crea'},
+  {n:'/editorial',d:'Stile editoriale magazine con composizione dinamica e intenzionale',c:'img',a:'crea'},
+  {n:'/flat-lay',d:'Composizione flat lay con elementi disposti dall\'alto per social',c:'img',a:'crea'},
+  {n:'/cinematic',d:'Stile cinematografico con colori graded e formato widescreen',c:'img',a:'crea'},
+  {n:'/analogico',d:'Effetto pellicola analogica con grain e tonalità vintage',c:'img',a:'crea'},
+  {n:'/minimalista-img',d:'Composizione minimalista con spazio negativo abbondante',c:'img',a:'crea'},
+  {n:'/corporate-photo',d:'Visual professionale per report, presentazioni e comunicazioni',c:'img',a:'crea'},
+  {n:'/drone',d:'Prospettiva aerea con droni per paesaggi, location o building',c:'img',a:'crea'},
+  {n:'/macro',d:'Dettaglio macro per texture, materiali e componenti',c:'img',a:'crea'},
+  {n:'/black-white',d:'Conversione b/n con contrasti e tonalità specificate',c:'img',a:'trasforma'},
+  {n:'/food-photo',d:'Food photography con styling, propping e illuminazione descritti',c:'img',a:'crea'},
+  {n:'/architettura-photo',d:'Fotografia architettonica con prospettive corrette e luce diurna',c:'img',a:'crea'},
+  {n:'/documentario',d:'Stile reportage autentico, non in posa, con luce naturale',c:'img',a:'crea'},
+  {n:'/before-after',d:'Prompt coppia before/after visivamente coerente per confronti',c:'img',a:'struttura'},
+  {n:'/mockup',d:'Prompt mockup prodotto o device per presentare design o app',c:'img',a:'crea'},
+  {n:'/pattern',d:'Pattern ripetuto per background, texture o branded material',c:'img',a:'crea'},
+  {n:'/illustrazione',d:'Stile illustrativo con tecnica specificata (acquerello, vettoriale ecc.)',c:'img',a:'crea'},
+  {n:'/icone',d:'Set di icone coerenti in stile flat/outline per interfaccia o deck',c:'img',a:'crea'},
+  {n:'/concept-art',d:'Concept art per idea di prodotto, servizio o spazio',c:'img',a:'crea'},
+
+  // IMMAGINI & VIDEO — Brand e identità visiva
+  {n:'/moodboard',d:'Descrizione moodboard con riferimenti visivi, colori e atmosfera',c:'img',a:'struttura'},
+  {n:'/visual-brief',d:'Brief visivo per fotografi o designer con direzione artistica',c:'img',a:'struttura'},
+  {n:'/art-direction',d:'Direzione artistica per set fotografico o video shoot',c:'img',a:'pianifica'},
+  {n:'/brand-visual',d:'Linee guida visive: font, colori, composizione e iconografia',c:'img',a:'struttura'},
+  {n:'/palette-brand',d:'Palette colori brand con HEX, uso consigliato e abbinamenti',c:'img',a:'struttura'},
+  {n:'/color-story',d:'Narrazione cromatica del brand con associazioni e valori',c:'img',a:'crea'},
+  {n:'/visual-identity',d:'Sistema identità visiva: logo, varianti, spazio di rispetto',c:'img',a:'struttura'},
+  {n:'/social-visual',d:'Linee guida visual per i canali social con formati e stili',c:'img',a:'struttura'},
+  {n:'/template-social',d:'Struttura template riutilizzabile per post del canale indicato',c:'img',a:'struttura'},
+  {n:'/visual-story',d:'Sequenza immagini che racconta una storia per Instagram Stories',c:'img',a:'pianifica'},
+  {n:'/cover-design',d:'Prompt per cover articolo, podcast, video o report',c:'img',a:'crea'},
+  {n:'/banner',d:'Prompt banner digitale o fisico con gerarchia di messaggi',c:'img',a:'crea'},
+  {n:'/infografica-visiva',d:'Brief visivo per infografica con dati, struttura e stile',c:'img',a:'struttura'},
+
+  // IMMAGINI & VIDEO — Script e contenuto video
+  {n:'/reel-hook',d:'Hook visivo/verbale per i primi 2-3 secondi di Reel o Short',c:'img',a:'crea'},
+  {n:'/script-reel',d:'Script Reel 30-60s con hook, sviluppo e CTA finale',c:'img',a:'crea'},
+  {n:'/video-linkedin',d:'Script video LinkedIn professionale da 60-90 secondi',c:'img',a:'crea'},
+  {n:'/talking-head',d:'Script talking head con punti chiave e ritmo di montaggio',c:'img',a:'crea'},
+  {n:'/b-roll',d:'Lista shot B-roll consigliati per supportare la narrazione',c:'img',a:'struttura'},
+  {n:'/thumbnail',d:'Descrizione thumbnail ad alto CTR con testo e composizione',c:'img',a:'crea'},
+  {n:'/storyboard',d:'Storyboard testuale con descrizione scena, audio e overlay',c:'img',a:'struttura'},
+  {n:'/voiceover',d:'Script voiceover con ritmo, enfasi e pause indicate',c:'img',a:'crea'},
+  {n:'/caption-video',d:'Caption accessibili ottimizzate per visione senza audio',c:'img',a:'crea'},
+  {n:'/descrizione-youtube',d:'Titolo SEO + descrizione YouTube con capitoli e CTA',c:'img',a:'crea'},
+  {n:'/video-serie',d:'Struttura serie video: episodi, arco narrativo e coerenza',c:'img',a:'pianifica'},
+  {n:'/short-form',d:'Adatta contenuto lungo per formato short-form (TikTok/Reels/Shorts)',c:'img',a:'trasforma'},
+  {n:'/long-form',d:'Struttura video long-form con intro, atti e outro',c:'img',a:'struttura'},
+  {n:'/video-hook-varianti',d:'5 varianti di apertura per lo stesso video su registri diversi',c:'img',a:'crea'},
+  {n:'/script-tutorial',d:'Script tutorial passo-passo con intro, dimostrazione e riepilogo',c:'img',a:'crea'},
+  {n:'/script-testimonianza',d:'Struttura video testimonial cliente con domande guida',c:'img',a:'struttura'},
+  {n:'/case-video',d:'Script video caso studio B2B con problema, soluzione e risultati',c:'img',a:'crea'},
+  {n:'/webinar-visual',d:'Design slide e supporti visivi per sessione webinar',c:'img',a:'pianifica'},
+  {n:'/video-ads',d:'Script video pubblicitario 15-30s con hook, beneficio e CTA',c:'img',a:'crea'},
+  {n:'/podcast-cover',d:'Prompt visual cover podcast con stile e identità coerenti',c:'img',a:'crea'},
+  {n:'/analisi-video',d:'Analisi critica di un video: struttura, ritmo, messaggi, miglioramenti',c:'img',a:'analizza'},
 ];
 
 // ── COSTANTI UI ────────────────────────────────────────────────────────────
-const CAT_LABEL = {vis:'Visivo',mkt:'Marketing',scr:'Scrittura',str:'Strategia'};
-const CAT_CLASS = {vis:'tag-vis',mkt:'tag-mkt',scr:'tag-scr',str:'tag-str'};
+const CAT_LABEL = {vis:'Visivo',mkt:'Marketing',scr:'Scrittura',str:'Strategia',img:'Img & Video'};
+const CAT_CLASS = {vis:'tag-vis',mkt:'tag-mkt',scr:'tag-scr',str:'tag-str',img:'tag-img'};
 const ACT_LABEL = {crea:'Creare',trasforma:'Trasformare',analizza:'Analizzare',pianifica:'Pianificare',struttura:'Strutturare'};
 const ACT_CLASS = {crea:'tag-crea',trasforma:'tag-trasforma',analizza:'tag-analizza',pianifica:'tag-pianifica',struttura:'tag-struttura'};
 
@@ -669,6 +753,12 @@ function makeCard(cmd) {
 
 // Costruisci griglia una sola volta
 document.getElementById('main-grid').innerHTML = CMDS.map(makeCard).join('');
+
+// Aggiorna contatori sidebar
+['all','vis','mkt','scr','str','img'].forEach(cat => {
+  const el = document.getElementById('cnt-' + cat);
+  if (el) el.textContent = cat === 'all' ? CMDS.length : CMDS.filter(c => c.c === cat).length;
+});
 
 // ── FILTRO ─────────────────────────────────────────────────────────────────
 function applyFilters() {
