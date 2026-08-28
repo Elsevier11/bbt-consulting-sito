@@ -210,11 +210,11 @@ Gli angoli sono moderatamente curvi: controlli compatti a 7-8px, schede a 10px e
 
 ### Product Window
 
-La finestra prodotto è il componente firma. Usa cornice fredda, testata browser tenue, tre tab e moduli applicativi compatti. A desktop mostra contemporaneamente le tre aree Fatturato, Produzione e NIS2; su mobile i tab selezionano un pannello alla volta. I dati dimostrativi devono sempre essere dichiarati come esempi.
+La finestra prodotto è il componente firma. Usa cornice fredda, testata browser tenue e moduli applicativi compatti. A desktop tre intestazioni statiche accompagnano la vista simultanea di Fatturato, Produzione e NIS2; su mobile vere tab selezionano un pannello alla volta. Semantica e comportamento devono coincidere. I dati dimostrativi devono sempre essere dichiarati come esempi e distinti dalle funzioni realmente operative.
 
 ### Case Rows
 
-I casi sono righe cliccabili, non collezioni di card promozionali. Categoria, nome, problema e risultato dichiarabile convivono nella stessa griglia; una freccia circolare chiude la riga e il sollevamento in hover segnala l'azione.
+I casi sono righe cliccabili, non collezioni di card promozionali. Categoria, nome, problema e meccanismo dichiarabile convivono nella stessa griglia. Sistema collegato e output operativo forniscono prova non quantitativa; una freccia circolare chiude la riga e il sollevamento in hover segnala l'azione.
 
 ## Do's and Don'ts
 

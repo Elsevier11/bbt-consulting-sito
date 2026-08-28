@@ -28,7 +28,7 @@ related_targets: ["soluzioni/index.html"]
 | --- | --- | --- |
 | Navigazione | Logo a sinistra, tre voci, CTA a destra | HTML/CSS + logo esistente |
 | Hero | Due colonne quasi equivalenti, titolo e CTA a sinistra | HTML/CSS |
-| Finestra operativa | Un unico browser con tre aree: fatturato, produzione, NIS2 | HTML/CSS + SVG semanticamente illustrativo |
+| Finestra operativa | Un unico browser con tre aree simultanee a desktop e vere tab a mobile | HTML/CSS + SVG semanticamente illustrativo |
 | Prove | Tre affermazioni reali in una fascia orizzontale | HTML/CSS |
 | Titoli | Sans geometrico pesante, rapporto circa 2.7:1 rispetto al corpo | Font web Manrope |
 | Controlli | Rettangoli moderatamente arrotondati, blu pieno o bordo blu | HTML/CSS |
@@ -49,11 +49,11 @@ related_targets: ["soluzioni/index.html"]
 
 1. Promessa + dimostrazione delle tre soluzioni.
 2. Tre prove operative verificabili.
-3. Problemi che BBT risolve e deliverable.
-4. Tre casi realizzati, collegati alle pagine di dettaglio.
-5. Metodo in quattro passaggi.
+3. Tre casi realizzati con problema, meccanismo, sistema collegato e output operativo.
+4. CTA contestuale dopo i casi.
+5. Metodo sintetico in quattro passaggi.
 6. Ruolo di unico interlocutore.
-7. CTA con risultato del confronto esplicitato.
+7. CTA finale con risultato del confronto e passaggio a Microsoft Bookings esplicitati.
 
 ## Decisioni aperte
 
