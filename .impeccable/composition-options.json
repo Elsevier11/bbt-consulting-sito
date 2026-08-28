@@ -1,0 +1,45 @@
+{
+  "title": "Scegliamo la composizione della nuova home",
+  "question": "Il linguaggio visivo ora è fisso: chiaro, professionale e prodotto-centrico. Scegli il layout da trasformare in codice.",
+  "followup": false,
+  "options": [
+    {
+      "id": "composition-1",
+      "label": "Prodotto in primo piano",
+      "kicker": "LA TUA SCELTA",
+      "lineage": "consulenza B2B contemporanea",
+      "thesis": "La promessa occupa metà schermo e le tre soluzioni diventano un unico prodotto visibile.",
+      "palette": ["#FFFFFF", "#111827", "#2563EB", "#F3F6FA"],
+      "materials": ["griglia pulita", "interfacce reali", "campi azzurro ghiaccio"],
+      "viewport": "Titolo e azioni a sinistra, grande finestra prodotto con Fatturato, Produzione e NIS2 a destra; prove subito sotto.",
+      "risk": "È la composizione più familiare e meno differenziante.",
+      "comp": ".impeccable/mocks/decision/canon.webp"
+    },
+    {
+      "id": "composition-2",
+      "label": "Problema → soluzione",
+      "lineage": "consulenza B2B contemporanea",
+      "thesis": "Il visitatore si riconosce prima nei problemi e vede immediatamente come BBT li trasforma.",
+      "palette": ["#FFFFFF", "#111827", "#2563EB", "#F3F6FA"],
+      "materials": ["griglia pulita", "interfacce reali", "campi azzurro ghiaccio"],
+      "viewport": "Headline orizzontale in alto; sotto, tre colonne prima/dopo con una schermata reale per ciascuna soluzione e CTA laterale.",
+      "risk": "Tre casi simultanei possono ridurre la forza del messaggio centrale.",
+      "comp": ".impeccable/mocks/home-composition-2.webp"
+    },
+    {
+      "id": "composition-3",
+      "label": "Una storia operativa",
+      "lineage": "consulenza B2B contemporanea",
+      "thesis": "Una sola trasformazione domina il primo viewport; le altre soluzioni proseguono subito sotto.",
+      "palette": ["#FFFFFF", "#111827", "#2563EB", "#F3F6FA"],
+      "materials": ["griglia pulita", "interfacce reali", "campi azzurro ghiaccio"],
+      "viewport": "Headline compatta a sinistra e grande caso Fatturato Monitor a destra; una fascia inferiore anticipa Produzione e NIS2.",
+      "risk": "L'apertura può far sembrare BBT specializzata solo nella reportistica.",
+      "comp": ".impeccable/mocks/home-composition-3.webp"
+    }
+  ],
+  "reroll": false,
+  "buildPath": {"value": "comp", "toggle": false},
+  "canon": false,
+  "steer": false
+}

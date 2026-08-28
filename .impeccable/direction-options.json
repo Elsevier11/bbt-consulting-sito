@@ -1,0 +1,100 @@
+{
+  "title": "Scegliamo il nuovo mondo visivo di BBT",
+  "question": "Tre modi per comunicare concretezza alla direzione di una PMI. Scegli quello che deve guidare la nuova home.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Flusso tracciato",
+      "kicker": "LA PROPOSTA",
+      "lineage": "etichette logistiche, moduli di avanzamento e segnaletica operativa",
+      "thesis": "Ogni problema entra come dato disperso ed esce come processo visibile e controllabile.",
+      "palette": ["#F7F7F2", "#12304A", "#1649E0", "#FF5C21"],
+      "materials": ["carta tecnica bianca", "etichette operative", "linee di avanzamento"],
+      "viewport": "Headline ampia a sinistra; a destra un flusso Gestionale → BBT → Decisione, seguito da tre prove reali in forma di tracciati operativi.",
+      "risk": "Può sembrare freddo se la precisione operativa non viene bilanciata da una voce umana.",
+      "raised": [
+        {"from": "Catalogo primario", "raise": "La gerarchia usa campiture decise, non piccoli accenti decorativi."},
+        {"from": "Quilt di memoria", "raise": "Ogni soluzione conserva una provenienza leggibile: problema, sistema e risultato."},
+        {"from": "Tempesta alfabetica", "raise": "Il messaggio centrale diventa una trasformazione visiva, non un semplice slogan."}
+      ],
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "model-pick",
+      "label": "Sala decisioni",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "report direzionali, pannelli di controllo e riunioni operative del mattino",
+      "thesis": "La home è la schermata con cui una direzione vede subito dove BBT interviene e cosa cambia.",
+      "palette": ["#FFFFFF", "#0B2239", "#2864DC", "#19A974"],
+      "materials": ["pannello smaltato", "report annotati", "grafici essenziali"],
+      "viewport": "Una grande lavagna operativa mostra tre situazioni prima/dopo; promessa e azione restano visibili lungo il margine sinistro.",
+      "risk": "È la soluzione più familiare e può avvicinarsi troppo al linguaggio delle società di consulenza B2B.",
+      "comp": ".impeccable/mocks/decision/model-pick.webp"
+    },
+    {
+      "id": "challenger-catalogue",
+      "label": "Catalogo delle soluzioni",
+      "verdict": "declined",
+      "lineage": "catalogo industriale fitto, codici prodotto e campiture primarie",
+      "thesis": "Ogni soluzione è una scheda immediatamente confrontabile e ordinabile.",
+      "palette": ["#FFFFFF", "#E6322B", "#FFD23F", "#1455D9"],
+      "materials": ["carta da catalogo", "codici articolo", "campiture primarie"],
+      "viewport": "Le tre soluzioni occupano la prima schermata come prodotti pronti da esplorare.",
+      "case": "Chiarisce bene l'offerta, ma rischia di far sembrare BBT un catalogo software anziché un partner su misura.",
+      "risk": "Il tono può risultare commerciale e poco adatto a decisioni aziendali complesse.",
+      "kept": "Densità coraggiosa e soluzioni visibili senza scorrere."
+    },
+    {
+      "id": "challenger-signboard",
+      "label": "Segnaletica verticale",
+      "verdict": "declined",
+      "lineage": "insegne urbane impilate come indice",
+      "thesis": "Ogni piano del sito accende un problema aziendale diverso.",
+      "palette": ["#111111", "#FAFAF7", "#F04A3A", "#275DFF"],
+      "materials": ["pannelli retroilluminati", "segnaletica", "indici verticali"],
+      "viewport": "Servizi impilati come destinazioni, con il problema più urgente in primo piano.",
+      "case": "Forte come navigazione, ma troppo urbana e notturna rispetto alla richiesta di uscire dal dark.",
+      "risk": "Comunica atmosfera prima della competenza.",
+      "kept": "Navigazione che rende visibile la priorità corrente."
+    },
+    {
+      "id": "challenger-quilt",
+      "label": "Mappa delle provenienze",
+      "verdict": "declined",
+      "lineage": "atlante composto da frammenti e cuciture",
+      "thesis": "Dati, persone e sistemi differenti vengono ricuciti in un unico processo.",
+      "palette": ["#E8EDF0", "#234C67", "#BF3B35", "#1F2528"],
+      "materials": ["tele tecniche", "etichette manoscritte", "cuciture visibili"],
+      "viewport": "Tre frammenti operativi si uniscono in una mappa unica del lavoro.",
+      "case": "La metafora dell'integrazione è pertinente, ma il tono artigianale riduce la precisione tecnologica.",
+      "risk": "Può apparire decorativo o emotivo.",
+      "kept": "Provenienza dei dati sempre esplicita."
+    },
+    {
+      "id": "challenger-alphabet",
+      "label": "Trasformazione visibile",
+      "verdict": "declined",
+      "lineage": "tipografia cinetica come materia",
+      "thesis": "Le parole Excel, carta e ritardi si trasformano davanti al visitatore in dati, flusso e controllo.",
+      "palette": ["#FAFAFA", "#101820", "#9BA7B0", "#1E5BFF"],
+      "materials": ["campo tipografico", "inchiostro digitale", "tracce di trasformazione"],
+      "viewport": "Una frase monumentale cambia forma per dimostrare il prima e il dopo.",
+      "case": "Memorabile, ma il meccanismo tipografico può oscurare le prove reali.",
+      "risk": "Sembra una campagna creativa più che una consulenza operativa.",
+      "kept": "Il primo viewport deve dimostrare una trasformazione."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "comp", "toggle": true},
+  "canon": true,
+  "canonCard": {
+    "label": "Consulenza B2B classica",
+    "thesis": "Una landing chiara e convenzionale con hero, servizi, casi e contatto.",
+    "palette": ["#FFFFFF", "#111827", "#2563EB"],
+    "materials": ["griglia pulita", "card neutre", "screenshot prodotto"],
+    "viewport": "Titolo e CTA a sinistra, screenshot delle soluzioni a destra.",
+    "risk": "Facile da capire, ma indistinguibile da molti concorrenti.",
+    "comp": ".impeccable/mocks/decision/canon.webp"
+  },
+  "steer": true
+}

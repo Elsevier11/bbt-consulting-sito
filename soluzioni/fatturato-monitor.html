@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fatturato Monitor | Soluzioni BBT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#0f1117;--bg2:#151825;--bg3:#1a2035;
@@ -193,6 +196,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
   .d-adds{grid-template-columns:repeat(3,1fr)}
   footer{flex-direction:column;gap:8px;text-align:center}
 }
+:root{--bg:#fff;--bg2:#fff;--bg3:#f3f6fa;--border:#dbe2ec;--border2:#b9c5d5;--accent:#2563eb;--teal:#2563eb;--text:#111827;--text2:#536074;--text3:#788598;--font:Manrope,sans-serif;--red-d:#fff5f5;--red-b:#f2c5ca}
+.nav{background:rgba(255,255,255,.96);backdrop-filter:none}.hero h1{background:none!important;-webkit-background-clip:initial!important;-webkit-text-fill-color:currentColor!important;color:var(--text)!important}.hero h1 em,.cta,.feat-num{background:var(--accent)!important;background-image:none!important}.lbl,.pain-icon{display:none!important}.pain-grid,.feat-grid,.kpi-grid{display:grid;grid-template-columns:1fr!important;gap:0}.pain-card,.feat,.kpi{padding:22px 0!important;border:0!important;border-bottom:1px solid var(--border)!important;border-radius:0!important;background:transparent!important}.pain-title,.feat-title{font-size:18px}.pain-body,.feat-body{max-width:72ch}.kpi{display:grid;grid-template-columns:160px 1fr;align-items:center}.kpi-n{font-size:28px!important}.demo-note{margin:0 0 18px;color:var(--text2);font-size:13px;font-weight:600}.d-fill-ok,.d-fill-w{background:var(--accent)!important;background-image:none!important}.hero h1 em{background:none!important;color:var(--accent)!important;-webkit-text-fill-color:var(--accent)!important}
+::selection{background:#cfe0ff;color:#111827}*:focus-visible{outline:3px solid #2563eb;outline-offset:3px}html{scrollbar-color:#9fb4d8 #f3f6fa;scrollbar-width:thin}::-webkit-scrollbar{width:11px}::-webkit-scrollbar-track{background:#f3f6fa}::-webkit-scrollbar-thumb{background:#9fb4d8;border:3px solid #f3f6fa;border-radius:99px}
 </style>
 </head>
 <body>
@@ -232,11 +238,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── PROBLEMA ── -->
 <section class="sec alt">
   <div class="container">
-    <div class="lbl">Il problema</div>
-    <h2 class="h2">Ogni mattina, 20 minuti per rispondere<br>a una domanda semplice</h2>
+    <h2 class="h2">Cinque sezioni da consultare<br>per rispondere a una domanda semplice</h2>
     <div class="pain-grid">
       <div class="pain-card">
-        <div class="pain-icon">⏱</div>
         <div class="pain-title">Il rito quotidiano</div>
         <div class="pain-body">
           Aprire il gestionale, navigare tra fatture emesse, contratti aperti,
@@ -245,7 +249,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         </div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">📊</div>
         <div class="pain-title">Nessuna visione integrata</div>
         <div class="pain-body">
           I numeri esistevano, ma dispersi in sezioni diverse e non comparabili
@@ -253,7 +256,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         </div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">⚡</div>
         <div class="pain-title">Reazione sempre in ritardo</div>
         <div class="pain-body">
           Quando il dato era finalmente pronto, il mese era già per metà consumato.
@@ -267,7 +269,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── SOLUZIONE ── -->
 <section class="sec">
   <div class="container">
-    <div class="lbl">La soluzione</div>
     <h2 class="h2">Un monitor live che aggrega tutto in automatico</h2>
     <div class="feat-grid">
       <div class="feat">
@@ -278,7 +279,7 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
       <div class="feat">
         <div class="feat-num">vs</div>
         <div class="feat-title">Budget sempre visibile</div>
-        <div class="feat-body">La proiezione è confrontata istantaneamente con il budget mensile. Scarto percentuale e barra colorata: verde, giallo, rosso.</div>
+        <div class="feat-body">La proiezione viene confrontata con il budget mensile. Scarto percentuale e stato rendono subito leggibile l'andamento.</div>
       </div>
       <div class="feat">
         <div class="feat-num">YTD</div>
@@ -286,9 +287,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         <div class="feat-body">Fatturato reale accumulato mese per mese più proiezione del mese corrente. Budget YTD a confronto, sempre allineato.</div>
       </div>
       <div class="feat">
-        <div class="feat-num">0</div>
-        <div class="feat-title">Zero installazione</div>
-        <div class="feat-body">Si apre nel browser. Nessun software da installare, nessun export manuale. Dati direttamente dal gestionale, in tempo reale.</div>
+        <div class="feat-num">WEB</div>
+        <div class="feat-title">Accesso da browser</div>
+        <div class="feat-body">La soluzione è consultabile da browser e riceve i dati dal gestionale senza richiedere esportazioni manuali.</div>
       </div>
     </div>
   </div>
@@ -297,9 +298,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── COME APPARE ── -->
 <section class="sec alt" style="padding-bottom:88px">
   <div class="container">
-    <div class="lbl">Come appare</div>
     <h2 class="h2" style="margin-bottom:32px">La dashboard in un colpo d'occhio</h2>
 
+    <p class="demo-note">Interfaccia dimostrativa · valori non riferiti a clienti.</p>
     <div class="browser">
       <div class="browser-bar">
         <div class="dots">
@@ -411,24 +412,23 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── RISULTATI ── -->
 <section class="sec">
   <div class="container">
-    <div class="lbl">I risultati</div>
-    <h2 class="h2">Numeri che parlano chiaro</h2>
+    <h2 class="h2">Cosa rende disponibile lo strumento</h2>
     <div class="kpi-grid">
       <div class="kpi">
-        <div class="kpi-n">0"</div>
-        <div class="kpi-l">Tempo per avere<br>la fotografia del mese</div>
+        <div class="kpi-n">Vista unica</div>
+        <div class="kpi-l">Proiezione del mese consultabile senza ricostruzioni manuali</div>
       </div>
       <div class="kpi">
         <div class="kpi-n">5→1</div>
         <div class="kpi-l">Sorgenti di dato<br>unificate in una vista</div>
       </div>
       <div class="kpi">
-        <div class="kpi-n">live</div>
-        <div class="kpi-l">Aggiornamento continuo<br>dal gestionale</div>
+        <div class="kpi-n">Budget</div>
+        <div class="kpi-l">Confronto tra proiezione e obiettivo mensile</div>
       </div>
       <div class="kpi">
-        <div class="kpi-n">∞</div>
-        <div class="kpi-l">Utenti che possono<br>accedervi in parallelo</div>
+        <div class="kpi-n">Browser</div>
+        <div class="kpi-l">Consultazione tramite applicazione web</div>
       </div>
     </div>
   </div>

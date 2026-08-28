@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIS2 Compliance Platform | Soluzioni BBT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#0f1117;--bg2:#151825;--bg3:#1a2035;
@@ -205,6 +208,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
   .nis-sidebar{display:none}
   footer{flex-direction:column;gap:8px;text-align:center}
 }
+:root{--bg:#fff;--bg2:#fff;--bg3:#f3f6fa;--border:#dbe2ec;--border2:#b9c5d5;--accent:#2563eb;--teal:#2563eb;--text:#111827;--text2:#536074;--text3:#788598;--font:Manrope,sans-serif;--red-d:#fff5f5;--red-b:#f2c5ca}
+.nav{background:rgba(255,255,255,.96);backdrop-filter:none}.hero h1{background:none!important;-webkit-background-clip:initial!important;-webkit-text-fill-color:currentColor!important;color:var(--text)!important}.hero h1 em,.cta,.feat-num,.nis-sb-pct-fill{background:var(--accent)!important;background-image:none!important}.lbl,.pain-icon{display:none!important}.pain-grid,.feat-grid,.kpi-grid{display:grid;grid-template-columns:1fr!important;gap:0}.pain-card,.feat,.kpi{padding:22px 0!important;border:0!important;border-bottom:1px solid var(--border)!important;border-radius:0!important;background:transparent!important}.pain-title,.feat-title{font-size:18px}.pain-body,.feat-body{max-width:72ch}.kpi{display:grid;grid-template-columns:160px 1fr;align-items:center}.kpi-n{font-size:28px!important}.demo-note{margin:0 0 18px;color:var(--text2);font-size:13px;font-weight:600}.hero h1 em{background:none!important;color:var(--accent)!important;-webkit-text-fill-color:var(--accent)!important}
+::selection{background:#cfe0ff;color:#111827}*:focus-visible{outline:3px solid #2563eb;outline-offset:3px}html{scrollbar-color:#9fb4d8 #f3f6fa;scrollbar-width:thin}::-webkit-scrollbar{width:11px}::-webkit-scrollbar-track{background:#f3f6fa}::-webkit-scrollbar-thumb{background:#9fb4d8;border:3px solid #f3f6fa;border-radius:99px}
 </style>
 </head>
 <body>
@@ -245,11 +251,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── PROBLEMA ── -->
 <section class="sec alt">
   <div class="container">
-    <div class="lbl">Il problema</div>
     <h2 class="h2">87 o 116 requisiti NIS2 da gestire.<br>Con un foglio Excel condiviso.</h2>
     <div class="pain-grid">
       <div class="pain-card">
-        <div class="pain-icon">📋</div>
         <div class="pain-title">L'assessment vive in un Excel che nessuno controlla davvero</div>
         <div class="pain-body">
           Chi ha modificato cosa? Chi è responsabile di quel requisito? Quando è stata
@@ -258,7 +262,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         </div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">🚨</div>
         <div class="pain-title">I gap emergono solo quando arriva l'auditor</div>
         <div class="pain-body">
           Senza una vista aggregata per dominio, i requisiti critici restano nascosti
@@ -267,7 +270,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         </div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">📁</div>
         <div class="pain-title">"Esiste la policy, ma non so dove sia né se sia aggiornata"</div>
         <div class="pain-body">
           Policy, procedure e verbali CdA giacciono in cartelle di rete, senza collegamento
@@ -282,7 +284,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── SOLUZIONE ── -->
 <section class="sec">
   <div class="container">
-    <div class="lbl">La soluzione</div>
     <h2 class="h2">Una piattaforma che struttura l'intero percorso di conformità</h2>
     <div class="feat-grid">
       <div class="feat">
@@ -312,9 +313,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── COME APPARE ── -->
 <section class="sec alt" style="padding-bottom:88px">
   <div class="container">
-    <div class="lbl">Come appare</div>
     <h2 class="h2" style="margin-bottom:32px">La dashboard di conformità in un colpo d'occhio</h2>
 
+    <p class="demo-note">Interfaccia dimostrativa · organizzazioni, stati e scadenze non riferiti a clienti.</p>
     <div class="browser">
       <div class="browser-bar">
         <div class="dots">
@@ -410,18 +411,7 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
             <div class="nis-gauge-row">
               <div class="nis-gauge-card">
                 <div class="nis-gauge-title">Conformità globale</div>
-                <svg width="90" height="50" viewBox="0 0 90 50">
-                  <path d="M10 45 A35 35 0 0 1 80 45" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>
-                  <path d="M10 45 A35 35 0 0 1 80 45" fill="none" stroke="url(#gGrad)" stroke-width="6" stroke-linecap="round"
-                        stroke-dasharray="110" stroke-dashoffset="40"/>
-                  <defs>
-                    <linearGradient id="gGrad" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stop-color="#0ea5e9"/>
-                      <stop offset="100%" stop-color="#34d399"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div class="nis-gauge-pct">63%</div>
+                <div class="nis-gauge-pct">74 / 116</div>
                 <div class="nis-gauge-sub">74 / 116 requisiti · essenziale</div>
               </div>
 
@@ -491,24 +481,23 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── RISULTATI ── -->
 <section class="sec">
   <div class="container">
-    <div class="lbl">I risultati</div>
-    <h2 class="h2">Numeri che parlano chiaro</h2>
+    <h2 class="h2">Cosa rende disponibile la piattaforma</h2>
     <div class="kpi-grid">
       <div class="kpi">
         <div class="kpi-n">87/116</div>
         <div class="kpi-l">Requisiti per soggetti importanti<br>ed essenziali (Determ. ACN 379907/2025)</div>
       </div>
       <div class="kpi">
-        <div class="kpi-n">N</div>
-        <div class="kpi-l">Clienti/organizzazioni<br>gestibili in parallelo</div>
+        <div class="kpi-n">Multi-org</div>
+        <div class="kpi-l">Organizzazioni separate nello stesso ambiente applicativo</div>
       </div>
       <div class="kpi">
-        <div class="kpi-n">1"</div>
-        <div class="kpi-l">Per generare report<br>tecnico o executive PDF</div>
+        <div class="kpi-n">Report</div>
+        <div class="kpi-l">Esportazione PDF tecnica ed executive</div>
       </div>
       <div class="kpi">
-        <div class="kpi-n">0</div>
-        <div class="kpi-l">Dipendenze esterne:<br>self-hosted, dati interni</div>
+        <div class="kpi-n">Self-hosted</div>
+        <div class="kpi-l">Dati mantenuti nell'infrastruttura prevista dal progetto</div>
       </div>
     </div>
   </div>

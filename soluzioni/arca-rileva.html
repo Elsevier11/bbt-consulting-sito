@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ArcaConnect MES | Soluzioni BBT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#0f1117;--bg2:#151825;--bg3:#1a2035;
@@ -237,6 +240,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
   .mes-erp{width:100%;flex-direction:row;flex-wrap:wrap;gap:4px}
   footer{flex-direction:column;gap:8px;text-align:center}
 }
+:root{--bg:#fff;--bg2:#fff;--bg3:#f3f6fa;--border:#dbe2ec;--border2:#b9c5d5;--accent:#2563eb;--teal:#2563eb;--text:#111827;--text2:#536074;--text3:#788598;--font:Manrope,sans-serif;--red-d:#fff5f5;--red-b:#f2c5ca}
+.nav{background:rgba(255,255,255,.96);backdrop-filter:none}.hero h1{background:none!important;-webkit-background-clip:initial!important;-webkit-text-fill-color:currentColor!important;color:var(--text)!important}.hero h1 em,.cta,.feat-num,.mes-bar-fill{background:var(--accent)!important;background-image:none!important}.lbl,.pain-icon{display:none!important}.pain-grid,.feat-grid,.kpi-grid{display:grid;grid-template-columns:1fr!important;gap:0}.pain-card,.feat,.kpi{padding:22px 0!important;border:0!important;border-bottom:1px solid var(--border)!important;border-radius:0!important;background:transparent!important}.pain-title,.feat-title{font-size:18px}.pain-body,.feat-body{max-width:72ch}.kpi{display:grid;grid-template-columns:160px 1fr;align-items:center}.kpi-n{font-size:28px!important}.demo-note{margin:0 0 18px;color:var(--text2);font-size:13px;font-weight:600}.hero h1 em{background:none!important;color:var(--accent)!important;-webkit-text-fill-color:var(--accent)!important}
+::selection{background:#cfe0ff;color:#111827}*:focus-visible{outline:3px solid #2563eb;outline-offset:3px}html{scrollbar-color:#9fb4d8 #f3f6fa;scrollbar-width:thin}::-webkit-scrollbar{width:11px}::-webkit-scrollbar-track{background:#f3f6fa}::-webkit-scrollbar-thumb{background:#9fb4d8;border:3px solid #f3f6fa;border-radius:99px}
 </style>
 </head>
 <body>
@@ -259,11 +265,11 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
     <span class="tag">Arca Evolution</span>
     <span class="tag">ERP Integration</span>
   </div>
-  <h1>Dal barcode all'ERP.<br><em>Zero carta, zero ritardi.</em></h1>
+  <h1>Dal barcode all'ERP.<br><em>Dati di produzione senza ricopiature.</em></h1>
   <p class="hero-sub">
     Il terminale MES che guida l'operatore di reparto dal riconoscimento badge
     alla creazione automatica del documento CP in Arca Evolution.
-    Tempi tracciati al secondo, consuntivo inviato senza digitare nulla.
+    Tempi e avanzamenti tracciati, consuntivo inviato senza doppia digitazione.
   </p>
   <div class="hero-meta">
     <div class="hm"><strong>Settore</strong>Manifattura</div>
@@ -276,11 +282,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── PROBLEMA ── -->
 <section class="sec alt">
   <div class="container">
-    <div class="lbl">Il problema</div>
-    <h2 class="h2">La scheda di produzione:<br>carta, penna, ritardo garantito</h2>
+    <h2 class="h2">La scheda di produzione:<br>carta, penna e dati disponibili in ritardo</h2>
     <div class="pain-grid">
       <div class="pain-card">
-        <div class="pain-icon">📋</div>
         <div class="pain-title">La scheda cartacea</div>
         <div class="pain-body">
           L'operatore scrive a mano orario di inizio, fine, pezzi prodotti e scarti.
@@ -289,7 +293,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         </div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">⏱</div>
         <div class="pain-title">Tempi invisibili</div>
         <div class="pain-body">
           Il responsabile non sa quando una fase è iniziata né quanto ha impiegato.
@@ -298,7 +301,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
         </div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">⌨️</div>
         <div class="pain-title">Doppia digitazione nell'ERP</div>
         <div class="pain-body">
           L'addetto ufficio riscrive ogni giorno i dati di produzione in Arca Evolution.
@@ -313,7 +315,6 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── SOLUZIONE ── -->
 <section class="sec">
   <div class="container">
-    <div class="lbl">La soluzione</div>
     <h2 class="h2">Un flusso guidato: badge, barcode,<br>timer, consuntivo — tutto automatico</h2>
     <div class="feat-grid">
       <div class="feat">
@@ -324,7 +325,7 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
       <div class="feat">
         <div class="feat-num">▶ ⏸</div>
         <div class="feat-title">Timer attrezzaggio e lavorazione</div>
-        <div class="feat-body">Cronometri separati per setup e machining. Sospensione con motivazione, ripresa con un tocco. Ogni evento registrato con timestamp preciso al secondo.</div>
+        <div class="feat-body">Cronometri separati per attrezzaggio e lavorazione. Sospensione con motivazione e ripresa guidata; ogni evento resta registrato.</div>
       </div>
       <div class="feat">
         <div class="feat-num">CP</div>
@@ -343,9 +344,9 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── COME APPARE ── -->
 <section class="sec alt" style="padding-bottom:88px">
   <div class="container">
-    <div class="lbl">Come appare</div>
     <h2 class="h2" style="margin-bottom:32px">Il terminale MES in reparto</h2>
 
+    <p class="demo-note">Interfaccia dimostrativa · ordini, operatori e tempi non riferiti a clienti.</p>
     <div class="browser">
       <div class="browser-bar">
         <div class="dots">
@@ -488,20 +489,19 @@ footer{border-top:1px solid var(--border);padding:22px 48px;
 <!-- ── RISULTATI ── -->
 <section class="sec">
   <div class="container">
-    <div class="lbl">I risultati</div>
-    <h2 class="h2">Numeri che parlano chiaro</h2>
+    <h2 class="h2">Cosa rende disponibile lo strumento</h2>
     <div class="kpi-grid">
       <div class="kpi">
-        <div class="kpi-n">0"</div>
-        <div class="kpi-l">Tempo di trascrizione<br>manuale dei dati produzione</div>
+        <div class="kpi-n">ERP</div>
+        <div class="kpi-l">Dati di produzione trasferiti ad Arca Evolution senza ricopiatura</div>
       </div>
       <div class="kpi">
         <div class="kpi-n">4</div>
         <div class="kpi-l">Step guidati: badge<br>→ barcode → timer → CP</div>
       </div>
       <div class="kpi">
-        <div class="kpi-n">live</div>
-        <div class="kpi-l">Sincronizzazione con<br>Arca Evolution in tempo reale</div>
+        <div class="kpi-n">Eventi</div>
+        <div class="kpi-l">Attrezzaggio, lavorazione e sospensioni registrati</div>
       </div>
       <div class="kpi">
         <div class="kpi-n">CP</div>

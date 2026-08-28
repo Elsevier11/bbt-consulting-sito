@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-29T00:04:54.9972338+02:00",
+  "title": "Design System: BBT Consulting",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Inchiostro direzionale",
+        "canonical": "#111827",
+        "tonalRamp": ["oklch(15% 0.025 264)", "oklch(26% 0.025 264)", "oklch(38% 0.022 264)", "oklch(50% 0.019 264)", "oklch(62% 0.016 264)", "oklch(74% 0.013 264)", "oklch(86% 0.009 264)", "oklch(95% 0.005 264)"]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Ardesia descrittiva",
+        "canonical": "#536074",
+        "tonalRamp": ["oklch(15% 0.025 256)", "oklch(27% 0.024 256)", "oklch(39% 0.022 256)", "oklch(51% 0.020 256)", "oklch(63% 0.017 256)", "oklch(75% 0.014 256)", "oklch(87% 0.009 256)", "oklch(95% 0.005 256)"]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Blu operativo",
+        "canonical": "#2563EB",
+        "tonalRamp": ["oklch(15% 0.10 260)", "oklch(27% 0.14 260)", "oklch(39% 0.18 260)", "oklch(51% 0.21 260)", "oklch(63% 0.18 260)", "oklch(75% 0.13 260)", "oklch(87% 0.07 260)", "oklch(95% 0.025 260)"]
+      },
+      "primary-deep": {
+        "role": "primary",
+        "displayName": "Blu operativo profondo",
+        "canonical": "#1749B8",
+        "tonalRamp": ["oklch(15% 0.09 260)", "oklch(27% 0.13 260)", "oklch(39% 0.17 260)", "oklch(51% 0.19 260)", "oklch(63% 0.16 260)", "oklch(75% 0.11 260)", "oklch(87% 0.06 260)", "oklch(95% 0.02 260)"]
+      },
+      "surface-soft": {
+        "role": "neutral",
+        "displayName": "Nebbia fredda",
+        "canonical": "#F3F6FA",
+        "tonalRamp": ["oklch(15% 0.008 250)", "oklch(27% 0.008 250)", "oklch(39% 0.008 250)", "oklch(51% 0.008 250)", "oklch(63% 0.007 250)", "oklch(75% 0.006 250)", "oklch(87% 0.005 250)", "oklch(95% 0.004 250)"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Linea fredda",
+        "canonical": "#DBE2EC",
+        "tonalRamp": ["oklch(15% 0.012 252)", "oklch(27% 0.012 252)", "oklch(39% 0.011 252)", "oklch(51% 0.010 252)", "oklch(63% 0.009 252)", "oklch(75% 0.008 252)", "oklch(87% 0.006 252)", "oklch(95% 0.003 252)"]
+      },
+      "status-success": {
+        "role": "tertiary",
+        "displayName": "Verde di conferma",
+        "canonical": "#168A55",
+        "tonalRamp": ["oklch(15% 0.055 158)", "oklch(27% 0.085 158)", "oklch(39% 0.11 158)", "oklch(51% 0.13 158)", "oklch(63% 0.11 158)", "oklch(75% 0.08 158)", "oklch(87% 0.045 158)", "oklch(95% 0.018 158)"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Carta bianca",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(100% 0 0)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Display", "purpose": "Promessa principale della home."},
+      "headline": {"displayName": "Headline", "purpose": "Aperture di sezione compatte e autorevoli."},
+      "title": {"displayName": "Title", "purpose": "Nomi di casi e blocchi principali."},
+      "body": {"displayName": "Body", "purpose": "Spiegazioni e testi editoriali leggibili."},
+      "label": {"displayName": "Label", "purpose": "Categorie, metadati e stati sintetici."}
+    },
+    "shadows": [
+      {"name": "product-window", "value": "0 18px 48px rgba(17,24,39,.1)", "purpose": "Ombra ambientale persistente della finestra operativa."},
+      {"name": "button-hover", "value": "0 10px 24px rgba(37,99,235,.18)", "purpose": "Conferma interattiva del pulsante primario."},
+      {"name": "case-hover", "value": "0 14px 32px rgba(17,24,39,.07)", "purpose": "Sollevamento leggero delle righe caso cliccabili."},
+      {"name": "mobile-navigation", "value": "0 18px 30px rgba(17,24,39,.08)", "purpose": "Separazione del pannello di navigazione mobile dal contenuto."}
+    ],
+    "motion": [
+      {"name": "ease-operational", "value": "cubic-bezier(.22,1,.36,1)", "purpose": "Easing predefinito per stati e piccoli sollevamenti."},
+      {"name": "state-fast", "value": "200ms", "purpose": "Hover e transizioni dei controlli."},
+      {"name": "panel-in", "value": "380ms", "purpose": "Ingresso verticale attenuato dei pannelli prodotto su mobile."}
+    ],
+    "breakpoints": [
+      {"name": "compact", "value": "430px"},
+      {"name": "mobile", "value": "760px"},
+      {"name": "stacked-hero", "value": "1020px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Azione principale per esplorare soluzioni o avviare un confronto.",
+      "html": "<button class=\"ds-btn-primary\">VALUTIAMO IL TUO PROCESSO <span aria-hidden=\"true\">→</span></button>",
+      "css": ".ds-btn-primary{display:inline-flex;min-height:48px;align-items:center;justify-content:center;gap:10px;padding:12px 19px;border:1px solid var(--blue,#2563eb);border-radius:7px;background:var(--blue,#2563eb);color:#fff;font:700 14px/1.4 Manrope,sans-serif;cursor:pointer;transition:background .2s cubic-bezier(.22,1,.36,1),transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s cubic-bezier(.22,1,.36,1)}.ds-btn-primary:hover{background:var(--blue-dark,#1749b8);transform:translateY(-2px);box-shadow:0 10px 24px rgba(37,99,235,.18)}.ds-btn-primary:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:4px}.ds-btn-primary:active{transform:translateY(0)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Azione secondaria affiancata alla CTA primaria.",
+      "html": "<button class=\"ds-btn-secondary\">PRENOTA UN CONFRONTO</button>",
+      "css": ".ds-btn-secondary{display:inline-flex;min-height:48px;align-items:center;justify-content:center;padding:12px 19px;border:1px solid var(--blue,#2563eb);border-radius:7px;background:transparent;color:var(--blue,#2563eb);font:700 14px/1.4 Manrope,sans-serif;cursor:pointer;transition:background .2s cubic-bezier(.22,1,.36,1),transform .2s cubic-bezier(.22,1,.36,1)}.ds-btn-secondary:hover{background:#eef4ff;transform:translateY(-2px)}.ds-btn-secondary:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:4px}.ds-btn-secondary:active{transform:translateY(0)}"
+    },
+    {
+      "name": "Top Navigation",
+      "kind": "nav",
+      "description": "Navigazione sticky sobria con logo, tre ancore e CTA operativa.",
+      "html": "<nav class=\"ds-nav\"><strong class=\"ds-nav-brand\">BBT Consulting</strong><div class=\"ds-nav-links\"><a href=\"#\">Soluzioni</a><a href=\"#\">Metodo</a><a href=\"#\">Chi siamo</a><a class=\"ds-nav-cta\" href=\"#\">Parliamone</a></div></nav>",
+      "css": ".ds-nav{height:78px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-bottom:1px solid var(--line,#dbe2ec);background:rgba(255,255,255,.96);color:var(--ink,#111827);font-family:Manrope,sans-serif}.ds-nav-brand{font-size:16px}.ds-nav-links{display:flex;align-items:center;gap:28px}.ds-nav a{color:#243147;font-size:14px;font-weight:600;text-decoration:none}.ds-nav a:hover{color:var(--blue,#2563eb)}.ds-nav a:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:4px}.ds-nav .ds-nav-cta{padding:10px 16px;border-radius:7px;background:var(--blue,#2563eb);color:#fff}.ds-nav .ds-nav-cta:hover{background:var(--blue-dark,#1749b8);color:#fff}"
+    },
+    {
+      "name": "Solution Tab",
+      "kind": "custom",
+      "description": "Selettore compatto delle tre dimostrazioni operative.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">Fatturato</button><button role=\"tab\">Produzione</button><button role=\"tab\">NIS2</button></div>",
+      "css": ".ds-tabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line,#dbe2ec);border-radius:8px 8px 0 0;overflow:hidden;font-family:Manrope,sans-serif}.ds-tabs button{padding:15px 8px;border:0;border-right:1px solid var(--line,#dbe2ec);background:#fff;color:#4f5d71;font-weight:700;cursor:pointer}.ds-tabs button:last-child{border-right:0}.ds-tabs button:hover{background:#f3f6fa;color:var(--blue,#2563eb)}.ds-tabs button[aria-selected=true]{color:var(--blue,#2563eb);box-shadow:inset 0 -3px 0 var(--blue,#2563eb);background:#fbfdff}.ds-tabs button:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:-4px}"
+    },
+    {
+      "name": "Case Card",
+      "kind": "card",
+      "refersTo": "case-card",
+      "description": "Riga cliccabile che mette insieme categoria, problema e risultato dichiarabile.",
+      "html": "<a class=\"ds-case\" href=\"#\"><div><span class=\"ds-case-type\">PRODUZIONE</span><h3>ArcaConnect MES</h3></div><p>Carta e ricopiature rallentano il consuntivo.</p><strong>Dati trasferiti ad Arca Evolution</strong><span class=\"ds-case-arrow\" aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-case{display:grid;grid-template-columns:.8fr 1.2fr 1fr auto;gap:24px;align-items:center;padding:28px;border:1px solid var(--line,#dbe2ec);border-radius:10px;background:#fff;color:var(--ink,#111827);font-family:Manrope,sans-serif;text-decoration:none;transition:border-color .2s cubic-bezier(.22,1,.36,1),transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s cubic-bezier(.22,1,.36,1)}.ds-case:hover{border-color:#a9bce0;transform:translateY(-3px);box-shadow:0 14px 32px rgba(17,24,39,.07)}.ds-case:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:4px}.ds-case h3,.ds-case p{margin:4px 0 0}.ds-case p{color:var(--muted,#536074)}.ds-case-type{color:var(--blue,#2563eb);font-size:12px;font-weight:800;letter-spacing:.08em}.ds-case-arrow{width:42px;height:42px;display:grid;place-items:center;border:1px solid #b8caf0;border-radius:50%;color:var(--blue,#2563eb)}"
+    },
+    {
+      "name": "Product Window",
+      "kind": "custom",
+      "refersTo": "product-window",
+      "description": "Componente firma che rende visibili processi e interfacce reali.",
+      "html": "<section class=\"ds-window\"><div class=\"ds-window-top\"><i></i><i></i><i></i><span></span></div><div class=\"ds-window-tabs\"><b>Fatturato</b><b>Produzione</b><b>NIS2</b></div><div class=\"ds-window-body\"><small>DATI DIMOSTRATIVI</small><h3>Tre processi, una vista operativa</h3><div class=\"ds-progress\"><span></span></div></div></section>",
+      "css": ".ds-window{overflow:hidden;border:1px solid #cfd8e6;border-radius:13px;background:#fff;color:var(--ink,#111827);box-shadow:0 18px 48px rgba(17,24,39,.1);font-family:Manrope,sans-serif}.ds-window-top{height:45px;display:flex;align-items:center;gap:7px;padding:0 15px;background:var(--soft,#f3f6fa);border-bottom:1px solid var(--line,#dbe2ec)}.ds-window-top i{width:9px;height:9px;border-radius:50%;background:#cbd4e1}.ds-window-top span{width:46%;height:10px;margin-left:9px;border-radius:999px;background:#e1e7ef}.ds-window-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line,#dbe2ec)}.ds-window-tabs b{padding:14px 8px;text-align:center;border-right:1px solid var(--line,#dbe2ec);font-size:13px}.ds-window-tabs b:last-child{border-right:0}.ds-window-body{padding:24px;background:#fbfcfe}.ds-window-body small{color:#6c788a;font-weight:700;letter-spacing:.1em}.ds-window-body h3{margin:18px 0}.ds-progress{height:8px;overflow:hidden;border-radius:999px;background:#e7edf5}.ds-progress span{display:block;width:68%;height:100%;background:var(--blue,#2563eb)}"
+    },
+    {
+      "name": "Solution Tag",
+      "kind": "chip",
+      "description": "Etichetta di dominio o tecnologia usata nelle pagine soluzione.",
+      "html": "<span class=\"ds-tag\">BUSINESS INTELLIGENCE</span> <span class=\"ds-tag ds-tag-active\">FINANZA</span>",
+      "css": ".ds-tag{display:inline-flex;padding:4px 13px;border:1px solid #b9c5d5;border-radius:999px;background:#fff;color:var(--muted,#536074);font:600 11px/1.4 Manrope,sans-serif;letter-spacing:.08em}.ds-tag-active{border-color:#b8caf0;background:#eef4ff;color:var(--blue,#2563eb)}.ds-tag:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:3px}"
+    },
+    {
+      "name": "Operational CTA",
+      "kind": "custom",
+      "description": "Blocco conclusivo blu che esplicita l'esito del primo confronto.",
+      "html": "<section class=\"ds-cta\"><div><h2>Partiamo da un processo concreto.</h2><p>In 30 minuti capiamo dati, passaggi manuali e priorità operative.</p></div><button>PRENOTA UN CONFRONTO</button></section>",
+      "css": ".ds-cta{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end;padding:64px;border-radius:12px;background:var(--blue,#2563eb);color:#fff;font-family:Manrope,sans-serif}.ds-cta h2{max-width:13ch;margin:0;font-size:42px;line-height:1.02;letter-spacing:-.04em}.ds-cta p{max-width:58ch;margin:18px 0 0;color:#e4ecff}.ds-cta button{min-height:48px;padding:12px 19px;border:1px solid #fff;border-radius:7px;background:#fff;color:var(--blue,#2563eb);font-weight:700;cursor:pointer;transition:background .2s,transform .2s}.ds-cta button:hover{background:#eef4ff;transform:translateY(-2px)}.ds-cta button:focus-visible{outline:3px solid rgba(255,255,255,.7);outline-offset:4px}.ds-cta button:active{transform:translateY(0)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Finestra Operativa",
+    "overview": "Il sistema presenta BBT come un interlocutore B2B concreto: luminoso, ordinato e vicino al linguaggio visivo degli strumenti che la direzione usa ogni giorno. La metafora guida è una finestra operativa aperta sui processi aziendali: ogni superficie deve far capire cosa si controlla, quale passaggio viene semplificato e dove si trova il valore.\n\nLa densità è misurata. Ampi margini e titoli netti danno autorevolezza; linee fredde, tabelle, stati e piccoli pannelli portano la concretezza del prodotto. La tecnologia rimane visibile nei meccanismi, non diventa decorazione. Sono esclusi tono dark, gradienti, glassmorphism, glow, immagini stock e metafore visive sull'intelligenza artificiale.",
+    "keyCharacteristics": [
+      "B2B luminoso, ordinato e rassicurante.",
+      "Prodotto e processi reali prima della decorazione.",
+      "Gerarchia tipografica decisa con un'unica famiglia sans serif.",
+      "Blu usato per azioni, selezioni e avanzamento; verde riservato agli stati positivi.",
+      "Superfici quasi piatte, separate da linee sottili e ombre rare."
+    ],
+    "rules": [
+      {"name": "The One Operational Blue Rule", "body": "Il blu è l'unico accento di marca: non introdurre colori diversi per distinguere servizi o pagine.", "section": "colors"},
+      {"name": "The Status Is Evidence Rule", "body": "Il verde compare solo quando comunica uno stato positivo reale dell'interfaccia, mai come riempitivo decorativo.", "section": "colors"},
+      {"name": "The One Voice Rule", "body": "Tutta la comunicazione pubblica usa Manrope; la differenza tra marketing e prodotto nasce dalla gerarchia, non dal cambio di font.", "section": "typography"},
+      {"name": "The Short Headline Rule", "body": "I titoli principali restano brevi, compatti e leggibili in due o tre righe; non ridurre la scala per contenere testi prolissi.", "section": "typography"},
+      {"name": "The Show, Then Explain Rule", "body": "Nella prima schermata testo e dimostrazione operativa hanno lo stesso peso: non sostituire la finestra prodotto con fotografia, illustrazione astratta o solo testo.", "section": "layout"},
+      {"name": "The Flat-by-Default Rule", "body": "Le superfici a riposo sono piatte; l'ombra permanente è riservata alla finestra operativa che dimostra il prodotto.", "section": "elevation"},
+      {"name": "The Rectangular Utility Rule", "body": "La forma dominante è rettangolare e operativa; le capsule sono micro-componenti, non una grammatica di layout.", "section": "shapes"}
+    ],
+    "dos": [
+      "Do mostrare interfacce, flussi, stati e integrazioni reali prima di introdurre spiegazioni tecnologiche.",
+      "Do usare fondo bianco, nebbia fredda e linee sottili per organizzare contenuti densi senza appesantirli.",
+      "Do mantenere un solo blu di marca per azioni e selezioni e il verde per stati positivi verificabili.",
+      "Do usare titoli brevi e una gerarchia Manrope decisa per parlare alla direzione di una PMI.",
+      "Do dichiarare come dimostrativi tutti i numeri di interfaccia che non sono risultati commerciali documentati."
+    ],
+    "donts": [
+      "Don't usare tema dark, gradienti, glassmorphism, glow o fondi neri.",
+      "Don't sostituire la concretezza del prodotto con immagini stock, laptop mockup, cervelli AI, robot o oggetti 3D.",
+      "Don't creare arcobaleni di accenti per servizi diversi o riempire la pagina di card grandi e molto arrotondate.",
+      "Don't inventare loghi cliente, testimonianze, percentuali, ricavi o tempi di progetto non verificati.",
+      "Don't presentare l'AI come promessa visiva principale quando il valore risiede nel processo operativo risolto."
+    ]
+  }
+}
