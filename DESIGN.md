@@ -8,7 +8,7 @@ colors:
   primary-deep: "#1749B8"
   surface-soft: "#F3F6FA"
   border: "#DBE2EC"
-  status-success: "#168A55"
+  status-success: "#0F7545"
   white: "#FFFFFF"
 typography:
   display:
@@ -37,7 +37,7 @@ typography:
     letterSpacing: "normal"
   label:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "0.76rem"
+    fontSize: "0.875rem"
     fontWeight: 800
     lineHeight: 1.4
     letterSpacing: "0.08em"
@@ -55,7 +55,7 @@ spacing:
   lg: "28px"
   xl: "40px"
   xxl: "64px"
-  section: "112px"
+  section: "96px"
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
@@ -79,7 +79,7 @@ components:
     backgroundColor: "{colors.white}"
     textColor: "{colors.ink}"
     rounded: "{rounded.card}"
-    padding: "28px"
+    padding: "24px"
   product-window:
     backgroundColor: "{colors.white}"
     textColor: "{colors.ink}"
@@ -155,9 +155,9 @@ La palette combina carta bianca, inchiostro blu-nero e grigi freddi; il blu oper
 
 ## Layout
 
-La home usa un contenitore centrale largo al massimo 1180px, con 20px di margine laterale minimo. Il ritmo verticale principale è ampio (112px per sezione); il hero accosta promessa e finestra prodotto in due colonne, mentre elenchi e casi usano griglie orizzontali con separatori netti.
+La home usa un contenitore centrale largo al massimo 1180px, con 20px di margine laterale minimo. Il ritmo verticale principale è autorevole ma compatto: 96px per sezione a desktop, 80px su tablet e 52px su mobile. Il hero accosta promessa e finestra prodotto in due colonne, mentre elenchi e casi usano griglie orizzontali con separatori netti.
 
-Le pagine di dettaglio restringono il contenuto editoriale a circa 900-960px e mantengono dimostrazioni di prodotto a tutta larghezza del contenitore. Sotto 1020px il hero passa a una colonna; sotto 760px navigazione, prove, servizi, casi, metodo e CTA diventano flussi verticali. A 390px la composizione deve restare interamente contenuta senza scorrimento orizzontale.
+Le pagine di dettaglio restringono il contenuto editoriale a circa 900-960px e mantengono dimostrazioni di prodotto a tutta larghezza del contenitore. Sotto 1020px il hero passa a una colonna; sotto 960px la finestra prodotto diventa selettiva e i casi abbandonano la griglia a quattro colonne; sotto 760px navigazione, prove, casi, metodo e CTA diventano flussi verticali. A 390px la composizione deve restare interamente contenuta senza scorrimento orizzontale.
 
 **The Show, Then Explain Rule.** Nella prima schermata testo e dimostrazione operativa hanno lo stesso peso: non sostituire la finestra prodotto con fotografia, illustrazione astratta o solo testo.
 
@@ -210,7 +210,7 @@ Gli angoli sono moderatamente curvi: controlli compatti a 7-8px, schede a 10px e
 
 ### Product Window
 
-La finestra prodotto è il componente firma. Usa cornice fredda, testata browser tenue e moduli applicativi compatti. A desktop tre intestazioni statiche accompagnano la vista simultanea di Fatturato, Produzione e NIS2; su mobile vere tab selezionano un pannello alla volta. Semantica e comportamento devono coincidere. I dati dimostrativi devono sempre essere dichiarati come esempi e distinti dalle funzioni realmente operative.
+La finestra prodotto è il componente firma. Usa cornice fredda, testata browser tenue e moduli applicativi compatti. Sopra 960px tre intestazioni statiche accompagnano la vista simultanea di Fatturato, Produzione e NIS2; su tablet e mobile vere tab selezionano un pannello essenziale alla volta. I contenuti informativi interni non scendono sotto 14px. Semantica e comportamento devono coincidere. I dati dimostrativi devono sempre essere dichiarati come esempi e distinti dalle funzioni realmente operative.
 
 ### Case Rows
 

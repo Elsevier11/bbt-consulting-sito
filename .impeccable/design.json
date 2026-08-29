@@ -43,7 +43,7 @@
       "status-success": {
         "role": "tertiary",
         "displayName": "Verde di conferma",
-        "canonical": "#168A55",
+        "canonical": "#0F7545",
         "tonalRamp": ["oklch(15% 0.055 158)", "oklch(27% 0.085 158)", "oklch(39% 0.11 158)", "oklch(51% 0.13 158)", "oklch(63% 0.11 158)", "oklch(75% 0.08 158)", "oklch(87% 0.045 158)", "oklch(95% 0.018 158)"]
       },
       "white": {
@@ -74,6 +74,7 @@
     "breakpoints": [
       {"name": "compact", "value": "430px"},
       {"name": "mobile", "value": "760px"},
+      {"name": "selective-product", "value": "960px"},
       {"name": "stacked-hero", "value": "1020px"}
     ]
   },
@@ -114,15 +115,15 @@
       "refersTo": "case-card",
       "description": "Riga cliccabile che mette insieme categoria, problema, meccanismo, sistema collegato e output operativo.",
       "html": "<a class=\"ds-case\" href=\"#\"><div><span class=\"ds-case-type\">PRODUZIONE</span><h3>ArcaConnect MES</h3></div><p>Carta e ricopiature rallentano il consuntivo.</p><strong>Dati trasferiti ad Arca Evolution</strong><span class=\"ds-case-arrow\" aria-hidden=\"true\">→</span></a>",
-      "css": ".ds-case{display:grid;grid-template-columns:.8fr 1.2fr 1fr auto;gap:24px;align-items:center;padding:28px;border:1px solid var(--line,#dbe2ec);border-radius:10px;background:#fff;color:var(--ink,#111827);font-family:Manrope,sans-serif;text-decoration:none;transition:border-color .2s cubic-bezier(.22,1,.36,1),transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s cubic-bezier(.22,1,.36,1)}.ds-case:hover{border-color:#a9bce0;transform:translateY(-3px);box-shadow:0 14px 32px rgba(17,24,39,.07)}.ds-case:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:4px}.ds-case h3,.ds-case p{margin:4px 0 0}.ds-case p{color:var(--muted,#536074)}.ds-case-type{color:var(--blue,#2563eb);font-size:12px;font-weight:800;letter-spacing:.08em}.ds-case-arrow{width:42px;height:42px;display:grid;place-items:center;border:1px solid #b8caf0;border-radius:50%;color:var(--blue,#2563eb)}"
+      "css": ".ds-case{display:grid;grid-template-columns:.8fr 1.2fr 1fr auto;gap:24px;align-items:center;padding:24px;border:1px solid var(--line,#dbe2ec);border-radius:10px;background:#fff;color:var(--ink,#111827);font-family:Manrope,sans-serif;text-decoration:none;transition:border-color .2s cubic-bezier(.22,1,.36,1),transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s cubic-bezier(.22,1,.36,1)}.ds-case:hover{border-color:#a9bce0;transform:translateY(-3px);box-shadow:0 14px 32px rgba(17,24,39,.07)}.ds-case:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:4px}.ds-case h3,.ds-case p{margin:4px 0 0}.ds-case p{color:var(--muted,#536074)}.ds-case-type{color:var(--blue,#2563eb);font-size:14px;font-weight:800;letter-spacing:.05em}.ds-case-arrow{width:44px;height:44px;display:grid;place-items:center;border:1px solid #b8caf0;border-radius:50%;color:var(--blue,#2563eb)}"
     },
     {
       "name": "Product Window",
       "kind": "custom",
       "refersTo": "product-window",
-      "description": "Componente firma: tre intestazioni statiche e tre processi simultanei a desktop, vere tab a pannello singolo su mobile.",
+      "description": "Componente firma: tre processi simultanei sopra 960px, vere tab con un pannello essenziale su tablet e mobile; metadati mai sotto 14px.",
       "html": "<section class=\"ds-window\"><div class=\"ds-window-top\"><i></i><i></i><i></i><span></span></div><div class=\"ds-window-tabs\"><b>Fatturato</b><b>Produzione</b><b>NIS2</b></div><div class=\"ds-window-body\"><small>DATI DIMOSTRATIVI</small><h3>Tre processi, una vista operativa</h3><div class=\"ds-progress\"><span></span></div></div></section>",
-      "css": ".ds-window{overflow:hidden;border:1px solid #cfd8e6;border-radius:13px;background:#fff;color:var(--ink,#111827);box-shadow:0 18px 48px rgba(17,24,39,.1);font-family:Manrope,sans-serif}.ds-window-top{height:45px;display:flex;align-items:center;gap:7px;padding:0 15px;background:var(--soft,#f3f6fa);border-bottom:1px solid var(--line,#dbe2ec)}.ds-window-top i{width:9px;height:9px;border-radius:50%;background:#cbd4e1}.ds-window-top span{width:46%;height:10px;margin-left:9px;border-radius:999px;background:#e1e7ef}.ds-window-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line,#dbe2ec)}.ds-window-tabs b{padding:14px 8px;text-align:center;border-right:1px solid var(--line,#dbe2ec);font-size:13px}.ds-window-tabs b:last-child{border-right:0}.ds-window-body{padding:24px;background:#fbfcfe}.ds-window-body small{color:#6c788a;font-weight:700;letter-spacing:.1em}.ds-window-body h3{margin:18px 0}.ds-progress{height:8px;overflow:hidden;border-radius:999px;background:#e7edf5}.ds-progress span{display:block;width:68%;height:100%;background:var(--blue,#2563eb)}"
+      "css": ".ds-window{overflow:hidden;border:1px solid #cfd8e6;border-radius:13px;background:#fff;color:var(--ink,#111827);box-shadow:0 18px 48px rgba(17,24,39,.1);font-family:Manrope,sans-serif}.ds-window-top{height:40px;display:flex;align-items:center;gap:7px;padding:0 15px;background:var(--soft,#f3f6fa);border-bottom:1px solid var(--line,#dbe2ec)}.ds-window-top i{width:9px;height:9px;border-radius:50%;background:#cbd4e1}.ds-window-top span{width:46%;height:10px;margin-left:9px;border-radius:999px;background:#e1e7ef}.ds-window-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line,#dbe2ec)}.ds-window-tabs b{padding:12px 8px;text-align:center;border-right:1px solid var(--line,#dbe2ec);font-size:14px}.ds-window-tabs b:last-child{border-right:0}.ds-window-body{padding:16px;background:#fbfcfe}.ds-window-body small{color:#4f5d71;font-size:14px;font-weight:700}.ds-window-body h3{margin:16px 0}.ds-progress{height:8px;overflow:hidden;border-radius:999px;background:#e7edf5}.ds-progress span{display:block;width:68%;height:100%;background:var(--blue,#2563eb)}"
     },
     {
       "name": "Solution Tag",
@@ -136,7 +137,7 @@
       "kind": "custom",
       "description": "Blocco conclusivo blu che esplicita l'esito del primo confronto.",
       "html": "<section class=\"ds-cta\"><div><h2>Partiamo da un processo concreto.</h2><p>In 30 minuti capiamo dati, passaggi manuali e priorità operative.</p></div><button>PRENOTA 30 MINUTI</button></section>",
-      "css": ".ds-cta{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end;padding:64px;border-radius:12px;background:var(--blue,#2563eb);color:#fff;font-family:Manrope,sans-serif}.ds-cta h2{max-width:13ch;margin:0;font-size:42px;line-height:1.02;letter-spacing:-.04em}.ds-cta p{max-width:58ch;margin:18px 0 0;color:#e4ecff}.ds-cta button{min-height:48px;padding:12px 19px;border:1px solid #fff;border-radius:7px;background:#fff;color:var(--blue,#2563eb);font-weight:700;cursor:pointer;transition:background .2s,transform .2s}.ds-cta button:hover{background:#eef4ff;transform:translateY(-2px)}.ds-cta button:focus-visible{outline:3px solid rgba(255,255,255,.7);outline-offset:4px}.ds-cta button:active{transform:translateY(0)}"
+      "css": ".ds-cta{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end;padding:52px;border-radius:12px;background:var(--blue,#2563eb);color:#fff;font-family:Manrope,sans-serif}.ds-cta h2{max-width:13ch;margin:0;font-size:42px;line-height:1.02;letter-spacing:-.04em}.ds-cta p{max-width:58ch;margin:18px 0 0;color:#fff}.ds-cta button{min-height:48px;padding:12px 19px;border:1px solid #fff;border-radius:7px;background:#fff;color:var(--blue,#2563eb);font-weight:700;cursor:pointer;transition:background .2s,transform .2s}.ds-cta button:hover{background:#eef4ff;transform:translateY(-2px)}.ds-cta button:focus-visible{outline:3px solid rgba(255,255,255,.7);outline-offset:4px}.ds-cta button:active{transform:translateY(0)}"
     }
   ],
   "narrative": {
