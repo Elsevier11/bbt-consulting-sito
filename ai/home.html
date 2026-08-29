@@ -23,7 +23,7 @@ a{text-decoration:none;color:inherit;}
 .brand{display:flex;align-items:center;gap:12px;}
 .bbt{background:#6366f1;color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;}
 .brand-name{font-size:16px;font-weight:700;}
-.brand-sep{color:var(--border);margin:0 2px;}
+.brand-sep{color:var(--text-muted);margin:0 2px;}
 .brand-sub{font-size:16px;font-weight:400;color:var(--text-muted);}
 .header-meta{font-size:12px;color:var(--text-muted);background:var(--bg3);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
 
@@ -152,7 +152,7 @@ html.light .card.dim{opacity:.4;}
 
 <header class="header">
   <div class="brand">
-    <a href="index.html" style="font-size:12px;color:#7878a0;text-decoration:none;display:flex;align-items:center;gap:5px;margin-right:16px;transition:color .15s;letter-spacing:.04em" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='#7878a0'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> AI</a>
+    <a href="index.html" style="font-size:12px;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:5px;margin-right:16px;transition:color .15s;letter-spacing:.04em" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='var(--text-muted)'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> AI</a>
     <img src="../Favicon/apple-touch-icon.png" alt="BBT" style="width:34px;height:34px;object-fit:contain;border-radius:6px;flex-shrink:0;">
     <span class="brand-name">AI Playbook</span>
     <span class="brand-sep">|</span>
@@ -178,27 +178,27 @@ html.light .card.dim{opacity:.4;}
   <div class="path-label">Il percorso formativo</div>
   <div class="path">
     <div class="pnode" title="Vai a: Fondamenti" onclick="document.getElementById('l1').scrollIntoView({behavior:'smooth'})">
-      <div class="pcircle on" style="--nc:#3b82f6">1</div>
+      <div class="pcircle on" style="--nc:#1d4ed8">1</div>
       <div class="plabel">Fondamenti</div>
     </div>
     <div class="pline on" style="--lc1:#3b82f6;--lc2:#6366f1"></div>
     <div class="pnode" title="Vai a: Prompt" onclick="document.getElementById('l2').scrollIntoView({behavior:'smooth'})">
-      <div class="pcircle on" style="--nc:#6366f1">2</div>
+      <div class="pcircle on" style="--nc:#4338ca">2</div>
       <div class="plabel">Prompt</div>
     </div>
     <div class="pline on" style="--lc1:#6366f1;--lc2:#8b5cf6"></div>
     <div class="pnode" title="Vai a: Agenti" onclick="document.getElementById('l3').scrollIntoView({behavior:'smooth'})">
-      <div class="pcircle on" style="--nc:#8b5cf6">3</div>
+      <div class="pcircle on" style="--nc:#6d28d9">3</div>
       <div class="plabel">Agenti</div>
     </div>
     <div class="pline on" style="--lc1:#8b5cf6;--lc2:#f59e0b"></div>
     <div class="pnode" title="Vai a: Workflow" onclick="document.getElementById('l4').scrollIntoView({behavior:'smooth'})">
-      <div class="pcircle on" style="--nc:#f59e0b">4</div>
+      <div class="pcircle on" style="--nc:#92400e">4</div>
       <div class="plabel">Workflow</div>
     </div>
     <div class="pline on" style="--lc1:#f59e0b;--lc2:#14b8a6"></div>
     <div class="pnode" title="Vai a: Governance" onclick="document.getElementById('l5').scrollIntoView({behavior:'smooth'})">
-      <div class="pcircle on" style="--nc:#14b8a6">5</div>
+      <div class="pcircle on" style="--nc:#0f766e">5</div>
       <div class="plabel">Governance</div>
     </div>
   </div>
@@ -207,7 +207,7 @@ html.light .card.dim{opacity:.4;}
 <!-- L1: FONDAMENTI -->
 <div class="section" id="l1">
   <div class="sec-head">
-    <div class="sec-num" style="--sc:#3b82f6">1</div>
+    <div class="sec-num" style="--sc:#1d4ed8">1</div>
     <div class="sec-text">
       <div class="sec-title">Fondamenti</div>
       <div class="sec-desc">Vocabolario, orientamento e scelta degli strumenti. Il punto di partenza per chiunque si avvicini all'AI in azienda, dal manager al team operativo.</div>
@@ -240,7 +240,7 @@ html.light .card.dim{opacity:.4;}
 <!-- L2: PROMPT -->
 <div class="section" id="l2">
   <div class="sec-head">
-    <div class="sec-num" style="--sc:#6366f1">2</div>
+    <div class="sec-num" style="--sc:#4338ca">2</div>
     <div class="sec-text">
       <div class="sec-title">Prompt</div>
       <div class="sec-desc">Librerie di prompt pronti all'uso per le principali funzioni aziendali, con due approcci complementari: ottimizzato per M365 Copilot o universale con struttura C·O·C·V.</div>
@@ -292,7 +292,7 @@ html.light .card.dim{opacity:.4;}
 <!-- L3: AGENTI -->
 <div class="section" id="l3">
   <div class="sec-head">
-    <div class="sec-num" style="--sc:#8b5cf6">3</div>
+    <div class="sec-num" style="--sc:#6d28d9">3</div>
     <div class="sec-text">
       <div class="sec-title">Agenti</div>
       <div class="sec-desc">Due formati complementari: simulatori di conversazioni ad alto rischio con flusso guidato in 4 fasi, e specialisti operativi pronti a eseguire un lavoro concreto senza flusso obbligato. Configurabili su Claude, ChatGPT, Gemini e M365 Copilot con Agent Builder.</div>
@@ -331,7 +331,7 @@ html.light .card.dim{opacity:.4;}
 <!-- L4: WORKFLOW -->
 <div class="section" id="l4">
   <div class="sec-head">
-    <div class="sec-num" style="--sc:#f59e0b">4</div>
+    <div class="sec-num" style="--sc:#92400e">4</div>
     <div class="sec-text">
       <div class="sec-title">Workflow</div>
       <div class="sec-desc">Il salto tra il singolo prompt e l'agente autonomo. Sequenze operative testate per task aziendali ricorrenti, con prompt da concatenare in ordine.</div>
@@ -354,7 +354,7 @@ html.light .card.dim{opacity:.4;}
 <!-- L5: GOVERNANCE -->
 <div class="section" id="l5">
   <div class="sec-head">
-    <div class="sec-num" style="--sc:#14b8a6">5</div>
+    <div class="sec-num" style="--sc:#0f766e">5</div>
     <div class="sec-text">
       <div class="sec-title">Governance</div>
       <div class="sec-desc">Adottare l'AI con criterio. Linee guida operative su privacy, rischi, policy e introduzione organizzativa: il livello che trasforma l'utilizzo individuale in vantaggio aziendale sostenibile.</div>
