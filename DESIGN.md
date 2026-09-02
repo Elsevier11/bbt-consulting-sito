@@ -55,7 +55,7 @@ spacing:
   lg: "28px"
   xl: "40px"
   xxl: "64px"
-  section: "96px"
+  section: "76px"
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
@@ -155,7 +155,7 @@ La palette combina carta bianca, inchiostro blu-nero e grigi freddi; il blu oper
 
 ## Layout
 
-La home usa un contenitore centrale largo al massimo 1180px, con 20px di margine laterale minimo. Il ritmo verticale principale è autorevole ma compatto: 96px per sezione a desktop, 80px su tablet e 52px su mobile. Il hero accosta promessa e finestra prodotto in due colonne, mentre elenchi e casi usano griglie orizzontali con separatori netti.
+La home usa un contenitore centrale largo al massimo 1180px, con 20px di margine laterale minimo. Il ritmo verticale distingue apertura e contenuto: hero e CTA possono mantenere un respiro ampio, mentre le sezioni editoriali usano 76px a desktop, 62px su tablet e 44px su mobile. Il hero accosta promessa e finestra prodotto in due colonne, mentre elenchi e casi usano griglie orizzontali con separatori netti. Prima di aggiungere spazio, eliminare ripetizioni e semplici impilamenti che non fanno avanzare il racconto.
 
 Le pagine di dettaglio restringono il contenuto editoriale a circa 900-960px e mantengono dimostrazioni di prodotto a tutta larghezza del contenitore. Sotto 1020px il hero passa a una colonna; sotto 960px la finestra prodotto diventa selettiva e i casi abbandonano la griglia a quattro colonne; sotto 760px navigazione, prove, casi, metodo e CTA diventano flussi verticali. A 390px la composizione deve restare interamente contenuta senza scorrimento orizzontale.
 

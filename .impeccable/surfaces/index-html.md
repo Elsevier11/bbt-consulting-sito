@@ -35,7 +35,7 @@ related_targets: ["soluzioni/index.html"]
 | Linee | 1px, grigio freddo, nessun bordo decorativo pesante | CSS |
 | Elevazione | Ombra diffusa e molto leggera solo sulla finestra prodotto | CSS |
 
-La densità informativa rispetta una soglia di 14px per label e metadati utili. Il ritmo verticale passa da 96px desktop a 80px tablet e 52px mobile; le prove diventano sintetiche su schermi stretti senza rimuovere le tre evidenze.
+La densità informativa rispetta una soglia di 14px per label e metadati utili. Il corpo pagina usa un ritmo di 76px desktop, 62px tablet e 44px mobile; hero e CTA possono conservare più respiro. Le prove diventano sintetiche su schermi stretti senza rimuovere le tre evidenze e i metadati secondari dei casi possono essere omessi quando il dettaglio è disponibile nella pagina dedicata.
 
 ## Colori campionati e vincoli
 
