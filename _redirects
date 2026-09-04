@@ -34,3 +34,5 @@
 /pola /pola/ 301
 /pola/* /pola/:splat 200
 
+/SMART1 /SMART1/ 301
+/SMART1/* /SMART1/:splat 200

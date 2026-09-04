@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Dossier interattivo dell'analisi funzionale, tecnica e di sicurezza di Smart.1.">
+  <title>Smart.1 — Dossier interattivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #122535;
+      --muted: #5c6f7b;
+      --paper: #f4f7f6;
+      --surface: #ffffff;
+      --line: #cbd7d9;
+      --line-strong: #8ca2a8;
+      --navy: #123a51;
+      --cyan: #0c8193;
+      --cyan-soft: #d9f0f1;
+      --amber: #d68922;
+      --amber-soft: #f9ecd6;
+      --red: #b8403b;
+      --red-soft: #f5dedc;
+      --green: #27825f;
+      --green-soft: #daf0e7;
+      --shadow: 0 18px 50px rgba(18, 58, 81, .09);
+      --radius: 18px;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e8f0f1;
+      --muted: #9fb0b6;
+      --paper: #0e1920;
+      --surface: #14242e;
+      --line: #29414d;
+      --line-strong: #56717c;
+      --navy: #9bd7df;
+      --cyan: #58c5d1;
+      --cyan-soft: #173d46;
+      --amber: #efb35e;
+      --amber-soft: #49351d;
+      --red: #ef8880;
+      --red-soft: #4c2928;
+      --green: #71cda8;
+      --green-soft: #183f33;
+      --shadow: 0 20px 55px rgba(0, 0, 0, .25);
+    }
+
+    * { box-sizing: border-box; }
+    html { max-width: 100%; overflow-x: clip; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      max-width: 100%;
+      overflow-x: clip;
+      background:
+        linear-gradient(rgba(18, 58, 81, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 58, 81, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      color: var(--ink);
+      font-family: "Manrope", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 100;
+      width: 0;
+      height: 4px;
+      background: var(--amber);
+    }
+
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+      background: color-mix(in srgb, var(--paper) 90%, transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand strong {
+      font: 700 1.5rem/1 "Barlow Condensed", sans-serif;
+      letter-spacing: .06em;
+    }
+
+    .brand span, .eyebrow, .micro, .step-index, .metric-label, .tag, .layer-label {
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .brand span { color: var(--muted); font-size: .7rem; }
+    .topnav { display: flex; align-items: center; gap: 4px; }
+    .topnav a, .icon-button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 10px;
+      padding: 0 12px;
+      background: transparent;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .topnav a:hover, .icon-button:hover { background: var(--cyan-soft); color: var(--ink); }
+    .icon-button { width: 42px; padding: 0; font-size: 1.05rem; }
+
+    .hero {
+      min-height: 610px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(330px, .65fr);
+      gap: 52px;
+      align-items: center;
+      padding: 84px 0 70px;
+    }
+
+    .eyebrow { color: var(--cyan); font-size: .76rem; font-weight: 500; }
+    h1, h2, h3 { margin: 0; font-family: "Barlow Condensed", sans-serif; line-height: .98; }
+    h1 { max-width: 800px; margin-top: 18px; font-size: clamp(4.2rem, 10vw, 8.5rem); letter-spacing: -.035em; }
+    h1 .accent { display: block; color: var(--cyan); }
+    .hero-copy { max-width: 650px; margin: 26px 0 0; color: var(--muted); font-size: 1.05rem; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 0 17px;
+      background: var(--surface);
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .button.primary { border-color: var(--navy); background: var(--navy); color: var(--paper); }
+    html[data-theme="dark"] .button.primary { color: #0e1920; }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(18, 58, 81, .12); }
+
+    .instrument {
+      position: relative;
+      min-height: 370px;
+      display: grid;
+      place-items: center;
+    }
+
+    .dial {
+      width: min(100%, 360px);
+      aspect-ratio: 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--surface) 74%, transparent);
+      box-shadow: var(--shadow);
+    }
+
+    .dial::before, .dial::after {
+      content: "";
+      position: absolute;
+      border: 1px dashed var(--line);
+      border-radius: 50%;
+    }
+
+    .dial::before { inset: 12%; }
+    .dial::after { inset: 27%; }
+    .dial-core { text-align: center; z-index: 1; }
+    .dial-core strong { display: block; font: 700 4rem/1 "Barlow Condensed", sans-serif; color: var(--cyan); }
+    .dial-core span { color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: .72rem; }
+    .dial-label { position: absolute; padding: 3px 7px; background: var(--paper); color: var(--muted); font: 500 .68rem/1.4 "IBM Plex Mono", monospace; }
+    .dial-label.a { top: 4%; left: 50%; transform: translateX(-50%); }
+    .dial-label.b { right: -4%; top: 48%; }
+    .dial-label.c { bottom: 4%; left: 50%; transform: translateX(-50%); }
+    .dial-label.d { left: -4%; top: 48%; }
+
+    .metric-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 64%, transparent);
+    }
+
+    .metric { padding: 22px 24px; }
+    .metric + .metric { border-left: 1px solid var(--line); }
+    .metric strong { display: block; font: 600 2.1rem/1 "Barlow Condensed", sans-serif; }
+    .metric-label { display: block; margin-top: 8px; color: var(--muted); font-size: .65rem; }
+
+    main { overflow: clip; }
+    .section { padding: 104px 0; scroll-margin-top: 80px; }
+    .section-header { display: grid; grid-template-columns: 120px 1fr; gap: 28px; margin-bottom: 52px; }
+    .step-index { color: var(--cyan); font-size: .76rem; }
+    .section-title { font-size: clamp(3.1rem, 7vw, 6rem); letter-spacing: -.025em; }
+    .section-lead { max-width: 760px; margin: 20px 0 0; color: var(--muted); }
+
+    .timeline { position: relative; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 119px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 90%, transparent);
+      box-shadow: var(--shadow);
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .channel { min-height: 190px; padding: 24px; }
+    .channel .micro { color: var(--cyan); font-size: .65rem; }
+    .channel h3 { margin-top: 28px; font-size: 2rem; }
+    .channel p { margin: 14px 0 0; color: var(--muted); font-size: .88rem; }
+
+    .domain-shortcuts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .domain-link, .filter-button, .domain-button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .domain-link { border-radius: 999px; padding: 8px 12px; font-size: .82rem; }
+    .domain-link:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .guide-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .guide-card { padding: 30px; }
+    .guide-card h3 { font-size: 2.1rem; }
+    .guide-card ul { margin: 22px 0 0; padding: 0; list-style: none; }
+    .guide-card li { position: relative; padding: 10px 0 10px 26px; border-top: 1px solid var(--line); }
+    .guide-card li::before { content: "↳"; position: absolute; left: 0; color: var(--cyan); }
+    .guide-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: .8fr 1.2fr; gap: 30px; align-items: center; }
+    .document-link { margin-top: 22px; }
+
+    .security-summary { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; align-items: stretch; }
+    .risk-board { padding: 30px; }
+    .risk-board h3 { font-size: 2.4rem; }
+    .risk-bars { display: grid; gap: 14px; margin-top: 28px; }
+    .risk-row { display: grid; grid-template-columns: 84px 1fr 28px; gap: 12px; align-items: center; }
+    .risk-row span { font: 500 .72rem/1 "IBM Plex Mono", monospace; text-transform: uppercase; }
+    .bar { height: 9px; background: var(--line); overflow: hidden; }
+    .bar i { display: block; height: 100%; background: var(--cyan); }
+    .risk-row.critical .bar i { background: var(--red); }
+    .risk-row.high .bar i { background: var(--amber); }
+    .risk-row.medium .bar i { background: var(--cyan); }
+    .risk-row.low .bar i { background: var(--green); }
+    .priority-note { padding: 30px; background: var(--red-soft); border-color: color-mix(in srgb, var(--red) 35%, var(--line)); }
+    .priority-note .micro { color: var(--red); font-size: .66rem; }
+    .priority-note h3 { margin-top: 18px; font-size: 2.45rem; }
+    .priority-note p { margin: 18px 0 0; }
+
+    .security-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 18px; }
+    .filter-button { min-height: 40px; border-radius: 10px; padding: 0 13px; }
+    .filter-button[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: var(--paper); }
+    html[data-theme="dark"] .filter-button[aria-pressed="true"] { color: #0e1920; }
+    .findings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .finding { min-height: 190px; padding: 22px; transition: opacity .18s ease, transform .18s ease; }
+    .finding[hidden] { display: none; }
+    .finding-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .finding-id { color: var(--muted); font: 500 .7rem/1 "IBM Plex Mono", monospace; }
+    .tag { border-radius: 999px; padding: 5px 8px; font-size: .58rem; }
+    .tag.critical { background: var(--red-soft); color: var(--red); }
+    .tag.high { background: var(--amber-soft); color: var(--amber); }
+    .tag.medium { background: var(--cyan-soft); color: var(--cyan); }
+    .tag.low { background: var(--green-soft); color: var(--green); }
+    .finding h3 { margin-top: 25px; font: 700 1.45rem/1.1 "Barlow Condensed", sans-serif; }
+    .finding p { margin: 13px 0 0; color: var(--muted); font-size: .84rem; }
+
+    .functional-flow {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      padding: 26px;
+      scrollbar-width: thin;
+    }
+
+    .flow-step { min-width: 118px; text-align: center; }
+    .flow-step strong { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 1.3rem; }
+    .flow-step span { display: block; margin-top: 4px; color: var(--muted); font: .62rem/1.4 "IBM Plex Mono", monospace; }
+    .flow-arrow { flex: 1 0 38px; height: 1px; position: relative; background: var(--line-strong); }
+    .flow-arrow::after { content: ""; position: absolute; right: 0; top: -4px; border: 4px solid transparent; border-left-color: var(--line-strong); }
+
+    .map-layout { display: grid; grid-template-columns: .86fr 1.14fr; gap: 18px; margin-top: 18px; }
+    .domain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .domain-button { min-height: 82px; border-radius: 14px; padding: 14px; text-align: left; transition: .18s ease; }
+    .domain-button span { display: block; color: var(--muted); font: .62rem/1.4 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
+    .domain-button strong { display: block; margin-top: 7px; font-family: "Barlow Condensed", sans-serif; font-size: 1.35rem; }
+    .domain-button:hover { transform: translateY(-2px); border-color: var(--cyan); }
+    .domain-button[aria-pressed="true"] { border-color: var(--cyan); background: var(--cyan-soft); box-shadow: inset 4px 0 0 var(--cyan); }
+    .domain-detail { padding: 34px; }
+    .domain-detail .micro { color: var(--cyan); font-size: .66rem; }
+    .domain-detail h3 { margin-top: 16px; font-size: clamp(2.6rem, 5vw, 4.6rem); }
+    .domain-detail ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin: 26px 0; padding: 0; list-style: none; }
+    .domain-detail li { padding: 11px 0; border-top: 1px solid var(--line); }
+    .domain-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+    .domain-meta div { border-top: 2px solid var(--line); padding-top: 10px; }
+    .domain-meta span { display: block; color: var(--muted); font: .61rem/1.4 "IBM Plex Mono", monospace; text-transform: uppercase; }
+    .domain-meta strong { display: block; margin-top: 7px; font-size: .8rem; line-height: 1.45; }
+
+    .platform-layers { margin-top: 18px; padding: 28px; }
+    .platform-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: center; padding: 15px 0; }
+    .platform-row + .platform-row { border-top: 1px solid var(--line); }
+    .layer-label { color: var(--muted); font-size: .62rem; }
+    .layer-items { display: flex; flex-wrap: wrap; gap: 8px; }
+    .layer-items span { border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; background: var(--surface); font-size: .8rem; }
+
+    .deep-index { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 56px; }
+    .deep-index a { min-height: 74px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line); border-radius: 12px; padding: 13px; background: var(--surface); text-decoration: none; }
+    .deep-index a:hover { border-color: var(--cyan); transform: translateY(-2px); }
+    .deep-index small { color: var(--cyan); font-family: "IBM Plex Mono", monospace; }
+    .deep-index strong { font: 600 1.15rem/1.05 "Barlow Condensed", sans-serif; }
+    .subsection { padding: 72px 0; scroll-margin-top: 82px; border-top: 1px solid var(--line); }
+    .subsection-head { display: grid; grid-template-columns: 90px 1fr; gap: 28px; margin-bottom: 34px; }
+    .subsection-number { color: var(--cyan); font: 500 .72rem/1.4 "IBM Plex Mono", monospace; }
+    .subsection h3.subsection-title { font-size: clamp(2.8rem, 5vw, 4.6rem); }
+    .subsection-copy { max-width: 780px; margin: 14px 0 0; color: var(--muted); }
+    .status-note { margin: 0 0 22px; border: 1px solid color-mix(in srgb, var(--amber) 48%, var(--line)); border-radius: 10px; padding: 14px 18px; background: var(--amber-soft); }
+    .status-note.confirmed { border-color: color-mix(in srgb, var(--green) 48%, var(--line)); background: var(--green-soft); }
+    .status-note.blocked { border-color: color-mix(in srgb, var(--red) 48%, var(--line)); background: var(--red-soft); }
+    .status-note strong { font-family: "IBM Plex Mono", monospace; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+    th, td { padding: 13px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); background: color-mix(in srgb, var(--cyan-soft) 38%, var(--surface)); font: 500 .65rem/1.35 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
+    tr:last-child td { border-bottom: 0; }
+    td.center, th.center { text-align: center; }
+    .access-full { color: var(--green); font-weight: 700; }
+    .access-operate { color: var(--cyan); font-weight: 700; }
+    .access-read { color: var(--amber); font-weight: 700; }
+    .access-none { color: var(--muted); }
+
+    .workflow-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .workflow-picker button { min-height: 42px; border: 1px solid var(--line); border-radius: 10px; padding: 0 13px; background: var(--surface); color: var(--ink); cursor: pointer; }
+    .workflow-picker button[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: var(--paper); }
+    html[data-theme="dark"] .workflow-picker button[aria-pressed="true"] { color: #0e1920; }
+    .workflow-board { padding: 28px; }
+    .workflow-title { font-size: 2.2rem; }
+    .workflow-steps { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 26px; }
+    .workflow-step { position: relative; min-height: 160px; padding: 0 15px 18px; border-top: 2px solid var(--line-strong); }
+    .workflow-step::before { content: ""; position: absolute; top: -7px; left: 15px; width: 12px; height: 12px; border-radius: 50%; background: var(--cyan); }
+    .workflow-step strong { display: block; margin-top: 21px; font-family: "Barlow Condensed", sans-serif; font-size: 1.25rem; line-height: 1.1; }
+    .workflow-step span { display: block; margin-top: 9px; color: var(--muted); font-size: .76rem; }
+    .workflow-step em { display: block; margin-top: 10px; color: var(--cyan); font: normal 500 .61rem/1.4 "IBM Plex Mono", monospace; text-transform: uppercase; }
+
+    .entity-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr); gap: 18px; }
+    .entity-layout > * { min-width: 0; }
+    .entity-network { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-content: start; gap: 10px; padding: 28px; }
+    .entity-node { width: 100%; min-width: 0; min-height: 76px; border: 1px solid var(--line); border-radius: 999px; padding: 12px 8px; overflow-wrap: anywhere; background: var(--surface); color: var(--ink); cursor: pointer; font: 600 1rem/1.1 "Barlow Condensed", sans-serif; }
+    .entity-node:hover, .entity-node[aria-pressed="true"] { border-color: var(--cyan); background: var(--cyan-soft); box-shadow: 0 0 0 4px color-mix(in srgb, var(--cyan) 12%, transparent); }
+    .entity-detail { min-width: 0; padding: 30px; overflow-wrap: anywhere; }
+    .entity-detail h4 { margin: 12px 0 0; font: 600 2.4rem/1 "Barlow Condensed", sans-serif; }
+    .entity-detail p { color: var(--muted); }
+    .relationship-list { margin: 20px 0 0; padding: 0; list-style: none; }
+    .relationship-list li { padding: 9px 0; border-top: 1px solid var(--line); }
+
+    .api-toolbar { display: grid; grid-template-columns: 1fr 180px auto; gap: 10px; margin-bottom: 14px; }
+    .api-toolbar input, .api-toolbar select { min-height: 44px; border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; background: var(--surface); color: var(--ink); font: inherit; }
+    .api-count { display: flex; align-items: center; justify-content: flex-end; color: var(--muted); font: .7rem/1.3 "IBM Plex Mono", monospace; }
+    .api-table code { color: var(--cyan); }
+
+    .deployment { display: grid; gap: 12px; }
+    .deployment-tier { display: grid; grid-template-columns: 145px 1fr; gap: 20px; align-items: center; padding: 20px 24px; }
+    .deployment-tier + .deployment-tier { position: relative; }
+    .deployment-tier + .deployment-tier::before { content: "↓"; position: absolute; top: -22px; left: 77px; color: var(--cyan); }
+    .deployment-tier h4 { margin: 0; font: 600 1.35rem/1 "Barlow Condensed", sans-serif; }
+    .deployment-nodes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .deployment-nodes span { border: 1px solid var(--line); border-radius: 9px; padding: 8px 11px; background: var(--surface); font-size: .8rem; }
+
+    .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .roadmap-column { padding: 25px; }
+    .roadmap-column h4 { margin: 0; font: 600 1.65rem/1 "Barlow Condensed", sans-serif; }
+    .roadmap-column ol { margin: 22px 0 0; padding-left: 21px; }
+    .roadmap-column li { padding: 7px 0; color: var(--muted); }
+
+    .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .tech-card { padding: 22px; }
+    .tech-card h4 { margin: 0; font: 600 1.5rem/1 "Barlow Condensed", sans-serif; }
+    .tech-card p { margin: 12px 0 0; color: var(--muted); font-size: .82rem; }
+    .tech-status { display: inline-block; margin-top: 18px; border-radius: 999px; padding: 5px 8px; font: 500 .58rem/1.3 "IBM Plex Mono", monospace; text-transform: uppercase; }
+    .tech-status.supported { color: var(--green); background: var(--green-soft); }
+    .tech-status.warning { color: var(--amber); background: var(--amber-soft); }
+    .tech-status.eol { color: var(--red); background: var(--red-soft); }
+
+    .pers-split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .pers-card { padding: 28px; }
+    .pers-card h4 { margin: 0; font: 600 2rem/1 "Barlow Condensed", sans-serif; }
+    .pers-card ul { margin: 20px 0 0; padding-left: 20px; color: var(--muted); }
+
+    .screen-plan { display: grid; grid-template-columns: .75fr 1.25fr; gap: 18px; }
+    .screen-empty { min-height: 310px; display: grid; place-items: center; padding: 35px; text-align: center; border: 1px dashed var(--line-strong); border-radius: var(--radius); background: color-mix(in srgb, var(--surface) 70%, transparent); }
+    .screen-empty strong { display: block; font: 600 2rem/1 "Barlow Condensed", sans-serif; }
+    .screen-empty p { max-width: 360px; margin: 14px auto 0; color: var(--muted); }
+    .capture-list { padding: 30px; }
+    .capture-list h4 { margin: 0; font: 600 2rem/1 "Barlow Condensed", sans-serif; }
+    .capture-list ol { margin: 22px 0 0; padding-left: 22px; }
+    .capture-list li { padding: 8px 0; }
+
+    .limits { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .limit-card { padding: 30px; }
+    .limit-card h3 { font-size: 2.1rem; }
+    .limit-card p, .limit-card li { color: var(--muted); }
+    .limit-card ul { margin: 18px 0 0; padding-left: 20px; }
+
+    footer { border-top: 1px solid var(--line); padding: 40px 0 54px; color: var(--muted); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .footer-inner strong { color: var(--ink); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .topnav a { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .instrument { min-height: 330px; }
+      .dial { width: 320px; }
+      .architecture, .findings { grid-template-columns: repeat(2, 1fr); }
+      .guide-layout, .security-summary, .map-layout, .limits { grid-template-columns: 1fr; }
+      .guide-card.wide { grid-template-columns: 1fr; }
+      .domain-detail ul { grid-template-columns: 1fr; }
+      .deep-index { grid-template-columns: repeat(2, 1fr); }
+      .workflow-steps { grid-template-columns: repeat(3, 1fr); gap: 22px 0; }
+      .entity-layout, .screen-plan { grid-template-columns: minmax(0, 1fr); }
+      .roadmap, .tech-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .hero { padding-top: 54px; }
+      h1 { font-size: clamp(3.8rem, 20vw, 6rem); }
+      .metric-strip { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+      .metric:nth-child(4) { border-top: 1px solid var(--line); }
+      .section { padding: 76px 0; }
+      .section-header { grid-template-columns: 1fr; gap: 12px; }
+      .timeline::before { display: none; }
+      .architecture, .findings, .domain-grid { grid-template-columns: 1fr; }
+      .risk-row { grid-template-columns: 74px 1fr 24px; }
+      .functional-flow { padding: 22px 16px; }
+      .domain-meta { grid-template-columns: 1fr; }
+      .platform-row { grid-template-columns: 1fr; gap: 7px; }
+      .footer-inner { flex-direction: column; }
+      .deep-index, .roadmap, .tech-grid, .pers-split { grid-template-columns: 1fr; }
+      .subsection-head { grid-template-columns: 1fr; gap: 8px; }
+      .workflow-steps { grid-template-columns: 1fr; }
+      .workflow-step { min-height: auto; border-top: 0; border-left: 2px solid var(--line-strong); padding: 0 0 24px 24px; }
+      .workflow-step::before { top: 3px; left: -7px; }
+      .workflow-step strong { margin-top: 0; }
+      .entity-network { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px; }
+      .api-toolbar { grid-template-columns: 1fr; }
+      .api-count { justify-content: flex-start; }
+      .deployment-tier { grid-template-columns: 1fr; gap: 10px; }
+      .deployment-tier + .deployment-tier::before { left: 28px; }
+    }
+
+    @media print {
+      .topbar, .scroll-progress, .hero-actions, .security-controls { display: none !important; }
+      body { background: white; color: #122535; }
+      .section { padding: 42px 0; break-inside: avoid; }
+      .reveal { opacity: 1; transform: none; }
+      .panel { box-shadow: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#inizio"><strong>SMART.1</strong><span>Dossier / 04.09.2026</span></a>
+      <nav class="topnav" aria-label="Navigazione principale">
+        <a href="#ricognizione">Ricognizione</a>
+        <a href="#guida">Guida</a>
+        <a href="#sicurezza">Sicurezza</a>
+        <a href="#mappa">Mappa</a>
+        <a href="#approfondimenti">Approfondimenti</a>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Attiva tema scuro" title="Cambia tema">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inizio">
+    <section class="shell hero">
+      <div>
+        <div class="eyebrow">Analisi statica · Funzioni · Rischi · Flussi</div>
+        <h1>Dentro <span class="accent">Smart.1</span></h1>
+        <p class="hero-copy">Un’unica lettura visuale del lavoro svolto: dalla ricognizione del codice alla guida, dalla sicurezza alla mappa interattiva della piattaforma.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#ricognizione">Segui il percorso ↓</a>
+          <button class="button" type="button" id="print-report">Stampa / salva PDF</button>
+        </div>
+      </div>
+
+      <div class="instrument" aria-label="Quattro fasi di analisi completate">
+        <div class="dial">
+          <span class="dial-label a">Ricognizione</span>
+          <span class="dial-label b">Guida</span>
+          <span class="dial-label c">Sicurezza</span>
+          <span class="dial-label d">Mappa</span>
+          <div class="dial-core"><strong>04</strong><span>PASSI COMPLETATI</span></div>
+        </div>
+      </div>
+
+      <div class="metric-strip" aria-label="Dimensioni principali del progetto">
+        <div class="metric"><strong>4.231</strong><span class="metric-label">file C#</span></div>
+        <div class="metric"><strong>1.673</strong><span class="metric-label">file TypeScript</span></div>
+        <div class="metric"><strong>58</strong><span class="metric-label">progetti in soluzione</span></div>
+        <div class="metric"><strong>14</strong><span class="metric-label">dipendenze esterne</span></div>
+      </div>
+    </section>
+
+    <div class="timeline">
+      <section class="section" id="ricognizione">
+        <div class="shell">
+          <div class="section-header reveal">
+            <div class="step-index">Passo 01 / 04</div>
+            <div><h2 class="section-title">Ricognizione</h2><p class="section-lead">Il contenuto è una piattaforma gestionale enterprise, non una singola applicazione: combina back-office, operatività mobile, integrazioni e automazioni.</p></div>
+          </div>
+
+          <div class="architecture reveal">
+            <article class="panel channel"><span class="micro">Back-office</span><h3>Desk Web</h3><p>ASP.NET Core 8, Angular 20 e Kendo UI per amministrazione e attività operative.</p></article>
+            <article class="panel channel"><span class="micro">Sul campo</span><h3>App mobile</h3><p>Android .NET 9, componenti condivisi e SQLite per stato locale e sincronizzazione.</p></article>
+            <article class="panel channel"><span class="micro">Integrazione</span><h3>API</h3><p>External API .NET 6, API legacy .NET Framework e contratti DTO condivisi.</p></article>
+            <article class="panel channel"><span class="micro">Automazione</span><h3>Job</h3><p>Scheduler Windows per report, import, posta, notifiche, geocodifica e sincronizzazioni.</p></article>
+          </div>
+
+          <div class="domain-shortcuts reveal" aria-label="Scorciatoie alla mappa funzionale">
+            <button class="domain-link" type="button" data-jump-domain="crm">CRM</button>
+            <button class="domain-link" type="button" data-jump-domain="issue">Ticket</button>
+            <button class="domain-link" type="button" data-jump-domain="maintenance">Manutenzione</button>
+            <button class="domain-link" type="button" data-jump-domain="products">Prodotti</button>
+            <button class="domain-link" type="button" data-jump-domain="warehouse">Magazzino</button>
+            <button class="domain-link" type="button" data-jump-domain="production">Produzione</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="guida">
+        <div class="shell">
+          <div class="section-header reveal">
+            <div class="step-index">Passo 02 / 04</div>
+            <div><h2 class="section-title">Guida ricostruita</h2><p class="section-lead">Dal codice sono stati ricavati utenti, canali, moduli, processi, tecnologie e limiti della copia disponibile.</p></div>
+          </div>
+
+          <div class="guide-layout">
+            <article class="panel guide-card reveal"><h3>Cosa gestisce</h3><ul><li>Clienti, fornitori, sedi e contatti</li><li>Ticket, priorità, workflow e pianificazione</li><li>Impianti, manutenzioni, tempi e ricambi</li><li>Prodotti, listini, documenti e magazzino</li></ul></article>
+            <article class="panel guide-card reveal"><h3>Come opera</h3><ul><li>Menu e azioni dipendono dai ruoli</li><li>Il mobile mantiene uno stato locale</li><li>Le API integrano sistemi esterni</li><li>I job eseguono processi asincroni</li></ul></article>
+            <article class="panel guide-card wide reveal">
+              <div><span class="eyebrow">Documento prodotto</span><h3>357 righe di guida funzionale e tecnica</h3></div>
+              <div><p>La guida distingue ciò che è confermato nel codice da ciò che richiede database, licenza o ambiente attivo. Include anche glossario, prerequisiti e tracciabilità delle fonti.</p><a class="button document-link" href="Guida_Smart1.md">Apri la guida completa</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sicurezza">
+        <div class="shell">
+          <div class="section-header reveal">
+            <div class="step-index">Passo 03 / 04</div>
+            <div><h2 class="section-title">Sicurezza</h2><p class="section-lead">La revisione statica preliminare rileva un rischio complessivo alto. Le priorità immediate riguardano segreti, autenticazione e controllo degli accessi.</p></div>
+          </div>
+
+          <div class="security-summary">
+            <article class="panel risk-board reveal">
+              <h3>15 rilievi confermati</h3>
+              <div class="risk-bars" aria-label="Distribuzione dei rilievi per severità">
+                <div class="risk-row critical"><span>Critici</span><div class="bar"><i style="width:50%"></i></div><strong>3</strong></div>
+                <div class="risk-row high"><span>Alti</span><div class="bar"><i style="width:100%"></i></div><strong>6</strong></div>
+                <div class="risk-row medium"><span>Medi</span><div class="bar"><i style="width:83.33%"></i></div><strong>5</strong></div>
+                <div class="risk-row low"><span>Bassi</span><div class="bar"><i style="width:16.66%"></i></div><strong>1</strong></div>
+              </div>
+            </article>
+            <article class="panel priority-note reveal"><span class="micro">Priorità 24–72 ore</span><h3>Ruotare. Chiudere. Autenticare.</h3><p>Ruotare credenziali e chiavi; proteggere allegati e upload legacy; rimuovere il bypass debugger; autenticare SignalR; revocare token esposti nei log.</p></article>
+          </div>
+
+          <div class="security-controls reveal" role="group" aria-label="Filtra i rilievi">
+            <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Tutti</button>
+            <button class="filter-button" type="button" data-filter="critical" aria-pressed="false">Critici</button>
+            <button class="filter-button" type="button" data-filter="high" aria-pressed="false">Alti</button>
+            <button class="filter-button" type="button" data-filter="medium" aria-pressed="false">Medi</button>
+            <button class="filter-button" type="button" data-filter="low" aria-pressed="false">Bassi</button>
+          </div>
+
+          <div class="findings" id="findings-list">
+            <article class="panel finding" data-severity="critical"><div class="finding-head"><span class="finding-id">SEC-01</span><span class="tag critical">Critica</span></div><h3>Segreti nel sorgente</h3><p>Credenziali SQL, script di build e valori sensibili inclusi nelle configurazioni.</p></article>
+            <article class="panel finding" data-severity="critical"><div class="finding-head"><span class="finding-id">SEC-02</span><span class="tag critical">Critica</span></div><h3>Token legacy riproducibili</h3><p>Chiavi statiche e formato proprietario permettono la costruzione di token validi.</p></article>
+            <article class="panel finding" data-severity="critical"><div class="finding-head"><span class="finding-id">SEC-03</span><span class="tag critical">Critica</span></div><h3>Allegati non protetti</h3><p>Download legacy per GUID senza controllo evidente di autenticazione e ownership.</p></article>
+            <article class="panel finding" data-severity="high"><div class="finding-head"><span class="finding-id">SEC-04</span><span class="tag high">Alta</span></div><h3>Rimozione upload</h3><p>Metodo di cancellazione privo dell’attributo di autorizzazione usato dal salvataggio.</p></article>
+            <article class="panel finding" data-severity="high"><div class="finding-head"><span class="finding-id">SEC-05</span><span class="tag high">Alta</span></div><h3>Bypass con debugger</h3><p>L’External API seleziona un account fisso senza validare token quando trova il debugger.</p></article>
+            <article class="panel finding" data-severity="high"><div class="finding-head"><span class="finding-id">SEC-06</span><span class="tag high">Alta</span></div><h3>SignalR anonimo</h3><p>Un client anonimo può tentare di trasmettere notifiche a tutti i collegati.</p></article>
+            <article class="panel finding" data-severity="high"><div class="finding-head"><span class="finding-id">SEC-07</span><span class="tag high">Alta</span></div><h3>Stored XSS</h3><p>Dati applicativi vengono concatenati e assegnati direttamente a innerHTML.</p></article>
+            <article class="panel finding" data-severity="high"><div class="finding-head"><span class="finding-id">SEC-08</span><span class="tag high">Alta</span></div><h3>Dati sensibili nei log</h3><p>Token non validi e request serializzate possono essere registrati integralmente.</p></article>
+            <article class="panel finding" data-severity="high"><div class="finding-head"><span class="finding-id">SEC-09</span><span class="tag high">Alta</span></div><h3>.NET 6 fuori supporto</h3><p>L’External API usa un runtime che non riceve più aggiornamenti di sicurezza.</p></article>
+            <article class="panel finding" data-severity="medium"><div class="finding-head"><span class="finding-id">SEC-10</span><span class="tag medium">Media</span></div><h3>Deserializzazione rischiosa</h3><p>Newtonsoft usa TypeNameHandling.All sui file di stato locali.</p></article>
+            <article class="panel finding" data-severity="medium"><div class="finding-head"><span class="finding-id">SEC-11</span><span class="tag medium">Media</span></div><h3>Plugin senza verifica</h3><p>Le DLL PERS sono caricate automaticamente senza firma o hash visibili.</p></article>
+            <article class="panel finding" data-severity="medium"><div class="finding-head"><span class="finding-id">SEC-12</span><span class="tag medium">Media</span></div><h3>Swagger e HTTPS</h3><p>Swagger è sempre disponibile e l’app non impone direttamente HTTPS.</p></article>
+            <article class="panel finding" data-severity="medium"><div class="finding-head"><span class="finding-id">SEC-13</span><span class="tag medium">Media</span></div><h3>Upload in memoria</h3><p>I file vengono caricati interamente in RAM e manca una validazione completa del contenuto.</p></article>
+            <article class="panel finding" data-severity="medium"><div class="finding-head"><span class="finding-id">SEC-14</span><span class="tag medium">Media</span></div><h3>Processi da database</h3><p>Lo scheduler avvia eseguibili e argomenti configurati nei job.</p></article>
+            <article class="panel finding" data-severity="low"><div class="finding-head"><span class="finding-id">SEC-15</span><span class="tag low">Bassa</span></div><h3>Chiave Firebase client</h3><p>La chiave incorporata richiede verifica delle restrizioni in Google/Firebase.</p></article>
+          </div>
+
+          <div class="hero-actions reveal"><a class="button" href="Valutazione_Sicurezza_Smart1.md">Apri il report completo</a></div>
+        </div>
+      </section>
+
+      <section class="section" id="mappa">
+        <div class="shell">
+          <div class="section-header reveal">
+            <div class="step-index">Passo 04 / 04</div>
+            <div><h2 class="section-title">Mappa funzionale</h2><p class="section-lead">Il cuore della piattaforma collega il cliente all’impianto e trasforma una richiesta in un intervento tracciato, consuntivato e comunicato.</p></div>
+          </div>
+
+          <div class="panel functional-flow reveal" aria-label="Flusso operativo principale">
+            <div class="flow-step"><strong>Cliente</strong><span>CRM</span></div><div class="flow-arrow"></div>
+            <div class="flow-step"><strong>Sede</strong><span>Destinazione</span></div><div class="flow-arrow"></div>
+            <div class="flow-step"><strong>Impianto</strong><span>Bene</span></div><div class="flow-arrow"></div>
+            <div class="flow-step"><strong>Ticket</strong><span>Richiesta</span></div><div class="flow-arrow"></div>
+            <div class="flow-step"><strong>Intervento</strong><span>Attività</span></div><div class="flow-arrow"></div>
+            <div class="flow-step"><strong>Consuntivo</strong><span>Tempi · ricambi</span></div><div class="flow-arrow"></div>
+            <div class="flow-step"><strong>Output</strong><span>Report · notifiche</span></div>
+          </div>
+
+          <div class="map-layout">
+            <div class="domain-grid reveal" role="group" aria-label="Seleziona un dominio funzionale">
+              <button class="domain-button" type="button" data-domain="crm" aria-pressed="true"><span>01</span><strong>CRM</strong></button>
+              <button class="domain-button" type="button" data-domain="issue" aria-pressed="false"><span>02</span><strong>Ticket e assistenza</strong></button>
+              <button class="domain-button" type="button" data-domain="maintenance" aria-pressed="false"><span>03</span><strong>Impianti e manutenzione</strong></button>
+              <button class="domain-button" type="button" data-domain="products" aria-pressed="false"><span>04</span><strong>Prodotti e promozioni</strong></button>
+              <button class="domain-button" type="button" data-domain="warehouse" aria-pressed="false"><span>05</span><strong>Documenti e magazzino</strong></button>
+              <button class="domain-button" type="button" data-domain="production" aria-pressed="false"><span>06</span><strong>Produzione</strong></button>
+              <button class="domain-button" type="button" data-domain="attendance" aria-pressed="false"><span>07</span><strong>Presenze</strong></button>
+              <button class="domain-button" type="button" data-domain="communications" aria-pressed="false"><span>08</span><strong>Comunicazioni e report</strong></button>
+              <button class="domain-button" type="button" data-domain="administration" aria-pressed="false"><span>09</span><strong>Amministrazione</strong></button>
+            </div>
+
+            <article class="panel domain-detail reveal" aria-live="polite">
+              <span class="micro" id="domain-code">Dominio 01</span>
+              <h3 id="domain-title">CRM</h3>
+              <ul id="domain-functions"></ul>
+              <div class="domain-meta">
+                <div><span>Canali</span><strong id="domain-channels"></strong></div>
+                <div><span>Riceve da</span><strong id="domain-inputs"></strong></div>
+                <div><span>Alimenta</span><strong id="domain-outputs"></strong></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="panel platform-layers reveal">
+            <div class="platform-row"><span class="layer-label">Accesso</span><div class="layer-items"><span>Desk Web</span><span>App mobile</span><span>External / Legacy API</span><span>Job Scheduler</span></div></div>
+            <div class="platform-row"><span class="layer-label">Trasversali</span><div class="layer-items"><span>Account e ruoli</span><span>Licenze</span><span>Allegati</span><span>Sincronizzazione</span><span>Importazioni</span><span>SignalR</span></div></div>
+            <div class="platform-row"><span class="layer-label">Dati</span><div class="layer-items"><span>SQL Server / WebHarbor</span><span>SQLite mobile</span><span>Arca</span><span>Algoma</span><span>AWSyncManager</span><span>Geocoding e push</span></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" id="approfondimenti">
+      <div class="shell">
+        <div class="section-header reveal">
+          <div class="step-index">Estensione / 10 punti</div>
+          <div><h2 class="section-title">Dalla mappa al piano operativo</h2><p class="section-lead">Dieci viste aggiuntive trasformano la ricognizione in uno strumento per governance, sviluppo, test e messa in sicurezza.</p></div>
+        </div>
+
+        <nav class="deep-index reveal" aria-label="Indice degli approfondimenti">
+          <a href="#ruoli"><small>01</small><strong>Ruoli e funzioni</strong></a>
+          <a href="#flussi"><small>02</small><strong>Flussi operativi</strong></a>
+          <a href="#dati"><small>03</small><strong>Mappa dati</strong></a>
+          <a href="#api"><small>04</small><strong>Inventario API</strong></a>
+          <a href="#distribuzione"><small>05</small><strong>Distribuzione</strong></a>
+          <a href="#piano-sicurezza"><small>06</small><strong>Piano sicurezza</strong></a>
+          <a href="#test"><small>07</small><strong>Strategia test</strong></a>
+          <a href="#tecnologie"><small>08</small><strong>Tecnologie</strong></a>
+          <a href="#pers"><small>09</small><strong>Personalizzazioni</strong></a>
+          <a href="#schermate"><small>10</small><strong>Schermate reali</strong></a>
+        </nav>
+
+        <section class="subsection" id="ruoli">
+          <div class="subsection-head reveal"><span class="subsection-number">01 / RUOLI</span><div><h3 class="subsection-title">Matrice ruoli–funzioni</h3><p class="subsection-copy">Smart.1 configura menu e controlli per ruolo. Senza il database non è possibile ricostruire i ruoli effettivi: questa matrice è una baseline organizzativa, non una fotografia dei permessi installati.</p></div></div>
+          <div class="status-note reveal"><strong>Da validare</strong> · sostituire gli archetipi con ruoli e assegnazioni estratti dal database di test.</div>
+          <div class="table-wrap reveal">
+            <table>
+              <thead><tr><th>Dominio</th><th class="center">Amministratore</th><th class="center">Back-office</th><th class="center">Responsabile service</th><th class="center">Tecnico</th><th class="center">Account API</th></tr></thead>
+              <tbody>
+                <tr><td>Configurazione e ruoli</td><td class="center access-full">G</td><td class="center access-none">—</td><td class="center access-read">L</td><td class="center access-none">—</td><td class="center access-none">—</td></tr>
+                <tr><td>Clienti e sedi</td><td class="center access-full">G</td><td class="center access-full">G</td><td class="center access-full">G</td><td class="center access-read">L</td><td class="center access-operate">O</td></tr>
+                <tr><td>Ticket e calendario</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-operate">O</td></tr>
+                <tr><td>Impianti e manutenzioni</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-operate">O</td></tr>
+                <tr><td>Prodotti e listini</td><td class="center access-full">G</td><td class="center access-full">G</td><td class="center access-read">L</td><td class="center access-read">L</td><td class="center access-operate">O</td></tr>
+                <tr><td>Documenti e magazzino</td><td class="center access-full">G</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-operate">O</td><td class="center access-operate">O</td></tr>
+                <tr><td>Produzione e presenze</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-none">—</td></tr>
+                <tr><td>Job, import e report</td><td class="center access-full">G</td><td class="center access-operate">O</td><td class="center access-operate">O</td><td class="center access-read">L</td><td class="center access-none">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="micro reveal">Legenda · G gestione · O operatività limitata · L lettura · — non previsto nella baseline</p>
+        </section>
+
+        <section class="subsection" id="flussi">
+          <div class="subsection-head reveal"><span class="subsection-number">02 / FLUSSI</span><div><h3 class="subsection-title">Sei processi end-to-end</h3><p class="subsection-copy">Ogni flusso collega azione, attore e controllo atteso. Seleziona un processo per seguirne la sequenza.</p></div></div>
+          <div class="workflow-picker reveal" role="group" aria-label="Seleziona un flusso">
+            <button type="button" data-workflow="ticket" aria-pressed="true">Ticket</button>
+            <button type="button" data-workflow="maintenance" aria-pressed="false">Manutenzione programmata</button>
+            <button type="button" data-workflow="field" aria-pressed="false">Intervento tecnico</button>
+            <button type="button" data-workflow="warehouse" aria-pressed="false">Magazzino</button>
+            <button type="button" data-workflow="sync" aria-pressed="false">Sincronizzazione mobile</button>
+            <button type="button" data-workflow="jobs" aria-pressed="false">Import e job</button>
+          </div>
+          <article class="panel workflow-board reveal" aria-live="polite"><h4 class="workflow-title" id="workflow-title">Ticket e assistenza</h4><div class="workflow-steps" id="workflow-steps"></div></article>
+        </section>
+
+        <section class="subsection" id="dati">
+          <div class="subsection-head reveal"><span class="subsection-number">03 / DATI</span><div><h3 class="subsection-title">Mappa concettuale dei dati</h3><p class="subsection-copy">Le relazioni sono ricavate dai DTO e dalle entità di sincronizzazione. Non rappresentano ancora cardinalità e vincoli fisici del database.</p></div></div>
+          <div class="status-note confirmed reveal"><strong>Confermato</strong> · i collegamenti principali ricorrono nei modelli condivisi; cardinalità e cancellazioni richiedono lo schema SQL.</div>
+          <div class="entity-layout">
+            <div class="panel entity-network reveal" role="group" aria-label="Entità principali">
+              <button class="entity-node" type="button" data-entity="customer" aria-pressed="true">Cliente</button>
+              <button class="entity-node" type="button" data-entity="destination" aria-pressed="false">Sede</button>
+              <button class="entity-node" type="button" data-entity="plant" aria-pressed="false">Impianto</button>
+              <button class="entity-node" type="button" data-entity="issue" aria-pressed="false">Ticket</button>
+              <button class="entity-node" type="button" data-entity="maintenance" aria-pressed="false">Manutenzione</button>
+              <button class="entity-node" type="button" data-entity="product" aria-pressed="false">Prodotto</button>
+              <button class="entity-node" type="button" data-entity="document" aria-pressed="false">Documento</button>
+              <button class="entity-node" type="button" data-entity="warehouse" aria-pressed="false">Magazzino</button>
+            </div>
+            <article class="panel entity-detail reveal" aria-live="polite"><span class="eyebrow">Entità selezionata</span><h4 id="entity-title">Cliente</h4><p id="entity-description"></p><ul class="relationship-list" id="entity-relationships"></ul></article>
+          </div>
+        </section>
+
+        <section class="subsection" id="api">
+          <div class="subsection-head reveal"><span class="subsection-number">04 / API</span><div><h3 class="subsection-title">Inventario External API</h3><p class="subsection-copy">54 controller confermati. I controller CRUD ereditano Get, Post, Put e operazioni bulk; i controller Read espongono la consultazione. Le azioni personalizzate richiedono verifica sullo Swagger runtime.</p></div></div>
+          <div class="status-note confirmed reveal"><strong>Confermato</strong> · autenticazione JWT a middleware e permessi controller/metodo sui CRUD base.</div>
+          <div class="api-toolbar reveal"><input id="api-search" type="search" placeholder="Cerca controller o area" aria-label="Cerca nell'inventario API"><select id="api-mode" aria-label="Filtra modalità"><option value="all">Tutte le modalità</option><option value="CRUD">CRUD</option><option value="Read">Sola lettura</option></select><span class="api-count" id="api-count">54 controller</span></div>
+          <div class="table-wrap reveal"><table class="api-table"><thead><tr><th>Area</th><th>Controller</th><th>Modalità rilevata</th><th>Contratto base</th></tr></thead><tbody id="api-body"></tbody></table></div>
+        </section>
+
+        <section class="subsection" id="distribuzione">
+          <div class="subsection-head reveal"><span class="subsection-number">05 / DEPLOY</span><div><h3 class="subsection-title">Architettura di distribuzione</h3><p class="subsection-copy">Vista logica ricavata dal codice. Host, segmentazione di rete, bilanciamento e alta affidabilità devono essere verificati sull’infrastruttura reale.</p></div></div>
+          <div class="deployment reveal">
+            <article class="panel deployment-tier"><h4>Utenti e sistemi</h4><div class="deployment-nodes"><span>Browser operatori</span><span>Android tecnici</span><span>ERP / partner</span><span>Amministratori</span></div></article>
+            <article class="panel deployment-tier"><h4>Front door</h4><div class="deployment-nodes"><span>IIS / reverse proxy</span><span>TLS e routing da validare</span><span>Autenticazione Forms / Windows / Entra</span></div></article>
+            <article class="panel deployment-tier"><h4>Applicazioni</h4><div class="deployment-nodes"><span>Desk .NET 8 + Angular</span><span>External API .NET 6</span><span>Web API .NET Framework 4.8</span><span>Plugin PERS</span></div></article>
+            <article class="panel deployment-tier"><h4>Servizi</h4><div class="deployment-nodes"><span>Job Scheduler</span><span>Report generator</span><span>SignalR</span><span>Logging FirstAid</span></div></article>
+            <article class="panel deployment-tier"><h4>Dati e terze parti</h4><div class="deployment-nodes"><span>SQL Server / WebHarbor</span><span>SQLite device</span><span>Arca</span><span>Algoma</span><span>AWSyncManager</span><span>Google / Firebase</span></div></article>
+          </div>
+        </section>
+
+        <section class="subsection" id="piano-sicurezza">
+          <div class="subsection-head reveal"><span class="subsection-number">06 / REMEDIATION</span><div><h3 class="subsection-title">Piano di sicurezza operativo</h3><p class="subsection-copy">Tutti i rilievi sono inizialmente aperti. Responsabili e scadenze sono proposte operative da assegnare formalmente.</p></div></div>
+          <div class="roadmap reveal">
+            <article class="panel roadmap-column"><h4>0–72 ore</h4><ol><li>Ruotare credenziali e chiavi</li><li>Chiudere download allegati anonimo</li><li>Proteggere rimozione upload</li><li>Eliminare bypass debugger</li><li>Autenticare SignalR</li></ol></article>
+            <article class="panel roadmap-column"><h4>Entro 2 settimane</h4><ol><li>Migrare token proprietari</li><li>Correggere sink XSS</li><li>Redigere logging e log storici</li><li>Limitare upload e Swagger</li><li>Proteggere plugin ed eseguibili</li></ol></article>
+            <article class="panel roadmap-column"><h4>Entro 2 mesi</h4><ol><li>Aggiornare External API</li><li>Integrare SAST e secret scan</li><li>Aggiungere test negativi</li><li>Ridurre privilegi SQL/servizi</li><li>Eseguire penetration test</li></ol></article>
+          </div>
+          <div class="table-wrap reveal" style="margin-top:18px"><table><thead><tr><th>ID</th><th>Intervento</th><th>Responsabile proposto</th><th>Verifica di chiusura</th><th>Stato</th></tr></thead><tbody>
+            <tr><td>SEC-01/02</td><td>Segreti e token</td><td>Security + backend</td><td>Rotazione, revoca, test token</td><td><span class="tag critical">Aperto</span></td></tr>
+            <tr><td>SEC-03/04</td><td>Allegati e upload</td><td>Backend legacy</td><td>Test 401/403 e ownership</td><td><span class="tag critical">Aperto</span></td></tr>
+            <tr><td>SEC-05/06</td><td>Debugger e SignalR</td><td>Backend + DevOps</td><td>Test anonimo e ruolo emittente</td><td><span class="tag high">Aperto</span></td></tr>
+            <tr><td>SEC-07/08</td><td>XSS e logging</td><td>Frontend + platform</td><td>Payload XSS, log redaction</td><td><span class="tag high">Aperto</span></td></tr>
+            <tr><td>SEC-09/12</td><td>Runtime, TLS, Swagger</td><td>DevOps + backend</td><td>Versione supportata, scan esterno</td><td><span class="tag high">Aperto</span></td></tr>
+            <tr><td>SEC-10/11/13/14/15</td><td>Hardening applicativo</td><td>Mobile + DevOps</td><td>Test mirati e policy allowlist</td><td><span class="tag medium">Aperto</span></td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section class="subsection" id="test">
+          <div class="subsection-head reveal"><span class="subsection-number">07 / TEST</span><div><h3 class="subsection-title">Strategia di test</h3><p class="subsection-copy">La copertura individuata è ridotta rispetto alla dimensione del sistema. La matrice privilegia rischio e continuità operativa, non una percentuale astratta.</p></div></div>
+          <div class="table-wrap reveal"><table><thead><tr><th>Area</th><th>Test prioritario</th><th>Livello</th><th>Esito minimo atteso</th><th>Priorità</th></tr></thead><tbody>
+            <tr><td>Autenticazione</td><td>Token assente, scaduto, alterato e futuro</td><td>API integration</td><td>401 senza effetti collaterali</td><td><span class="tag critical">P0</span></td></tr>
+            <tr><td>Autorizzazione</td><td>Accesso ad allegato e record di altro utente/azienda</td><td>Security integration</td><td>403 e audit event</td><td><span class="tag critical">P0</span></td></tr>
+            <tr><td>Ticket</td><td>Transizioni valide e non valide tra stati</td><td>Domain + API</td><td>Solo workflow consentiti</td><td><span class="tag high">P1</span></td></tr>
+            <tr><td>Manutenzione</td><td>Creazione, consuntivo e chiusura intervento</td><td>End-to-end</td><td>Storico e prossima scadenza coerenti</td><td><span class="tag high">P1</span></td></tr>
+            <tr><td>Magazzino</td><td>Movimenti concorrenti e disponibilità</td><td>Integration</td><td>Nessuna quantità negativa inattesa</td><td><span class="tag high">P1</span></td></tr>
+            <tr><td>Sincronizzazione</td><td>Retry, conflitto, perdita rete e duplicati</td><td>Mobile integration</td><td>Idempotenza e stato recuperabile</td><td><span class="tag high">P1</span></td></tr>
+            <tr><td>Job</td><td>Timeout, esclusività, duplicazione e crash</td><td>Service integration</td><td>Una sola esecuzione e risultato tracciato</td><td><span class="tag medium">P2</span></td></tr>
+            <tr><td>Frontend</td><td>Input HTML in descrizioni, PERS e mappe</td><td>Browser security</td><td>Nessuna esecuzione script</td><td><span class="tag high">P1</span></td></tr>
+          </tbody></table></div>
+          <p class="subsection-copy reveal">Test già individuati: login, nazioni, province, zone, impostazioni e tipi impianto; progetti app legacy per documenti e impianti.</p>
+        </section>
+
+        <section class="subsection" id="tecnologie">
+          <div class="subsection-head reveal"><span class="subsection-number">08 / STACK</span><div><h3 class="subsection-title">Stato tecnologico</h3><p class="subsection-copy">Valutazione al 4 settembre 2026. Lo stato “supportato” non garantisce che l’ultima patch sia installata.</p></div></div>
+          <div class="tech-grid">
+            <article class="panel tech-card reveal"><h4>Desk · .NET 8</h4><p>LTS in manutenzione fino al 10 novembre 2026. Pianificare subito la migrazione.</p><span class="tech-status warning">Scadenza vicina</span></article>
+            <article class="panel tech-card reveal"><h4>Android · .NET 9</h4><p>STS in manutenzione fino al 10 novembre 2026. Aggiornamento urgente da programmare.</p><span class="tech-status warning">Scadenza vicina</span></article>
+            <article class="panel tech-card reveal"><h4>External API · .NET 6</h4><p>Fuori supporto dal 12 novembre 2024.</p><span class="tech-status eol">Fuori supporto</span></article>
+            <article class="panel tech-card reveal"><h4>Angular 20</h4><p>In LTS fino al 28 novembre 2026; versione diretta 20.1.2.</p><span class="tech-status warning">LTS in scadenza</span></article>
+            <article class="panel tech-card reveal"><h4>.NET Framework 4.8</h4><p>Supportato come componente del sistema operativo Windows supportato.</p><span class="tech-status supported">Supporto legato all’OS</span></article>
+            <article class="panel tech-card reveal"><h4>UWP / iOS storici</h4><p>Progetti legacy presenti; supporto produttivo effettivo da confermare.</p><span class="tech-status warning">Da decidere</span></article>
+          </div>
+          <p class="subsection-copy reveal">Fonti: <a href="https://dotnet.microsoft.com/en-us/platform/support/policy" target="_blank" rel="noreferrer">policy .NET</a> e <a href="https://angular.dev/reference/releases" target="_blank" rel="noreferrer">release Angular</a>.</p>
+        </section>
+
+        <section class="subsection" id="pers">
+          <div class="subsection-head reveal"><span class="subsection-number">09 / PERS</span><div><h3 class="subsection-title">Standard e personalizzazioni</h3><p class="subsection-copy">Le PERS estendono il prodotto senza duplicarne il nucleo. La copia contiene esempi di test, non l’inventario delle personalizzazioni installate presso i clienti.</p></div></div>
+          <div class="pers-split">
+            <article class="panel pers-card reveal"><h4>Backend</h4><ul><li>Controller External API dedicati</li><li>Override degli schemi di ricerca</li><li>Override dei repository Issue</li><li>Azioni database e DTO aggiuntivi</li><li>DLL caricate dalla cartella Pers</li></ul></article>
+            <article class="panel pers-card reveal"><h4>Frontend</h4><ul><li>Plugin Angular compilato separatamente</li><li>Campi aggiuntivi cliente</li><li>Filtri cliente personalizzati</li><li>Template calcolati per ticket</li><li>Servizi HTTP e DTO dedicati</li></ul></article>
+          </div>
+          <div class="status-note reveal" style="margin-top:18px"><strong>Governance consigliata</strong> · catalogare per cliente: versione, moduli toccati, dipendenze, owner, test e compatibilità con ogni release standard.</div>
+        </section>
+
+        <section class="subsection" id="schermate">
+          <div class="subsection-head reveal"><span class="subsection-number">10 / UI REALE</span><div><h3 class="subsection-title">Piano delle schermate</h3><p class="subsection-copy">Nella copia non sono presenti screenshot applicativi e il sistema non è avviabile senza repository condivisi, database, configurazioni e licenze. Non vengono mostrate ricostruzioni spacciate per interfacce reali.</p></div></div>
+          <div class="screen-plan">
+            <div class="screen-empty reveal"><div><strong>Acquisizione bloccata</strong><p>Mancano 14 progetti esterni, database di test, account dimostrativi e configurazione completa.</p></div></div>
+            <article class="panel capture-list reveal"><h4>Set minimo da acquisire</h4><ol><li>Login e home per ciascun ruolo</li><li>Ricerca e dettaglio cliente</li><li>Apertura, assegnazione e chiusura ticket</li><li>Impianto e sessione di manutenzione</li><li>Documento e movimentazione magazzino</li><li>Pianificazione e consuntivo produzione</li><li>Sincronizzazione e lavoro offline mobile</li><li>Configurazione ruoli, job e report</li></ol></article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="limiti">
+      <div class="shell">
+        <div class="section-header reveal">
+          <div class="step-index">Perimetro</div>
+          <div><h2 class="section-title">Cosa resta da validare</h2><p class="section-lead">L’analisi è solida sul codice disponibile, ma alcuni comportamenti dipendono dall’installazione reale.</p></div>
+        </div>
+        <div class="limits">
+          <article class="panel limit-card reveal"><h3>Ambiente</h3><ul><li>Avvio con database di test</li><li>Licenze e moduli effettivamente attivi</li><li>Ruoli reali e personalizzazioni PERS</li><li>Configurazione IIS, proxy e rete</li></ul></article>
+          <article class="panel limit-card reveal"><h3>Verifiche successive</h3><ul><li>Walkthrough delle schermate</li><li>Scansione completa delle dipendenze</li><li>Test automatici sui flussi critici</li><li>Penetration test autorizzato</li></ul></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner"><span><strong>Smart.1</strong> · dossier ricavato dal codice in C:\SMART</span><span>Analisi statica · 4 settembre 2026</span></div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      const storedTheme = localStorage.getItem('smart1-dossier-theme');
+      if (storedTheme === 'dark') root.dataset.theme = 'dark';
+
+      function updateThemeLabel() {
+        const dark = root.dataset.theme === 'dark';
+        themeToggle.setAttribute('aria-label', dark ? 'Attiva tema chiaro' : 'Attiva tema scuro');
+      }
+      updateThemeLabel();
+
+      themeToggle.addEventListener('click', () => {
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('smart1-dossier-theme', root.dataset.theme);
+        updateThemeLabel();
+      });
+
+      document.getElementById('print-report').addEventListener('click', () => window.print());
+
+      const progress = document.querySelector('.scroll-progress');
+      function updateProgress() {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        progress.style.width = (max > 0 ? scrollY / max * 100 : 0) + '%';
+      }
+      addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .08 });
+        revealItems.forEach((item) => observer.observe(item));
+      } else {
+        revealItems.forEach((item) => item.classList.add('visible'));
+      }
+
+      const filterButtons = document.querySelectorAll('[data-filter]');
+      const findings = document.querySelectorAll('.finding');
+      filterButtons.forEach((button) => button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        findings.forEach((finding) => {
+          finding.hidden = filter !== 'all' && finding.dataset.severity !== filter;
+        });
+      }));
+
+      const domains = {
+        crm: { code: 'Dominio 01', title: 'CRM', functions: ['Clienti, fornitori e prospect', 'Sedi e destinazioni', 'Contatti, contratti, stati e mappe', 'Agenti, gruppi e classificazioni'], channels: 'Desk · Mobile · API', inputs: 'Anagrafiche · ERP · Import', outputs: 'Ticket · Impianti · Documenti' },
+        issue: { code: 'Dominio 02', title: 'Ticket e assistenza', functions: ['Apertura, ricerca e assegnazione', 'Categorie, priorità, stati e workflow', 'Pianificazione, storico e commenti', 'Allegati, partecipanti e notifiche'], channels: 'Desk · Mobile · API legacy', inputs: 'Clienti · Sedi · Progetti · Impianti', outputs: 'Interventi · Calendario · Report' },
+        maintenance: { code: 'Dominio 03', title: 'Impianti e manutenzione', functions: ['Impianti, tipi, modelli e produttori', 'Piani, cicli e sessioni', 'Contatori, esiti, tempi e spese', 'Ricambi, trasferimenti e storico'], channels: 'Desk · Mobile · External API', inputs: 'Clienti · Ticket · Prodotti', outputs: 'Scadenze · Consuntivi · Magazzino' },
+        products: { code: 'Dominio 04', title: 'Prodotti e promozioni', functions: ['Prodotti, alias, marchi e unità', 'Lotti, immagini e attributi', 'Classi, gruppi, listini e prezzi', 'Promozioni avanzate e kit'], channels: 'Desk · Mobile · External API', inputs: 'ERP · Import · Configurazione commerciale', outputs: 'Documenti · Magazzino · Ricambi' },
+        warehouse: { code: 'Dominio 05', title: 'Documenti e magazzino', functions: ['Documenti, righe e spedizioni', 'Magazzini, ubicazioni e quantità', 'Movimenti, vettori e trasporto', 'QR, barcode e stampa'], channels: 'Desk · Mobile · External API', inputs: 'Clienti · Prodotti · Lotti · Impianti', outputs: 'Movimenti · Spedizioni · Pagamenti' },
+        production: { code: 'Dominio 06', title: 'Produzione', functions: ['Pianificazione della produzione', 'Fasi e postazioni di lavoro', 'Rilevazione tempi', 'Controllo produzione e pause'], channels: 'Desk', inputs: 'Prodotti · Risorse · Piani', outputs: 'Timesheet · Avanzamento · Consuntivi' },
+        attendance: { code: 'Dominio 07', title: 'Presenze', functions: ['Inserimento presenze', 'Righe e dettaglio attività', 'Ricerca e consultazione', 'Registrazione mobile'], channels: 'Desk · Mobile', inputs: 'Account · Calendario · Attività', outputs: 'Consuntivi · Report' },
+        communications: { code: 'Dominio 08', title: 'Comunicazioni e report', functions: ['Template e coda e-mail', 'Notifiche ticket e push', 'Allegati e miniature', 'Coda e generazione report'], channels: 'Desk · Mobile · Job Scheduler', inputs: 'Eventi di tutti i moduli', outputs: 'Utenti · Clienti · Monitoraggio' },
+        administration: { code: 'Dominio 09', title: 'Amministrazione', functions: ['Aziende, unità e territori', 'Account, ruoli, skill e permessi API', 'Progetti, tariffe e impostazioni', 'Import, job, licenze e PERS'], channels: 'Desk · Job Scheduler', inputs: 'Configurazione · Licenze', outputs: 'Regole per tutti i moduli' }
+      };
+
+      const domainButtons = document.querySelectorAll('[data-domain]');
+      const code = document.getElementById('domain-code');
+      const title = document.getElementById('domain-title');
+      const functions = document.getElementById('domain-functions');
+      const channels = document.getElementById('domain-channels');
+      const inputs = document.getElementById('domain-inputs');
+      const outputs = document.getElementById('domain-outputs');
+
+      function selectDomain(key, shouldScroll = false) {
+        const domain = domains[key];
+        if (!domain) return;
+        domainButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.domain === key)));
+        code.textContent = domain.code;
+        title.textContent = domain.title;
+        functions.replaceChildren(...domain.functions.map((value) => {
+          const item = document.createElement('li');
+          item.textContent = value;
+          return item;
+        }));
+        channels.textContent = domain.channels;
+        inputs.textContent = domain.inputs;
+        outputs.textContent = domain.outputs;
+        if (shouldScroll) document.getElementById('mappa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      domainButtons.forEach((button) => button.addEventListener('click', () => selectDomain(button.dataset.domain)));
+      document.querySelectorAll('[data-jump-domain]').forEach((button) => button.addEventListener('click', () => selectDomain(button.dataset.jumpDomain, true)));
+      selectDomain('crm');
+
+      const workflows = {
+        ticket: {
+          title: 'Ticket e assistenza',
+          steps: [
+            ['01', 'Apertura', 'Operatore / cliente', 'Cliente, sede, categoria, priorità e descrizione'],
+            ['02', 'Classificazione', 'Back-office', 'Verifica dati, SLA e competenze richieste'],
+            ['03', 'Assegnazione', 'Service manager', 'Tecnico, gruppo, agenda e notifiche'],
+            ['04', 'Lavorazione', 'Tecnico', 'Attività, commenti, tempi, ricambi e allegati'],
+            ['05', 'Risoluzione', 'Tecnico / back-office', 'Esito, consuntivo e comunicazione al cliente'],
+            ['06', 'Chiusura', 'Service manager', 'Controllo completezza, storico e reportistica']
+          ]
+        },
+        maintenance: {
+          title: 'Manutenzione programmata',
+          steps: [
+            ['01', 'Configurazione piano', 'Service manager', 'Impianto, ciclo, operazioni e frequenza'],
+            ['02', 'Calcolo scadenza', 'Sistema / job', 'Data, contatore o regola di pianificazione'],
+            ['03', 'Pianificazione', 'Back-office', 'Sessione, tecnico, agenda e materiali'],
+            ['04', 'Esecuzione', 'Tecnico', 'Controlli, misure, ricambi, tempi e spese'],
+            ['05', 'Consuntivo', 'Tecnico', 'Esito, firma, allegati e anomalie'],
+            ['06', 'Ricalcolo', 'Sistema', 'Storico impianto e prossima scadenza']
+          ]
+        },
+        field: {
+          title: 'Intervento tecnico sul campo',
+          steps: [
+            ['01', 'Preparazione', 'Back-office', 'Ticket, impianto, contatti e parti necessarie'],
+            ['02', 'Assegnazione mobile', 'Service manager', 'Agenda, priorità e informazioni operative'],
+            ['03', 'Presa in carico', 'Tecnico', 'Download dati e verifica disponibilità offline'],
+            ['04', 'Intervento', 'Tecnico', 'Tempi, operazioni, materiali, foto e note'],
+            ['05', 'Firma ed esito', 'Tecnico / cliente', 'Conferma attività e rapporto di lavoro'],
+            ['06', 'Sincronizzazione', 'App / backend', 'Invio consuntivo, gestione conflitti e chiusura']
+          ]
+        },
+        warehouse: {
+          title: 'Movimentazione di magazzino',
+          steps: [
+            ['01', 'Origine', 'Operatore', 'Documento, intervento o rettifica inventariale'],
+            ['02', 'Identificazione', 'Operatore', 'Prodotto, lotto, QR/barcode e ubicazione'],
+            ['03', 'Validazione', 'Sistema', 'Disponibilità, quantità e regole del movimento'],
+            ['04', 'Registrazione', 'Backend', 'Carico, scarico o trasferimento'],
+            ['05', 'Aggiornamento', 'Sistema', 'Giacenza e storico per sito/magazzino'],
+            ['06', 'Riconciliazione', 'Back-office', 'Controllo documento, anomalie e report']
+          ]
+        },
+        sync: {
+          title: 'Sincronizzazione mobile',
+          steps: [
+            ['01', 'Autenticazione', 'App mobile', 'Account, dispositivo e autorizzazioni'],
+            ['02', 'Download', 'App / API', 'Dati assegnati, anagrafiche e configurazioni'],
+            ['03', 'Lavoro offline', 'Tecnico', 'Modifiche locali con coda persistente'],
+            ['04', 'Riconnessione', 'App', 'Verifica rete, token e versione dati'],
+            ['05', 'Upload idempotente', 'App / API', 'Invio modifiche, allegati e retry controllati'],
+            ['06', 'Conflitti', 'Sistema / utente', 'Risoluzione, audit e conferma di sincronizzazione']
+          ]
+        },
+        jobs: {
+          title: 'Import, code e job schedulati',
+          steps: [
+            ['01', 'Attivazione', 'Scheduler / operatore', 'Frequenza, evento o richiesta manuale'],
+            ['02', 'Blocco esclusivo', 'Servizio', 'Prevenzione di esecuzioni concorrenti'],
+            ['03', 'Acquisizione', 'Job', 'File, ERP, coda e parametri di elaborazione'],
+            ['04', 'Validazione', 'Job', 'Schema, riferimenti e regole di dominio'],
+            ['05', 'Elaborazione', 'Job', 'Transazione, retry e gestione degli scarti'],
+            ['06', 'Esito', 'Job / monitoraggio', 'Log, report, notifica e possibilità di rilancio']
+          ]
+        }
+      };
+
+      const workflowButtons = document.querySelectorAll('[data-workflow]');
+      const workflowTitle = document.getElementById('workflow-title');
+      const workflowSteps = document.getElementById('workflow-steps');
+
+      function selectWorkflow(key) {
+        const workflow = workflows[key];
+        if (!workflow) return;
+        workflowButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.workflow === key)));
+        workflowTitle.textContent = workflow.title;
+        workflowSteps.replaceChildren(...workflow.steps.map(([number, name, actor, detail]) => {
+          const step = document.createElement('div');
+          step.className = 'workflow-step';
+          const marker = document.createElement('span');
+          marker.className = 'workflow-marker';
+          marker.textContent = number;
+          const content = document.createElement('div');
+          const heading = document.createElement('h5');
+          heading.textContent = name;
+          const meta = document.createElement('p');
+          meta.textContent = actor + ' · ' + detail;
+          content.append(heading, meta);
+          step.append(marker, content);
+          return step;
+        }));
+      }
+
+      workflowButtons.forEach((button) => button.addEventListener('click', () => selectWorkflow(button.dataset.workflow)));
+      selectWorkflow('ticket');
+
+      const entities = {
+        customer: { title: 'Cliente', description: 'Radice commerciale e operativa: anagrafica, stato, gruppi, contatti, note e condizioni.', relationships: ['1 → N sedi e destinazioni', '1 → N ticket e progetti', '1 → N documenti e pagamenti', '1 → N impianti tramite le sedi'] },
+        destination: { title: 'Sede / destinazione', description: 'Luogo operativo del cliente usato per consegne, impianti e interventi sul campo.', relationships: ['N → 1 cliente', '1 → N impianti', '1 → N ticket e attività', 'Collegamenti geografici a nazione, provincia e zona'] },
+        plant: { title: 'Impianto', description: 'Bene installato su cui convergono assistenza, manutenzione, ricambi e storico tecnico.', relationships: ['N → 1 cliente/sede', '1 → N manutenzioni e sessioni', '1 → N ticket', 'N ↔ N prodotti e ricambi'] },
+        issue: { title: 'Ticket', description: 'Unità di lavoro dell’assistenza, con workflow, priorità, assegnazioni, commenti e allegati.', relationships: ['N → 1 cliente e sede', 'N → 0/1 impianto', '1 → N attività, commenti e partecipanti', 'Può originare interventi e notifiche'] },
+        maintenance: { title: 'Manutenzione', description: 'Piano e consuntivo delle operazioni cicliche o a contatore eseguite sugli impianti.', relationships: ['N → 1 impianto', '1 → N sessioni e operazioni', 'N ↔ N ricambi/prodotti', 'Produce storico, esiti e nuove scadenze'] },
+        product: { title: 'Prodotto', description: 'Anagrafica di articolo con attributi, lotti, immagini, prezzi e classificazioni.', relationships: ['N ↔ N documenti tramite righe', 'N ↔ N magazzini tramite quantità', 'N ↔ N impianti/manutenzioni come ricambio', 'N ↔ N promozioni e listini'] },
+        document: { title: 'Documento', description: 'Testata transazionale con righe, valori, pagamenti, spedizione e movimenti collegati.', relationships: ['N → 1 cliente/destinazione', '1 → N righe prodotto', '1 → N pagamenti/scadenze', 'Può generare movimenti di magazzino'] },
+        warehouse: { title: 'Magazzino', description: 'Contesto fisico o logico di ubicazioni, quantità e movimenti per prodotto e lotto.', relationships: ['1 → N siti e ubicazioni', 'N ↔ N prodotti tramite giacenze', '1 → N movimenti', 'Movimenti collegabili a documenti e interventi'] }
+      };
+
+      const entityButtons = document.querySelectorAll('[data-entity]');
+      const entityTitle = document.getElementById('entity-title');
+      const entityDescription = document.getElementById('entity-description');
+      const entityRelationships = document.getElementById('entity-relationships');
+
+      function selectEntity(key) {
+        const entity = entities[key];
+        if (!entity) return;
+        entityButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.entity === key)));
+        entityTitle.textContent = entity.title;
+        entityDescription.textContent = entity.description;
+        entityRelationships.replaceChildren(...entity.relationships.map((relationship) => {
+          const item = document.createElement('li');
+          item.textContent = relationship;
+          return item;
+        }));
+      }
+
+      entityButtons.forEach((button) => button.addEventListener('click', () => selectEntity(button.dataset.entity)));
+      selectEntity('customer');
+
+      const apiControllers = [
+        ['CRM', 'Agent', 'Read'], ['Anagrafiche', 'Brand', 'CRUD'], ['Amministrazione', 'BusinessUnit', 'CRUD'],
+        ['CRM', 'Customer', 'CRUD'], ['CRM', 'CustomerContact', 'CRUD'], ['CRM', 'CustomerDestination', 'CRUD'],
+        ['CRM', 'CustomerGroup1', 'Read'], ['CRM', 'CustomerGroup2', 'Read'], ['CRM', 'CustomerGroup3', 'Read'],
+        ['CRM', 'CustomerNote', 'CRUD'], ['CRM', 'CustomerStatusType', 'CRUD'], ['Documenti', 'Document', 'CRUD'],
+        ['Documenti', 'DocumentDefinition', 'Read'], ['Documenti', 'DocumentRow', 'CRUD'], ['Documenti', 'DocumentType', 'Read'],
+        ['Documenti', 'DocumentValue', 'Read'], ['Documenti', 'ExpenseType', 'Read'], ['Documenti', 'Expiry', 'Read'],
+        ['Documenti', 'FiscalPeriod', 'Read'], ['Anagrafiche', 'MeasureUnit', 'CRUD'], ['Anagrafiche', 'Nation', 'CRUD'],
+        ['Documenti', 'NoteType', 'Read'], ['Documenti', 'Payment', 'CRUD'], ['Documenti', 'PaymentInstallment', 'CRUD'],
+        ['Manutenzione', 'PlantHistory', 'Read'], ['Manutenzione', 'PlantMaintenanceSparePart', 'Read'],
+        ['Prodotti', 'PriceList', 'Read'], ['Prodotti', 'PriceListProduct', 'Read'], ['Prodotti', 'Product', 'CRUD'],
+        ['Prodotti', 'ProductAttribute', 'Read'], ['Prodotti', 'ProductClass1', 'Read'], ['Prodotti', 'ProductClass2', 'Read'],
+        ['Prodotti', 'ProductClass3', 'Read'], ['Prodotti', 'ProductDefinition', 'Read'], ['Prodotti', 'ProductGroup1', 'CRUD'],
+        ['Prodotti', 'ProductGroup2', 'CRUD'], ['Prodotti', 'ProductGroup3', 'CRUD'], ['Prodotti', 'ProductImage', 'Read'],
+        ['Prodotti', 'ProductLot', 'Read'], ['Prodotti', 'ProductProductAttribute', 'Read'], ['Prodotti', 'ProductStatusType', 'Read'],
+        ['Prodotti', 'ProductValue', 'Read'], ['Amministrazione', 'Project', 'CRUD'],
+        ['Prodotti', 'PromotionCustomerGroupProductGroup', 'Read'], ['Prodotti', 'PromotionCustomerProductGroup', 'Read'],
+        ['Prodotti', 'PromotionProductCustomerGroup', 'Read'], ['Anagrafiche', 'Province', 'CRUD'], ['Amministrazione', 'Rate', 'CRUD'],
+        ['Magazzino', 'Warehouse', 'CRUD'], ['Magazzino', 'WarehouseMovement', 'CRUD'], ['Magazzino', 'WarehouseQuantity', 'CRUD'],
+        ['Magazzino', 'WarehouseSite', 'CRUD'], ['Amministrazione', 'WarningLog', 'CRUD'], ['Anagrafiche', 'Zone', 'CRUD']
+      ];
+
+      const apiSearch = document.getElementById('api-search');
+      const apiMode = document.getElementById('api-mode');
+      const apiCount = document.getElementById('api-count');
+      const apiBody = document.getElementById('api-body');
+
+      function renderApiInventory() {
+        const query = apiSearch.value.trim().toLocaleLowerCase('it');
+        const mode = apiMode.value;
+        const filtered = apiControllers.filter(([area, name, controllerMode]) => {
+          const matchesQuery = !query || (area + ' ' + name).toLocaleLowerCase('it').includes(query);
+          return matchesQuery && (mode === 'all' || controllerMode === mode);
+        });
+        apiCount.textContent = filtered.length + ' di ' + apiControllers.length + ' controller';
+        apiBody.replaceChildren(...filtered.map(([area, name, controllerMode]) => {
+          const row = document.createElement('tr');
+          [area, name + 'Controller', controllerMode, controllerMode === 'CRUD' ? 'GET · POST · PUT · BULK' : 'GET'].forEach((value, index) => {
+            const cell = document.createElement('td');
+            if (index === 2) {
+              const badge = document.createElement('span');
+              badge.className = 'tag ' + (controllerMode === 'CRUD' ? 'medium' : 'info');
+              badge.textContent = value;
+              cell.append(badge);
+            } else {
+              cell.textContent = value;
+            }
+            row.append(cell);
+          });
+          return row;
+        }));
+      }
+
+      apiSearch.addEventListener('input', renderApiInventory);
+      apiMode.addEventListener('change', renderApiInventory);
+      renderApiInventory();
+    })();
+  </script>
+</body>
+</html>
