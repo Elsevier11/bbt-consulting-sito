@@ -345,7 +345,8 @@
   }
   .gami-row {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) minmax(3.5rem, 5.5rem) 2rem;
+    gap: 0.7rem;
     align-items: center;
     font-size: 0.88rem;
     padding-bottom: 0.5rem;
@@ -353,7 +354,28 @@
   }
   .gami-row:last-child { border-bottom: none; padding-bottom: 0; }
   .gami-row-name { color: var(--ink); }
-  .gami-row-count { color: var(--teal); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .gami-row-track {
+    display: block;
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .gami-row-fill {
+    display: block;
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+  }
+  .gami-row-count { color: var(--teal); font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+  .gami-example-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 1.1rem;
+  }
   .gami-mock-caption {
     font-size: 0.76rem;
     color: var(--ink-soft);
@@ -548,19 +570,20 @@
     <div class="gami-mock">
       <div class="gami-mock-label">
         <span>Obiettivo comune — casi reali applicati</span>
-        <strong>0 / 50</strong>
+        <strong>27 / 50</strong>
       </div>
-      <div class="gami-progress-track"><div class="gami-progress-fill" style="width: 0%;"></div></div>
+      <div class="gami-progress-track"><div class="gami-progress-fill" style="width: 54%;"></div></div>
 
+      <div class="gami-example-tag">Esempio con valori inventati</div>
       <div class="gami-board">
-        <div class="gami-row"><span class="gami-row-name">Consulenti HD</span><span class="gami-row-count">—</span></div>
-        <div class="gami-row"><span class="gami-row-name">Sistemisti</span><span class="gami-row-count">—</span></div>
-        <div class="gami-row"><span class="gami-row-name">Commerciali</span><span class="gami-row-count">—</span></div>
-        <div class="gami-row"><span class="gami-row-name">Comunicazione digitale + marketing</span><span class="gami-row-count">—</span></div>
-        <div class="gami-row"><span class="gami-row-name">Programmatori</span><span class="gami-row-count">—</span></div>
-        <div class="gami-row"><span class="gami-row-name">Amministrazione/HR</span><span class="gami-row-count">—</span></div>
+        <div class="gami-row"><span class="gami-row-name">Consulenti HD</span><span class="gami-row-track"><span class="gami-row-fill" style="width: 57%;"></span></span><span class="gami-row-count">4</span></div>
+        <div class="gami-row"><span class="gami-row-name">Sistemisti</span><span class="gami-row-track"><span class="gami-row-fill" style="width: 86%;"></span></span><span class="gami-row-count">6</span></div>
+        <div class="gami-row"><span class="gami-row-name">Commerciali</span><span class="gami-row-track"><span class="gami-row-fill" style="width: 43%;"></span></span><span class="gami-row-count">3</span></div>
+        <div class="gami-row"><span class="gami-row-name">Comunicazione digitale + marketing</span><span class="gami-row-track"><span class="gami-row-fill" style="width: 71%;"></span></span><span class="gami-row-count">5</span></div>
+        <div class="gami-row"><span class="gami-row-name">Programmatori</span><span class="gami-row-track"><span class="gami-row-fill" style="width: 100%;"></span></span><span class="gami-row-count">7</span></div>
+        <div class="gami-row"><span class="gami-row-name">Amministrazione/HR</span><span class="gami-row-track"><span class="gami-row-fill" style="width: 29%;"></span></span><span class="gami-row-count">2</span></div>
       </div>
-      <p class="gami-mock-caption">Anteprima del formato — non ancora attivo. I numeri compariranno solo a registro avviato, alimentati esclusivamente dai casi inseriti dai partecipanti.</p>
+      <p class="gami-mock-caption">Valori inventati a titolo di esempio, per mostrare come apparirebbe il registro — non ancora attivo. I numeri reali arriveranno solo dai casi inseriti dai partecipanti.</p>
     </div>
   </div>
 
