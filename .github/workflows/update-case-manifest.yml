@@ -1,0 +1,37 @@
+name: Aggiorna manifest case-insensitive
+
+on:
+  push:
+    branches-ignore:
+      - "gh-pages"
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    if: "!contains(github.event.head_commit.message, '[skip case-manifest]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rigenera functions/_case-manifest.js
+        run: node scripts/generate-case-manifest.mjs
+
+      - name: Commit se il manifest è cambiato
+        run: |
+          if git diff --quiet -- functions/_case-manifest.js; then
+            echo "Manifest già aggiornato, nessun commit necessario."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add functions/_case-manifest.js
+          git commit -m "Aggiorna functions/_case-manifest.js [skip case-manifest]"
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}

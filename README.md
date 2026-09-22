@@ -17,9 +17,9 @@ Per i percorsi custom e i rewrite lato hosting, usa [`_redirects`](/c:/Users/Pao
 Le cartelle e i file sono case-sensitive per natura (filesystem), ma `functions/_middleware.js`
 intercetta i 404 e, se l'URL corrisponde a una pagina esistente ignorando maiuscole/minuscole,
 reindirizza (301) al percorso corretto. Il mapping usato dal middleware è in
-`functions/_case-manifest.js`, generato da `scripts/generate-case-manifest.mjs`: rilanciare
-questo script (`node scripts/generate-case-manifest.mjs`) ogni volta che si aggiungono,
-rinominano o spostano pagine/cartelle, poi committare il file rigenerato.
+`functions/_case-manifest.js`, generato da `scripts/generate-case-manifest.mjs`. Il workflow
+GitHub Actions `.github/workflows/update-case-manifest.yml` lo rigenera automaticamente ad ogni
+push e, se cambia, lo committa da solo: non serve farlo a mano dopo aver aggiunto una pagina.
 
 ## Nota operativa
 
