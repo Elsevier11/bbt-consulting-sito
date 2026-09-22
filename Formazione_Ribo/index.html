@@ -159,6 +159,10 @@
     line-height: 1.3;
   }
   .module-body h3 { margin-top: 0; }
+  @media (max-width: 640px) {
+    .module { grid-template-columns: 1.6rem 1fr; gap: 0 0.7rem; }
+    .module-num { font-size: 1.05rem; }
+  }
 
   table {
     width: 100%;
@@ -195,8 +199,39 @@
     font-style: italic;
     margin: -1.3rem 0 1.6rem;
   }
-  @media (max-width: 640px) {
+  @media (min-width: 641px) and (max-width: 899px) {
     .table-hint { display: block; }
+  }
+  @media (max-width: 640px) {
+    .table-wrap { overflow-x: visible; }
+    table, thead, tbody, tr, th, td { display: block; width: 100%; }
+    thead { display: none; }
+    table { margin-top: 0; }
+    tbody tr {
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.8rem;
+    }
+    tbody tr:last-child { margin-bottom: 0; }
+    td { border-bottom: none; padding: 0.3rem 0; }
+    td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.15rem;
+    }
+    td.area {
+      font-family: 'Fraunces', serif;
+      font-size: 1.02rem;
+      color: var(--ink);
+      padding-top: 0;
+    }
+    td.area::before { display: none; }
   }
 
   .footer {
@@ -262,6 +297,40 @@
   .toc a.active { background: var(--teal); }
   @media (max-width: 1180px) {
     .toc { display: none; }
+  }
+
+  .mobile-toc {
+    display: none;
+    position: sticky;
+    top: 2px;
+    z-index: 18;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0.6rem 1.4rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mobile-toc::-webkit-scrollbar { display: none; }
+  .mobile-toc a {
+    display: inline-block;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .mobile-toc a.active {
+    color: var(--paper);
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  @media (max-width: 1180px) {
+    .mobile-toc { display: block; }
   }
 
   .module-body h3 {
@@ -384,6 +453,16 @@
     border-radius: 3px;
   }
   .gami-row-count { color: var(--teal); font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+  @media (max-width: 640px) {
+    .gami-row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "name count" "track track";
+      row-gap: 0.4rem;
+    }
+    .gami-row-name { grid-area: name; }
+    .gami-row-count { grid-area: count; }
+    .gami-row-track { grid-area: track; }
+  }
   .gami-example-tag {
     font-size: 0.68rem;
     font-weight: 600;
@@ -403,6 +482,7 @@
 <body>
 <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 <nav class="toc" id="toc"></nav>
+<nav class="mobile-toc" id="mobileToc"></nav>
 <div class="sheet">
 
   <div class="mark">Ribo</div>
@@ -547,15 +627,15 @@
   <table>
     <thead><tr><th>Modulo</th><th>Contenuto</th><th>Durata</th></tr></thead>
     <tbody>
-      <tr><td class="area">Base comune</td><td>Fase 1 — fondamenti AI, esempi pratici, rischi e GDPR, spazio domande (2-4 turni per capienza sala)</td><td>Mezza giornata a turno</td></tr>
-      <tr><td class="area">Consulenti HD</td><td>Indagine su database e creazione query</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">Sistemisti</td><td>API Atera, report da intervista, agent matrice rischi</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">Commerciali</td><td>Analisi offerte, gestione obiezioni</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">Commerciali + consulenti HD</td><td>Sessione congiunta — rassegna app su misura</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">Comunicazione digitale + marketing</td><td>Immagini, siti, post social</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">Programmatori</td><td>Skill e ottimizzazione (pubblico ristretto)</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">Amministrazione/HR</td><td>Analisi normativa e contrattualistica</td><td>Mezza giornata</td></tr>
-      <tr><td class="area">+30 giorni</td><td>Fase 4 — verifica tramite feedback pratico, per area</td><td>~1 ora cad.</td></tr>
+      <tr><td class="area" data-label="Modulo">Base comune</td><td data-label="Contenuto">Fase 1 — fondamenti AI, esempi pratici, rischi e GDPR, spazio domande (2-4 turni per capienza sala)</td><td data-label="Durata">Mezza giornata a turno</td></tr>
+      <tr><td class="area" data-label="Modulo">Consulenti HD</td><td data-label="Contenuto">Indagine su database e creazione query</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">Sistemisti</td><td data-label="Contenuto">API Atera, report da intervista, agent matrice rischi</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">Commerciali</td><td data-label="Contenuto">Analisi offerte, gestione obiezioni</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">Commerciali + consulenti HD</td><td data-label="Contenuto">Sessione congiunta — rassegna app su misura</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">Comunicazione digitale + marketing</td><td data-label="Contenuto">Immagini, siti, post social</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">Programmatori</td><td data-label="Contenuto">Skill e ottimizzazione (pubblico ristretto)</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">Amministrazione/HR</td><td data-label="Contenuto">Analisi normativa e contrattualistica</td><td data-label="Durata">Mezza giornata</td></tr>
+      <tr><td class="area" data-label="Modulo">+30 giorni</td><td data-label="Contenuto">Fase 4 — verifica tramite feedback pratico, per area</td><td data-label="Durata">~1 ora cad.</td></tr>
     </tbody>
   </table>
   </div>
@@ -566,12 +646,12 @@
   <table>
     <thead><tr><th>Ruolo</th><th>Strumenti</th></tr></thead>
     <tbody>
-      <tr><td class="area">Consulenti HD</td><td>SQL Server · MarkItDown (conversione export/report)</td></tr>
-      <tr><td class="area">Sistemisti</td><td>API di Atera · web app composizione report da intervista · agent GPT per matrice dei rischi</td></tr>
-      <tr><td class="area">Commerciali</td><td>SalesPrep (GPT)</td></tr>
-      <tr><td class="area">Comunicazione digitale + marketing</td><td>Designer di Claude Code · Image 2.5 (OpenAI) — <a href="https://youtu.be/kQoLREh2GJ8" target="_blank" rel="noopener">video 1</a>, <a href="https://youtu.be/dJ4t0CdMBXY" target="_blank" rel="noopener">video 2</a> · Codex (funzione Siti) · GPT (post social) · agent ispirato a <a href="https://bbtconsulting.it/ai" target="_blank" rel="noopener">bbtconsulting.it/ai</a></td></tr>
-      <tr><td class="area">Programmatori</td><td>Claude Code — skill: Superpowers, Design/UI, Impeccable, Find-skills, Cloudflare security-audit · MarkItDown</td></tr>
-      <tr><td class="area">Amministrazione/HR</td><td>Claude (Projects + ricerca web attiva) · MarkItDown (conversione PDF/scan normative)</td></tr>
+      <tr><td class="area" data-label="Ruolo">Consulenti HD</td><td data-label="Strumenti">SQL Server · MarkItDown (conversione export/report)</td></tr>
+      <tr><td class="area" data-label="Ruolo">Sistemisti</td><td data-label="Strumenti">API di Atera · web app composizione report da intervista · agent GPT per matrice dei rischi</td></tr>
+      <tr><td class="area" data-label="Ruolo">Commerciali</td><td data-label="Strumenti">SalesPrep (GPT)</td></tr>
+      <tr><td class="area" data-label="Ruolo">Comunicazione digitale + marketing</td><td data-label="Strumenti">Designer di Claude Code · Image 2.5 (OpenAI) — <a href="https://youtu.be/kQoLREh2GJ8" target="_blank" rel="noopener">video 1</a>, <a href="https://youtu.be/dJ4t0CdMBXY" target="_blank" rel="noopener">video 2</a> · Codex (funzione Siti) · GPT (post social) · agent ispirato a <a href="https://bbtconsulting.it/ai" target="_blank" rel="noopener">bbtconsulting.it/ai</a></td></tr>
+      <tr><td class="area" data-label="Ruolo">Programmatori</td><td data-label="Strumenti">Claude Code — skill: Superpowers, Design/UI, Impeccable, Find-skills, Cloudflare security-audit · MarkItDown</td></tr>
+      <tr><td class="area" data-label="Ruolo">Amministrazione/HR</td><td data-label="Strumenti">Claude (Projects + ricerca web attiva) · MarkItDown (conversione PDF/scan normative)</td></tr>
     </tbody>
   </table>
   </div>
@@ -612,6 +692,7 @@
   (function () {
     var sections = Array.prototype.slice.call(document.querySelectorAll('.sheet > h2[id]'));
     var toc = document.getElementById('toc');
+    var mobileToc = document.getElementById('mobileToc');
     sections.forEach(function (h2) {
       var a = document.createElement('a');
       a.href = '#' + h2.id;
@@ -624,8 +705,18 @@
         h2.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
       toc.appendChild(a);
+
+      var chip = document.createElement('a');
+      chip.href = '#' + h2.id;
+      chip.textContent = h2.textContent;
+      chip.addEventListener('click', function (e) {
+        e.preventDefault();
+        h2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      mobileToc.appendChild(chip);
     });
     var tocLinks = Array.prototype.slice.call(toc.querySelectorAll('a'));
+    var mobileLinks = Array.prototype.slice.call(mobileToc.querySelectorAll('a'));
 
     var progressBar = document.getElementById('progressBar');
 
@@ -642,11 +733,16 @@
       tocLinks.forEach(function (a, i) {
         a.classList.toggle('active', sections[i] === current);
       });
+      mobileLinks.forEach(function (a, i) {
+        a.classList.toggle('active', sections[i] === current);
+      });
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
+    var startCollapsed = window.matchMedia('(max-width: 640px)').matches;
     document.querySelectorAll('.module-body').forEach(function (body) {
+      if (startCollapsed) body.classList.add('collapsed');
       var heading = body.querySelector('h3');
       heading.setAttribute('role', 'button');
       heading.setAttribute('tabindex', '0');
