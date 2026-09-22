@@ -1,8 +1,10 @@
 // File generato automaticamente da scripts/generate-case-manifest.mjs
 // Non modificare a mano: rilanciare lo script dopo aver aggiunto/rinominato pagine.
 export default {
+  "/.github/workflows/update-case-manifest.yml": "/.github/workflows/update-case-manifest.yml",
   "/.gitignore": "/.gitignore",
   "/agente_vendita.docx": "/Agente_vendita.docx",
+  "/claude.md": "/CLAUDE.md",
   "/design.md": "/DESIGN.md",
   "/favicon/android-chrome-192x192.png": "/Favicon/android-chrome-192x192.png",
   "/favicon/android-chrome-512x512.png": "/Favicon/android-chrome-512x512.png",
