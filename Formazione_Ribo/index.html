@@ -181,7 +181,23 @@
   }
   td { color: var(--ink-soft); }
   td.area, td strong { color: var(--ink); }
-  .table-wrap { overflow-x: auto; }
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .table-wrap::-webkit-scrollbar { height: 6px; }
+  .table-wrap::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+  .table-hint {
+    display: none;
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: -1.3rem 0 1.6rem;
+  }
+  @media (max-width: 640px) {
+    .table-hint { display: block; }
+  }
 
   .footer {
     margin-top: 4rem;
@@ -543,6 +559,7 @@
     </tbody>
   </table>
   </div>
+  <p class="table-hint">Scorri orizzontalmente per vedere tutte le colonne →</p>
 
   <h2 id="promemoria">Promemoria strumenti per ruolo</h2>
   <div class="table-wrap">
@@ -558,6 +575,7 @@
     </tbody>
   </table>
   </div>
+  <p class="table-hint">Scorri orizzontalmente per vedere tutte le colonne →</p>
 
   <div class="gami-card">
     <div class="gami-head">
