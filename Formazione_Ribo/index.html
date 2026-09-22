@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Piano di formazione AI — Ribo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEEEE6;
+    --paper: #F7F6F0;
+    --ink: #1E2A2E;
+    --ink-soft: #4B5A5C;
+    --line: #D8D6C8;
+    --teal: #2C6659;
+    --teal-soft: #E4EDE9;
+    --gold: #A9782F;
+    --gold-soft: #F3E9D6;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12181A;
+      --paper: #171F21;
+      --ink: #EDEDE4;
+      --ink-soft: #ABB5B2;
+      --line: #2A3335;
+      --teal: #6FBFA8;
+      --teal-soft: #1C2C29;
+      --gold: #D8AE68;
+      --gold-soft: #2A2416;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12181A;
+    --paper: #171F21;
+    --ink: #EDEDE4;
+    --ink-soft: #ABB5B2;
+    --line: #2A3335;
+    --teal: #6FBFA8;
+    --teal-soft: #1C2C29;
+    --gold: #D8AE68;
+    --gold-soft: #2A2416;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 4.5rem 4rem 6rem;
+  }
+  @media (max-width: 640px) {
+    .sheet { padding: 3rem 1.4rem 4rem; }
+  }
+  .mark {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--teal);
+    margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.1rem, 5vw, 2.85rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.6rem;
+    max-width: 16ch;
+  }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    line-height: 1.55;
+    margin: 0 0 3.2rem;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin: 3.4rem 0 1rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.12rem;
+    margin: 1.9rem 0 0.5rem;
+    color: var(--ink);
+  }
+  p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 0.9rem;
+  }
+  ul {
+    margin: 0 0 1rem;
+    padding-left: 1.15rem;
+  }
+  li {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 0.45rem;
+    max-width: 60ch;
+  }
+  li::marker { color: var(--teal); }
+  strong { color: var(--ink); font-weight: 600; }
+  a {
+    color: var(--teal);
+    text-decoration-color: color-mix(in srgb, var(--teal) 40%, transparent);
+    text-underline-offset: 2px;
+  }
+  a:hover { text-decoration-color: var(--teal); }
+  .callout {
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.3rem;
+    margin: 1.1rem 0 1.4rem;
+    border-radius: 2px;
+  }
+  .callout p { color: var(--ink); margin: 0; font-size: 0.94rem; }
+  .callout p + p { margin-top: 0.5rem; }
+  .note {
+    border-left: 2px solid var(--line);
+    padding-left: 1.1rem;
+    margin: 1.1rem 0 1.6rem;
+  }
+  .note p { font-style: italic; font-size: 0.92rem; margin: 0; }
+
+  .module {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0 1.1rem;
+    margin: 1.9rem 0;
+  }
+  .module-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    color: var(--line);
+    line-height: 1.3;
+  }
+  .module-body h3 { margin-top: 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.6rem 0 1.8rem;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  th {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.82rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  td { color: var(--ink-soft); }
+  td.area, td strong { color: var(--ink); }
+  .table-wrap { overflow-x: auto; }
+
+  .footer {
+    margin-top: 4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: transparent;
+    z-index: 20;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: var(--teal);
+    transition: transform 0.1s linear;
+  }
+
+  .toc {
+    position: fixed;
+    top: 50%;
+    right: 1.6rem;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    z-index: 15;
+  }
+  .toc a {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line);
+    text-decoration: none;
+  }
+  .toc a .toc-label {
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    background: var(--paper);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+  .toc a:hover .toc-label { opacity: 1; }
+  .toc a.active { background: var(--teal); }
+  @media (max-width: 1180px) {
+    .toc { display: none; }
+  }
+
+  .module-body h3 {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    user-select: none;
+  }
+  .module-body h3::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid var(--ink-soft);
+    border-bottom: 1.5px solid var(--ink-soft);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-top: -3px;
+  }
+  .module-body.collapsed h3::after { transform: rotate(-45deg); margin-top: 0; }
+  .module-detail {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows 0.3s ease, opacity 0.2s ease;
+  }
+  .module-detail > div { overflow: hidden; }
+  .module-body.collapsed .module-detail {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .gami-card {
+    background: var(--teal-soft);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1.4rem 1.5rem 1.6rem;
+    margin: 0 0 3.2rem;
+  }
+  .gami-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.7rem;
+  }
+  .gami-head h2 {
+    margin: 0;
+    padding: 0;
+    border-top: none;
+    font-size: 1.28rem;
+  }
+  .gami-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--paper);
+    border: 1px solid var(--teal);
+    border-radius: 2px;
+    padding: 0.18rem 0.5rem;
+  }
+  .gami-card p { max-width: 58ch; }
+  .gami-mock {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1.1rem 1.3rem 1.3rem;
+    margin-top: 1.2rem;
+  }
+  .gami-mock-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.4rem;
+  }
+  .gami-mock-label strong { color: var(--ink); }
+  .gami-progress-track {
+    height: 8px;
+    background: var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .gami-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--teal);
+    border-radius: 4px;
+  }
+  .gami-board {
+    margin-top: 1.3rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .gami-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    font-size: 0.88rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .gami-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .gami-row-name { color: var(--ink); }
+  .gami-row-count { color: var(--teal); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .gami-mock-caption {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 1rem 0 0;
+  }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<nav class="toc" id="toc"></nav>
+<div class="sheet">
+
+  <div class="mark">Ribo</div>
+  <h1>Piano di formazione AI per il personale</h1>
+  <p class="subtitle">Le basi dell'AI in mezza giornata. Poi, un percorso su misura per ogni ruolo in azienda.</p>
+
+  <h2 id="impostazione-generale">Come funziona</h2>
+  <p>Una base comune per tutti, poi un modulo per ruolo — costruito sui casi e sugli strumenti che già usate in azienda.</p>
+  <div class="note"><p>La parte comune resta breve apposta: il valore vero è nei moduli per ruolo, dove si porta a casa qualcosa di applicabile da subito.</p></div>
+
+  <h2 id="fase-1">Fase 1 — base comune</h2>
+  <p>Mezza giornata, tre ore, aperta a tutti.</p>
+  <div class="callout">
+    <p><strong>Logistica:</strong> la sessione verrà ripetuta per gruppi diversi (2, 3 o 4 turni) per conciliare la capienza della sala riunioni con la partecipazione di tutti.</p>
+  </div>
+  <ul>
+    <li>Cos'è un LLM, cosa può e non può fare</li>
+    <li>Esempi di utilizzo pratico di chat conversazionale</li>
+    <li>Rischi concreti: allucinazioni, gestione di dati riservati, GDPR, dipendenza acritica dai risultati</li>
+    <li>Spazio per domande, risposte e proposte da parte dei partecipanti</li>
+  </ul>
+
+  <h2 id="fase-2">Fase 2 — moduli per ruolo</h2>
+  <p>Stesso schema per ogni modulo (mezza giornata, 3-4 ore): un caso reale, una dimostrazione live, un esercizio guidato — e spazio per le vostre domande.</p>
+
+  <div class="module">
+    <div class="module-num">1</div>
+    <div class="module-body">
+      <h3>Consulenti HD</h3>
+      <div class="module-detail"><div>
+      <p>Caso: da un database SQL Server, mappare le entità principali e costruire query per estrarre dati da importare altrove.</p>
+      <ul>
+        <li>Lettura dello schema del database (tabelle, relazioni, chiavi) con supporto AI</li>
+        <li>Traduzione di una richiesta in linguaggio naturale in una query SQL verificata</li>
+      </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-num">2</div>
+    <div class="module-body">
+      <h3>Sistemisti</h3>
+      <div class="module-detail"><div>
+      <p>Tre casi, eventualmente su più incontri:</p>
+      <ul>
+        <li>Estrazione dati tramite API di Atera</li>
+        <li>Web app che compone un report a partire da un'intervista strutturata</li>
+        <li>Agent (GPT) per la creazione di una matrice dei rischi — caso studio: la matrice rischio cyber NIS2 già realizzata in azienda</li>
+      </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-num">3</div>
+    <div class="module-body">
+      <h3>Commerciali</h3>
+      <div class="module-detail"><div>
+      <p>Usare l'AI per aumentare le chiusure positive delle trattative.</p>
+      <ul>
+        <li>Analisi critica di un'offerta reale con l'AI come secondo lettore</li>
+        <li>Simulazione delle obiezioni del cliente (role-play) con SalesPrep</li>
+      </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-num">4</div>
+    <div class="module-body">
+      <h3>Comunicazione digitale + marketing</h3>
+      <div class="module-detail"><div>
+      <p>Testi e immagini</p>
+      <ul>
+        <li>Gestione immagini: Designer di Claude Code, Image 2.5 di OpenAI — riferimento nei video: <a href="https://youtu.be/kQoLREh2GJ8" target="_blank" rel="noopener">video 1</a> e <a href="https://youtu.be/dJ4t0CdMBXY" target="_blank" rel="noopener">video 2</a></li>
+        <li>Creazione rapida di siti web: Codex, funzione "Siti"</li>
+        <li>Creazione rapida di post social: GPT, con ispirazione dagli agenti e specialisti di <a href="https://bbtconsulting.it/ai" target="_blank" rel="noopener">bbtconsulting.it/ai</a></li>
+      </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-num">5</div>
+    <div class="module-body">
+      <h3>Programmatori</h3>
+      <div class="module-detail"><div>
+      <p>L'AI come supporto alla programmazione e al test.</p>
+      <ul>
+        <li>Claude Code e uso delle skill per ottimizzare risultati e token</li>
+        <li>Skill installate: Superpowers (workflow/processo), Design/UI, Impeccable, Find-skills, Cloudflare security-audit</li>
+        <li>MarkItDown per la conversione di documenti in formato leggibile dall'AI</li>
+        <li>Creazione di test ricorsivi automatici</li>
+        <li>Analisi della sicurezza del codice con supporto AI (es. Cloudflare security-audit)</li>
+      </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-num">6</div>
+    <div class="module-body">
+      <h3>Amministrazione/HR</h3>
+      <div class="module-detail"><div>
+      <p>Caso: analisi di una norma, estrazione delle informazioni rilevanti, strutturazione e redazione di un contratto.</p>
+      <ul>
+        <li>Claude (con Projects, se disponibile) per caricare norme e modelli contrattuali ricorrenti come contesto fisso</li>
+        <li>Claude con ricerca web attiva per verificare la versione aggiornata di una norma</li>
+        <li>MarkItDown per convertire contratti e norme in PDF/scan in testo strutturato</li>
+      </ul>
+      <div class="note"><p>Area a rischio più alto del piano: un errore su una clausola contrattuale non si nota a colpo d'occhio come uno di stile. Dedicare 15-20 minuti espliciti alla verifica delle fonti (citazioni, riferimenti normativi verificabili) prima di passare alla pratica.</p></div>
+      </div></div>
+    </div>
+  </div>
+
+  <h2 id="commerciali-consulenti">Commerciali e consulenti HD</h2>
+  <p>Una mezza giornata insieme per vedere, dal vivo, le app già realizzate in azienda: ai commerciali serve per non perdere occasioni con i clienti, ai consulenti per capire come sono fatte.</p>
+  <ul>
+    <li>Gestione ordini CARRA</li>
+    <li>N&amp;S360 per Zerobyte (chiamata API a Gemini)</li>
+    <li>Gestione vasche CARRA (web app di logistica)</li>
+    <li>Gestione manutenzione VELLO</li>
+    <li>Gestione pipeline commerciale</li>
+  </ul>
+
+  <h2 id="fase-3">Fase 3 — follow-up</h2>
+  <p>Un'ora, tre-quattro settimane dopo l'ultimo modulo: ogni area racconta cosa ha applicato. Aiuta a intercettare chi si è bloccato, prima che diventi abitudine.</p>
+
+  <h2 id="fase-4">Fase 4 — verifica tramite feedback pratico</h2>
+  <p>Trenta giorni dopo, un incontro per area — non un questionario anonimo, ma una conversazione vera, dove emergono i blocchi reali. Tre domande guidano il confronto:</p>
+  <ul>
+    <li>Cosa hai effettivamente provato a fare con l'AI dal modulo a oggi? (un caso specifico, non "un po' di tutto")</li>
+    <li>Cosa ti ha fatto risparmiare tempo o migliorato, in modo concreto?</li>
+    <li>Dove ti sei bloccato o hai rinunciato, e perché?</li>
+  </ul>
+  <p>La terza domanda è quella che conta di più: distingue se il problema è nella formazione, nello strumento o nella motivazione — tre problemi diversi con soluzioni diverse.</p>
+  <div class="note"><p>Pur restando qualitativo, conviene annotare da qualche parte (anche solo appunti per area) chi ha detto cosa, per poter confrontare in futuro la situazione di partenza con eventuali indicatori più strutturati che si decida di introdurre in seguito.</p></div>
+
+  <h2 id="calendario">Calendario proposto</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Modulo</th><th>Contenuto</th><th>Durata</th></tr></thead>
+    <tbody>
+      <tr><td class="area">Base comune</td><td>Fase 1 — fondamenti AI, esempi pratici, rischi e GDPR, spazio domande (2-4 turni per capienza sala)</td><td>Mezza giornata a turno</td></tr>
+      <tr><td class="area">Consulenti HD</td><td>Indagine su database e creazione query</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">Sistemisti</td><td>API Atera, report da intervista, agent matrice rischi</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">Commerciali</td><td>Analisi offerte, gestione obiezioni</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">Commerciali + consulenti HD</td><td>Sessione congiunta — rassegna app su misura</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">Comunicazione digitale + marketing</td><td>Immagini, siti, post social</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">Programmatori</td><td>Skill e ottimizzazione (pubblico ristretto)</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">Amministrazione/HR</td><td>Analisi normativa e contrattualistica</td><td>Mezza giornata</td></tr>
+      <tr><td class="area">+30 giorni</td><td>Fase 4 — verifica tramite feedback pratico, per area</td><td>~1 ora cad.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="promemoria">Promemoria strumenti per ruolo</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Ruolo</th><th>Strumenti</th></tr></thead>
+    <tbody>
+      <tr><td class="area">Consulenti HD</td><td>SQL Server · MarkItDown (conversione export/report)</td></tr>
+      <tr><td class="area">Sistemisti</td><td>API di Atera · web app composizione report da intervista · agent GPT per matrice dei rischi</td></tr>
+      <tr><td class="area">Commerciali</td><td>SalesPrep (GPT)</td></tr>
+      <tr><td class="area">Comunicazione digitale + marketing</td><td>Designer di Claude Code · Image 2.5 (OpenAI) — <a href="https://youtu.be/kQoLREh2GJ8" target="_blank" rel="noopener">video 1</a>, <a href="https://youtu.be/dJ4t0CdMBXY" target="_blank" rel="noopener">video 2</a> · Codex (funzione Siti) · GPT (post social) · agent ispirato a <a href="https://bbtconsulting.it/ai" target="_blank" rel="noopener">bbtconsulting.it/ai</a></td></tr>
+      <tr><td class="area">Programmatori</td><td>Claude Code — skill: Superpowers, Design/UI, Impeccable, Find-skills, Cloudflare security-audit · MarkItDown</td></tr>
+      <tr><td class="area">Amministrazione/HR</td><td>Claude (Projects + ricerca web attiva) · MarkItDown (conversione PDF/scan normative)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gami-card">
+    <div class="gami-head">
+      <h2 id="gamification">Si vede chi la usa</h2>
+      <span class="gami-tag">Proposta da valutare</span>
+    </div>
+    <p>Creazione di una pagina web su cui, fino al 31/12, ogni collaboratore segnala un caso reale in cui ha usato l'AI: cosa ha fatto, quanto tempo ha risparmiato. Nessun numero gonfiato — solo ciò che è successo davvero, visibile a tutti in tempo reale.</p>
+    <p>Da qui nascono un obiettivo comune da raggiungere insieme e l'elenco dei casi più recenti, per area — niente classifiche individuali, solo la prova che il percorso sta funzionando.</p>
+
+    <div class="gami-mock">
+      <div class="gami-mock-label">
+        <span>Obiettivo comune — casi reali applicati</span>
+        <strong>0 / 50</strong>
+      </div>
+      <div class="gami-progress-track"><div class="gami-progress-fill" style="width: 0%;"></div></div>
+
+      <div class="gami-board">
+        <div class="gami-row"><span class="gami-row-name">Consulenti HD</span><span class="gami-row-count">—</span></div>
+        <div class="gami-row"><span class="gami-row-name">Sistemisti</span><span class="gami-row-count">—</span></div>
+        <div class="gami-row"><span class="gami-row-name">Commerciali</span><span class="gami-row-count">—</span></div>
+        <div class="gami-row"><span class="gami-row-name">Comunicazione digitale + marketing</span><span class="gami-row-count">—</span></div>
+        <div class="gami-row"><span class="gami-row-name">Programmatori</span><span class="gami-row-count">—</span></div>
+        <div class="gami-row"><span class="gami-row-name">Amministrazione/HR</span><span class="gami-row-count">—</span></div>
+      </div>
+      <p class="gami-mock-caption">Anteprima del formato — non ancora attivo. I numeri compariranno solo a registro avviato, alimentati esclusivamente dai casi inseriti dai partecipanti.</p>
+    </div>
+  </div>
+
+  <div class="footer">Ribo — piano di formazione AI per il personale</div>
+
+</div>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.sheet > h2[id]'));
+    var toc = document.getElementById('toc');
+    sections.forEach(function (h2) {
+      var a = document.createElement('a');
+      a.href = '#' + h2.id;
+      var label = document.createElement('span');
+      label.className = 'toc-label';
+      label.textContent = h2.textContent;
+      a.appendChild(label);
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        h2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      toc.appendChild(a);
+    });
+    var tocLinks = Array.prototype.slice.call(toc.querySelectorAll('a'));
+
+    var progressBar = document.getElementById('progressBar');
+
+    function onScroll() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = docHeight > 0 ? scrollTop / docHeight : 0;
+      progressBar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, ratio)) + ')';
+
+      var current = sections[0];
+      sections.forEach(function (h2) {
+        if (h2.getBoundingClientRect().top <= 120) current = h2;
+      });
+      tocLinks.forEach(function (a, i) {
+        a.classList.toggle('active', sections[i] === current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    document.querySelectorAll('.module-body').forEach(function (body) {
+      var heading = body.querySelector('h3');
+      heading.setAttribute('role', 'button');
+      heading.setAttribute('tabindex', '0');
+      heading.addEventListener('click', function () {
+        body.classList.toggle('collapsed');
+      });
+      heading.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          body.classList.toggle('collapsed');
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>

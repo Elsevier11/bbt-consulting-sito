@@ -36,3 +36,6 @@
 
 /SMART1 /SMART1/ 301
 /SMART1/* /SMART1/:splat 200
+
+/Formazione_Ribo /Formazione_Ribo/ 301
+/Formazione_Ribo/* /Formazione_Ribo/:splat 200
