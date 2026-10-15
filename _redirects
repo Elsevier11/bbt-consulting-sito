@@ -31,6 +31,12 @@
 /offerte/fresenius1 /Offerte/Fresenius1/ 301
 /offerte/fresenius1/* /Offerte/Fresenius1/:splat 200
 
+/aloven /Offerte/Aloven/ 301
+/aloven/* /Offerte/Aloven/:splat 200
+
+/offerte/aloven /Offerte/Aloven/ 301
+/offerte/aloven/* /Offerte/Aloven/:splat 200
+
 /pola /pola/ 301
 /pola/* /pola/:splat 200
 
