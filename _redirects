@@ -45,3 +45,8 @@
 
 /Formazione_Ribo /Formazione_Ribo/ 301
 /Formazione_Ribo/* /Formazione_Ribo/:splat 200
+
+/portale-b2b /Offerte/Portale-B2B/ 301
+/portale-b2b/* /Offerte/Portale-B2B/:splat 200
+/offerte/portale-b2b /Offerte/Portale-B2B/ 301
+/offerte/portale-b2b/* /Offerte/Portale-B2B/:splat 200
