@@ -1,235 +1,257 @@
 ---
 name: "BBT Consulting"
-description: "Un sistema B2B luminoso e prodotto-centrico per rendere visibili strumenti, processi e risultati operativi."
+description: "Sobrietà da società di consulenza e prodotti mostrati in azione: un ponte tra i sistemi che l'azienda ha già e le decisioni di ogni giorno."
 colors:
-  ink: "#111827"
-  text-muted: "#536074"
-  primary: "#2563EB"
-  primary-deep: "#1749B8"
-  surface-soft: "#F3F6FA"
-  border: "#DBE2EC"
-  status-success: "#0F7545"
-  white: "#FFFFFF"
+  navy: "#1A3A6B"
+  navy-deep: "#12294D"
+  cyan: "#00AEEF"
+  grey-brand: "#6B7280"
+  bg: "#F6F8FB"
+  surface: "#FFFFFF"
+  ink: "#0F2242"
+  text: "#33425A"
+  muted: "#56647A"
+  line: "#D9E0EA"
+  line-strong: "#B9C5D6"
+  cyan-wash: "#E4F5FC"
+  on-navy: "#DCE6F3"
+  on-navy-soft: "#C3D1E4"
+  status-ok: "#0F7545"
+  status-ok-bg: "#E3F3EA"
+  status-warn: "#8A5A00"
+  status-warn-bg: "#FBEFD9"
+  status-danger: "#A4262C"
+  shadow-media: "0 1px 0 rgba(15, 34, 66, .04), 0 24px 48px -28px rgba(15, 34, 66, .35)"
+  edge-media: "rgba(15, 34, 66, .08)"
+  scrim: "rgba(15, 34, 66, .78)"
+  backdrop: "rgba(8, 18, 36, .72)"
 typography:
   display:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(3rem, 5vw, 4.5rem)"
-    fontWeight: 800
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(2.6rem, 1.5rem + 4.4vw, 5.25rem)"
+    fontWeight: 600
     lineHeight: 1.02
-    letterSpacing: "-0.04em"
+    letterSpacing: "-0.025em"
   headline:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(2.25rem, 5vw, 4.8rem)"
-    fontWeight: 800
-    lineHeight: 1.02
-    letterSpacing: "-0.04em"
-  title:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "1.4rem"
-    fontWeight: 700
-    lineHeight: 1.2
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(2.1rem, 1.4rem + 2.6vw, 3.5rem)"
+    fontWeight: 600
+    lineHeight: 1.06
     letterSpacing: "-0.02em"
+  product-name:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(2rem, 1.5rem + 1.6vw, 2.75rem)"
+    fontWeight: 600
+    lineHeight: 1.05
+    letterSpacing: "-0.02em"
+  promise:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(1.2rem, 1.1rem + .4vw, 1.4rem)"
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: "normal"
+  title:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "1.35rem"
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: "normal"
   body:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "16px"
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
   label:
-    fontFamily: "Manrope, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "0.875rem"
-    fontWeight: 800
+    fontWeight: 600
     lineHeight: 1.4
-    letterSpacing: "0.08em"
+    letterSpacing: "normal"
 rounded:
-  control: "7px"
-  content: "8px"
-  card: "10px"
-  panel: "12px"
-  product-window: "13px"
   pill: "999px"
+  media: "14px"
+  small: "4px"
 spacing:
-  xs: "10px"
-  sm: "14px"
-  md: "22px"
-  lg: "28px"
-  xl: "40px"
-  xxl: "64px"
-  section: "76px"
+  gutter: "clamp(16px, 4vw, 40px)"
+  container: "1200px"
+  section: "clamp(72px, 10vw, 136px)"
+  section-head: "clamp(48px, 7vw, 96px)"
+  solution-gap: "clamp(72px, 10vw, 140px)"
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.white}"
+    backgroundColor: "{colors.navy}"
+    textColor: "{colors.surface}"
     typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "12px 19px"
+    rounded: "{rounded.pill}"
+    padding: "12px 22px"
     height: "48px"
   button-primary-hover:
-    backgroundColor: "{colors.primary-deep}"
-    textColor: "{colors.white}"
-    rounded: "{rounded.control}"
-  button-secondary:
+    backgroundColor: "{colors.navy-deep}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.pill}"
+  button-ghost:
     backgroundColor: "transparent"
-    textColor: "{colors.primary}"
+    textColor: "{colors.navy}"
     typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "12px 19px"
+    rounded: "{rounded.pill}"
+    padding: "12px 22px"
     height: "48px"
-  case-card:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.card}"
-    padding: "24px"
-  product-window:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.product-window}"
+  button-light:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.navy}"
+    rounded: "{rounded.pill}"
+    height: "48px"
+  media-frame:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.media}"
 ---
 
 # Design System: BBT Consulting
 
+> Riferimento vivo: `bozza/index.html` (nuova home approvata il 2026-11-10). Il sito pubblico `index.html` usa ancora il sistema precedente finché la bozza non viene promossa.
+
 ## Overview
 
-**Creative North Star: "La Finestra Operativa"**
+**Creative North Star: "Il Ponte"**
 
-Il sistema presenta BBT come un interlocutore B2B concreto: luminoso, ordinato e vicino al linguaggio visivo degli strumenti che la direzione usa ogni giorno. La metafora guida è una finestra operativa aperta sui processi aziendali: ogni superficie deve far capire cosa si controlla, quale passaggio viene semplificato e dove si trova il valore.
+Il marchio BBT è un ponte e il sistema lo prende alla lettera: da una parte i sistemi che l'azienda ha già (Arca Evolution, SQL Server, ERP, Excel), dall'altra le decisioni di ogni giorno; in mezzo lo strumento su misura costruito e seguito da BBT. Il ponte compare come disegno a linee nell'apertura, nella sezione Chi siamo e nella chiusura del contatto; non è decorazione, è la spiegazione del lavoro.
 
-La densità è misurata. Ampi margini e titoli netti danno autorevolezza; linee fredde, tabelle, stati e piccoli pannelli portano la concretezza del prodotto. La tecnologia rimane visibile nei meccanismi, non diventa decorazione. Sono esclusi tono dark, gradienti, glassmorphism, glow, immagini stock e metafore visive sull'intelligenza artificiale.
+Due registri convivono. La parte che racconta BBT ha la sobrietà di una società di consulenza: titoli con grazie, molto spazio, linee sottili, nessuna fotografia di repertorio. La parte che presenta i prodotti segue la logica delle pagine prodotto: un prodotto alla volta, il video protagonista, poco testo e tutto concreto.
 
 **Key Characteristics:**
 
-- B2B luminoso, ordinato e rassicurante.
-- Prodotto e processi reali prima della decorazione.
-- Gerarchia tipografica decisa con un'unica famiglia sans serif.
-- Blu usato per azioni, selezioni e avanzamento; verde riservato agli stati positivi.
-- Superfici quasi piatte, separate da linee sottili e ombre rare.
+- Luminoso e calmo: fondo bianco tinto verso il blu del marchio, mai crema o beige.
+- Navy per testi e azioni, ciano solo per linee e dettagli del ponte.
+- Titoli con grazie (Source Serif 4), testo e interfaccia in Inter.
+- Prodotti con nome proprio, mostrati in video o in anteprima d'interfaccia dichiarata come dimostrativa.
+- Superfici piatte separate da linee da 1px; un'unica ombra, riservata alle cornici dei media.
 
 ## Colors
 
-La palette combina carta bianca, inchiostro blu-nero e grigi freddi; il blu operativo concentra l'attenzione sulle azioni e sugli stati attivi.
+I colori ufficiali vengono dalle Brand Guidelines BBT (navy #1A3A6B, ciano #00AEEF, grigio #6B7280). Attorno a questi il sistema usa neutri tinti verso il navy.
 
 ### Primary
 
-- **Blu operativo:** azioni primarie, link attivi, indicatori di avanzamento e accenti nelle dimostrazioni di prodotto.
-- **Blu operativo profondo:** stato hover delle azioni principali, usato solo come variazione funzionale.
+- **Navy BBT** (`navy`): pulsanti primari, link, numeri dei passi, fondo della sezione contatto.
+- **Navy profondo** (`navy-deep`): solo stato hover delle azioni.
 
-### Tertiary
+### Accent
 
-- **Verde di conferma:** stati completati o positivi; non è un secondo colore di marca.
+- **Ciano del ponte** (`cyan`): cavi e tiranti del ponte, trattino delle aree prodotto, linea del metodo. Contrasto 2,5:1 su bianco: **mai per il testo**.
+- **Velo ciano** (`cyan-wash`): fondo dei chip informativi.
 
 ### Neutral
 
-- **Inchiostro direzionale:** testo principale e titoli ad alto contrasto.
-- **Ardesia descrittiva:** paragrafi, metadati e informazioni secondarie.
-- **Carta bianca:** fondo dominante, navigazione, schede e finestre applicative.
-- **Nebbia fredda:** fasce alternate, barre di browser e campi di supporto.
-- **Linea fredda:** separatori, bordi dei pannelli e struttura delle tabelle.
+- **Inchiostro** (`ink`): titoli. **Testo** (`text`): paragrafi (9,6:1 sul fondo). **Attenuato** (`muted`): metadati e didascalie (5,6:1).
+- **Fondo** (`bg`) e **superficie** (`surface`): le sezioni alternano i due per dare ritmo.
+- **Linea** e **linea forte**: separatori, bordi dei pulsanti secondari.
+- **Su navy** (`on-navy`, `on-navy-soft`): testi nella sezione contatto (9,0:1 e 7,3:1).
+
+### Status
+
+Verde, ambra e rosso compaiono solo dentro le anteprime d'interfaccia per stati reali (Conforme, Da completare, Fermo), mai come colori di marca.
 
 ### Named Rules
 
-**The One Operational Blue Rule.** Il blu è l'unico accento di marca: non introdurre colori diversi per distinguere servizi o pagine.
+**The Cyan Is Structure Rule.** Il ciano disegna, non scrive: linee, cavi, trattini. Ogni testo è navy, inchiostro o bianco.
 
-**The Status Is Evidence Rule.** Il verde compare solo quando comunica uno stato positivo reale dell'interfaccia, mai come riempitivo decorativo.
+**The Cool Paper Rule.** Il fondo è bianco tinto verso il navy; i fondi caldi (crema, sabbia, avorio) sono esclusi.
 
 ## Typography
 
-**Display Font:** Manrope (con fallback sans-serif)
-
-**Body Font:** Manrope (con fallback sans-serif)
-
-**Character:** Una sola famiglia geometrica e leggibile tiene insieme linguaggio consulenziale e interfacce operative. Il peso, la scala e lo spazio creano la gerarchia senza richiedere un secondo carattere decorativo.
+**Display e titoli:** Source Serif 4 (600; 500 per le promesse), fallback Georgia.
+**Testo e interfaccia:** Inter (400–600), fallback system-ui. Coerente con le Brand Guidelines aggiornate il 2026-11-10.
 
 ### Hierarchy
 
-- **Display** (800, `clamp(3rem, 5vw, 4.5rem)`, 1.02): promessa principale della home; massimo circa 12 caratteri medi per riga.
-- **Headline** (800, `clamp(2.25rem, 5vw, 4.8rem)`, 1.02): aperture di sezione con andamento compatto.
-- **Title** (700, 1.4rem, 1.2): nomi dei casi e titoli dei blocchi principali.
-- **Body** (400, 16px, 1.6): testo descrittivo; mantenere le righe tra circa 48 e 72 caratteri quando possibile.
-- **Label** (800, 0.76rem, 0.08em, maiuscolo): categorie, risultati, metadati e piccoli segnali di orientamento.
+- **Display** (600, `clamp(2.6rem, …, 5.25rem)`, 1.02): solo la frase d'apertura; seconda riga in navy.
+- **Headline** (600, `clamp(2.1rem, …, 3.5rem)`, 1.06): aperture di sezione, a sinistra; la frase di supporto sta a destra, allineata in basso.
+- **Product name** (600, `clamp(2rem, …, 2.75rem)`): nome del prodotto.
+- **Promise** (500, serif, ~1.3rem): la promessa del prodotto in una frase.
+- **Title** (600, 1.35rem): passi del metodo, principi.
+- **Body** (Inter 400, 17px, 1.6; 16px su telefono): righe tra 45 e 75 caratteri.
+- **Label** (Inter 600, 14px, minuscolo): area del prodotto, preceduta da un trattino ciano. Nessuna etichetta maiuscola spaziata.
 
 ### Named Rules
 
-**The One Voice Rule.** Tutta la comunicazione pubblica usa Manrope; la differenza tra marketing e prodotto nasce dalla gerarchia, non dal cambio di font.
+**The 14px Floor Rule.** Nessun testo leggibile sotto i 14px (eccetto i dati decorativi dentro le anteprime, marcate `aria-hidden`).
 
-**The Short Headline Rule.** I titoli principali restano brevi, compatti e leggibili in due o tre righe; non ridurre la scala per contenere testi prolissi.
+**The Typographic Apostrophe Rule.** Nel testo italiano si usano apostrofi e virgolette tipografiche (’ « »).
 
 ## Layout
 
-La home usa un contenitore centrale largo al massimo 1180px, con 20px di margine laterale minimo. Il ritmo verticale distingue apertura e contenuto: hero e CTA possono mantenere un respiro ampio, mentre le sezioni editoriali usano 76px a desktop, 62px su tablet e 44px su mobile. Il hero accosta promessa e finestra prodotto in due colonne, mentre elenchi e casi usano griglie orizzontali con separatori netti. Prima di aggiungere spazio, eliminare ripetizioni e semplici impilamenti che non fanno avanzare il racconto.
+Contenitore massimo 1200px con margine `clamp(16px, 4vw, 40px)`. Sezioni da `clamp(72px, 10vw, 136px)`. Le intestazioni di sezione usano una griglia 7/5: titolo a sinistra, frase di supporto a destra in basso.
 
-Le pagine di dettaglio restringono il contenuto editoriale a circa 900-960px e mantengono dimostrazioni di prodotto a tutta larghezza del contenitore. Sotto 1020px il hero passa a una colonna; sotto 960px la finestra prodotto diventa selettiva e i casi abbandonano la griglia a quattro colonne; sotto 760px navigazione, prove, casi, metodo e CTA diventano flussi verticali. A 390px la composizione deve restare interamente contenuta senza scorrimento orizzontale.
+I blocchi prodotto usano una griglia 7/5 (media/testo) che si alterna a sinistra e a destra; tra un prodotto e l'altro c'è uno stacco ampio. Sotto 960px tutto passa a una colonna con il media sopra il testo; il menu diventa un pannello sotto 820px. A 375px nessun elemento esce dallo schermo.
 
-**The Show, Then Explain Rule.** Nella prima schermata testo e dimostrazione operativa hanno lo stesso peso: non sostituire la finestra prodotto con fotografia, illustrazione astratta o solo testo.
+**The One Product Per View Rule.** Un prodotto occupa una "scena": media, nome, promessa, prima/dopo, con cosa si collega, cosa ottenete, demo e scheda. Niente griglie di card con più prodotti affiancati.
 
 ## Elevation & Depth
 
-Il sistema è piatto per impostazione predefinita. La profondità nasce da fondi tonali, linee da 1px e sovrapposizione controllata; l'ombra diffusa principale appartiene alla finestra prodotto. Pulsanti e casi acquistano una piccola elevazione solo in hover.
-
-### Shadow Vocabulary
-
-- **Finestra operativa** (`0 18px 48px rgba(17,24,39,.1)`): unica ombra ambientale persistente, usata per la dimostrazione prodotto principale.
-- **Azione in hover** (`0 10px 24px rgba(37,99,235,.18)`): conferma interattiva del pulsante primario.
-- **Caso in hover** (`0 14px 32px rgba(17,24,39,.07)`): sollevamento leggero delle righe cliccabili.
-
-### Named Rules
-
-**The Flat-by-Default Rule.** Le superfici a riposo sono piatte; l'ombra permanente è riservata alla finestra operativa che dimostra il prodotto.
+Piatto per impostazione predefinita. L'unica ombra (`shadow-media`) appartiene alle cornici dei media prodotto. L'intestazione sticky acquista una linea inferiore dopo lo scorrimento.
 
 ## Shapes
 
-Gli angoli sono moderatamente curvi: controlli compatti a 7-8px, schede a 10px e pannelli principali a 12-13px. I bordi sottili restano visibili e strutturali. Il raggio pieno è ammesso solo per stati, piccoli indicatori e pulsanti circolari; non trasforma i contenitori in capsule.
-
-**The Rectangular Utility Rule.** La forma dominante è rettangolare e operativa; le capsule sono micro-componenti, non una grammatica di layout.
+Pulsanti a capsula (999px), cornici media a 14px, piccole barre a 4px. Pannelli e liste usano linee, non card. I cerchi compaiono solo per i numeri dei passi, i nodi del ponte e i controlli dei video.
 
 ## Components
 
 ### Buttons
 
-- **Shape:** rettangolo compatto con angoli moderati (7px) e altezza minima di 48px.
-- **Primary:** blu operativo con testo bianco, bordo dello stesso colore e padding orizzontale contenuto (12px 19px).
-- **Hover / Focus:** traslazione verticale di 2px, blu più profondo e ombra blu diffusa; focus visibile con anello blu traslucido da 3px e offset da 4px.
-- **Secondary:** fondo trasparente, testo e bordo blu; in hover riceve un fondo azzurro molto chiaro.
+- **Primario:** capsula navy, testo bianco Inter 600 15px, altezza minima 48px; hover navy profondo.
+- **Secondario (ghost):** trasparente, testo navy, bordo `line-strong`; in hover il bordo diventa navy.
+- **Chiaro:** bianco su navy, per la sezione contatto.
+- **Link con freccia:** navy 600, la freccia scorre di 3px in hover.
+- Focus: contorno 2px navy (bianco sul fondo navy), offset 3px.
 
-### Chips
+### Solution block
 
-- **Style:** etichette piccole, maiuscole e semibold; fondo bianco o azzurro molto chiaro, bordo freddo e raggio pieno.
-- **State:** la variante evidenziata usa il blu operativo per testo e bordo; le etichette non rappresentano nuove categorie cromatiche di marca.
+Fonte unica: `bozza/soluzioni.js`. Ogni voce ha `id, nome, area, promessa, problema, cambia[3], siCollega, ottenete, media, scheda`. `media.tipo` è `video` (loop muto + poster + demo opzionale) oppure `anteprima` (interfaccia HTML dimostrativa con etichetta "Video demo in preparazione"). Aggiungere un prodotto = aggiungere una voce.
 
-### Cards / Containers
+### Media frame
 
-- **Corner Style:** 10px per i casi, 12-13px per pannelli e finestre applicative.
-- **Background:** bianco; i pannelli interni possono usare la nebbia fredda.
-- **Shadow Strategy:** nessuna ombra a riposo per i casi; ombra ambientale solo sulla finestra prodotto.
-- **Border:** linea fredda da 1px.
-- **Internal Padding:** 28px per i casi, 14-18px per i pannelli applicativi compatti.
+Cornice 16:9 a 14px con `shadow-media`. Il loop parte solo quando è visibile per almeno il 35%, si ferma fuori schermo, ha un pulsante pausa/riproduci da 44px e non parte da solo con `prefers-reduced-motion`. Didascalia sotto: "Estratto della demo · dati dimostrativi" o "Anteprima dell’interfaccia · dati dimostrativi".
+
+### Demo dialog
+
+`<dialog>` nativo con video completo e controlli; la chiusura (pulsante, clic sullo sfondo, Esc) ferma sempre il video.
+
+### Bridge
+
+SVG con impalcato e pilone navy, cavi e tiranti ciano. Nell'apertura si disegna al caricamento (statico con movimento ridotto) con tre didascalie HTML: i sistemi che avete già, lo strumento su misura, le decisioni di ogni giorno.
+
+### About mark ("Perché un ponte")
+
+Al posto di una foto del team (non disponibile, nessuna foto finta): pannello chiaro con il ponte, il significato del marchio e tre fatti verificabili (sede, sistemi, referente).
 
 ### Navigation
 
-- **Style:** barra bianca sticky alta 78px, separatore inferiore da 1px, logo a sinistra e azione primaria a destra.
-- **Typography and states:** link semibold sobri; il blu appare in hover. Sotto 760px un pulsante quadrato da 44px apre un pannello verticale bianco.
+Logo ufficiale (versione principale) alto 58px (48px su telefono), tre voci e il pulsante "Prenota 30 minuti". Sotto 820px pulsante menu da 44px e pannello verticale.
 
-### Product Window
+### Giulia
 
-La finestra prodotto è il componente firma. Usa cornice fredda, testata browser tenue e moduli applicativi compatti. Sopra 960px tre intestazioni statiche accompagnano la vista simultanea di Fatturato, Produzione e NIS2; su tablet e mobile vere tab selezionano un pannello essenziale alla volta. I contenuti informativi interni non scendono sotto 14px. Semantica e comportamento devono coincidere. I dati dimostrativi devono sempre essere dichiarati come esempi e distinti dalle funzioni realmente operative.
+Pulsante flottante da `giulia.js` con `data-tema="bbt"` (navy, Inter).
 
-### Case Rows
+## Video standard
 
-I casi sono righe cliccabili, non collezioni di card promozionali. Categoria, nome, problema e meccanismo dichiarabile convivono nella stessa griglia. Sistema collegato e output operativo forniscono prova non quantitativa; una freccia circolare chiude la riga e il sollevamento in hover segnala l'azione.
+- **Loop:** 20–30 s, muto, 1280×720 H.264, ≤ 2 MB, zoom sulle zone chiave, nessuna scritta dentro il video.
+- **Demo:** 60–120 s, con voce, ≤ 6 MB, sottotitoli preferibilmente in file `.vtt`.
+- **Struttura:** problema (5 s) → una scena per ruolo → cosa cambia → invito al contatto. Registrare con zoom del browser al 125–150%.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** mostrare interfacce, flussi, stati e integrazioni reali prima di introdurre spiegazioni tecnologiche.
-- **Do** usare fondo bianco, nebbia fredda e linee sottili per organizzare contenuti densi senza appesantirli.
-- **Do** mantenere un solo blu di marca per azioni e selezioni e il verde per stati positivi verificabili.
-- **Do** usare titoli brevi e una gerarchia Manrope decisa per parlare alla direzione di una PMI.
-- **Do** dichiarare come dimostrativi tutti i numeri di interfaccia che non sono risultati commerciali documentati.
+- **Do** dare del "voi" in tutti i testi; frasi brevi, risultato prima della tecnologia.
+- **Do** dichiarare sempre come dimostrativi i dati di interfaccia.
+- **Do** usare il ponte come unica immagine di marca, a linee.
+- **Do** mostrare i prodotti in azione (video o anteprima) prima di spiegarli.
 
 ### Don't:
 
-- **Don't** usare tema dark, gradienti, glassmorphism, glow o fondi neri.
-- **Don't** sostituire la concretezza del prodotto con immagini stock, laptop mockup, cervelli AI, robot o oggetti 3D.
-- **Don't** creare arcobaleni di accenti per servizi diversi o riempire la pagina di card grandi e molto arrotondate.
-- **Don't** inventare loghi cliente, testimonianze, percentuali, ricavi o tempi di progetto non verificati.
-- **Don't** presentare l'AI come promessa visiva principale quando il valore risiede nel processo operativo risolto.
+- **Don't** usare foto di repertorio, foto finte del team, cervelli AI, robot, laptop mockup.
+- **Don't** usare il ciano per il testo, gradienti, glassmorphism, tema dark.
+- **Don't** mettere etichette maiuscole spaziate sopra ogni sezione o numerare sezioni che non sono una sequenza.
+- **Don't** usare "innovativo", "trasformazione digitale", "soluzioni all'avanguardia".
+- **Don't** inventare clienti, testimonianze, percentuali o tempi di progetto.

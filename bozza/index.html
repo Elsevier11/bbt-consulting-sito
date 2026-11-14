@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>BBT Consulting · Bozza home</title>
+  <meta name="description" content="Bozza di lavoro della nuova home di BBT Consulting: strumenti su misura collegati ai sistemi delle PMI.">
+  <link rel="icon" href="../Favicon/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colori ufficiali BBT (Brand Guidelines) */
+      --navy: #1A3A6B;
+      --navy-deep: #12294D;
+      --cyan: #00AEEF;            /* solo linee e dettagli: contrasto insufficiente per il testo */
+      --grey-brand: #6B7280;
+      /* Neutri tinti verso il blu del marchio */
+      --bg: #F6F8FB;
+      --surface: #FFFFFF;
+      --ink: #0F2242;
+      --text: #33425A;
+      --muted: #56647A;
+      --line: #D9E0EA;
+      --line-strong: #B9C5D6;
+      --cyan-wash: #E4F5FC;
+      --ok: #0F7545;
+      --warn: #8A5A00;
+      --danger: #A4262C;
+
+      --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+      --gutter: clamp(16px, 4vw, 40px);
+      --max: 1200px;
+      --radius: 14px;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+
+      --shadow-media: 0 1px 0 rgba(15, 34, 66, .04), 0 24px 48px -28px rgba(15, 34, 66, .35);
+      --edge-media: rgba(15, 34, 66, .08);
+      --scrim: rgba(15, 34, 66, .78);
+      --backdrop: rgba(8, 18, 36, .72);
+      --on-navy: #DCE6F3;
+      --on-navy-soft: #C3D1E4;
+
+      --z-sticky: 10;
+      --z-menu: 20;
+      --z-dialog: 30;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 17px/1.6 var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    img, video, svg { display: block; max-width: 100%; }
+    [id] { scroll-margin-top: 96px; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--serif); color: var(--ink); font-weight: 600; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 4px; }
+
+    .container { width: 100%; max-width: calc(var(--max) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 16px; z-index: var(--z-menu); background: var(--surface); padding: 8px 12px; }
+
+    /* Avviso bozza */
+    .draft-note { background: var(--ink); color: var(--on-navy); font-size: 14px; text-align: center; padding: 6px 16px; }
+
+    /* Pulsanti */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 48px; padding: 12px 22px; border-radius: 999px;
+      font: 600 15px/1.2 var(--sans); text-decoration: none; cursor: pointer; border: 1px solid transparent;
+      transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+    }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy-deep); }
+    .btn-ghost { background: transparent; color: var(--navy); border-color: var(--line-strong); }
+    .btn-ghost:hover { border-color: var(--navy); }
+    .btn-light { background: #fff; color: var(--navy); }
+    .btn-light:hover { background: var(--cyan-wash); }
+    .link-arrow { color: var(--navy); font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+    .link-arrow span { transition: transform .25s var(--ease); }
+    .link-arrow:hover span { transform: translateX(3px); }
+    .link-arrow:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* Intestazione */
+    .site-header { position: sticky; top: 0; z-index: var(--z-sticky); background: rgba(246, 248, 251, .94); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    .site-header.scrolled { border-bottom-color: var(--line); }
+    @supports (backdrop-filter: blur(8px)) { .site-header { backdrop-filter: blur(8px); } }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 84px; gap: 24px; }
+    .brand { display: block; padding-block: 10px; }
+    .brand img { height: 58px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a:not(.btn) { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--text); }
+    .nav-links a:not(.btn):hover { color: var(--navy); }
+    .menu-button { display: none; background: none; border: 1px solid var(--line-strong); border-radius: 999px; width: 44px; height: 44px; align-items: center; justify-content: center; color: var(--ink); cursor: pointer; }
+
+    /* Apertura */
+    .hero { padding-block: clamp(48px, 8vw, 112px) clamp(32px, 5vw, 64px); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 5vw, 80px); align-items: end; }
+    .hero h1 { font-size: clamp(2.6rem, 1.5rem + 4.4vw, 5.25rem); line-height: 1.02; letter-spacing: -0.025em; }
+    .hero h1 .line { display: block; }
+    .hero h1 .line + .line { color: var(--navy); }
+    .hero-side p { font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem); color: var(--text); max-width: 40ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+
+    /* Il ponte: sistemi esistenti → decisioni */
+    .bridge { margin-top: clamp(48px, 7vw, 88px); }
+    .bridge svg { width: 100%; height: auto; overflow: visible; }
+    .bridge .deck { stroke: var(--navy); stroke-width: 3; }
+    .bridge .cable { stroke: var(--cyan); stroke-width: 2.5; fill: none; }
+    .bridge .hanger { stroke: var(--cyan); stroke-width: 1.5; }
+    .bridge .pylon { stroke: var(--navy); stroke-width: 4; }
+    .bridge .node { fill: var(--surface); stroke: var(--navy); stroke-width: 2; }
+    .bridge-labels { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; margin-top: 18px; font-size: 15px; }
+    .bridge-labels > div:nth-child(2) { text-align: center; }
+    .bridge-labels > div:last-child { text-align: right; }
+    .bridge-labels strong { display: block; color: var(--ink); font-weight: 600; }
+    .bridge-labels span { color: var(--muted); }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero h1 .line, .hero-side { animation: rise .9s var(--ease) both; }
+      .hero h1 .line:nth-child(2) { animation-delay: .08s; }
+      .hero-side { animation-delay: .18s; }
+      .bridge .cable, .bridge .deck { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: draw 1.8s var(--ease) .35s forwards; }
+      .bridge .hanger { opacity: 0; animation: fade .6s var(--ease) 1.4s forwards; }
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes fade { to { opacity: 1; } }
+
+    /* Sezioni */
+    .section { padding-block: clamp(72px, 10vw, 136px); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 80px); align-items: end; margin-bottom: clamp(48px, 7vw, 96px); }
+    .section-head h2 { font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.5rem); line-height: 1.06; letter-spacing: -0.02em; }
+    .section-head p { color: var(--text); max-width: 46ch; }
+    .rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+    /* Soluzioni */
+    .solutions { background: var(--surface); }
+    .solution { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .solution + .solution { margin-top: clamp(72px, 10vw, 140px); }
+    .solution.reverse .solution-media { order: 2; }
+    .solution-area { font-size: 14px; font-weight: 600; color: var(--navy); display: inline-flex; align-items: center; gap: 10px; }
+    .solution-area::before { content: ""; width: 22px; height: 2px; background: var(--cyan); }
+    .solution h3 { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em; margin-top: 14px; }
+    .solution .promise { font-family: var(--serif); font-size: clamp(1.2rem, 1.1rem + .4vw, 1.4rem); line-height: 1.4; color: var(--ink); margin-top: 16px; max-width: 34ch; }
+    .solution .before { margin-top: 22px; font-size: 15px; color: var(--muted); }
+    .solution .before b { color: var(--text); font-weight: 600; }
+    .changes { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+    .changes li { position: relative; padding: 12px 0 12px 28px; border-bottom: 1px solid var(--line); font-size: 16px; }
+    .changes li::before { content: ""; position: absolute; left: 2px; top: 22px; width: 12px; height: 2px; background: var(--navy); }
+    .facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 22px 0 0; font-size: 14px; }
+    .facts dt { color: var(--muted); }
+    .facts dd { margin: 0; color: var(--ink); font-weight: 500; }
+    .solution-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 28px; }
+
+    .media-frame { position: relative; border-radius: var(--radius); overflow: hidden; background: #E9EEF5; box-shadow: var(--shadow-media); outline: 1px solid var(--edge-media); aspect-ratio: 16 / 9; }
+    .media-frame video { width: 100%; height: 100%; object-fit: cover; }
+    .media-caption { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 14px; color: var(--muted); }
+    .media-toggle { position: absolute; right: 12px; bottom: 12px; width: 44px; height: 44px; border-radius: 999px; border: 0; background: var(--scrim); color: #fff; display: grid; place-items: center; cursor: pointer; transition: background .2s; }
+    .media-toggle:hover { background: var(--navy-deep); }
+    .media-badge { position: absolute; right: 10px; top: 6px; background: rgba(255, 255, 255, .94); color: var(--navy); font-size: 14px; font-weight: 600; padding: 4px 12px; border-radius: 999px; outline: 1px solid var(--line); }
+
+    /* Anteprime dimostrative (in attesa del video) */
+    .app { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--surface); font-size: 13px; color: var(--text); }
+    .app-bar { display: flex; align-items: center; gap: 10px; padding: 10px 250px 10px 14px; white-space: nowrap; overflow: hidden; border-bottom: 1px solid var(--line); background: #F2F5F9; font-size: 12px; color: var(--muted); }
+    .app-bar i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+    .app-bar span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .app-body { flex: 1; padding: clamp(14px, 3%, 26px); display: grid; align-content: start; gap: 14px; min-height: 0; }
+    .app-kpi { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .app-kpi small { display: block; color: var(--muted); font-size: 12px; }
+    .app-kpi strong { font: 600 clamp(1.3rem, 1rem + 1.4vw, 2rem)/1.1 var(--sans); color: var(--ink); letter-spacing: -0.01em; }
+    .chip { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+    .chip-ok { background: #E3F3EA; color: var(--ok); }
+    .chip-run { background: var(--cyan-wash); color: var(--navy); }
+    .chip-todo { background: #FBEFD9; color: var(--warn); }
+    .bars { display: grid; gap: 8px; }
+    .bar-row { display: grid; grid-template-columns: minmax(90px, 9.5em) 1fr auto; gap: 10px; align-items: center; }
+    .bar { height: 8px; border-radius: 4px; background: #EDF1F6; overflow: hidden; }
+    .bar b { display: block; height: 100%; background: var(--navy); border-radius: 4px; }
+    .bar-row em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; }
+    .progress { height: 10px; border-radius: 4px; background: #EDF1F6; overflow: hidden; }
+    .progress b { display: block; height: 100%; width: 64%; background: var(--navy); }
+    .req-list { display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .req-list div { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .app-foot { font-size: 12px; color: var(--muted); }
+
+    .catalog-line { margin-top: clamp(72px, 9vw, 120px); padding-top: 28px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    .catalog-line p { color: var(--muted); }
+
+    /* Metodo */
+    .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); position: relative; }
+    .steps::before { content: ""; position: absolute; left: 0; right: 0; top: 19px; height: 2px; background: var(--cyan); opacity: .55; }
+    .steps li { position: relative; padding-top: 64px; }
+    .steps .num { position: absolute; top: 0; left: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--bg); border: 2px solid var(--navy); color: var(--navy); font: 600 16px/36px var(--sans); text-align: center; }
+    .steps h3 { font-size: 1.35rem; line-height: 1.2; }
+    .steps p { margin-top: 10px; font-size: 16px; color: var(--text); }
+
+    /* Chi siamo */
+    .about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+    .about h2 { font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.5rem); line-height: 1.06; letter-spacing: -0.02em; }
+    .about .lead { margin-top: 24px; font-size: 1.1rem; max-width: 52ch; }
+    .principles { margin: 40px 0 0; border-top: 1px solid var(--line); }
+    .principles div { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px 32px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .principles dt { font-family: var(--serif); font-size: 1.2rem; color: var(--ink); font-weight: 600; line-height: 1.3; }
+    .principles dd { margin: 0; color: var(--text); }
+    .about-mark { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(24px, 4vw, 44px); }
+    .mark-bridge { width: 100%; height: auto; margin-bottom: clamp(20px, 3vw, 32px); }
+    .mark-bridge .deck { stroke: var(--navy); stroke-width: 5; fill: none; }
+    .mark-bridge .pylon { stroke: var(--navy); stroke-width: 7; }
+    .mark-bridge .cable { stroke: var(--cyan); stroke-width: 4; fill: none; }
+    .mark-bridge .hanger { stroke: var(--cyan); stroke-width: 2.5; }
+    .about-mark h3 { font-size: clamp(1.5rem, 1.3rem + .8vw, 1.9rem); line-height: 1.15; }
+    .about-mark > p { margin-top: 12px; color: var(--text); }
+    .mark-facts { margin: 28px 0 0; border-top: 1px solid var(--line); font-size: 15px; }
+    .mark-facts div { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .mark-facts dt { color: var(--muted); }
+    .mark-facts dd { margin: 0; color: var(--ink); font-weight: 500; text-align: right; }
+
+    /* Contatto */
+    .cta { background: var(--navy); color: var(--on-navy); }
+    .cta :focus-visible { outline-color: #fff; }
+    .cta-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: end; }
+    .cta h2 { color: #fff; font-size: clamp(2.2rem, 1.4rem + 3vw, 3.9rem); line-height: 1.04; letter-spacing: -0.02em; }
+    .cta p { max-width: 48ch; }
+    .cta .btn { margin-top: 28px; }
+    .cta .small { margin-top: 18px; font-size: 15px; color: var(--on-navy-soft); }
+    .cta .small a { color: #fff; font-weight: 600; text-underline-offset: 4px; }
+    .cta-bridge { margin-top: clamp(48px, 7vw, 88px); }
+    .cta-bridge path, .cta-bridge line { stroke: var(--cyan); fill: none; }
+
+    /* Piè di pagina */
+    footer { background: var(--surface); border-top: 1px solid var(--line); padding-block: 56px 32px; font-size: 15px; }
+    .footer-grid { display: grid; grid-template-columns: minmax(0, 5fr) repeat(2, minmax(0, 3fr)); gap: 40px; }
+    footer h2 { font: 600 14px/1.4 var(--sans); color: var(--ink); margin-bottom: 12px; }
+    footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    footer a { text-decoration: none; color: var(--text); }
+    footer a:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; }
+    footer .brand img { height: 54px; }
+    footer .tagline { margin-top: 16px; color: var(--muted); max-width: 36ch; }
+    .legal { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 14px; color: var(--muted); }
+
+    /* Finestra demo */
+    dialog.demo { width: min(1100px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: var(--radius); background: var(--ink); color: #fff; z-index: var(--z-dialog); }
+    dialog.demo::backdrop { background: var(--backdrop); }
+    dialog.demo video { width: 100%; height: auto; max-height: calc(100vh - 110px); background: var(--ink); }
+    .demo-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 12px 12px 20px; font-size: 15px; }
+    .demo-close { width: 44px; height: 44px; border-radius: 999px; border: 0; background: rgba(255, 255, 255, .12); color: #fff; cursor: pointer; font-size: 20px; }
+    .demo-close:hover { background: rgba(255, 255, 255, .22); }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid, .section-head, .solution, .about-grid, .cta-grid { grid-template-columns: 1fr; }
+      .solution.reverse .solution-media { order: 0; }
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+      .steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid > div:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 820px) {
+      .menu-button { display: inline-flex; }
+      .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 20px; background: var(--bg); border-bottom: 1px solid var(--line); z-index: var(--z-menu); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+      .nav-links .btn { margin-top: 16px; }
+      .brand img { height: 48px; }
+      .nav { min-height: 72px; }
+      .app-bar { padding-right: 14px; }
+      .app-bar span { display: none; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .bridge-labels { grid-template-columns: 1fr 1fr; }
+      .bridge-labels > div:nth-child(2) { display: none; }
+      .steps { grid-template-columns: 1fr; }
+      .principles div { grid-template-columns: 1fr; gap: 6px; }
+      .mark-facts div { grid-template-columns: 1fr; }
+      .mark-facts dd { text-align: left; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-actions .btn { flex: 1 1 100%; }
+      .app { font-size: 12px; }
+      .app-body { gap: 10px; }
+      .app .hide-sm { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
+  <div class="draft-note" role="note">Bozza di lavoro della nuova home · non pubblicata</div>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Navigazione principale">
+      <a class="brand" href="#contenuto" aria-label="BBT Consulting, inizio pagina"><img src="media/bbt-logo.png" alt="BBT Consulting" width="480" height="323"></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Apri il menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#soluzioni">Soluzioni</a>
+        <a href="#metodo">Come lavoriamo</a>
+        <a href="#chi-siamo">Chi siamo</a>
+        <a class="btn btn-primary" href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&amp;ismsaljsauthenabled&amp;ep=mlink" target="_blank" rel="noopener noreferrer">Prenota 30 minuti</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenuto">
+    <section class="hero" aria-labelledby="titolo">
+      <div class="container">
+        <div class="hero-grid">
+          <h1 id="titolo"><span class="line">I dati della vostra azienda ci sono già.</span><span class="line">Facciamoli lavorare.</span></h1>
+          <div class="hero-side">
+            <p>Costruiamo strumenti su misura collegati ai gestionali che usate ogni giorno: meno attività ricopiate a mano, numeri importanti sempre visibili, processi sotto controllo.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#soluzioni">Guardate le soluzioni</a>
+              <a class="btn btn-ghost" href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&amp;ismsaljsauthenabled&amp;ep=mlink" target="_blank" rel="noopener noreferrer">Prenota 30 minuti</a>
+            </div>
+            <p class="hero-note">Senza impegno. La prenotazione si apre su Microsoft Bookings.</p>
+          </div>
+        </div>
+
+        <figure class="bridge" aria-label="Il ponte tra i sistemi che avete già e le decisioni di ogni giorno">
+          <svg viewBox="0 0 1200 240" role="presentation" focusable="false">
+            <path class="cable" d="M40 200 Q430 192 600 40 Q770 192 1160 200"/>
+            <line class="hanger" x1="450" y1="130.4" x2="450" y2="200"/>
+            <line class="hanger" x1="490" y1="112.6" x2="490" y2="200"/>
+            <line class="hanger" x1="530" y1="91.1" x2="530" y2="200"/>
+            <line class="hanger" x1="565" y1="68.1" x2="565" y2="200"/>
+            <line class="hanger" x1="635" y1="68.1" x2="635" y2="200"/>
+            <line class="hanger" x1="670" y1="91.1" x2="670" y2="200"/>
+            <line class="hanger" x1="710" y1="112.6" x2="710" y2="200"/>
+            <line class="hanger" x1="750" y1="130.4" x2="750" y2="200"/>
+            <line class="pylon" x1="600" y1="36" x2="600" y2="236"/>
+            <path class="deck" d="M40 200 H1160"/>
+            <circle class="node" cx="40" cy="200" r="7"/>
+            <circle class="node" cx="1160" cy="200" r="7"/>
+          </svg>
+          <figcaption class="bridge-labels">
+            <div><strong>I sistemi che avete già</strong><span>Arca Evolution, SQL Server, ERP e CRM, fogli Excel</span></div>
+            <div><strong>Lo strumento su misura</strong><span>costruito e seguito da BBT</span></div>
+            <div><strong>Le decisioni di ogni giorno</strong><span>piano di produzione, fatturato, conformità NIS2</span></div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section solutions" id="soluzioni" aria-labelledby="titolo-soluzioni">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="titolo-soluzioni">Strumenti con un nome, nati da problemi veri.</h2>
+          <p>Ogni soluzione è già in uso nelle aziende per cui l’abbiamo costruita. La adattiamo ai vostri dati, ai vostri reparti e ai sistemi che usate.</p>
+        </div>
+        <div id="soluzioni-lista"></div>
+        <noscript><p>Per vedere le soluzioni con i video attivate JavaScript, oppure aprite il <a href="../soluzioni/">catalogo delle soluzioni</a>.</p></noscript>
+        <div class="catalog-line">
+          <p>Il catalogo cresce con nuovi strumenti.</p>
+          <a class="link-arrow" href="../soluzioni/">Tutte le soluzioni <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodo" aria-labelledby="titolo-metodo">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="titolo-metodo">Dal problema allo strumento, con un solo referente.</h2>
+          <p>Analisi, collegamento ai sistemi, prova sul lavoro reale e messa in produzione: un percorso che potete seguire passo per passo.</p>
+        </div>
+        <ol class="steps">
+          <li><span class="num" aria-hidden="true">1</span><h3>Capire il processo</h3><p>Individuiamo con voi dove si fermano informazioni e attività.</p></li>
+          <li><span class="num" aria-hidden="true">2</span><h3>Collegare ciò che esiste</h3><p>Partiamo dai dati, dai gestionali e dalle procedure che usate già.</p></li>
+          <li><span class="num" aria-hidden="true">3</span><h3>Costruire e provare</h3><p>Proviamo una prima versione con le persone che la useranno.</p></li>
+          <li><span class="num" aria-hidden="true">4</span><h3>Mettere in produzione</h3><p>Consegniamo, vi affianchiamo nell’adozione e seguiamo le evoluzioni.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section about" id="chi-siamo" aria-labelledby="titolo-chi">
+      <div class="container about-grid">
+        <div>
+          <h2 id="titolo-chi">Un solo interlocutore tra direzione, reparto e tecnologia.</h2>
+          <p class="lead">BBT trasforma un’esigenza della vostra azienda in uno strumento funzionante, collegando applicazioni, dati e sicurezza. Non dovete coordinare fornitori diversi né tradurre il problema in linguaggio tecnico.</p>
+          <dl class="principles">
+            <div><dt>Prima il risultato</dt><dd>La tecnologia si sceglie dopo aver chiarito che cosa deve migliorare.</dd></div>
+            <div><dt>Quello che avete vale</dt><dd>Partiamo da gestionali, database e procedure già in uso, senza rifare tutto.</dd></div>
+            <div><dt>Un referente, dall’inizio alla fine</dt><dd>La stessa persona segue analisi, realizzazione, rilascio ed evoluzione.</dd></div>
+          </dl>
+        </div>
+        <aside class="about-mark" aria-labelledby="titolo-ponte">
+          <svg class="mark-bridge" viewBox="30 28 1140 226" aria-hidden="true" focusable="false">
+            <path class="cable" d="M40 200 Q430 192 600 40 Q770 192 1160 200"/>
+            <line class="hanger" x1="450" y1="130.4" x2="450" y2="200"/>
+            <line class="hanger" x1="490" y1="112.6" x2="490" y2="200"/>
+            <line class="hanger" x1="530" y1="91.1" x2="530" y2="200"/>
+            <line class="hanger" x1="565" y1="68.1" x2="565" y2="200"/>
+            <line class="hanger" x1="635" y1="68.1" x2="635" y2="200"/>
+            <line class="hanger" x1="670" y1="91.1" x2="670" y2="200"/>
+            <line class="hanger" x1="710" y1="112.6" x2="710" y2="200"/>
+            <line class="hanger" x1="750" y1="130.4" x2="750" y2="200"/>
+            <line class="pylon" x1="600" y1="36" x2="600" y2="250"/>
+            <path class="deck" d="M40 200 H1160"/>
+          </svg>
+          <h3 id="titolo-ponte">Perché un ponte</h3>
+          <p>Il ponte del nostro marchio racconta il lavoro che facciamo: collegare chi guida l’azienda ai sistemi che ne custodiscono i dati. Lo costruiamo su ciò che esiste già, e restiamo a curarlo nel tempo.</p>
+          <dl class="mark-facts">
+            <div><dt>Sede</dt><dd>Vedelago (TV)</dd></div>
+            <div><dt>Sistemi con cui lavoriamo</dt><dd>Arca Evolution, SQL Server, ERP e CRM</dd></div>
+            <div><dt>Referente</dt><dd>Uno solo, dall’analisi all’evoluzione</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section cta" id="contatti" aria-labelledby="titolo-cta">
+      <div class="container">
+        <div class="cta-grid">
+          <h2 id="titolo-cta">Portateci un processo che oggi vi rallenta.</h2>
+          <div>
+            <p>In 30 minuti ricostruiamo il problema, verifichiamo dati e sistemi coinvolti e individuiamo il primo intervento utile. Se non vediamo un valore concreto, ve lo diciamo.</p>
+            <a class="btn btn-light" href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&amp;ismsaljsauthenabled&amp;ep=mlink" target="_blank" rel="noopener noreferrer">Prenota 30 minuti</a>
+            <p class="small">Preferite fare prima una domanda? <a href="https://giulia.bbtconsulting.it/" data-giulia>Chiedete a Giulia</a>, l’assistente vocale: risponde subito.</p>
+          </div>
+        </div>
+        <svg class="cta-bridge" viewBox="0 0 1200 60" aria-hidden="true" focusable="false"><path d="M0 54 Q450 50 600 6 Q750 50 1200 54" stroke-width="1.5"/><line x1="0" y1="54" x2="1200" y2="54" stroke-width="1.5"/></svg>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#contenuto"><img src="media/bbt-logo.png" alt="BBT Consulting" width="480" height="323"></a>
+          <p class="tagline">Dashboard, automazioni e applicazioni su misura collegate ai sistemi delle PMI.</p>
+        </div>
+        <div>
+          <h2>Esplora</h2>
+          <ul><li><a href="#soluzioni">Soluzioni</a></li><li><a href="#metodo">Come lavoriamo</a></li><li><a href="#chi-siamo">Chi siamo</a></li><li><a href="#contatti">Contatti</a></li></ul>
+        </div>
+        <div>
+          <h2>Accessi e risorse</h2>
+          <ul><li><a href="../soluzioni/">Catalogo soluzioni</a></li><li><a href="../ai/">Risorse AI</a></li><li><a href="https://nis2.bbtconsulting.it/" target="_blank" rel="noopener noreferrer">Accesso partner NIS2</a></li><li><a href="../index.html#privacy">Privacy, cookie e termini</a></li></ul>
+        </div>
+      </div>
+      <div class="legal"><span>© 2026 BBT S.r.l. Tutti i diritti riservati.</span><span>P.IVA 05371510263 · Vedelago (TV), Italia</span></div>
+    </div>
+  </footer>
+
+  <dialog class="demo" id="demo" aria-labelledby="demo-titolo">
+    <div class="demo-head"><span id="demo-titolo">Demo</span><button class="demo-close" type="button" aria-label="Chiudi la demo">×</button></div>
+    <video controls playsinline preload="none"></video>
+  </dialog>
+
+  <script src="soluzioni.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var icoPause = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+    var icoPlay = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+    var anteprime = {
+      fatturato: function () {
+        var righe = [["Fatture emesse", 612400], ["Contratti attivi", 284900], ["Prefatture", 168300], ["DDT da fatturare", 121780], ["Ordini in consegna", 60000]];
+        var max = righe[0][1], fmt = function (n) { return "€ " + n.toLocaleString("it-IT"); };
+        return '<div class="app" aria-hidden="true"><div class="app-bar"><i></i><i></i><i></i><span>Fatturato Monitor · novembre 2026</span></div><div class="app-body">' +
+          '<div class="app-kpi"><div><small>Proiezione di fine mese</small><strong>€ 1.247.380</strong></div><span class="chip chip-run">96% del budget</span></div>' +
+          '<div class="bars">' + righe.map(function (r, i) { return '<div class="bar-row' + (i > 2 ? " hide-sm" : "") + '"><span>' + r[0] + '</span><span class="bar"><b style="width:' + Math.round(r[1] / max * 100) + '%"></b></span><em>' + fmt(r[1]) + '</em></div>'; }).join("") + '</div>' +
+          '<div class="app-foot">Cinque fonti del gestionale in una vista · aggiornato alle 9:30</div></div></div>';
+      },
+      nis2: function () {
+        var aree = [["Governance", "chip-ok", "Conforme"], ["Gestione del rischio", "chip-run", "In corso"], ["Protezione", "chip-run", "In corso"], ["Risposta agli incidenti", "chip-todo", "Da completare"], ["Continuità operativa", "chip-todo", "Da completare"]];
+        return '<div class="app" aria-hidden="true"><div class="app-bar"><i></i><i></i><i></i><span>NIS2 Platform · soggetto essenziale</span></div><div class="app-body">' +
+          '<div class="app-kpi"><div><small>Requisiti con evidenze complete</small><strong>74 / 116</strong></div><span class="chip chip-run">Prossima scadenza 28 nov</span></div>' +
+          '<div class="progress"><b></b></div>' +
+          '<div class="req-list">' + aree.map(function (a, i) { return '<div' + (i > 2 ? ' class="hide-sm"' : "") + '><span>' + a[0] + '</span><span class="chip ' + a[1] + '">' + a[2] + '</span></div>'; }).join("") + '</div></div></div>';
+      }
+    };
+
+    function media(s) {
+      var m = s.media;
+      if (m.tipo === "video") {
+        return '<div class="media-frame"><video muted loop playsinline preload="none" poster="' + esc(m.poster) + '" aria-label="' + esc(m.descrizione) + '" data-src="' + esc(m.loop) + '"></video>' +
+          '<button class="media-toggle" type="button" aria-label="Metti in pausa il video">' + icoPause + '</button></div>' +
+          '<div class="media-caption"><span>Estratto della demo · dati dimostrativi</span></div>';
+      }
+      return '<div class="media-frame">' + (anteprime[m.vista] ? anteprime[m.vista]() : "") + '<span class="media-badge">Video demo in preparazione</span></div>' +
+        '<div class="media-caption"><span>Anteprima dell’interfaccia · dati dimostrativi</span></div>';
+    }
+
+    function blocco(s, i) {
+      var demo = s.media.demo ? '<button class="btn btn-primary" type="button" data-demo="' + esc(s.media.demo.src) + '" data-titolo="' + esc(s.nome) + '">Guardate la demo · ' + esc(s.media.demo.durata) + '</button>' : "";
+      return '<article class="solution' + (i % 2 ? " reverse" : "") + '" id="' + esc(s.id) + '" aria-labelledby="sol-' + esc(s.id) + '">' +
+        '<div class="solution-media">' + media(s) + '</div>' +
+        '<div class="solution-text"><span class="solution-area">' + esc(s.area) + '</span>' +
+        '<h3 id="sol-' + esc(s.id) + '">' + esc(s.nome) + '</h3>' +
+        '<p class="promise">' + esc(s.promessa) + '</p>' +
+        '<p class="before"><b>Prima:</b> ' + esc(s.problema) + '</p>' +
+        '<ul class="changes">' + s.cambia.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + '</ul>' +
+        '<dl class="facts"><dt>Si collega a</dt><dd>' + esc(s.siCollega) + '</dd><dt>Cosa ottenete</dt><dd>' + esc(s.ottenete) + '</dd></dl>' +
+        '<div class="solution-links">' + demo + '<a class="link-arrow" href="' + esc(s.scheda) + '">Scheda di ' + esc(s.nome) + ' <span aria-hidden="true">→</span></a></div>' +
+        '</div></article>';
+    }
+
+    var lista = document.getElementById("soluzioni-lista");
+    lista.innerHTML = (window.BBT_SOLUZIONI || []).map(blocco).join("");
+
+    /* Video in loop: si caricano e partono solo quando sono visibili; pausa manuale sempre disponibile */
+    lista.querySelectorAll(".media-frame video").forEach(function (v) {
+      var btn = v.parentNode.querySelector(".media-toggle");
+      var fermato = reduce;   // con movimento ridotto il video non parte da solo
+      function carica() { if (!v.src) v.src = v.dataset.src; }
+      function aggiorna() { var inPausa = v.paused; btn.innerHTML = inPausa ? icoPlay : icoPause; btn.setAttribute("aria-label", inPausa ? "Riproduci il video" : "Metti in pausa il video"); }
+      v.addEventListener("play", aggiorna); v.addEventListener("pause", aggiorna); aggiorna();
+      btn.addEventListener("click", function () { carica(); if (v.paused) { fermato = false; v.play(); } else { fermato = true; v.pause(); } });
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { carica(); if (!fermato) v.play().catch(function () {}); }
+            else if (!v.paused) v.pause();
+          });
+        }, { threshold: 0.35 }).observe(v);
+      } else { carica(); }
+    });
+
+    /* Finestra con la demo completa */
+    var dlg = document.getElementById("demo"), dv = dlg.querySelector("video");
+    lista.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-demo]"); if (!b) return;
+      document.getElementById("demo-titolo").textContent = "Demo di " + b.dataset.titolo;
+      if (dv.getAttribute("src") !== b.dataset.demo) dv.src = b.dataset.demo;
+      if (typeof dlg.showModal === "function") { dlg.showModal(); dv.play().catch(function () {}); } else { window.open(b.dataset.demo, "_blank"); }
+    });
+    function chiudiDemo() { dv.pause(); if (dlg.open) dlg.close(); }
+    dlg.querySelector(".demo-close").addEventListener("click", chiudiDemo);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) chiudiDemo(); });
+    dlg.addEventListener("cancel", function () { dv.pause(); });   // tasto Esc
+    dlg.addEventListener("close", function () { dv.pause(); });
+
+    /* Menu su telefono */
+    var mb = document.querySelector(".menu-button"), nl = document.getElementById("nav-links");
+    function chiudi(focus) { mb.setAttribute("aria-expanded", "false"); mb.setAttribute("aria-label", "Apri il menu"); nl.classList.remove("open"); if (focus) mb.focus(); }
+    mb.addEventListener("click", function () { var aperto = mb.getAttribute("aria-expanded") === "true"; if (aperto) chiudi(); else { mb.setAttribute("aria-expanded", "true"); mb.setAttribute("aria-label", "Chiudi il menu"); nl.classList.add("open"); } });
+    nl.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { chiudi(); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && mb.getAttribute("aria-expanded") === "true") chiudi(true); });
+
+    /* Linea sotto l'intestazione dopo lo scorrimento */
+    var header = document.querySelector(".site-header");
+    var onScroll = function () { header.classList.toggle("scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  })();
+  </script>
+  <script src="../giulia.js" data-tema="bbt" defer></script>
+</body>
+</html>

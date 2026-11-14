@@ -1,3 +1,15 @@
 {
-  "buildPath": "comp"
+  "buildPath": "comp",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "reason": "Inter previsto dalle Brand Guidelines BBT aggiornate il 2026-11-10 e confermato dall'utente",
+        "createdAt": "2026-11-10T15:27:43.084Z"
+      }
+    ]
+  }
 }

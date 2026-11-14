@@ -16,9 +16,9 @@ BBT Consulting aiuta le PMI a trasformare processi manuali, dati frammentati e a
 
 ## Positioning
 
-Scelta aperta: il titolare non ha ancora deciso se presentare BBT principalmente come realizzatore di strumenti su misura integrati con i gestionali o come partner per l'adozione di AI e tecnologia.
+Deciso il 2026-11-10: BBT si presenta come realizzatore di strumenti su misura integrati con i gestionali che l'azienda usa già. AI e tecnologia sono mezzi impiegati quando utili, non la promessa principale.
 
-Ipotesi di lavoro per il redesign: guidare con gli strumenti operativi su misura e le integrazioni con i sistemi gia presenti; presentare AI e tecnologia come mezzi impiegati quando utili, non come promessa principale. Questa ipotesi deriva dalle soluzioni reali disponibili nel repository e deve poter essere riconsiderata.
+Le soluzioni sono prodotti con nome proprio (MesBeat, Fatturato Monitor, NIS2 Platform); BBT è chi li costruisce, li adatta e li segue. MesBeat è il nuovo nome di ArcaConnect MES.
 
 ## Operating Context
 
@@ -40,17 +40,17 @@ Ipotesi di lavoro per il redesign: guidare con gli strumenti operativi su misura
 ## Brand Commitments
 
 - Nome: BBT Consulting.
-- Logo/favicon esistente in `Favicon/`.
-- Voce italiana, concreta, accessibile alla direzione di una PMI e priva di gergo tecnologico non necessario.
-- Il redesign deve abbandonare il tono dark attuale.
-- Direzione approvata: identita B2B luminosa, ordinata e prodotto-centrica; il visitatore deve vedere strumenti e casi reali prima di effetti grafici o metafore sperimentali.
+- Logo ufficiale: lettere BBT navy con ponte ciano e scritta CONSULTING grigia (OneDrive `BBT/BRAND_Identity/`); nel sito `bozza/media/bbt-logo.png`, in attesa del file SVG. Favicon in `Favicon/`.
+- Colori e tipografia: Brand Guidelines BBT, aggiornate il 2026-11-10 (navy #1A3A6B, ciano #00AEEF solo per linee, titoli Source Serif 4, testi Inter). Dettagli in `DESIGN.md`.
+- Voce italiana, concreta, accessibile alla direzione di una PMI e priva di gergo tecnologico non necessario. Si dà del "voi" ("la vostra azienda") in tutti i testi. Termini da evitare: "innovativo", "trasformazione digitale", "Guru", "Ninja", "Visionario".
+- Direzione approvata il 2026-11-10: sobrietà da società di consulenza per raccontare BBT, logica da pagina prodotto per presentare le soluzioni (un prodotto alla volta, video protagonista). Nessuna foto di repertorio né foto finte del team.
 
 ## Evidence on Hand
 
 Le seguenti sono soluzioni realmente operative e possono essere presentate come lavori realizzati:
 
 - `soluzioni/fatturato-monitor.html`: aggregazione in tempo reale di cinque flussi del gestionale per proiezione mensile e confronto con il budget.
-- `soluzioni/arca-rileva.html`: terminale MES con badge, barcode, tracciamento tempi e generazione del documento CP in Arca Evolution.
+- `soluzioni/arca-rileva.html` (MesBeat, ex ArcaConnect MES): pianificazione, monitor di reparto, terminale operatore con badge, barcode e tempi, qualità, tracciabilità, statistiche e generazione del documento CP in Arca Evolution. Video demo: `bozza/media/mesbeat-demo.mp4`.
 - `soluzioni/nis2-compliance.html`: gestione strutturata dell'assessment NIS2, documentazione, avanzamento e report.
 
 Risultati quantitativi, tempi di progetto e nomi dei clienti non sono ancora documentati come prove verificabili nel repository. Possono essere aggiunti solo dopo conferma puntuale.

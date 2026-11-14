@@ -1,11 +1,19 @@
 /* Pulsante "Parla con Giulia": apre l'assistente vocale di BBT (giulia.bbtconsulting.it) in una finestra accanto
    al sito. Autonomo: stili isolati (Shadow DOM), nessuna dipendenza. Includere con
-   <script src="/giulia.js" defer></script>. I link con l'attributo data-giulia aprono la stessa finestra. */
+   <script src="/giulia.js" defer></script>. I link con l'attributo data-giulia aprono la stessa finestra.
+   Con data-tema="bbt" sul tag script usa i colori del marchio (navy) e il carattere Inter. */
 (function () {
   "use strict";
   var URL_GIULIA = "https://giulia.bbtconsulting.it/";
   if (window.__giuliaWidget) return;
   window.__giuliaWidget = true;
+
+  var script = document.currentScript;
+  var TEMI = {
+    classico: { fondo: "#2563eb", hover: "#1749b8", font: "Manrope" },
+    bbt: { fondo: "#1A3A6B", hover: "#12294D", font: "Inter" }
+  };
+  var tema = TEMI[(script && script.dataset.tema) || "classico"] || TEMI.classico;
 
   function apri(ev) {
     if (ev) ev.preventDefault();
@@ -35,12 +43,12 @@
       ':host{all:initial}' +
       '.g{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));' +
       'display:flex;align-items:center;gap:10px;padding:10px 18px 10px 10px;border:0;border-radius:999px;cursor:pointer;' +
-      'background:#2563eb;color:#fff;font:600 15px/1.2 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;' +
+      'background:' + tema.fondo + ';color:#fff;font:600 15px/1.2 ' + tema.font + ',system-ui,-apple-system,"Segoe UI",sans-serif;' +
       'box-shadow:0 10px 30px rgba(17,24,39,.28),0 0 0 1px rgba(255,255,255,.12) inset;' +
       'transition:transform .2s cubic-bezier(.22,1,.36,1),background .2s}' +
-      '.g:hover{background:#1749b8;transform:translateY(-2px)}' +
-      '.g:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px #2563eb}' +
-      '.ic{position:relative;width:34px;height:34px;border-radius:50%;background:#fff;color:#2563eb;' +
+      '.g:hover{background:' + tema.hover + ';transform:translateY(-2px)}' +
+      '.g:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px ' + tema.fondo + '}' +
+      '.ic{position:relative;width:34px;height:34px;border-radius:50%;background:#fff;color:' + tema.fondo + ';' +
       'display:grid;place-items:center;flex:none}' +
       '.ic svg{width:18px;height:18px}' +
       '.ic::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(255,255,255,.55);' +
