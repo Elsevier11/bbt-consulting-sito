@@ -154,6 +154,7 @@
     .solution-area::before { content: ""; width: 22px; height: 2px; background: var(--cyan); }
     .solution h3 { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em; margin-top: 14px; }
     .solution .promise { font-family: var(--serif); font-size: clamp(1.2rem, 1.1rem + .4vw, 1.4rem); line-height: 1.4; color: var(--ink); margin-top: 16px; max-width: 34ch; }
+    .solution .definition { margin-top: 8px; font-size: 16px; font-weight: 500; color: var(--muted); }
     .scene { margin-top: 24px; padding: 18px 20px; background: var(--bg); border-radius: var(--radius); }
     .scene-label, .changes-label { font-size: 14px; font-weight: 600; color: var(--navy); }
     .scene-text { margin-top: 6px; font-size: 16px; color: var(--text); }
@@ -353,7 +354,7 @@
             <circle class="node" cx="1160" cy="200" r="7"/>
           </svg>
           <figcaption class="bridge-labels">
-            <div><strong>Quello che avete già</strong><span>Arca Evolution, SQL Server, il CRM e quel file Excel che conosce una persona sola</span></div>
+            <div><strong>Quello che avete già</strong><span>l’ERP, il CRM, il database e quel foglio di calcolo che conosce una persona sola</span></div>
             <div><strong>Il ponte</strong><span>lo costruiamo noi, e lo teniamo in piedi</span></div>
             <div><strong>Quello che vi serve sapere</strong><span>cosa produrre domani, come chiude il mese, a che punto è la NIS2</span></div>
           </figcaption>
@@ -384,7 +385,7 @@
         </div>
         <ol class="steps">
           <li><span class="num" aria-hidden="true">1</span><h3>Ci mostrate dove si inceppa</h3><p>Partiamo da chi il lavoro lo fa ogni giorno: è lì che si vede dove si perdono ore e informazioni.</p></li>
-          <li><span class="num" aria-hidden="true">2</span><h3>Colleghiamo quello che c’è</h3><p>Gestionale, database, fogli Excel: si parte da lì. Niente da buttare, niente da rifare da zero.</p></li>
+          <li><span class="num" aria-hidden="true">2</span><h3>Colleghiamo quello che c’è</h3><p>ERP, database, fogli di calcolo: si parte da lì. Niente da buttare, niente da rifare da zero.</p></li>
           <li><span class="num" aria-hidden="true">3</span><h3>Lo provate sul lavoro vero</h3><p>Una prima versione la usano le persone che la useranno davvero, e la correggiamo insieme a loro.</p></li>
           <li><span class="num" aria-hidden="true">4</span><h3>Lo mettiamo in produzione, e restiamo</h3><p>Vi affianchiamo all’avvio e lo facciamo crescere quando cambiano le vostre esigenze.</p></li>
         </ol>
@@ -420,7 +421,7 @@
           <p>Da una parte c’è chi guida l’azienda e deve decidere. Dall’altra ci sono i sistemi che custodiscono i dati, e che spesso non si parlano. Il nostro lavoro è collegarli, e restare a curare il collegamento nel tempo.</p>
           <dl class="mark-facts">
             <div><dt>Sede</dt><dd>Vedelago (TV)</dd></div>
-            <div><dt>Ci colleghiamo a</dt><dd>Arca Evolution, SQL Server, ERP e CRM</dd></div>
+            <div><dt>Ci colleghiamo a</dt><dd>ERP, CRM, database e fogli di calcolo</dd></div>
             <div><dt>Il vostro referente</dt><dd>Uno solo, dall’analisi all’evoluzione</dd></div>
           </dl>
         </aside>
@@ -467,7 +468,8 @@
     <video controls playsinline preload="none"></video>
   </dialog>
 
-  <script src="soluzioni.js"></script>
+  <!-- Aggiornare ?v= a ogni modifica di soluzioni.js: il sito tiene i file JS in cache per 4 ore -->
+  <script src="soluzioni.js?v=20261114b"></script>
   <script>
   (function () {
     "use strict";
@@ -511,8 +513,9 @@
         '<div class="solution-media">' + media(s) + '</div>' +
         '<div class="solution-text"><span class="solution-area">' + esc(s.area) + '</span>' +
         '<h3 id="sol-' + esc(s.id) + '">' + esc(s.nome) + '</h3>' +
+        (s.definizione ? '<p class="definition">' + esc(s.definizione) + '</p>' : "") +
         '<p class="promise">' + esc(s.promessa) + '</p>' +
-        '<div class="scene"><p class="scene-label">Vi suona familiare?</p><p class="scene-text">' + esc(s.scena) + '</p></div>' +
+        ((s.scena || s.problema) ? '<div class="scene"><p class="scene-label">Vi suona familiare?</p><p class="scene-text">' + esc(s.scena || s.problema) + '</p></div>' : "") +
         '<p class="changes-label">Con ' + esc(s.nome) + '</p>' +
         '<ul class="changes">' + s.cambia.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + '</ul>' +
         '<dl class="facts"><dt>Funziona con</dt><dd>' + esc(s.siCollega) + '</dd><dt>Vi ritrovate</dt><dd>' + esc(s.ottenete) + '</dd></dl>' +
