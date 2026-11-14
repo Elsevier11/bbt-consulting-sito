@@ -207,7 +207,7 @@ Pulsanti a capsula (999px), cornici media a 14px, piccole barre a 4px. Pannelli 
 
 ### Solution block
 
-Fonte unica: `bozza/soluzioni.js`. Ogni voce ha `id, nome, area, promessa, problema, cambia[3], siCollega, ottenete, media, scheda`. `media.tipo` è `video` (loop muto + poster + demo opzionale) oppure `anteprima` (interfaccia HTML dimostrativa con etichetta "Video demo in preparazione"). Aggiungere un prodotto = aggiungere una voce.
+Fonte unica: `bozza/soluzioni.js`. Ogni voce ha `id, nome, area, promessa, scena, cambia[3], siCollega, ottenete, media, scheda`. Ordine di lettura: area → nome → promessa (serif) → riquadro "Vi suona familiare?" con la scena di oggi → "Con [nome]" e tre risultati → "Funziona con" / "Vi ritrovate" → "Guardate [nome] al lavoro" e "Come funziona [nome]". `media.tipo` è `video` (loop muto + poster + demo opzionale) oppure `anteprima` (interfaccia HTML dimostrativa con etichetta "Video demo in preparazione"). Aggiungere un prodotto = aggiungere una voce.
 
 ### Media frame
 
@@ -244,6 +244,8 @@ Pulsante flottante da `giulia.js` con `data-tema="bbt"` (navy, Inter).
 ### Do:
 
 - **Do** dare del "voi" in tutti i testi; frasi brevi, risultato prima della tecnologia.
+- **Do** scrivere ogni titolo dal punto di vista di chi legge: una situazione che riconosce ("Il fatturato del mese ricostruito a mano"), una domanda che si è già fatto, un timore a cui rispondere ("Niente progetti infiniti"). Mai titoli che descrivono il nostro ragionamento ("Strumenti con un nome", "Un percorso che potete seguire").
+- **Do** usare dettagli concreti e quotidiani (il file Excel che conosce una persona sola, le schede ricopiate a fine turno) invece di categorie astratte (processi, efficienza, dati).
 - **Do** dichiarare sempre come dimostrativi i dati di interfaccia.
 - **Do** usare il ponte come unica immagine di marca, a linee.
 - **Do** mostrare i prodotti in azione (video o anteprima) prima di spiegarli.

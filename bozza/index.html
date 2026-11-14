@@ -105,8 +105,8 @@
 
     /* Apertura */
     .hero { padding-block: clamp(48px, 8vw, 112px) clamp(32px, 5vw, 64px); }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 5vw, 80px); align-items: end; }
-    .hero h1 { font-size: clamp(2.6rem, 1.5rem + 4.4vw, 5.25rem); line-height: 1.02; letter-spacing: -0.025em; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(32px, 5vw, 80px); align-items: end; }
+    .hero h1 { font-size: clamp(2.5rem, 1.5rem + 3.6vw, 4.4rem); line-height: 1.02; letter-spacing: -0.025em; }
     .hero h1 .line { display: block; }
     .hero h1 .line + .line { color: var(--navy); }
     .hero-side p { font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem); color: var(--text); max-width: 40ch; }
@@ -154,9 +154,11 @@
     .solution-area::before { content: ""; width: 22px; height: 2px; background: var(--cyan); }
     .solution h3 { font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em; margin-top: 14px; }
     .solution .promise { font-family: var(--serif); font-size: clamp(1.2rem, 1.1rem + .4vw, 1.4rem); line-height: 1.4; color: var(--ink); margin-top: 16px; max-width: 34ch; }
-    .solution .before { margin-top: 22px; font-size: 15px; color: var(--muted); }
-    .solution .before b { color: var(--text); font-weight: 600; }
-    .changes { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+    .scene { margin-top: 24px; padding: 18px 20px; background: var(--bg); border-radius: var(--radius); }
+    .scene-label, .changes-label { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .scene-text { margin-top: 6px; font-size: 16px; color: var(--text); }
+    .changes-label { margin-top: 26px; }
+    .changes { list-style: none; padding: 0; margin: 10px 0 0; border-top: 1px solid var(--line); }
     .changes li { position: relative; padding: 12px 0 12px 28px; border-bottom: 1px solid var(--line); font-size: 16px; }
     .changes li::before { content: ""; position: absolute; left: 2px; top: 22px; width: 12px; height: 2px; background: var(--navy); }
     .facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 22px 0 0; font-size: 14px; }
@@ -196,7 +198,8 @@
     .app-foot { font-size: 12px; color: var(--muted); }
 
     .catalog-line { margin-top: clamp(72px, 9vw, 120px); padding-top: 28px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
-    .catalog-line p { color: var(--muted); }
+    .catalog-line p { color: var(--text); }
+    .inline-link { color: var(--navy); font-weight: 600; text-underline-offset: 4px; }
 
     /* Metodo */
     .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); position: relative; }
@@ -301,7 +304,7 @@
 </head>
 <body>
   <a class="skip" href="#contenuto">Vai al contenuto</a>
-  <div class="draft-note" role="note">Bozza di lavoro della nuova home · non pubblicata</div>
+  <div class="draft-note" role="note">Bozza di lavoro della nuova home · non ancora collegata al sito</div>
 
   <header class="site-header">
     <nav class="container nav" aria-label="Navigazione principale">
@@ -322,18 +325,18 @@
     <section class="hero" aria-labelledby="titolo">
       <div class="container">
         <div class="hero-grid">
-          <h1 id="titolo"><span class="line">I dati della vostra azienda ci sono già.</span><span class="line">Facciamoli lavorare.</span></h1>
+          <h1 id="titolo"><span class="line">Il vostro gestionale sa già tutto.</span><span class="line">Noi lo facciamo parlare.</span></h1>
           <div class="hero-side">
-            <p>Costruiamo strumenti su misura collegati ai gestionali che usate ogni giorno: meno attività ricopiate a mano, numeri importanti sempre visibili, processi sotto controllo.</p>
+            <p>Il fatturato del mese ricostruito a mano. Le schede di produzione ricopiate in ufficio. La NIS2 inseguita tra fogli e cartelle condivise. Costruiamo strumenti su misura, collegati ai sistemi che usate già, che tolgono di mezzo questi passaggi.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#soluzioni">Guardate le soluzioni</a>
+              <a class="btn btn-primary" href="#soluzioni">Guardateli al lavoro</a>
               <a class="btn btn-ghost" href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&amp;ismsaljsauthenabled&amp;ep=mlink" target="_blank" rel="noopener noreferrer">Prenota 30 minuti</a>
             </div>
-            <p class="hero-note">Senza impegno. La prenotazione si apre su Microsoft Bookings.</p>
+            <p class="hero-note">Mezz’ora, senza impegno: scegliete voi giorno e ora su Microsoft Bookings.</p>
           </div>
         </div>
 
-        <figure class="bridge" aria-label="Il ponte tra i sistemi che avete già e le decisioni di ogni giorno">
+        <figure class="bridge" aria-label="Il ponte tra quello che avete già e quello che vi serve sapere">
           <svg viewBox="0 0 1200 240" role="presentation" focusable="false">
             <path class="cable" d="M40 200 Q430 192 600 40 Q770 192 1160 200"/>
             <line class="hanger" x1="450" y1="130.4" x2="450" y2="200"/>
@@ -350,9 +353,9 @@
             <circle class="node" cx="1160" cy="200" r="7"/>
           </svg>
           <figcaption class="bridge-labels">
-            <div><strong>I sistemi che avete già</strong><span>Arca Evolution, SQL Server, ERP e CRM, fogli Excel</span></div>
-            <div><strong>Lo strumento su misura</strong><span>costruito e seguito da BBT</span></div>
-            <div><strong>Le decisioni di ogni giorno</strong><span>piano di produzione, fatturato, conformità NIS2</span></div>
+            <div><strong>Quello che avete già</strong><span>Arca Evolution, SQL Server, il CRM e quel file Excel che conosce una persona sola</span></div>
+            <div><strong>Il ponte</strong><span>lo costruiamo noi, e lo teniamo in piedi</span></div>
+            <div><strong>Quello che vi serve sapere</strong><span>cosa produrre domani, come chiude il mese, a che punto è la NIS2</span></div>
           </figcaption>
         </figure>
       </div>
@@ -361,13 +364,13 @@
     <section class="section solutions" id="soluzioni" aria-labelledby="titolo-soluzioni">
       <div class="container">
         <div class="section-head">
-          <h2 id="titolo-soluzioni">Strumenti con un nome, nati da problemi veri.</h2>
-          <p>Ogni soluzione è già in uso nelle aziende per cui l’abbiamo costruita. La adattiamo ai vostri dati, ai vostri reparti e ai sistemi che usate.</p>
+          <h2 id="titolo-soluzioni">Vi riconoscete in una di queste situazioni? La soluzione esiste già.</h2>
+          <p>Ogni strumento è nato in un’azienda come la vostra, per un problema preciso, e oggi lavora tutti i giorni. Lo adattiamo ai vostri dati, ai vostri reparti e ai vostri sistemi.</p>
         </div>
         <div id="soluzioni-lista"></div>
         <noscript><p>Per vedere le soluzioni con i video attivate JavaScript, oppure aprite il <a href="../soluzioni/">catalogo delle soluzioni</a>.</p></noscript>
         <div class="catalog-line">
-          <p>Il catalogo cresce con nuovi strumenti.</p>
+          <p>Il vostro problema non è tra questi? Potrebbe essere il prossimo strumento. <a class="inline-link" href="#contatti">Raccontatecelo</a>.</p>
           <a class="link-arrow" href="../soluzioni/">Tutte le soluzioni <span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -376,14 +379,14 @@
     <section class="section" id="metodo" aria-labelledby="titolo-metodo">
       <div class="container">
         <div class="section-head">
-          <h2 id="titolo-metodo">Dal problema allo strumento, con un solo referente.</h2>
-          <p>Analisi, collegamento ai sistemi, prova sul lavoro reale e messa in produzione: un percorso che potete seguire passo per passo.</p>
+          <h2 id="titolo-metodo">Niente progetti infiniti. Quattro passi, e al terzo lo state già usando.</h2>
+          <p>Lavoriamo su un processo alla volta, partendo da quello che vi costa di più. Ogni passo lascia qualcosa che potete vedere e giudicare.</p>
         </div>
         <ol class="steps">
-          <li><span class="num" aria-hidden="true">1</span><h3>Capire il processo</h3><p>Individuiamo con voi dove si fermano informazioni e attività.</p></li>
-          <li><span class="num" aria-hidden="true">2</span><h3>Collegare ciò che esiste</h3><p>Partiamo dai dati, dai gestionali e dalle procedure che usate già.</p></li>
-          <li><span class="num" aria-hidden="true">3</span><h3>Costruire e provare</h3><p>Proviamo una prima versione con le persone che la useranno.</p></li>
-          <li><span class="num" aria-hidden="true">4</span><h3>Mettere in produzione</h3><p>Consegniamo, vi affianchiamo nell’adozione e seguiamo le evoluzioni.</p></li>
+          <li><span class="num" aria-hidden="true">1</span><h3>Ci mostrate dove si inceppa</h3><p>Partiamo da chi il lavoro lo fa ogni giorno: è lì che si vede dove si perdono ore e informazioni.</p></li>
+          <li><span class="num" aria-hidden="true">2</span><h3>Colleghiamo quello che c’è</h3><p>Gestionale, database, fogli Excel: si parte da lì. Niente da buttare, niente da rifare da zero.</p></li>
+          <li><span class="num" aria-hidden="true">3</span><h3>Lo provate sul lavoro vero</h3><p>Una prima versione la usano le persone che la useranno davvero, e la correggiamo insieme a loro.</p></li>
+          <li><span class="num" aria-hidden="true">4</span><h3>Lo mettiamo in produzione, e restiamo</h3><p>Vi affianchiamo all’avvio e lo facciamo crescere quando cambiano le vostre esigenze.</p></li>
         </ol>
       </div>
     </section>
@@ -391,12 +394,12 @@
     <section class="section about" id="chi-siamo" aria-labelledby="titolo-chi">
       <div class="container about-grid">
         <div>
-          <h2 id="titolo-chi">Un solo interlocutore tra direzione, reparto e tecnologia.</h2>
-          <p class="lead">BBT trasforma un’esigenza della vostra azienda in uno strumento funzionante, collegando applicazioni, dati e sicurezza. Non dovete coordinare fornitori diversi né tradurre il problema in linguaggio tecnico.</p>
+          <h2 id="titolo-chi">Quando qualcosa non va, chiamate una persona sola.</h2>
+          <p class="lead">Non dovete capire se il problema è del gestionale, del database o della rete, né mettere d’accordo tre fornitori. BBT segue lo strumento dall’inizio alla fine e parla la lingua di chi dirige l’azienda, non quella dei tecnici.</p>
           <dl class="principles">
-            <div><dt>Prima il risultato</dt><dd>La tecnologia si sceglie dopo aver chiarito che cosa deve migliorare.</dd></div>
-            <div><dt>Quello che avete vale</dt><dd>Partiamo da gestionali, database e procedure già in uso, senza rifare tutto.</dd></div>
-            <div><dt>Un referente, dall’inizio alla fine</dt><dd>La stessa persona segue analisi, realizzazione, rilascio ed evoluzione.</dd></div>
+            <div><dt>Prima capiamo cosa deve migliorare</dt><dd>La tecnologia la scegliamo dopo, e solo se serve davvero.</dd></div>
+            <div><dt>Non vi chiediamo di cambiare gestionale</dt><dd>Lavoriamo sui sistemi e sulle procedure che usate già.</dd></div>
+            <div><dt>Chi vi ascolta è chi costruisce</dt><dd>La stessa persona segue analisi, realizzazione, rilascio ed evoluzione: nessun passaggio di mano.</dd></div>
           </dl>
         </div>
         <aside class="about-mark" aria-labelledby="titolo-ponte">
@@ -414,11 +417,11 @@
             <path class="deck" d="M40 200 H1160"/>
           </svg>
           <h3 id="titolo-ponte">Perché un ponte</h3>
-          <p>Il ponte del nostro marchio racconta il lavoro che facciamo: collegare chi guida l’azienda ai sistemi che ne custodiscono i dati. Lo costruiamo su ciò che esiste già, e restiamo a curarlo nel tempo.</p>
+          <p>Da una parte c’è chi guida l’azienda e deve decidere. Dall’altra ci sono i sistemi che custodiscono i dati, e che spesso non si parlano. Il nostro lavoro è collegarli, e restare a curare il collegamento nel tempo.</p>
           <dl class="mark-facts">
             <div><dt>Sede</dt><dd>Vedelago (TV)</dd></div>
-            <div><dt>Sistemi con cui lavoriamo</dt><dd>Arca Evolution, SQL Server, ERP e CRM</dd></div>
-            <div><dt>Referente</dt><dd>Uno solo, dall’analisi all’evoluzione</dd></div>
+            <div><dt>Ci colleghiamo a</dt><dd>Arca Evolution, SQL Server, ERP e CRM</dd></div>
+            <div><dt>Il vostro referente</dt><dd>Uno solo, dall’analisi all’evoluzione</dd></div>
           </dl>
         </aside>
       </div>
@@ -427,11 +430,11 @@
     <section class="section cta" id="contatti" aria-labelledby="titolo-cta">
       <div class="container">
         <div class="cta-grid">
-          <h2 id="titolo-cta">Portateci un processo che oggi vi rallenta.</h2>
+          <h2 id="titolo-cta">Qual è il passaggio che oggi vi fa perdere più tempo?</h2>
           <div>
-            <p>In 30 minuti ricostruiamo il problema, verifichiamo dati e sistemi coinvolti e individuiamo il primo intervento utile. Se non vediamo un valore concreto, ve lo diciamo.</p>
+            <p>Raccontatecelo in mezz’ora. Ricostruiamo insieme il problema, guardiamo quali dati e sistemi sono coinvolti e vi diciamo da dove partiremmo. Se non vediamo un vantaggio concreto, ve lo diciamo subito.</p>
             <a class="btn btn-light" href="https://outlook.office.com/bookwithme/user/90b21f1e0d8f44e6b80293d04933dc23@bbtconsulting.it/meetingtype/h9kLPa47HUiHRXljmwWCaw2?anonymous&amp;ismsaljsauthenabled&amp;ep=mlink" target="_blank" rel="noopener noreferrer">Prenota 30 minuti</a>
-            <p class="small">Preferite fare prima una domanda? <a href="https://giulia.bbtconsulting.it/" data-giulia>Chiedete a Giulia</a>, l’assistente vocale: risponde subito.</p>
+            <p class="small">Prima volete fare una domanda veloce? <a href="https://giulia.bbtconsulting.it/" data-giulia>Chiedete a Giulia</a>, la nostra assistente vocale: risponde subito.</p>
           </div>
         </div>
         <svg class="cta-bridge" viewBox="0 0 1200 60" aria-hidden="true" focusable="false"><path d="M0 54 Q450 50 600 6 Q750 50 1200 54" stroke-width="1.5"/><line x1="0" y1="54" x2="1200" y2="54" stroke-width="1.5"/></svg>
@@ -444,7 +447,7 @@
       <div class="footer-grid">
         <div>
           <a class="brand" href="#contenuto"><img src="media/bbt-logo.png" alt="BBT Consulting" width="480" height="323"></a>
-          <p class="tagline">Dashboard, automazioni e applicazioni su misura collegate ai sistemi delle PMI.</p>
+          <p class="tagline">Strumenti su misura che fanno parlare i sistemi che le PMI usano già.</p>
         </div>
         <div>
           <h2>Esplora</h2>
@@ -503,16 +506,17 @@
     }
 
     function blocco(s, i) {
-      var demo = s.media.demo ? '<button class="btn btn-primary" type="button" data-demo="' + esc(s.media.demo.src) + '" data-titolo="' + esc(s.nome) + '">Guardate la demo · ' + esc(s.media.demo.durata) + '</button>' : "";
+      var demo = s.media.demo ? '<button class="btn btn-primary" type="button" data-demo="' + esc(s.media.demo.src) + '" data-titolo="' + esc(s.nome) + '">Guardate ' + esc(s.nome) + ' al lavoro · ' + esc(s.media.demo.durata) + '</button>' : "";
       return '<article class="solution' + (i % 2 ? " reverse" : "") + '" id="' + esc(s.id) + '" aria-labelledby="sol-' + esc(s.id) + '">' +
         '<div class="solution-media">' + media(s) + '</div>' +
         '<div class="solution-text"><span class="solution-area">' + esc(s.area) + '</span>' +
         '<h3 id="sol-' + esc(s.id) + '">' + esc(s.nome) + '</h3>' +
         '<p class="promise">' + esc(s.promessa) + '</p>' +
-        '<p class="before"><b>Prima:</b> ' + esc(s.problema) + '</p>' +
+        '<div class="scene"><p class="scene-label">Vi suona familiare?</p><p class="scene-text">' + esc(s.scena) + '</p></div>' +
+        '<p class="changes-label">Con ' + esc(s.nome) + '</p>' +
         '<ul class="changes">' + s.cambia.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + '</ul>' +
-        '<dl class="facts"><dt>Si collega a</dt><dd>' + esc(s.siCollega) + '</dd><dt>Cosa ottenete</dt><dd>' + esc(s.ottenete) + '</dd></dl>' +
-        '<div class="solution-links">' + demo + '<a class="link-arrow" href="' + esc(s.scheda) + '">Scheda di ' + esc(s.nome) + ' <span aria-hidden="true">→</span></a></div>' +
+        '<dl class="facts"><dt>Funziona con</dt><dd>' + esc(s.siCollega) + '</dd><dt>Vi ritrovate</dt><dd>' + esc(s.ottenete) + '</dd></dl>' +
+        '<div class="solution-links">' + demo + '<a class="link-arrow" href="' + esc(s.scheda) + '">Come funziona ' + esc(s.nome) + ' <span aria-hidden="true">→</span></a></div>' +
         '</div></article>';
     }
 

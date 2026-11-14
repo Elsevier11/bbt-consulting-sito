@@ -1,5 +1,10 @@
 /* Elenco delle soluzioni BBT: unica fonte per la home (e, in seguito, per il catalogo /soluzioni/).
    Per aggiungere una soluzione basta aggiungere un oggetto a questo array e caricare i suoi media.
+   Campi di testo, nell'ordine in cui il visitatore li legge:
+   - promessa: cosa cambia, in una frase, detto dal punto di vista di chi legge;
+   - scena: la situazione di oggi, descritta in modo che il lettore ci si riconosca;
+   - cambia: tre risultati concreti, ciascuno con un soggetto e un verbo;
+   - siCollega / ottenete: i fatti, brevi.
    media.tipo: "video" (loop muto + poster, opzionale demo completa) oppure "anteprima" (interfaccia
    dimostrativa in HTML, usata finché il video non è pronto). */
 window.BBT_SOLUZIONI = [
@@ -7,15 +12,15 @@ window.BBT_SOLUZIONI = [
     id: "mesbeat",
     nome: "MesBeat",
     area: "Produzione",
-    promessa: "Il piano di produzione si compone da solo. Lo controlla chi conosce il reparto.",
-    problema: "Schede cartacee, tempi poco visibili e dati di produzione ricopiati in ufficio.",
+    promessa: "Il piano di produzione si compone da solo. L’ultima parola resta a chi conosce il reparto.",
+    scena: "Le schede di lavoro girano su carta, a fine turno qualcuno le ricopia nel gestionale e, quando una macchina si ferma, in ufficio lo si scopre a cose fatte.",
     cambia: [
-      "Il pianificatore vede subito quali macchine lavorano, quali sono ferme e cosa è in ritardo.",
-      "Gli operatori registrano attrezzaggio, produzione e pause dal tablet di macchina.",
-      "Il consuntivo arriva in Arca Evolution senza ricopiare nulla."
+      "Ogni mattina il pianificatore vede, macchina per macchina, cosa lavora, cosa è fermo e cosa è in ritardo.",
+      "Gli operatori segnano attrezzaggio, produzione e pause con un tocco sul tablet di macchina.",
+      "Il consuntivo entra in Arca Evolution da solo: nessuno ricopia più nulla."
     ],
     siCollega: "Arca Evolution e SQL Server",
-    ottenete: "Piano, avanzamento e consuntivo di produzione nel gestionale",
+    ottenete: "Piano, avanzamento e consuntivo di produzione, già nel gestionale",
     media: {
       tipo: "video",
       loop: "media/mesbeat-loop.mp4",
@@ -29,15 +34,15 @@ window.BBT_SOLUZIONI = [
     id: "fatturato",
     nome: "Fatturato Monitor",
     area: "Finanza e controllo",
-    promessa: "La proiezione del mese, senza aprire cinque sezioni del gestionale.",
-    problema: "Fatture, contratti, prefatture, documenti di trasporto e ordini da consultare uno per uno.",
+    promessa: "Come chiuderà il mese, in una schermata. Senza aspettare l’amministrazione.",
+    scena: "Per sapere come sta andando il mese bisogna aprire fatture, contratti, prefatture, documenti di trasporto e ordini, uno alla volta, e poi sommare a mano.",
     cambia: [
-      "Le cinque fonti del gestionale confluiscono in una sola vista.",
-      "La proiezione di fine mese è sempre confrontata con il budget.",
-      "La direzione legge i numeri senza chiedere un estratto all’amministrazione."
+      "Le cinque fonti del gestionale finiscono in una sola vista, sempre aggiornata.",
+      "La proiezione di fine mese compare accanto al budget: lo scostamento si vede subito.",
+      "Non serve più chiedere un estratto all’amministrazione: il numero è già lì."
     ],
     siCollega: "Gestionale su SQL Server",
-    ottenete: "Dashboard con proiezione del mese e budget",
+    ottenete: "Una dashboard con proiezione del mese e confronto con il budget",
     media: { tipo: "anteprima", vista: "fatturato" },
     scheda: "../soluzioni/fatturato-monitor.html"
   },
@@ -45,15 +50,15 @@ window.BBT_SOLUZIONI = [
     id: "nis2",
     nome: "NIS2 Platform",
     area: "Conformità e sicurezza",
-    promessa: "Requisiti, evidenze e scadenze in un unico posto, pronti per la verifica.",
-    problema: "Requisiti, documenti e responsabilità sparsi tra fogli di calcolo e cartelle condivise.",
+    promessa: "Sapere in ogni momento a che punto siete con la NIS2. E poterlo dimostrare.",
+    scena: "Requisiti in un foglio Excel, documenti sparsi tra cartelle condivise, scadenze affidate alla memoria di qualcuno. E la verifica arriva sempre nel momento sbagliato.",
     cambia: [
-      "Il perimetro si configura su 87 requisiti per i soggetti importanti o 116 per gli essenziali.",
-      "Ogni requisito ha un responsabile, una scadenza e le sue evidenze.",
-      "Il quadro per la direzione e per le verifiche si esporta in PDF."
+      "Il perimetro si imposta sui requisiti che vi riguardano: 87 per i soggetti importanti, 116 per gli essenziali.",
+      "Ogni requisito ha un responsabile, una scadenza e le prove allegate.",
+      "Il quadro per la direzione e per chi vi controlla si esporta in PDF."
     ],
-    siCollega: "Portale dedicato con accessi per ruolo",
-    ottenete: "Evidenze, scadenze e report PDF",
+    siCollega: "Portale dedicato, con accessi per ruolo",
+    ottenete: "Evidenze ordinate, scadenze sotto controllo, report pronti",
     media: { tipo: "anteprima", vista: "nis2" },
     scheda: "../soluzioni/nis2-compliance.html"
   }
