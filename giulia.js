@@ -1,7 +1,8 @@
 /* Pulsante "Parla con Giulia": apre l'assistente vocale di BBT (giulia.bbtconsulting.it) in una finestra accanto
    al sito. Autonomo: stili isolati (Shadow DOM), nessuna dipendenza. Includere con
    <script src="/giulia.js" defer></script>. I link con l'attributo data-giulia aprono la stessa finestra.
-   Con data-tema="bbt" sul tag script usa i colori del marchio (navy) e il carattere Inter. */
+   Con data-tema="bbt" sul tag script usa i colori del marchio (navy) e il carattere Inter;
+   con data-tema="ribo" il blu di Ribo e il carattere Quicksand. */
 (function () {
   "use strict";
   var URL_GIULIA = "https://giulia.bbtconsulting.it/";
@@ -11,7 +12,8 @@
   var script = document.currentScript;
   var TEMI = {
     classico: { fondo: "#2563eb", hover: "#1749b8", font: "Manrope" },
-    bbt: { fondo: "#1A3A6B", hover: "#12294D", font: "Inter" }
+    bbt: { fondo: "#1A3A6B", hover: "#12294D", font: "Inter" },
+    ribo: { fondo: "#0064BF", hover: "#00519B", font: "Quicksand" }
   };
   var tema = TEMI[(script && script.dataset.tema) || "classico"] || TEMI.classico;
 
