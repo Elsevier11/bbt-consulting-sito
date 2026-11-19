@@ -9,7 +9,7 @@ from html import escape
 from pathlib import Path
 
 RADICE = Path(__file__).resolve().parent.parent
-GIULIA_VERSIONE = "20261119"
+GIULIA_VERSIONE = "20261119b"
 
 RIBO = "https://www.ribo.it"
 CUR = ' aria-current="page"'
@@ -209,6 +209,7 @@ def piede(p):
         <div>
           <h2>Azienda</h2>
           <ul>
+            <li><a href="{r}ribo-in-breve.html">Ribo in breve</a></li>
             <li>{ext(RIBO + "/case-study/", "Case Study")}</li>
             <li>{ext(RIBO + "/contatti/", "Contatti")}</li>
             <li>{ext(RIBO + "/blog/", "Blog")}</li>
@@ -377,8 +378,136 @@ def area(a):
     (RADICE / "ribo" / f"{a['slug']}.html").write_text(html, encoding="utf-8")
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# "Ribo in breve": la pagina riassuntiva che Giulia legge come base di conoscenza (progetto ribo dell'assistente
+# vocale, sezione conoscenza). Fonti: ribo.it e i siti d'area, letti il 2026-11-19. Solo fatti dichiarati da Ribo.
+# Struttura: (titolo sezione, [blocchi]); blocco = ("p", testo) | ("ul", [voci]) | ("h3", titolo)
+IN_BREVE = [
+    ("Chi è Ribo", [
+        ("p", "Ribo S.r.l. è un’azienda informatica di Orio al Serio (Bergamo), attiva dal 1999. Il payoff è Beyond Expectations: “amiamo andare oltre le aspettative, vogliamo stupire i nostri clienti, siamo il partner che non ti aspetti”."),
+        ("p", "Ribo affianca le aziende in un percorso di innovazione per migliorare i processi di gestione e di comunicazione. Lavora con un team di circa 40 professionisti con competenze complementari e propone soluzioni concrete, personalizzate e integrate."),
+        ("p", "In sintesi Ribo offre cinque cose: gestionali ERP con personalizzazioni e soluzioni verticali (in particolare per chi fa manutenzione antincendio e manutenzione di impianti), assistenza sistemistica e sicurezza informatica, app e software su misura, comunicazione digitale, consulenza direzionale alle aziende."),
+        ("ul", ["Oltre 800 clienti attivi, 380 progetti, 25 anni di esperienza (dati del sito Ribo).",
+                "Certificazione ISO/IEC 27001:2022 sulla sicurezza delle informazioni.",
+                "Rivenditore autorizzato e partner certificato di Arca Evolution (Artel, Wolters Kluwer Italia), premiato dalla casa madre per le personalizzazioni realizzate per i clienti.",
+                "Partner Microsoft (Silver Partner) e vtiger; aderente a Confindustria Bergamo."]),
+    ]),
+    ("Gestionali ERP e personalizzazioni", [
+        ("p", "Il cuore dell’offerta gestionale di Ribo è Arca Evolution, il software gestionale di Artel (Wolters Kluwer Italia) per piccole e medie imprese. È modulare, personalizzabile, sviluppato su database Microsoft SQL Server e integrato con Office. Le personalizzazioni restano valide anche nelle nuove versioni."),
+        ("p", "Arca Evolution gestisce tutte le aree aziendali: amministrazione e contabilità, controllo di gestione, acquisti, commerciale e agenti, magazzino, pianificazione e consuntivi di produzione, business intelligence."),
+        ("ul", ["Contabilità generale e solleciti, flussi finanziari, cespiti, contabilità analitica, riconciliazione bancaria.",
+                "Vendite, listini e fatturazione, fatturazione elettronica, esterometro, ordini della Pubblica Amministrazione (Peppol).",
+                "Magazzino multiazienda e multimagazzino, evasione ordini con controllo giacenze, lotti e matricole.",
+                "Produzione: distinta base, MRP (pianificazione dei materiali), gestione della produzione, pianificazione acquisti.",
+                "Gestione documentale, archiviazione e conservazione documentale sostitutiva.",
+                "Indici d’allerta e crisi d’impresa, acquisizione automatica dei dati anagrafici delle imprese, gestione estesa degli accessi."]),
+        ("h3", "Gestionali su misura e servizi"),
+        ("p", "Per le aziende con processi particolari Ribo realizza gestionali su misura, cuciti sulla realtà aziendale: ordini, bolle e fatture, produzione e certificati di qualità per lotto, magazzino con codici a barre e tracciabilità, consegne con controllo dei mezzi via GPS, commerciale (e-commerce, raccolta ordini, agenti), contabilità e budget per commessa, CRM, presenze e attività interne."),
+        ("ul", ["Migrazione dati da qualsiasi gestionale: anagrafiche clienti e fornitori, articoli, dati per le fatture, scadenze, partite, documenti.",
+                "Gestionale in cloud: aggiornamenti gestiti, infrastruttura esternalizzata, accesso da qualsiasi dispositivo.",
+                "Assistenza post vendita con un intero reparto help desk e un referente (account) dedicato a ogni cliente fin dall’inizio del progetto; programmatori per qualsiasi personalizzazione.",
+                "Formazione sul gestionale e moduli integrati."]),
+    ]),
+    ("Soluzioni verticali Smart.1: antincendio e manutenzione", [
+        ("p", "Smart.1 è la piattaforma app di Ribo, modulare e personalizzabile, che porta il gestionale fuori dall’ufficio in sicurezza. Su Smart.1 Ribo ha costruito soluzioni verticali per settori specifici."),
+        ("h3", "Fireproof, per la manutenzione antincendio"),
+        ("p", "Fireproof è il software per chi fa manutenzione e revisione di impianti antincendio. Permette ai tecnici di consultare i dati degli impianti in mobilità, fare le revisioni e inviare i dati al gestionale direttamente dal luogo di lavoro, anche senza connessione: i dati si sincronizzano dopo, con compressione e crittografia. È stato sviluppato con esperti del settore antincendio e sicurezza (progettazione, installazione e manutenzione di impianti elettrici, idraulici e meccanici)."),
+        ("ul", ["Automazione completa del processo di revisione degli impianti.",
+                "Riconoscimento degli impianti da revisionare con i codici QR, usando la fotocamera del dispositivo.",
+                "Funzionamento completamente offline, utile dove la connessione è scarsa o assente.",
+                "Meno errori, dati rilevati più sicuri, accesso rapido alle informazioni; integrato con il gestionale aziendale. Wolters Kluwer gli ha dedicato un video."]),
+        ("h3", "Maintenance, per la manutenzione di impianti"),
+        ("p", "Maintenance è il verticale per chi esegue manutenzioni di impianti presso le sedi dei clienti, nato dall’esperienza sul campo e disponibile anche in cloud. I tecnici lavorano dall’app su smartphone, tablet o pc, anche offline. Si collega ad Arca Evolution o a qualsiasi gestionale già presente in azienda."),
+        ("ul", ["Maintenance Light: per chi fa manutenzione per conto terzi. Gestione e profilazione dei clienti, impianti da revisionare, schede personalizzate, pianificazione degli interventi, conteggio delle spese, assegnazione delle attività ai tecnici, ticket, report, archivio di contratti e fatture.",
+                "Maintenance Pro: per chi gestisce più impianti e sedi della propria azienda, con le stesse funzioni.",
+                "Rapportini digitali in tempo reale, senza aspettare il rientro del tecnico; interventi geolocalizzati e archivio storico; pianificazione a distanza.",
+                "Più efficienza, meno tempo e costi, controllo di anagrafiche, impianti, articoli di magazzino e documenti."]),
+        ("h3", "Gli altri verticali"),
+        ("ul", ["Ceramio: gestionale per le rivendite di ceramica.", "Fashion: gestionale per la moda, con taglie e colori.",
+                "Beverage: per imbottigliamento e distribuzione di bevande.", "Agent: raccolta ordini e tentata vendita per gli agenti.",
+                "Delivery: distribuzione food & beverage per il settore Ho.Re.Ca."]),
+    ]),
+    ("Sistemistica e sicurezza informatica", [
+        ("p", "Ribo si prende carico della gestione, manutenzione, progettazione e aggiornamento dei sistemi informatici aziendali: hardware, software, sistemi operativi, reti, sicurezza, storage, formazione e assistenza pre e post vendita."),
+        ("h3", "Net Assistance: Ribo come Managed Service Provider"),
+        ("p", "Net Assistance è il servizio con cui Ribo monitora, mantiene e supporta in modo proattivo l’infrastruttura IT dell’azienda, invece di intervenire solo quando qualcosa si rompe. Obiettivo: prevenire guasti e fermi, costi chiari e pianificabili, sistemi sempre aggiornati e sicuri, competenze specializzate senza assumere personale interno."),
+        ("ul", ["Infrastrutture: virtualizzazione della rete, progettazione di reti aziendali, storage e archiviazione dati, server dedicati, monitoraggio.",
+                "Sicurezza informatica: firewall, antispam professionale ESVA, antivirus WebRoot SecureAnywhere, filtro dei contenuti (siti e mail malevoli), cyber security con analisi dei rischi e accompagnamento del cliente nel rispetto delle normative europee.",
+                "Continuità operativa: disaster recovery, sistemi iperconvergenti Syneto, Veeam.",
+                "BackupIT, il backup remoto di Ribo: dati criptati e salvati nel datacenter Ribo, copie incrementali notturne di file, database SQL Server o macchine virtuali, ripristino fino a 14 giorni prima, report a ogni backup.",
+                "Cloud Ribo: desktop remoto (Microsoft Remote Desktop Services), hosting e housing, backup in cloud; Office 365.",
+                "Assistenza informatica in sede e da remoto: interventi hardware on site entro 4 ore, assistenza remota con TeamViewer, assistenza telefonica in orario d’ufficio, corsi di formazione di base.",
+                "Consulenza hardware e studi di fattibilità sull’evoluzione dell’informatica aziendale."]),
+    ]),
+    ("App e software su misura", [
+        ("p", "Ribo sviluppa app aziendali personalizzate per portare i vantaggi del mobile nel lavoro di tutti i giorni e distinguersi dalla concorrenza, e software con interfaccia semplice e dati sincronizzati in tempo reale. Il team di sviluppatori ascolta le esigenze, anche quelle non ancora espresse, e realizza l’app su misura."),
+    ]),
+    ("Comunicazione digitale e marketing", [
+        ("p", "La business unit Communication di Ribo si presenta come “oltre la solita web agency”: un team di creativi che cura la comunicazione integrata, online e offline, per far crescere il business e rendere riconoscibile il brand."),
+        ("ul", ["Online: siti web, e-commerce, marketplace (Amazon e altri), social media, SEO, copywriting, video production, shooting fotografico, motion graphics e 3D, realtà aumentata, contest online.",
+                "Marketing: marketing strategico, analisi della strategia digitale, content marketing, web marketing e campagne online, lead generation, email marketing, influencer marketing, campagne Spotify, programmatic banner, ricerche di mercato.",
+                "Offline: brand design e corporate image, company profile, brochure e leaflet, packaging, advertising, stand per fiere, concorsi, spot radio e TV."]),
+    ]),
+    ("Consulenza direzionale", [
+        ("p", "Ribo affianca titolari e direzione nelle decisioni, con consulenza e strumenti di controllo."),
+        ("ul", ["Finanza d’impresa: un consulente dedicato aiuta a prevenire la crisi d’impresa e ad adeguarsi al Codice della crisi d’impresa e dell’insolvenza, che chiede a ogni impresa sistemi per controllare flussi di cassa, budget e piano d’impresa e cogliere per tempo i segnali di difficoltà.",
+                "Per chi usa Arca: Cashflow (flussi di cassa a medio termine, con entrate e uscite previsionali), Analisi di bilancio (indici di bilancio dal bilancio riclassificato) e Budget (scostamenti tra consuntivo e previsione). Chi non usa Arca può comunque ricevere un’analisi di bilancio con un software dedicato e suggerimenti di azioni correttive.",
+                "Business intelligence: il cruscotto di Arca Evolution riunisce in un pannello analisi pronte su vendite (per prodotto, cliente, area, agente), acquisti, flussi finanziari, logistica e produzione, con grafici e tabelle pivot; consultabile anche da smartphone, tablet e portatile.",
+                "Industria 4.0: digitalizzazione dei processi, gestionale e cloud per la produzione.",
+                "Strumenti gratuiti: il test “Quali aree della tua azienda sono migliorabili?” (organizzazione, sicurezza, marketing, gestione clienti, vendite) e un report sui profitti dell’azienda."]),
+    ]),
+    ("Contatti", [
+        ("ul", ["Sede: Via Portico 55b, 24050 Orio al Serio (BG).",
+                "Telefono 035 42 51 092 (+39 035 4251092), fax +39 035 951447.",
+                "E-mail: info@ribo.it e marketing@ribo.it.",
+                "Ribo S.r.l., P.I. 02667750166, capitale sociale i.v. 60.000 euro.",
+                "Pagina contatti e richiesta informazioni: www.ribo.it/contatti; lavora con noi: www.ribo.it/lavora-con-noi."]),
+    ]),
+    ("Domande frequenti", [
+        ("h3", "Fireproof e Maintenance funzionano solo con Arca Evolution?"),
+        ("p", "No: Maintenance si interfaccia con Arca Evolution o con qualsiasi gestionale già presente in azienda; Fireproof è integrato con il gestionale aziendale."),
+        ("h3", "Se cambio gestionale perdo i dati?"),
+        ("p", "Ribo esegue la migrazione dati da qualsiasi gestionale: anagrafiche, articoli, scadenze, partite e documenti."),
+        ("h3", "Che assistenza avrò dopo l’acquisto?"),
+        ("p", "Un reparto help desk e un referente dedicato fin dall’inizio del progetto; per i sistemi, assistenza da remoto e interventi hardware in sede entro 4 ore."),
+        ("h3", "Quanto costa?"),
+        ("p", "Prezzi e tempi dipendono dal progetto: si definiscono con un consulente Ribo dopo aver capito le esigenze. Si può chiedere di essere ricontattati."),
+    ]),
+]
+
+
+def in_breve():
+    p = "../"
+    html = testa("Ribo in breve – Ribo srl", "Tutto quello che fa Ribo: gestionali ERP e verticali, sistemistica e sicurezza, app, comunicazione digitale, consulenza direzionale.", p)
+    corpo = ""
+    for titolo, blocchi in IN_BREVE:
+        corpo += f'<section class="kb"><h2>{e(titolo)}</h2>'
+        for tipo, val in blocchi:
+            if tipo == "p":
+                corpo += f"<p>{e(val)}</p>"
+            elif tipo == "h3":
+                corpo += f"<h3>{e(val)}</h3>"
+            else:
+                corpo += "<ul>" + "".join(f"<li>{e(v)}</li>" for v in val) + "</ul>"
+        corpo += "</section>"
+    html += f"""  <main id="contenuto">
+    <section class="section bg-antracite">
+      <div class="wrap kb-wrap">
+        <p class="kicker" style="text-align:left">Ribo Beyond Expectations</p>
+        <h1 class="kb-title">Ribo in breve</h1>
+        <p class="kb-lead">Tutto quello che facciamo, in una pagina. Hai una domanda? Chiedi a Giulia, la nostra assistente vocale.</p>
+        {corpo}
+      </div>
+    </section>
+  </main>
+"""
+    html += fascia_contatti() + piede(p)
+    (RADICE / "ribo" / "ribo-in-breve.html").write_text(html, encoding="utf-8")
+
+
 if __name__ == "__main__":
     home()
     for a in AREE:
         area(a)
-    print("Generate: index.html +", ", ".join(f"ribo/{a['slug']}.html" for a in AREE))
+    in_breve()
+    print("Generate: index.html +", ", ".join(f"ribo/{a['slug']}.html" for a in AREE), "+ ribo/ribo-in-breve.html")

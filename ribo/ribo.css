@@ -202,6 +202,16 @@ p { margin: 0; }
 .subnav a:hover, .subnav a[aria-current] { color: var(--blu-chiaro); }
 .bu-other { margin-top: 18px; }
 
+/* Ribo in breve */
+.kb-wrap { max-width: calc(860px + 2 * var(--gutter)); }
+.kb-title { font-size: clamp(2.2rem, 1.4rem + 2.6vw, 3.2rem); margin-top: 8px; }
+.kb-lead { margin-top: 14px; font-size: 1.1rem; color: #D9DCE2; }
+.kb { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.14); }
+.kb h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); }
+.kb h3 { font-size: 1.15rem; margin-top: 26px; color: var(--blu-chiaro); }
+.kb p { margin-top: 12px; color: #D9DCE2; }
+.kb ul { margin: 12px 0 0; padding-left: 20px; color: #D9DCE2; display: grid; gap: 8px; }
+
 /* Responsive */
 @media (max-width: 1020px) {
   .menu-toggle { display: inline-flex; }
